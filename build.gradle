@@ -1,0 +1,23 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "6.0.0"
+    id "java"
+}
+
+group 'at.sudo200'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        name 'm2-dv8tion'
+        url 'https://m2.dv8tion.net/releases'
+    }
+}
+
+dependencies {
+    implementation("net.dv8tion:JDA:4.2.1_253")
+}
+
+shadowJar {
+
+}

@@ -17,7 +17,7 @@ public class ChatCommandLenny extends BotCommand {
     @Override
     protected void execute(CommandParameter param) {
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
-        builder.setTitle("( ͡° ͜ʖ ͡ °)");
+        builder.setTitle("( \u0361° \u035c\u0296 \u0361 °)");
 
         utilsChat.send(param.message.getChannel(), builder.build());
     }

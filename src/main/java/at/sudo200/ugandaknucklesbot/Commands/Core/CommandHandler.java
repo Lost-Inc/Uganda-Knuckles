@@ -63,7 +63,7 @@ public class CommandHandler {
 
         BotCommand[] commands = this.commands.toArray(new BotCommand[0]);
 
-        if(args[1].equalsIgnoreCase("help")) {
+        if(args[1].equalsIgnoreCase("help")) {// help command
             EmbedBuilder builder = utilsChat.getDefaultEmbed();
             for(BotCommand cmd : commands)
                 builder.addField("**" + cmd.getName() + "**", cmd.getHelp(), false);

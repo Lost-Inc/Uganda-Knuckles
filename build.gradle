@@ -15,7 +15,8 @@ repositories {
 }
 
 dependencies {
-    implementation("net.dv8tion:JDA:4.2.1_253")
+    implementation "net.dv8tion:JDA:4.2.1_253"
+    implementation "com.sedmelluq:lavaplayer:1.3.77"
 }
 
 shadowJar {

@@ -5,6 +5,7 @@ import at.sudo200.ugandaknucklesbot.Commands.ChatCommandInator;
 import at.sudo200.ugandaknucklesbot.Commands.ChatCommandLenny;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandHandler;
+import at.sudo200.ugandaknucklesbot.Commands.VoiceCommandLeave;
 import at.sudo200.ugandaknucklesbot.listeners.MessageReceiveListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -49,6 +50,7 @@ public class Main {
                 new ChatCommandInator(),
                 new ChatCommandLenny(),
                 new ChatCommandAvatar(),
+                new VoiceCommandLeave(),
         };
 
         main.handler.register(commands);

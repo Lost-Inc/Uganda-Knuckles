@@ -1,9 +1,6 @@
 package at.sudo200.ugandaknucklesbot;
 
-import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandAvatar;
-import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandInator;
-import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandLenny;
-import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandUrban;
+import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.*;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandHandler;
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLeave;
@@ -52,6 +49,7 @@ public class Main {
                 new ChatCommandLenny(),
                 new ChatCommandAvatar(),
                 new ChatCommandUrban(),
+                new ChatCommandRandomCat(),
                 new VoiceCommandLeave(),
         };
 

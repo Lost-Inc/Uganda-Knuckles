@@ -1,5 +1,6 @@
 package at.sudo200.ugandaknucklesbot.Commands.Core;
 
+import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -10,6 +11,7 @@ import java.util.Collection;
 public class CommandHandler {
     private static final CommandHandler instance;
     private final Collection<BotCommand> commands = new ArrayList<>();
+    private final UtilsChat utilsChat = new UtilsChat();
 
     private CommandHandler() {
     }
@@ -36,30 +38,35 @@ public class CommandHandler {
     }
 
     public void handle(MessageReceivedEvent event) {
-        // When not mentioned, ignore
-        if(!event.getMessage().getMentionedMembers().contains(event.getGuild().getMemberById(event.getJDA().getSelfUser().getId())))
-            return;
-
         // Object, that gets passed to the command classes
         CommandParameter param = new CommandParameter();
-        String[] argElements = event
+        String[] args = event
                 .getMessage()
                 .getContentRaw()
                 .trim()
-                .substring(event.getJDA().getSelfUser().getAsMention().length() + 1)
-                .trim()
                 .split(" ");
 
-        param.args = Arrays.copyOfRange(argElements, 1, argElements.length);
+
+        // If not mentioned, ignore
+        if(!utilsChat.isMention(args[0])) return;
+        if(!utilsChat.getMemberByMention(
+                args[0], event.getGuild()).equals(
+                        event.getGuild().getMemberById(
+                                event.getJDA().getSelfUser().getId()
+                        )
+                )
+        ) return;
+
+        param.args = Arrays.copyOfRange(args, 2, args.length);
         param.message = event.getMessage();
 
         BotCommand[] commands = this.commands.toArray(new BotCommand[0]);
-        BotCommand cmd = search(commands, argElements[0].toLowerCase());
+        BotCommand cmd = search(commands, args[1].toLowerCase());
 
         if(cmd == null)
             return;
 
-        try { // Execute the command; exceptions get caught, just so the won't crash the bot
+        try { // Execute the command; exceptions get caught, so the won't crash the bot (pls still catch 'em yourself)
             cmd.execute(param);
         }
         catch (Exception e) {

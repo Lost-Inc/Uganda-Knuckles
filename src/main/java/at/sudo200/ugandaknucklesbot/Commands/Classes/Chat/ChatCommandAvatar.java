@@ -1,4 +1,4 @@
-package at.sudo200.ugandaknucklesbot.Commands;
+package at.sudo200.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
@@ -14,8 +14,13 @@ public class ChatCommandAvatar extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
 
     @Override
-    protected @NotNull String setName() {
+    protected @NotNull String getName() {
         return "avatar";
+    }
+
+    @Override
+    protected @NotNull String getHelp() {
+        return "Gets the profile picture of a server member by mentioning him";
     }
 
     @Override

@@ -77,7 +77,7 @@ public class CommandHandler {
     // Gets a command from an array of commands based on its name
     private BotCommand search(@NotNull BotCommand[] commands, String command) {
         for(BotCommand cmd : commands)
-            if(cmd.setName().toLowerCase().equals(command))
+            if(cmd.getName().toLowerCase().equals(command))
                 return cmd;
         return null;
     }

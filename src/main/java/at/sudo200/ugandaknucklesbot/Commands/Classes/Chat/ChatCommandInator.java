@@ -1,4 +1,4 @@
-package at.sudo200.ugandaknucklesbot.Commands;
+package at.sudo200.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
@@ -10,8 +10,14 @@ public class ChatCommandInator extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
 
     @Override
-    protected @NotNull String setName() {
+    protected @NotNull String getName() {
         return "inator";
+    }
+
+    @Override
+    protected @NotNull String getHelp() {
+        return "Converts every word into a doofensmirtz quote\n" +
+                "*We are not responable for quotes, which aren't grammatically correct* :upside_down:";
     }
 
     @Override

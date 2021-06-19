@@ -1,11 +1,11 @@
 package at.sudo200.ugandaknucklesbot;
 
-import at.sudo200.ugandaknucklesbot.Commands.ChatCommandAvatar;
-import at.sudo200.ugandaknucklesbot.Commands.ChatCommandInator;
-import at.sudo200.ugandaknucklesbot.Commands.ChatCommandLenny;
+import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandAvatar;
+import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandInator;
+import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandLenny;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandHandler;
-import at.sudo200.ugandaknucklesbot.Commands.VoiceCommandLeave;
+import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLeave;
 import at.sudo200.ugandaknucklesbot.listeners.MessageReceiveListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;

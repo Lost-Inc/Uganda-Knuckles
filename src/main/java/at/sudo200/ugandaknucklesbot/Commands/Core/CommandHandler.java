@@ -76,12 +76,15 @@ public class CommandHandler {
         if(cmd == null)
             return;
 
-        try { // Execute the command; exceptions get caught, so the won't crash the bot (pls still catch 'em yourself)
-            cmd.execute(param);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+        Thread thread = new Thread(() -> {// Async thread
+            try { // Execute the command; exceptions get caught, so the won't crash the bot (pls still catch 'em yourself)
+                cmd.execute(param);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        thread.start();
     }
 
     // Gets a command from an array of commands based on its name

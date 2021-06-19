@@ -1,6 +1,7 @@
 package at.sudo200.ugandaknucklesbot.Commands.Core;
 
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.NotNull;
 
@@ -61,6 +62,15 @@ public class CommandHandler {
         param.message = event.getMessage();
 
         BotCommand[] commands = this.commands.toArray(new BotCommand[0]);
+
+        if(args[1].equalsIgnoreCase("help")) {
+            EmbedBuilder builder = utilsChat.getDefaultEmbed();
+            for(BotCommand cmd : commands)
+                builder.addField("**" + cmd.getName() + "**", cmd.getHelp(), false);
+            utilsChat.send(event.getChannel(), builder.build());
+            return;
+        }
+
         BotCommand cmd = search(commands, args[1].toLowerCase());
 
         if(cmd == null)

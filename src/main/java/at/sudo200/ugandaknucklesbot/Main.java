@@ -53,6 +53,7 @@ public class Main {
                 new ChatCommandRandomDog(),
                 new ChatCommandFood(),
                 new ChatCommandJoke(),
+                new ChatCommandGetMinecraftSkin(),
                 new VoiceCommandLeave(),
         };
 

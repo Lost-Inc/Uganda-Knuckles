@@ -4,6 +4,7 @@ import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
 
 public class ChatCommandLenny extends BotCommand {
@@ -29,10 +30,13 @@ public class ChatCommandLenny extends BotCommand {
         if(param.args.length == 0 || !utilsChat.isMention(param.args[0]))
             utilsChat.send(param.message.getChannel(), builder.build());
         else {
-            utilsChat.getMemberByMention(param.args[0], param.message.getGuild())
-                .getUser().openPrivateChannel()
-                    .flatMap(privateChannel -> privateChannel.sendMessage(builder.build()))
-                    .queue();
+            User user = utilsChat.getMemberByMention(param.args[0], param.message.getGuild()).getUser();
+            if(user.getIdLong() == param.message.getJDA().getSelfUser().getIdLong()) {
+                utilsChat.sendInfo(param.message.getChannel(), "Sry, but I cannot talk with myself!");
+                return;
+            }
+
+            user.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessage(builder.build())).queue();
         }
     }
 }

@@ -50,6 +50,7 @@ public class Main {
                 new ChatCommandAvatar(),
                 new ChatCommandUrban(),
                 new ChatCommandRandomCat(),
+                new ChatCommandRandomDog(),
                 new VoiceCommandLeave(),
         };
 

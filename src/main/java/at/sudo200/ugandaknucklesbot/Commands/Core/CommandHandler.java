@@ -57,9 +57,7 @@ public class CommandHandler {
                         )
                 )
         ) return;
-
-        param.args = Arrays.copyOfRange(args, 2, args.length);
-        param.message = event.getMessage();
+        if(args.length == 1) return;
 
         BotCommand[] commands = this.commands.toArray(new BotCommand[0]);
 
@@ -70,6 +68,9 @@ public class CommandHandler {
             utilsChat.send(event.getChannel(), builder.build());
             return;
         }
+
+        param.args = Arrays.copyOfRange(args, 2, args.length);
+        param.message = event.getMessage();
 
         BotCommand cmd = search(commands, args[1].toLowerCase());
 
@@ -84,6 +85,7 @@ public class CommandHandler {
                 e.printStackTrace();
             }
         });
+        thread.setPriority(Thread.NORM_PRIORITY - 1);
         thread.start();
     }
 

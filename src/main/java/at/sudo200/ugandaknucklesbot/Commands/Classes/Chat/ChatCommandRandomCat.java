@@ -1,17 +1,19 @@
 package at.sudo200.ugandaknucklesbot.Commands.Classes.Chat;
 
+import at.sudo200.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomCatAPIResponse;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import com.github.kevinsawicki.http.HttpRequest;
+import com.google.gson.Gson;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+
+import java.lang.reflect.Type;
 
 public class ChatCommandRandomCat extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
+    private final Gson gson = new Gson();
 
     @Override
     protected @NotNull String getName() {
@@ -26,22 +28,19 @@ public class ChatCommandRandomCat extends BotCommand {
 
     @Override
     protected void execute(CommandParameter param) {
-        JSONObject object;
-        String url;
-        JSONParser parser = new JSONParser();
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
         String response = HttpRequest.get("https://aws.random.cat/meow").body();
         try {
-            object = (JSONObject) parser.parse(response);
-            url = (String) object.get("file");
+            RandomCatAPIResponse randomCatAPIResponse = gson.fromJson(response, (Type) RandomCatAPIResponse.class);
+            builder.setImage(randomCatAPIResponse.file);
+            utilsChat.send(param.message.getChannel(), builder.build());
         }
         catch (Exception e) {
-            System.err.println("Ouch:");
-            e.printStackTrace();
-            utilsChat.sendInfo(param.message.getChannel(), "**Something went severely wrong**\nBlame your neighbor!");
-            return;
+            utilsChat.sendInfo(
+                    param.message.getChannel(),
+                    "**Something went severely wrong**\nBlame your neighbor!\n\n" + e
+            );
         }
-        builder.setImage(url);
-        utilsChat.send(param.message.getChannel(), builder.build());
+
     }
 }

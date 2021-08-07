@@ -1,9 +1,9 @@
 package at.sudo200.ugandaknucklesbot;
 
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.*;
+import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLeave;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandHandler;
-import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLeave;
 import at.sudo200.ugandaknucklesbot.listeners.MessageReceiveListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -52,8 +52,8 @@ public class Main {
                 new ChatCommandRandomCat(),
                 new ChatCommandRandomDog(),
                 new ChatCommandFood(),
-                new ChatCommandJoke(),
                 new ChatCommandGetMinecraftSkin(),
+                new ChatCommandUselessWeb(),
                 new VoiceCommandLeave(),
         };
 

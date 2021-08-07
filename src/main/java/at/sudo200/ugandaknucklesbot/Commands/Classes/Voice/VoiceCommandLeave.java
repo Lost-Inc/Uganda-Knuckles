@@ -22,7 +22,7 @@ public class VoiceCommandLeave extends BotCommand {
     @Override
     protected @NotNull String getHelp() {
         return "Leaves voice channel\n" +
-                "(If in voice channel)";
+                "(If in a voice channel)";
     }
 
     @Override

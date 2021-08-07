@@ -8,8 +8,6 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
-
 public class ChatCommandAvatar extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
 

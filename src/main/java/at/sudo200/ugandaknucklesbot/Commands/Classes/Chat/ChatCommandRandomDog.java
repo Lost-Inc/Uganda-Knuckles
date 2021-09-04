@@ -2,6 +2,7 @@ package at.sudo200.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.sudo200.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomDogAPIResponse;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.sudo200.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import com.github.kevinsawicki.http.HttpRequest;
@@ -27,7 +28,16 @@ public class ChatCommandRandomDog extends BotCommand {
     }
 
     @Override
-    protected void execute(CommandParameter param) {
+    protected String @NotNull [] getCategories() {
+        return new String[]
+                // Main category
+                {CommandCategories.IMAGE,
+                // Auxiliary categories
+                CommandCategories.CHAT, CommandCategories.FUN, CommandCategories.INTERNET};
+    }
+
+    @Override
+    protected void execute(@NotNull CommandParameter param) {
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
         String response = HttpRequest.get("https://random.dog/woof.json").body();
         try {

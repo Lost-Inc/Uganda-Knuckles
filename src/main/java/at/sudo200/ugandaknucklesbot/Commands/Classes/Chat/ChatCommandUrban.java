@@ -2,6 +2,7 @@ package at.sudo200.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.sudo200.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.UrbanDictionaryAPIResponse;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.sudo200.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import com.github.kevinsawicki.http.HttpRequest;
@@ -27,7 +28,16 @@ public class ChatCommandUrban extends BotCommand {
     }
 
     @Override
-    protected void execute(CommandParameter param) {
+    protected String @NotNull [] getCategories() {
+        return new String[]
+                // Main category
+                {CommandCategories.SEARCH,
+                // Auxiliary categories
+                CommandCategories.CHAT, CommandCategories.INTERNET};
+    }
+
+    @Override
+    protected void execute(@NotNull CommandParameter param) {
         if(param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(), "Mate, please, what do you want me to search?");
             return;

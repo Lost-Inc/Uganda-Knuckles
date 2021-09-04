@@ -1,6 +1,7 @@
 package at.sudo200.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.sudo200.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -25,7 +26,16 @@ public class ChatCommandGetMinecraftSkin extends BotCommand {
     }
 
     @Override
-    protected void execute(CommandParameter param) {
+    protected String @NotNull [] getCategories() {
+        return new String[]
+                // Main category
+                {CommandCategories.MISC,
+                // Auxiliary categories
+                CommandCategories.CHAT, CommandCategories.INTERNET, CommandCategories.IMAGE};
+    }
+
+    @Override
+    protected void execute(@NotNull CommandParameter param) {
         if(param.args.length == 0) {
             utilsChat.sendInfo(
                     param.message.getChannel(),

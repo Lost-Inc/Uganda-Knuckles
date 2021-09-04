@@ -55,7 +55,7 @@ public class Main {
                 new ChatCommandGetMinecraftSkin(),
                 new ChatCommandUselessWeb(),
                 new ChatCommandWiki(),
-                new VoiceCommandLeave(),
+                //new VoiceCommandLeave(),
         };
 
         main.handler.register(commands);

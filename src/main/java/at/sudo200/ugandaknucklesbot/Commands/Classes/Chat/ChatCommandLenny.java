@@ -1,6 +1,7 @@
 package at.sudo200.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.sudo200.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -23,7 +24,16 @@ public class ChatCommandLenny extends BotCommand {
     }
 
     @Override
-    protected void execute(CommandParameter param) {
+    protected String @NotNull [] getCategories() {
+        return new String[]
+                // Main category
+                {CommandCategories.FUN,
+                // Auxiliary categories
+                CommandCategories.CHAT};
+    }
+
+    @Override
+    protected void execute(@NotNull CommandParameter param) {
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
         builder.setTitle("( \u0361° \u035c\u0296 \u0361 °)");
 

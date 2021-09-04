@@ -2,17 +2,17 @@ package at.sudo200.ugandaknucklesbot.Commands.Core;
 
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 
 public class CommandHandler {
     private static final CommandHandler instance;
     private final Collection<BotCommand> commands = new ArrayList<>();
+    private final HashMap<String, Collection<BotCommand>> categories = new HashMap<>();
     private final UtilsChat utilsChat = new UtilsChat();
 
     private CommandHandler() {
@@ -28,12 +28,21 @@ public class CommandHandler {
 
     // methods for registering commands
     public boolean register(@NotNull BotCommand command) {
+        for (String categoryName : command.getCategories()) {
+            if(!categories.containsKey(categoryName)) {
+                categories.put(categoryName, new ArrayList<>());
+            }
+            Collection<BotCommand> com = categories.get(categoryName);
+            if(!com.contains(command))
+                com.add(command);
+        }
+        System.gc();
         return this.commands.add(command);
     }
-    public boolean register(@NotNull BotCommand[] commands) {
+    public boolean register(BotCommand @NotNull [] commands) {
         boolean okay = true;
         for (BotCommand command : commands)
-            if (!this.commands.add(command))
+            if (!register(command))
                 okay = false;
 
             return okay;
@@ -61,31 +70,49 @@ public class CommandHandler {
         ) return;
         if(args.length == 1) return;
 
-        BotCommand[] commands = this.commands.toArray(new BotCommand[0]);
-
         if(args[1].equalsIgnoreCase("help")) {// help command
-            EmbedBuilder builder = utilsChat.getDefaultEmbed();
-            for(BotCommand cmd : commands)
-                builder.addField("**" + cmd.getName() + "**", cmd.getHelp(), false);
-            utilsChat.send(event.getChannel(), builder.build());
+            Thread helpThread = new Thread(() -> {
+                EmbedBuilder builder = utilsChat.getDefaultEmbed();
+                if(args.length != 3) {// show categories
+                    builder.setTitle(":book: Help categories");
+                    for(String name : categories.keySet())
+                        builder.addField(name, "\t", true);
+                    builder.addField("All", "\t", true);
+                }
+                else if(args[2].equalsIgnoreCase("all")) {// show all commands
+                    builder.setTitle("All commands");
+                    for (BotCommand command : commands)
+                        builder.addField(command.getName(), command.getHelp(), false);
+                }
+                else {
+                    String key = categories.keySet().stream().filter(k -> k.matches("(?i).*" + args[2] + ".*")).findFirst().orElse(null);
+                    if(key != null) {// show commands from category
+                        builder.setTitle(key);
+                        for (BotCommand command : categories.get(key))
+                            builder.addField(command.getName(), command.getHelp(), false);
+                    }
+                    else // category does not exist
+                        builder.setDescription("**There is no category called \"" + args[2] + "\"!**\nTry \"all\"");
+                }
+                utilsChat.send(event.getChannel(), builder.build());
+            });
+            helpThread.setPriority(Thread.NORM_PRIORITY - 1);
+            helpThread.start();
             return;
         }
 
         param.args = Arrays.copyOfRange(args, 2, args.length);
         param.message = event.getMessage();
 
+        BotCommand[] commands = this.commands.toArray(new BotCommand[0]);
         BotCommand cmd = search(commands, args[1].toLowerCase());
 
         if(cmd == null)
             return;
 
         Thread thread = new Thread(() -> {// Async thread
-            try { // Execute the command; exceptions get caught, so the won't crash the bot (pls still catch 'em yourself)
-                cmd.execute(param);
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
+            // Execute the command; exceptions are thrown in seperate thread, so they won't crash the bot (pls still catch 'em yourself)
+            cmd.execute(param);
         });
         /* Thread priority is set lower than usual,
         *   because the main thread is important

@@ -1,6 +1,7 @@
 package at.sudo200.ugandaknucklesbot.Commands.Classes.Voice;
 
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.sudo200.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import at.sudo200.ugandaknucklesbot.Util.UtilsVoice;
@@ -13,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 public class VoiceCommandLeave extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
     private final UtilsVoice utilsVoice = new UtilsVoice();
-    
+
     @Override
     protected @NotNull String getName() {
         return "leave";
@@ -26,7 +27,18 @@ public class VoiceCommandLeave extends BotCommand {
     }
 
     @Override
-    protected void execute(CommandParameter param) {
+    protected String @NotNull [] getCategories() {
+        return new String[]
+                {
+                // Main Category
+                CommandCategories.VOICE,
+                // Auxiliary Catergories
+                CommandCategories.UTIL
+        };
+    }
+
+    @Override
+    protected void execute(@NotNull CommandParameter param) {
         Guild guild = param.message.getGuild();
         AudioManager audioManager = guild.getAudioManager();
         JDA jda = param.message.getJDA();

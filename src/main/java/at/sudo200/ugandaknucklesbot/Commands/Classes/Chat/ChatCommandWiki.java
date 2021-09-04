@@ -2,6 +2,7 @@ package at.sudo200.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.sudo200.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.WikipediaSummaryRestAPI;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.sudo200.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import com.github.kevinsawicki.http.HttpRequest;
@@ -29,7 +30,16 @@ public class ChatCommandWiki extends BotCommand {
     }
 
     @Override
-    protected void execute(CommandParameter param) {
+    protected String @NotNull [] getCategories() {
+        return new String[]
+                // Main category
+                {CommandCategories.SEARCH,
+                // Auxiliary categories
+                CommandCategories.CHAT, CommandCategories.INTERNET};
+    }
+
+    @Override
+    protected void execute(@NotNull CommandParameter param) {
         if(param.args.length == 0) {// If the user didn't specify an article
             param.args = new String[1];// we know what to do B)
             param.args[0] = "Getting_lost";

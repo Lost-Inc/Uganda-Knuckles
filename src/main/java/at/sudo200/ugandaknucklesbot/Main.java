@@ -54,6 +54,7 @@ public class Main {
                 new ChatCommandFood(),
                 new ChatCommandGetMinecraftSkin(),
                 new ChatCommandUselessWeb(),
+                new ChatCommandWiki(),
                 new VoiceCommandLeave(),
         };
 

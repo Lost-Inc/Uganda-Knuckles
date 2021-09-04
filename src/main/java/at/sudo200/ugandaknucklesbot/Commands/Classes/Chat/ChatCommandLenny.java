@@ -36,7 +36,15 @@ public class ChatCommandLenny extends BotCommand {
                 return;
             }
 
-            user.openPrivateChannel().flatMap(privateChannel -> privateChannel.sendMessage(builder.build())).queue();
+            user.openPrivateChannel()
+                    .flatMap(privateChannel -> privateChannel.sendMessage(builder.build()))
+                    .queue(message -> {}, error ->
+                        utilsChat.sendInfo(
+                                param.message.getChannel(),
+                                "**Could not send private message!**\n" +
+                                "Is the receiver a bot too?"
+                        )
+                    );
         }
     }
 }

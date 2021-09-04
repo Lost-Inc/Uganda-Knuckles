@@ -4,6 +4,7 @@ import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,10 +26,10 @@ public class CommandHandler {
         return instance;
     }
 
+    // methods for registering commands
     public boolean register(@NotNull BotCommand command) {
         return this.commands.add(command);
     }
-
     public boolean register(@NotNull BotCommand[] commands) {
         boolean okay = true;
         for (BotCommand command : commands)
@@ -38,7 +39,8 @@ public class CommandHandler {
             return okay;
     }
 
-    public void handle(MessageReceivedEvent event) {
+    // method called by MessageReceiveListener
+    public void handle(@NotNull MessageReceivedEvent event) {
         // Object, that gets passed to the command classes
         CommandParameter param = new CommandParameter();
         String[] args = event
@@ -85,12 +87,15 @@ public class CommandHandler {
                 e.printStackTrace();
             }
         });
+        /* Thread priority is set lower than usual,
+        *   because the main thread is important
+        */
         thread.setPriority(Thread.NORM_PRIORITY - 1);
         thread.start();
     }
 
     // Gets a command from an array of commands based on its name
-    private BotCommand search(@NotNull BotCommand[] commands, String command) {
+    private @Nullable BotCommand search(@NotNull BotCommand[] commands, String command) {
         for(BotCommand cmd : commands)
             if(cmd.getName().toLowerCase().equals(command))
                 return cmd;

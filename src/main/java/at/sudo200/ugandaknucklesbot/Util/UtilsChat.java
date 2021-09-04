@@ -15,16 +15,17 @@ import java.io.File;
 public class UtilsChat {
 
     // Sends a string, embed or file into a channel
-    public void send(MessageChannel channel, String message) {
+    public void send(@NotNull MessageChannel channel, String message) {
         channel.sendMessage(message).queue();
     }
-    public void send(MessageChannel channel, MessageEmbed embed) {
+    public void send(@NotNull MessageChannel channel, MessageEmbed embed) {
         channel.sendMessage(embed).queue();
     }
-    public void send(MessageChannel channel, File file, AttachmentOption ...options) {
+    public void send(@NotNull MessageChannel channel, File file, AttachmentOption ...options) {
         channel.sendFile(file, options).queue();
     }
 
+    // Method for sending fancy replies
     public void sendInfo(MessageChannel channel, String message) {
         EmbedBuilder builder = this.getDefaultEmbed();
         builder.setDescription(message);
@@ -43,6 +44,7 @@ public class UtilsChat {
         return guild.getMemberById(id);
     }
 
+    // returns true, if string is a valid user mention
     public boolean isMention(@NotNull String q) {
         return q.matches("^<@!?[0-9]{18}>$");
     }

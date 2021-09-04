@@ -42,7 +42,7 @@ public class ChatCommandWiki extends BotCommand {
             String jsonString = request.body();
 
             switch (request.code()) {
-                case 200:
+                case 200:// Page exists
                     WikipediaSummaryRestAPI response = gson.fromJson(jsonString, (Type) WikipediaSummaryRestAPI.class);
                     if(!response.type.equalsIgnoreCase("standard")) {
                         utilsChat.sendInfo(
@@ -54,9 +54,10 @@ public class ChatCommandWiki extends BotCommand {
 
                     builder.setTitle(response.titles.display.replaceAll("<.*?>", ""));
                     builder.setDescription(
-                            ("**" + response.description + "**\n\n" +
-                            response.extract)
-                                    .replaceAll("<.*?>", "")
+                            (
+                                (response.description != null ? "**" + response.description + "**\n\n" : "") +
+                                response.extract
+                            ).replaceAll("<.*?>", "")
                     );
                     if(response.thumbnail != null)
                         builder.setImage(response.thumbnail.source);
@@ -64,14 +65,14 @@ public class ChatCommandWiki extends BotCommand {
                     utilsChat.send(param.message.getChannel(), builder.build());
                     break;
 
-                case 404:
+                case 404:// Page does not exist
                     utilsChat.sendInfo(
                             param.message.getChannel(),
                             "**Seems like there is no article about \"" + String.join(" ", param.args) + "\" on wikipedia (yet).**"
                     );
                     break;
 
-                default:
+                default:// Everything else
                     utilsChat.sendInfo(
                             param.message.getChannel(),
                             "**Something went wrong!**\nBlame your intellectual if you have one!"

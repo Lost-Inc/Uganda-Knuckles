@@ -23,8 +23,8 @@ public class ChatCommandRandomCat extends BotCommand {
 
     @Override
     protected @NotNull String getHelp() {
-        return "Imports cute little pussies from the internet\n" +
-                "we mean cats of course";
+        return "~~Imports cute little pussies from the internet\n" +
+                "we mean cats of course~~ **Currently broken!**";
     }
 
     @Override
@@ -36,8 +36,13 @@ public class ChatCommandRandomCat extends BotCommand {
                 CommandCategories.CHAT, CommandCategories.FUN, CommandCategories.INTERNET};
     }
 
-    @Override
+    @Override // TODO: FIX!
     protected void execute(@NotNull CommandParameter param) {
+        utilsChat.sendInfo(param.message.getChannel(),
+                "**This command is currently broken :broken_heart:**\n" +
+                "Like your girlfriend's heart! Go fix it!"
+        );
+        /*
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
         String response = HttpRequest.get("https://aws.random.cat/meow").body();
         try {
@@ -50,7 +55,7 @@ public class ChatCommandRandomCat extends BotCommand {
                     param.message.getChannel(),
                     "**Something went severely wrong**\nBlame your neighbor!\n\n" + e
             );
-        }
+        }*/
 
     }
 }

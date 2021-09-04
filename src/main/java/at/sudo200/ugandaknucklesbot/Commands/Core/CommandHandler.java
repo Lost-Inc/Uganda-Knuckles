@@ -2,7 +2,6 @@ package at.sudo200.ugandaknucklesbot.Commands.Core;
 
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -105,7 +104,7 @@ public class CommandHandler {
         param.message = event.getMessage();
 
         BotCommand[] commands = this.commands.toArray(new BotCommand[0]);
-        BotCommand cmd = search(commands, args[1].toLowerCase());
+        BotCommand cmd = search(commands, args[1]);
 
         if(cmd == null)
             return;
@@ -122,10 +121,7 @@ public class CommandHandler {
     }
 
     // Gets a command from an array of commands based on its name
-    private @Nullable BotCommand search(@NotNull BotCommand[] commands, String command) {
-        for(BotCommand cmd : commands)
-            if(cmd.getName().toLowerCase().equals(command))
-                return cmd;
-        return null;
+    private @Nullable BotCommand search(BotCommand @NotNull [] commands, String command) {
+        return Arrays.stream(commands).filter(c -> c.getName().equalsIgnoreCase(command)).findFirst().orElse(null);
     }
 }

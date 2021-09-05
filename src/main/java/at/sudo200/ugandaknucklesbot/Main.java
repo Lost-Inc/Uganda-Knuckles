@@ -52,6 +52,7 @@ public class Main {
                 new ChatCommandRandomCat(),
                 new ChatCommandRandomDog(),
                 new ChatCommandFood(),
+                new ChatCommandPing(),
                 new ChatCommandGetMinecraftSkin(),
                 new ChatCommandUselessWeb(),
                 new ChatCommandWiki(),

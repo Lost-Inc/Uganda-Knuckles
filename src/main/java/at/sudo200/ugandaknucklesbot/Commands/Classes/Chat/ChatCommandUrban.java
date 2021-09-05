@@ -68,7 +68,7 @@ public class ChatCommandUrban extends BotCommand {
         catch (Exception e) {
             utilsChat.sendInfo(
                     param.message.getChannel(),
-                    "**Something went severely wrong**\nBlame your neighbor!" + e
+                    "**Something went severely wrong**\nBlame your neighbor!\n\n" + e
             );
         }
 

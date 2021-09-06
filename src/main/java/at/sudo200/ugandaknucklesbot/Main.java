@@ -55,6 +55,7 @@ public class Main {
                 new ChatCommandUselessWeb(),
                 new ChatCommandWiki(),
                 new ChatCommandClear(),
+                new ChatCommandKick(),
                 // Voice commands
                 //new VoiceCommandPlay(),
                 //new VoiceCommandLeave(),

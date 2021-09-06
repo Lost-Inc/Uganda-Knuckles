@@ -4,6 +4,7 @@ import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
+import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,6 +41,7 @@ public class ChatCommandPing extends BotCommand {
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
+        final EmbedBuilder builder = utilsChat.getDefaultEmbed();
         final String normal = "**`Pong!`**";
         final String special =
                 "```\n" +
@@ -51,6 +53,9 @@ public class ChatCommandPing extends BotCommand {
                         "                  |___/   " +
                         "```";
 
-        utilsChat.sendInfo(param.message.getChannel(), random.nextInt(500) == 0 ? special : normal);
+        builder.setDescription(random.nextInt(500) == 0 ? special : normal);
+        builder.addField("Bot <-> Discord", param.message.getJDA().getGatewayPing() + " ms", true);
+
+        utilsChat.send(param.message.getChannel(), builder.build());
     }
 }

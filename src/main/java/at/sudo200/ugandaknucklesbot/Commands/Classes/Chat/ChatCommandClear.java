@@ -27,7 +27,7 @@ public class ChatCommandClear extends BotCommand {
 
     @Override
     protected @NotNull String getHelp() {
-        return "null";
+        return "Deletes messages\n\nWhat do you expect?";
     }
 
     @Override

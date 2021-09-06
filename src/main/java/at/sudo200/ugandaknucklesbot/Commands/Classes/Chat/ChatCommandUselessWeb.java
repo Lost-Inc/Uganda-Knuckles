@@ -111,8 +111,8 @@ public class ChatCommandUselessWeb extends BotCommand {
         return new String[]
                 // Main category
                 {CommandCategories.FUN,
-                // Auxiliary categories
-                CommandCategories.CHAT, CommandCategories.INTERNET};
+                        // Auxiliary categories
+                        CommandCategories.CHAT, CommandCategories.INTERNET};
     }
 
     @Override

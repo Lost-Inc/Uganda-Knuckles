@@ -20,12 +20,13 @@ public class VoiceAudioLoadResultHandler implements AudioLoadResultHandler {
 
     @Override
     public void playlistLoaded(AudioPlaylist playlist) {
-        for(AudioTrack track : playlist.getTracks())
+        for (AudioTrack track : playlist.getTracks())
             player.playTrack(track);
     }
 
     @Override
-    public void noMatches() {}
+    public void noMatches() {
+    }
 
     @Override
     public void loadFailed(FriendlyException exception) {

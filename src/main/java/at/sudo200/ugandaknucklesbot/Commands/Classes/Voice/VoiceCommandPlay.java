@@ -26,7 +26,7 @@ public class VoiceCommandPlay extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 // Main category
                 CommandCategories.VOICE,
                 // Auxiliary categories

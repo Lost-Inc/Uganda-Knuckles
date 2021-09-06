@@ -1,8 +1,6 @@
 package at.sudo200.ugandaknucklesbot;
 
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.*;
-import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLeave;
-import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandPlay;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandHandler;
 import at.sudo200.ugandaknucklesbot.listeners.MessageReceiveListener;
@@ -23,7 +21,7 @@ public class Main {
 
     private Main() throws LoginException { // Token retrieved from Environment
         this.gatewayIntents.add(GatewayIntent.GUILD_MEMBERS);
-        this.jda  = JDABuilder.createDefault(System.getenv("DISCORDBOTTOKEN"))
+        this.jda = JDABuilder.createDefault(System.getenv("DISCORDBOTTOKEN"))
                 .enableIntents(this.gatewayIntents)
                 .setChunkingFilter(ChunkingFilter.ALL)
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
@@ -35,9 +33,7 @@ public class Main {
         Main main;
         try {
             main = new Main();
-        }
-
-        catch (LoginException e) {
+        } catch (LoginException e) {
             e.printStackTrace();
             return;
         }

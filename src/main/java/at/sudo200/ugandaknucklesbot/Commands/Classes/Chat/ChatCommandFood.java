@@ -32,8 +32,8 @@ public class ChatCommandFood extends BotCommand {
         return new String[]
                 // Main category
                 {CommandCategories.IMAGE,
-                // Auxiliary categories
-                CommandCategories.CHAT, CommandCategories.FUN, CommandCategories.INTERNET};
+                        // Auxiliary categories
+                        CommandCategories.CHAT, CommandCategories.FUN, CommandCategories.INTERNET};
     }
 
     @Override
@@ -45,8 +45,7 @@ public class ChatCommandFood extends BotCommand {
             RandomFoodAPIResponse randomFoodAPIResponse = gson.fromJson(response, (Type) RandomFoodAPIResponse.class);
             builder.setImage(randomFoodAPIResponse.image);
             utilsChat.send(param.message.getChannel(), builder.build());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             utilsChat.sendInfo(
                     param.message.getChannel(),
                     "**Something went severely wrong**\nBlame your cook!\nIf you have one\n\n" + e

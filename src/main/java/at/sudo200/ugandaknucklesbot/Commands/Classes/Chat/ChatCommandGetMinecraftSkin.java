@@ -30,13 +30,13 @@ public class ChatCommandGetMinecraftSkin extends BotCommand {
         return new String[]
                 // Main category
                 {CommandCategories.MISC,
-                // Auxiliary categories
-                CommandCategories.CHAT, CommandCategories.INTERNET, CommandCategories.IMAGE};
+                        // Auxiliary categories
+                        CommandCategories.CHAT, CommandCategories.INTERNET, CommandCategories.IMAGE};
     }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        if(param.args.length == 0) {
+        if (param.args.length == 0) {
             utilsChat.sendInfo(
                     param.message.getChannel(),
                     (random.nextInt(500) == 1) ? "Pwease teww me the pwayew nyame ow uuid U\u03C9U" : "Please tell me the player name or uuid!"

@@ -28,8 +28,8 @@ public class ChatCommandLenny extends BotCommand {
         return new String[]
                 // Main category
                 {CommandCategories.FUN,
-                // Auxiliary categories
-                CommandCategories.CHAT};
+                        // Auxiliary categories
+                        CommandCategories.CHAT};
     }
 
     @Override
@@ -37,23 +37,24 @@ public class ChatCommandLenny extends BotCommand {
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
         builder.setTitle("( \u0361° \u035c\u0296 \u0361 °)");
 
-        if(param.args.length == 0 || !utilsChat.isMention(param.args[0]))
+        if (param.args.length == 0 || !utilsChat.isMention(param.args[0]))
             utilsChat.send(param.message.getChannel(), builder.build());
         else {
             User user = utilsChat.getMemberByMention(param.args[0], param.message.getGuild()).getUser();
-            if(user.getIdLong() == param.message.getJDA().getSelfUser().getIdLong()) {
+            if (user.getIdLong() == param.message.getJDA().getSelfUser().getIdLong()) {
                 utilsChat.sendInfo(param.message.getChannel(), "Sry, but I cannot talk with myself!");
                 return;
             }
 
             user.openPrivateChannel()
                     .flatMap(privateChannel -> privateChannel.sendMessage(builder.build()))
-                    .queue(message -> {}, error ->
-                        utilsChat.sendInfo(
-                                param.message.getChannel(),
-                                "**Could not send private message!**\n" +
-                                "Is the receiver a bot too?"
-                        )
+                    .queue(message -> {
+                            }, error ->
+                                    utilsChat.sendInfo(
+                                            param.message.getChannel(),
+                                            "**Could not send private message!**\n" +
+                                                    "Is the receiver a bot too?"
+                                    )
                     );
         }
     }

@@ -27,15 +27,15 @@ public class ChatCommandRandomCat extends BotCommand {
         return new String[]
                 // Main category
                 {CommandCategories.IMAGE,
-                // Auxiliary categories
-                CommandCategories.CHAT, CommandCategories.FUN, CommandCategories.INTERNET};
+                        // Auxiliary categories
+                        CommandCategories.CHAT, CommandCategories.FUN, CommandCategories.INTERNET};
     }
 
     @Override // TODO: FIX!
     protected void execute(@NotNull CommandParameter param) {
         utilsChat.sendInfo(param.message.getChannel(),
                 "**This command is currently broken :broken_heart:**\n" +
-                "Like your girlfriend's heart! Go fix it!"
+                        "Like your girlfriend's heart! Go fix it!"
         );
         /*
         EmbedBuilder builder = utilsChat.getDefaultEmbed();

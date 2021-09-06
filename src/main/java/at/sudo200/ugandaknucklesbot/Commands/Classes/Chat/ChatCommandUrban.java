@@ -32,13 +32,13 @@ public class ChatCommandUrban extends BotCommand {
         return new String[]
                 // Main category
                 {CommandCategories.SEARCH,
-                // Auxiliary categories
-                CommandCategories.CHAT, CommandCategories.INTERNET};
+                        // Auxiliary categories
+                        CommandCategories.CHAT, CommandCategories.INTERNET};
     }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        if(param.args.length == 0) {
+        if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(), "Mate, please, what do you want me to search?");
             return;
         }
@@ -48,7 +48,7 @@ public class ChatCommandUrban extends BotCommand {
         try {
             UrbanDictionaryAPIResponse urbanDictionaryAPIResponse = gson.fromJson(response, (Type) UrbanDictionaryAPIResponse.class);
 
-            if(urbanDictionaryAPIResponse.list.length != 0) {
+            if (urbanDictionaryAPIResponse.list.length != 0) {
                 UrbanDictionaryAPIResponse.DefinitionObject definition = urbanDictionaryAPIResponse.list[0];
                 builder.setTitle(definition.word, definition.permalink);
                 builder.setDescription(definition.definition);
@@ -56,16 +56,14 @@ public class ChatCommandUrban extends BotCommand {
                 builder.addField("Author", definition.author, false);
                 builder.addField(":thumbsup:", definition.thumbs_up.toString(), true);
                 builder.addField(":thumbsdown:", definition.thumbs_down.toString(), true);
-            }
-            else {
+            } else {
                 builder.setTitle("Oh no!");
                 builder.setDescription("Seems like there is no definition for this!");
                 builder.setImage("https://media1.tenor.com/images/22e32eae11bf34c250c716dc88c4ca6a/tenor.gif");
             }
 
             utilsChat.send(param.message.getChannel(), builder.build());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             utilsChat.sendInfo(
                     param.message.getChannel(),
                     "**Something went severely wrong**\nBlame your neighbor!\n\n" + e

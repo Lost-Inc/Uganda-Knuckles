@@ -14,7 +14,7 @@ public class ChatCommandPing extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 // Main category
                 CommandCategories.MISC,
                 // Auxiliary categories
@@ -37,13 +37,13 @@ public class ChatCommandPing extends BotCommand {
         final String normal = "**`Pong!`**";
         final String special =
                 "```\n" +
-                " ____                   _ \n" +
-                "|  _ \\ ___  _ __   __ _| |\n" +
-                "| |_) / _ \\| '_ \\ / _` | |\n" +
-                "|  __/ (_) | | | | (_| |_|\n" +
-                "|_|   \\___/|_| |_|\\__, (_)\n" +
-                "                  |___/   " +
-                "```";
+                        " ____                   _ \n" +
+                        "|  _ \\ ___  _ __   __ _| |\n" +
+                        "| |_) / _ \\| '_ \\ / _` | |\n" +
+                        "|  __/ (_) | | | | (_| |_|\n" +
+                        "|_|   \\___/|_| |_|\\__, (_)\n" +
+                        "                  |___/   " +
+                        "```";
 
         utilsChat.sendInfo(param.message.getChannel(), random.nextInt(500) == 0 ? special : normal);
     }

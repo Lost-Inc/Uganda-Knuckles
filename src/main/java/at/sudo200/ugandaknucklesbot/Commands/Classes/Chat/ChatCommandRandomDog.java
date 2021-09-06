@@ -32,8 +32,8 @@ public class ChatCommandRandomDog extends BotCommand {
         return new String[]
                 // Main category
                 {CommandCategories.IMAGE,
-                // Auxiliary categories
-                CommandCategories.CHAT, CommandCategories.FUN, CommandCategories.INTERNET};
+                        // Auxiliary categories
+                        CommandCategories.CHAT, CommandCategories.FUN, CommandCategories.INTERNET};
     }
 
     @Override
@@ -44,8 +44,7 @@ public class ChatCommandRandomDog extends BotCommand {
             RandomDogAPIResponse randomDogAPIResponse = gson.fromJson(response, (Type) RandomDogAPIResponse.class);
             builder.setImage(randomDogAPIResponse.url);
             utilsChat.send(param.message.getChannel(), builder.build());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             utilsChat.sendInfo(
                     param.message.getChannel(),
                     "**Something went severely wrong**\nBlame your neighbor's cat!\n\n" + e

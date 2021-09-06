@@ -34,13 +34,13 @@ public class ChatCommandWiki extends BotCommand {
         return new String[]
                 // Main category
                 {CommandCategories.SEARCH,
-                // Auxiliary categories
-                CommandCategories.CHAT, CommandCategories.INTERNET};
+                        // Auxiliary categories
+                        CommandCategories.CHAT, CommandCategories.INTERNET};
     }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        if(param.args.length == 0) {// If the user didn't specify an article
+        if (param.args.length == 0) {// If the user didn't specify an article
             param.args = new String[1];// we know what to do B)
             param.args[0] = "Getting_lost";
         }
@@ -54,7 +54,7 @@ public class ChatCommandWiki extends BotCommand {
             switch (request.code()) {
                 case 200:// Page exists
                     WikipediaSummaryRestAPI response = gson.fromJson(jsonString, (Type) WikipediaSummaryRestAPI.class);
-                    if(!response.type.equalsIgnoreCase("standard")) {
+                    if (!response.type.equalsIgnoreCase("standard")) {
                         utilsChat.sendInfo(
                                 param.message.getChannel(),
                                 "**Sry, but this site is a special site, which I cannot show you!**"
@@ -65,11 +65,11 @@ public class ChatCommandWiki extends BotCommand {
                     builder.setTitle(response.titles.display.replaceAll("<.*?>", ""));
                     builder.setDescription(
                             (
-                                (response.description != null ? "**" + response.description + "**\n\n" : "") +
-                                response.extract
+                                    (response.description != null ? "**" + response.description + "**\n\n" : "") +
+                                            response.extract
                             ).replaceAll("<.*?>", "")
                     );
-                    if(response.thumbnail != null)
+                    if (response.thumbnail != null)
                         builder.setImage(response.thumbnail.source);
 
                     utilsChat.send(param.message.getChannel(), builder.build());
@@ -89,7 +89,8 @@ public class ChatCommandWiki extends BotCommand {
                     );
                     break;
             }
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
-        catch (UnsupportedEncodingException e) { e.printStackTrace(); }
     }
 }

@@ -30,11 +30,11 @@ public class VoiceCommandLeave extends BotCommand {
     protected String @NotNull [] getCategories() {
         return new String[]
                 {
-                // Main Category
-                CommandCategories.VOICE,
-                // Auxiliary Catergories
-                CommandCategories.UTIL
-        };
+                        // Main Category
+                        CommandCategories.VOICE,
+                        // Auxiliary Catergories
+                        CommandCategories.UTIL
+                };
     }
 
     @Override
@@ -45,12 +45,12 @@ public class VoiceCommandLeave extends BotCommand {
         GuildVoiceState userVoiceState = utilsVoice.getVoiceState(param.message.getAuthor(), guild);
         GuildVoiceState botVoiceState = utilsVoice.getVoiceState(jda.getUserById(jda.getSelfUser().getId()), guild);
 
-        if(!userVoiceState.inVoiceChannel()) {
+        if (!userVoiceState.inVoiceChannel()) {
             utilsChat.sendInfo(param.message.getChannel(), "**Join a voice channel first!**");
             return;
         }
 
-        if(!botVoiceState.inVoiceChannel()) {
+        if (!botVoiceState.inVoiceChannel()) {
             utilsChat.sendInfo(param.message.getChannel(), "**I already left!**");
             return;
         }

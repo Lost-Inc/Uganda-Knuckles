@@ -26,8 +26,8 @@ public class ChatCommandInator extends BotCommand {
         return new String[]
                 // Main category
                 {CommandCategories.FUN,
-                // Auxiliary categories
-                CommandCategories.CHAT};
+                        // Auxiliary categories
+                        CommandCategories.CHAT};
     }
 
     @Override

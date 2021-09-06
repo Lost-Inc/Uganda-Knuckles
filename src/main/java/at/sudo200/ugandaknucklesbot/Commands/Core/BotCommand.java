@@ -5,8 +5,11 @@ import org.jetbrains.annotations.NotNull;
 // abstract class which gets inherited
 // by every command class
 public abstract class BotCommand {
-    protected abstract String @NotNull[] getCategories();
+    protected abstract String @NotNull [] getCategories();
+
     protected abstract @NotNull String getName();
+
     protected abstract @NotNull String getHelp();
+
     protected abstract void execute(@NotNull CommandParameter param);
 }

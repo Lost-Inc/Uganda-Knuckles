@@ -18,10 +18,12 @@ public class UtilsChat {
     public void send(@NotNull MessageChannel channel, String message) {
         channel.sendMessage(message).queue();
     }
+
     public void send(@NotNull MessageChannel channel, MessageEmbed embed) {
         channel.sendMessage(embed).queue();
     }
-    public void send(@NotNull MessageChannel channel, File file, AttachmentOption ...options) {
+
+    public void send(@NotNull MessageChannel channel, File file, AttachmentOption... options) {
         channel.sendFile(file, options).queue();
     }
 

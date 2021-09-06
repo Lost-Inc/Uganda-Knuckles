@@ -58,6 +58,7 @@ public class Main {
                 new ChatCommandGetMinecraftSkin(),
                 new ChatCommandUselessWeb(),
                 new ChatCommandWiki(),
+                new ChatCommandClear(),
                 // Voice commands
                 //new VoiceCommandPlay(),
                 //new VoiceCommandLeave(),

@@ -2,6 +2,7 @@ package at.sudo200.ugandaknucklesbot;
 
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.*;
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLeave;
+import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandPlay;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandHandler;
 import at.sudo200.ugandaknucklesbot.listeners.MessageReceiveListener;
@@ -45,6 +46,7 @@ public class Main {
 
         // Register your Commands here
         BotCommand[] commands = {
+                // Chat commands
                 new ChatCommandInator(),
                 new ChatCommandLenny(),
                 new ChatCommandAvatar(),
@@ -56,6 +58,8 @@ public class Main {
                 new ChatCommandGetMinecraftSkin(),
                 new ChatCommandUselessWeb(),
                 new ChatCommandWiki(),
+                // Voice commands
+                //new VoiceCommandPlay(),
                 //new VoiceCommandLeave(),
         };
 

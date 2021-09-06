@@ -9,6 +9,7 @@ import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.Gson;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Type;
 
@@ -34,6 +35,11 @@ public class ChatCommandUrban extends BotCommand {
                 {CommandCategories.SEARCH,
                         // Auxiliary categories
                         CommandCategories.CHAT, CommandCategories.INTERNET};
+    }
+
+    @Override
+    protected String @Nullable [] getAliases() {
+        return null;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package at.sudo200.ugandaknucklesbot.Commands.Core;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /** abstract class which gets inherited
  *  by every command class
@@ -8,6 +9,13 @@ import org.jetbrains.annotations.NotNull;
  *
  */
 public abstract class BotCommand {
+    /** Returns aliases for the command.
+     *  When no aliases are defined, null is returned instead
+     *  @author sudo200
+     *  @return Array of alias strings or null
+     */
+    protected abstract String @Nullable [] getAliases();
+
     /** Returns category strings
      *  of the categories the command belongs to
      *  @author sudo200

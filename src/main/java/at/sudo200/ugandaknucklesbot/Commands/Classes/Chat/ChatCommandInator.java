@@ -6,6 +6,7 @@ import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ChatCommandInator extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
@@ -28,6 +29,11 @@ public class ChatCommandInator extends BotCommand {
                 {CommandCategories.FUN,
                         // Auxiliary categories
                         CommandCategories.CHAT};
+    }
+
+    @Override
+    protected String @Nullable [] getAliases() {
+        return null;
     }
 
     @Override

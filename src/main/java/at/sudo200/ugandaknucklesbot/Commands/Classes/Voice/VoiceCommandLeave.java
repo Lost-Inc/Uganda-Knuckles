@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.managers.AudioManager;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class VoiceCommandLeave extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
@@ -35,6 +36,11 @@ public class VoiceCommandLeave extends BotCommand {
                         // Auxiliary Catergories
                         CommandCategories.UTIL
                 };
+    }
+
+    @Override
+    protected String @Nullable [] getAliases() {
+        return null;
     }
 
     @Override

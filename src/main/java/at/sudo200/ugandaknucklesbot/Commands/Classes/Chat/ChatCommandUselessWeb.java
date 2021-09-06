@@ -6,6 +6,7 @@ import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
@@ -113,6 +114,11 @@ public class ChatCommandUselessWeb extends BotCommand {
                 {CommandCategories.FUN,
                         // Auxiliary categories
                         CommandCategories.CHAT, CommandCategories.INTERNET};
+    }
+
+    @Override
+    protected String @Nullable [] getAliases() {
+        return null;
     }
 
     @Override

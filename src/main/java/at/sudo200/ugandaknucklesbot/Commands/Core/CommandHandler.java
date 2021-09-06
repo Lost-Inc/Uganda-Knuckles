@@ -85,13 +85,21 @@ public class CommandHandler {
                 } else if (args[2].equalsIgnoreCase("all")) {// show all commands
                     builder.setTitle("All commands");
                     for (BotCommand command : commands)
-                        builder.addField(command.getName(), command.getHelp(), false);
+                        builder.addField(
+                                command.getName(),
+                                command.getHelp() + (command.getAliases() != null ? "\n\n*Aliases:* " + String.join(",", command.getAliases()) : ""),
+                                false
+                        );
                 } else {
                     String key = categories.keySet().stream().filter(k -> k.matches("(?i).*" + args[2] + ".*")).findFirst().orElse(null);
                     if (key != null) {// show commands from category
                         builder.setTitle(key);
                         for (BotCommand command : categories.get(key))
-                            builder.addField(command.getName(), command.getHelp(), false);
+                            builder.addField(
+                                    command.getName(),
+                                    command.getHelp() + (command.getAliases() != null ? "\n\n*Aliases:* " + String.join(",", command.getAliases()) : ""),
+                                    false
+                            );
                     } else // category does not exist
                         builder.setDescription("**There is no category called \"" + args[2] + "\"!**\nTry \"all\"");
                 }
@@ -124,6 +132,14 @@ public class CommandHandler {
 
     // Gets a command from an array of commands based on its name
     private @Nullable BotCommand search(BotCommand @NotNull [] commands, String command) {
-        return Arrays.stream(commands).filter(c -> c.getName().equalsIgnoreCase(command)).findFirst().orElse(null);
+        return Arrays.stream(commands)
+                .filter(
+                        c -> c.getName()
+                                .equalsIgnoreCase(command) || (
+                                        c.getAliases() != null && Arrays.stream(c.getAliases()).anyMatch(a -> a.equalsIgnoreCase(command))
+                        )
+                )
+                .findFirst()
+                .orElse(null);
     }
 }

@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ChatCommandAvatar extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
@@ -20,6 +21,11 @@ public class ChatCommandAvatar extends BotCommand {
     @Override
     protected @NotNull String getHelp() {
         return "Gets the profile picture of a server member by mentioning him";
+    }
+
+    @Override
+    protected String @Nullable [] getAliases() {
+        return null;
     }
 
     @Override

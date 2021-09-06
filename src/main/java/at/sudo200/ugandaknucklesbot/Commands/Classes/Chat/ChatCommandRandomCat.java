@@ -6,6 +6,7 @@ import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import com.google.gson.Gson;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ChatCommandRandomCat extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
@@ -29,6 +30,11 @@ public class ChatCommandRandomCat extends BotCommand {
                 {CommandCategories.IMAGE,
                         // Auxiliary categories
                         CommandCategories.CHAT, CommandCategories.FUN, CommandCategories.INTERNET};
+    }
+
+    @Override
+    protected String @Nullable [] getAliases() {
+        return null;
     }
 
     @Override // TODO: FIX!

@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.exceptions.HierarchyException;
 import net.dv8tion.jda.api.requests.restaction.AuditableRestAction;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ChatCommandKick extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
@@ -28,6 +29,11 @@ public class ChatCommandKick extends BotCommand {
     @Override
     protected @NotNull String getHelp() {
         return "Yes, it kicks a member of your choice\n\n(not in the balls)";
+    }
+
+    @Override
+    protected String @Nullable [] getAliases() {
+        return null;
     }
 
     @Override

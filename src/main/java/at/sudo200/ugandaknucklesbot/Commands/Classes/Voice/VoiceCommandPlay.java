@@ -3,7 +3,6 @@ package at.sudo200.ugandaknucklesbot.Commands.Classes.Voice;
 import at.sudo200.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioLoadResultHandler;
 import at.sudo200.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioSendHandler;
 import at.sudo200.ugandaknucklesbot.Commands.Core.Audio.VoicePlayerManager;
-import at.sudo200.ugandaknucklesbot.Commands.Core.Audio.VoiceTrackScheduler;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
@@ -18,7 +17,6 @@ import net.dv8tion.jda.api.managers.AudioManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.Random;
 
 public class VoiceCommandPlay extends BotCommand {
@@ -26,7 +24,6 @@ public class VoiceCommandPlay extends BotCommand {
 
     private final UtilsChat utilsChat = new UtilsChat();
     private final UtilsVoice utilsVoice = new UtilsVoice();
-    private final HashMap<Long, VoiceAudioSendHandler> voiceAudioSendHandler = new HashMap<>();
 
     @Override
     protected String @NotNull [] getCategories() {
@@ -57,12 +54,12 @@ public class VoiceCommandPlay extends BotCommand {
     protected void execute(@NotNull CommandParameter param) {
         if(param.args.length == 0) {
             if(random.nextInt(10) == 0) {
-                utilsChat.sendInfo(param.message.getChannel(), "...this is what you get!");
+                utilsChat.sendInfo(param.message.getChannel(), "...this is what you get! :smiling_imp:");
                 param.args = new String[1];
                 param.args[0] = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
             }
             else {
-                utilsChat.sendInfo(param.message.getChannel(), "Please tell me what to play!\nOr else...");
+                utilsChat.sendInfo(param.message.getChannel(), "**Please tell me what to play!**\nOr else...");
                 return;
             }
         }
@@ -73,17 +70,14 @@ public class VoiceCommandPlay extends BotCommand {
         final AudioPlayer player = audioPlayerManager.createPlayer();
         audioPlayerManager.loadItem(
                 String.join(" ", param.args),
-                new VoiceAudioLoadResultHandler(player)
+                new VoiceAudioLoadResultHandler(player, param.message)
         );
-        voiceAudioSendHandler.put(guild.getIdLong(), new VoiceAudioSendHandler(player));
-
-        player.addListener(new VoiceTrackScheduler());
 
         final VoiceChannel channel = utilsVoice.getVoiceState(user, guild).getChannel();
         final AudioManager manager = guild.getAudioManager();
 
         manager.setAutoReconnect(true);
-        manager.setSendingHandler(voiceAudioSendHandler.get(guild.getIdLong()));
+        manager.setSendingHandler(new VoiceAudioSendHandler(player));
         manager.openAudioConnection(channel);
     }
 }

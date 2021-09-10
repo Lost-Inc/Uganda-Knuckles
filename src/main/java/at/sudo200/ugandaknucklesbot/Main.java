@@ -2,6 +2,7 @@ package at.sudo200.ugandaknucklesbot;
 
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.*;
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLeave;
+import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandPlay;
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandSync;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandHandler;
@@ -60,7 +61,7 @@ public class Main {
                 new ChatCommandKick(),
                 new ChatCommandBan(),
                 // Voice commands
-                //new VoiceCommandPlay(),
+                new VoiceCommandPlay(),
                 new VoiceCommandSync(),
                 new VoiceCommandLeave(),
         };

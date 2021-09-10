@@ -1,7 +1,5 @@
 package at.sudo200.ugandaknucklesbot.Commands.Classes.JSONTypeClasses;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 public class RedditTopApiResponse {
     public String kind;
     public Data data;

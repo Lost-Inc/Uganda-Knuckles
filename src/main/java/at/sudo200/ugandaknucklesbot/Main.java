@@ -9,6 +9,9 @@ import at.sudo200.ugandaknucklesbot.Commands.Core.CommandHandler;
 import at.sudo200.ugandaknucklesbot.listeners.MessageReceiveListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.OnlineStatus;
+import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Icon;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -42,6 +45,9 @@ public class Main {
         }
         // Listeners
         main.jda.addEventListener(new MessageReceiveListener());
+
+        // Set presence
+        main.jda.getPresence().setPresence(OnlineStatus.ONLINE, Activity.listening("@" + main.jda.getSelfUser().getName()), false);
 
         // Register your Commands here
         BotCommand[] commands = {

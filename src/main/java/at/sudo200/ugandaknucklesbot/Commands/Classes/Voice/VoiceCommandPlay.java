@@ -19,8 +19,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.Random;
 
 public class VoiceCommandPlay extends BotCommand {
+    private final Random random = new Random();
+
     private final UtilsChat utilsChat = new UtilsChat();
     private final UtilsVoice utilsVoice = new UtilsVoice();
     private final HashMap<Long, VoiceAudioSendHandler> voiceAudioSendHandler = new HashMap<>();
@@ -42,7 +45,7 @@ public class VoiceCommandPlay extends BotCommand {
 
     @Override
     protected @NotNull String getHelp() {
-        return "Start playing a song (lol)";
+        return "Plays a song right in your voice channel!\n\n||RIP Groovy 2021||";
     }
 
     @Override
@@ -52,14 +55,26 @@ public class VoiceCommandPlay extends BotCommand {
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
+        if(param.args.length == 0) {
+            if(random.nextInt(10) == 0) {
+                param.args = new String[1];
+                param.args[0] = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+            }
+            else {
+                utilsChat.sendInfo(param.message.getChannel(), "Please tell me what to play!\nOr else...");
+                return;
+            }
+        }
+
         final Guild guild = param.message.getGuild();
         final User user = param.message.getAuthor();
         final AudioPlayerManager audioPlayerManager = VoicePlayerManager.get();
         final AudioPlayer player = audioPlayerManager.createPlayer();
         audioPlayerManager.loadItem(
-                "https://sensibass.radioca.st/stream",
+                String.join(" ", param.args),
                 new VoiceAudioLoadResultHandler(player)
         );
+        audioPlayerManager.getConfiguration();
         voiceAudioSendHandler.put(guild.getIdLong(), new VoiceAudioSendHandler(player));
 
         player.addListener(new VoiceTrackScheduler());

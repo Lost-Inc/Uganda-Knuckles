@@ -50,7 +50,7 @@ public class VoiceCommandSync extends BotCommand {
 
     @Override
     protected @NotNull String getHelp() {
-        return "Syncs two voicechannels on two different guilds.\n\nWhy? Because we can!";
+        return "Syncs two voicechannels on two different servers.\n\n**Why? Because we can!**";
     }
 
     @Override
@@ -80,7 +80,7 @@ public class VoiceCommandSync extends BotCommand {
                     voiceState.getChannel()
             );
 
-            new Timer().schedule(new Task(() -> {// Schedule task for expiration
+            new Timer().schedule(new Task(() -> {// Schedule task for token expiration
                 guilds.remove(hash);
                 vcs.remove(guild);
             }), 5 * 60 * 1000);
@@ -108,7 +108,7 @@ public class VoiceCommandSync extends BotCommand {
             final AudioManager priManager = guild.getAudioManager();
 
             final Guild secGuild = guilds.get(param.args[0]);
-            final VoiceChannel secVoiceState = vcs.get(secGuild);
+            final VoiceChannel secVoiceChannel = vcs.get(secGuild);
             final AudioManager secManager = secGuild.getAudioManager();
 
             final VoiceAudioEchoHandler
@@ -125,7 +125,7 @@ public class VoiceCommandSync extends BotCommand {
             secManager.setReceivingHandler(secToPri);
 
             priManager.openAudioConnection(voiceState.getChannel());
-            secManager.openAudioConnection(secVoiceState);
+            secManager.openAudioConnection(secVoiceChannel);
         }
     }
 

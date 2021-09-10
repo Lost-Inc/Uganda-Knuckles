@@ -33,6 +33,7 @@ public class UtilsChat {
         builder.setDescription(message);
         channel.sendMessage(builder.build()).queue();
     }
+    public void send(MessageChannel channel, File file) { channel.sendFile(file).queue(); }
 
     // Returns an embed with default properties already set
     public EmbedBuilder getDefaultEmbed() {

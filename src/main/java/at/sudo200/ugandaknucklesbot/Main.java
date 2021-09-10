@@ -55,6 +55,7 @@ public class Main {
                 new ChatCommandInator(),
                 new ChatCommandLenny(),
                 new ChatCommandAvatar(),
+                new ChatCommandDNSLookup(),
                 new ChatCommandUrban(),
                 new ChatCommandRandomCat(),
                 new ChatCommandRandomDog(),

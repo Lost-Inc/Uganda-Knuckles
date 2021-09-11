@@ -26,7 +26,8 @@ dependencies {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'at.sudo200.ugandaknucklesbot.Main'
+                'Main-Class': 'at.sudo200.ugandaknucklesbot.Main',
+                'Implementation-Version': project.version.toString()
         )
     }
 }

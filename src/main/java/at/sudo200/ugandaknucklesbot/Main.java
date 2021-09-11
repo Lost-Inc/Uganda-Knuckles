@@ -81,6 +81,7 @@ public class Main {
                 new ChatCommandClear(),
                 new ChatCommandKick(),
                 new ChatCommandBan(),
+                new ChatCommandVersion(),
                 // Voice commands
                 new VoiceCommandPlay(),
                 new VoiceCommandSync(),

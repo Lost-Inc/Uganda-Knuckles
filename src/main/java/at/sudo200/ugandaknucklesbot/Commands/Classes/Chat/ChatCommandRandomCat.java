@@ -24,8 +24,8 @@ public class ChatCommandRandomCat extends BotCommand {
 
     @Override
     protected @NotNull String getHelp() {
-        return "~~Imports cute little pussies from the internet\n" +
-                "we mean cats of course~~ **Currently broken!**";
+        return "Imports cute little pussies from the internet\n" +
+                "we mean cats of course";
     }
 
     @Override

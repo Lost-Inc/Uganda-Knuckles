@@ -14,16 +14,17 @@ public class ChatCommandPoop extends BotCommand {
 
     @Override
     protected String @Nullable [] getAliases() {
-        return new String[]
-                // Main category
-                {CommandCategories.FUN,
-                        // Auxiliary categories
-                        CommandCategories.CHAT};
+        return null;
+
     }
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[0];
+        return new String[]
+        // Main category
+        {CommandCategories.FUN,
+                // Auxiliary categories
+                CommandCategories.CHAT};
     }
 
     @Override

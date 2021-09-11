@@ -19,6 +19,19 @@ import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/*
+ *  TODO:
+ *  - [ ] Add moderation category
+ *  - [ ] Add permission restriction to moderation commands
+ *  - [ ] Add QR command (embed string in QR code)
+ *  - [ ] Add version command (print out package- and jvm version)
+ *  - [ ] Add queue command (print out current audio track queue)
+ *  - [ ] Add stop command (destroy audio player, leave bot in channel)
+ *  - [ ] Add pause command (pause audio player)
+ *  - [ ] Add resume command (resume audio player)
+ *  - [ ] Fix typos and similar
+ */
+
 public class Main {
     private final Collection<GatewayIntent> gatewayIntents = new ArrayList<>();
     private final JDA jda;

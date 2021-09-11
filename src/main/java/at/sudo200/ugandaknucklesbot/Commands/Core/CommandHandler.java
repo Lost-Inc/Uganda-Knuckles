@@ -136,7 +136,7 @@ public class CommandHandler {
                 .filter(
                         c -> c.getName()
                                 .equalsIgnoreCase(command) || (
-                                        c.getAliases() != null && Arrays.stream(c.getAliases()).anyMatch(a -> a.equalsIgnoreCase(command))
+                                c.getAliases() != null && Arrays.stream(c.getAliases()).anyMatch(a -> a.equalsIgnoreCase(command))
                         )
                 )
                 .findFirst()

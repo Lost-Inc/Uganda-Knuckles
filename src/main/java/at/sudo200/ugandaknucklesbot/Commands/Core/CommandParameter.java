@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.entities.Message;
 
 /**
  * Object, which containing the command args and message object
+ *
  * @author sudo200
  */
 public class CommandParameter {

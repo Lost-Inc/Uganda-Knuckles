@@ -11,7 +11,6 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
-import net.dv8tion.jda.api.entities.Icon;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -58,6 +57,8 @@ public class Main {
                 new ChatCommandDNSLookup(),
                 new ChatCommandUrban(),
                 new ChatCommandRandomCat(),
+                new ChatCommandPoop(),
+                new ChatCommandDice(),
                 new ChatCommandRandomDog(),
                 new ChatCommandFood(),
                 new ChatCommandPing(),
@@ -71,8 +72,6 @@ public class Main {
                 new VoiceCommandPlay(),
                 new VoiceCommandSync(),
                 new VoiceCommandLeave(),
-                new ChatCommandPoop(),
-                new ChatCommandDice()
         };
 
         main.handler.register(commands);

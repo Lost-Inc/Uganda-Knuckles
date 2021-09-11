@@ -9,7 +9,6 @@ public class VoicePlayerManager {
 
     static {
         AudioSourceManagers.registerRemoteSources(playerManager);
-        AudioSourceManagers.registerLocalSource(playerManager);
     }
 
     public static AudioPlayerManager get() {

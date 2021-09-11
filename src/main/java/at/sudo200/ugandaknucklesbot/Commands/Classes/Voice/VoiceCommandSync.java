@@ -20,13 +20,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class VoiceCommandSync extends BotCommand {
-    private final Random random = new Random();
-
-    private final UtilsChat utilsChat = new UtilsChat();
-    private final UtilsVoice utilsVoice = new UtilsVoice();
-
     private static final HashMap<String, Guild> guilds = new HashMap<>();
     private static final HashMap<Guild, VoiceChannel> vcs = new HashMap<>();
+    private final Random random = new Random();
+    private final UtilsChat utilsChat = new UtilsChat();
+    private final UtilsVoice utilsVoice = new UtilsVoice();
 
     @Override
     protected String @Nullable [] getAliases() {
@@ -35,7 +33,7 @@ public class VoiceCommandSync extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 // Main Category
                 CommandCategories.UTIL,
                 // Auxiliary categories
@@ -59,13 +57,13 @@ public class VoiceCommandSync extends BotCommand {
         final MessageChannel channel = param.message.getChannel();
         final GuildVoiceState voiceState = utilsVoice.getVoiceState(param.message.getAuthor(), guild);
 
-        if(param.args.length == 0) {// Called without token
-            if(guilds.containsValue(guild)) {// Check for already existing token
+        if (param.args.length == 0) {// Called without token
+            if (guilds.containsValue(guild)) {// Check for already existing token
                 utilsChat.sendInfo(channel, "**Somebody already generated a token for this server!**\n\nWhen will you learn!");
                 return;
             }
 
-            if(voiceState.getChannel() == null) {// Check for voice channel
+            if (voiceState.getChannel() == null) {// Check for voice channel
                 utilsChat.sendInfo(channel, "**Please join the voice channel you wanna sync mate!**\n\nWhen will you learn!");
                 return;
             }
@@ -93,14 +91,13 @@ public class VoiceCommandSync extends BotCommand {
                             hash
                     )
             );
-        }
-        else {
-            if(!guilds.containsKey(param.args[0])) {
+        } else {
+            if (!guilds.containsKey(param.args[0])) {
                 utilsChat.sendInfo(channel, "This is not a valid token!\n\nMaybe it has expired like your free trial of WinRAR?");
                 return;
             }
 
-            if(voiceState.getChannel() == null) {
+            if (voiceState.getChannel() == null) {
                 utilsChat.sendInfo(channel, "**Please join the voice channel you wanna sync mate!**\n\nWhen will you learn!");
                 return;
             }
@@ -138,7 +135,8 @@ public class VoiceCommandSync extends BotCommand {
                 stringBuilder.append(Integer.toHexString((b & 0xFF) | 0x100), 1, 3);
             }
             return stringBuilder.toString();
-        } catch (java.security.NoSuchAlgorithmException ignored) {}
+        } catch (java.security.NoSuchAlgorithmException ignored) {
+        }
         return "";
     }
 
@@ -150,6 +148,8 @@ public class VoiceCommandSync extends BotCommand {
         }
 
         @Override
-        public void run() { runnable.run(); }
+        public void run() {
+            runnable.run();
+        }
     }
 }

@@ -20,7 +20,7 @@ public class ChatCommandDNSLookup extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 // Main category
                 CommandCategories.SEARCH,
                 // Auxiliary categories
@@ -40,7 +40,7 @@ public class ChatCommandDNSLookup extends BotCommand {
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        if(param.args.length == 0) {
+        if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(), "**What hostname should I resolve?!?**");
             return;
         }
@@ -51,8 +51,7 @@ public class ChatCommandDNSLookup extends BotCommand {
                     builder.addField("", inetAddress.getHostAddress(), false)
             );
             utilsChat.send(param.message.getChannel(), builder.build());
-        }
-        catch (UnknownHostException e) {
+        } catch (UnknownHostException e) {
             utilsChat.sendInfo(param.message.getChannel(), "That host seems to be non existent!\n\n**Maybe your government didn't like him...**");
         }
     }

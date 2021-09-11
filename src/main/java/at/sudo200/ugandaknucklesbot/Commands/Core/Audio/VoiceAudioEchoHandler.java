@@ -10,7 +10,8 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- *  Class for transmitting sound from one vc to another
+ * Class for transmitting sound from one vc to another
+ *
  * @author sudo200
  */
 public class VoiceAudioEchoHandler implements AudioSendHandler, AudioReceiveHandler {
@@ -34,7 +35,7 @@ public class VoiceAudioEchoHandler implements AudioSendHandler, AudioReceiveHand
 
     @Override
     public void handleCombinedAudio(@NotNull CombinedAudio combinedAudio) {
-        if(combinedAudio.getUsers().isEmpty())
+        if (combinedAudio.getUsers().isEmpty())
             return;
 
         byte[] data = combinedAudio.getAudioData(1.0);

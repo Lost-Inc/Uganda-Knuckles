@@ -38,7 +38,7 @@ public class ChatCommandBan extends BotCommand {
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        if(param.args.length == 0 || !utilsChat.isMention(param.args[0])) {
+        if (param.args.length == 0 || !utilsChat.isMention(param.args[0])) {
             utilsChat.sendInfo(param.message.getChannel(), "You have to say who you want to ban.");
             return;
         }
@@ -49,8 +49,7 @@ public class ChatCommandBan extends BotCommand {
                 ban = ban.reason(String.join(" ", param.args));
             }
             ban.queue();
-        }
-        catch (HierarchyException e) {
+        } catch (HierarchyException e) {
             EmbedBuilder builder = utilsChat.getDefaultEmbed();
             builder.setDescription("**That dude is more pog than me, sry** ");
             builder.setImage("https://i1.sndcdn.com/avatars-ypCd5dE5YbGkyF0p-Y59d9w-t500x500.jpg");

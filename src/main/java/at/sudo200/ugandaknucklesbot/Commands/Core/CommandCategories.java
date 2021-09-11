@@ -2,6 +2,7 @@ package at.sudo200.ugandaknucklesbot.Commands.Core;
 
 /**
  * Interface containing command categories
+ *
  * @author sudo200
  */
 public interface CommandCategories {

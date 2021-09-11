@@ -71,6 +71,7 @@ public class Main {
                 new VoiceCommandPlay(),
                 new VoiceCommandSync(),
                 new VoiceCommandLeave(),
+                new ChatCommandPoop()
         };
 
         main.handler.register(commands);

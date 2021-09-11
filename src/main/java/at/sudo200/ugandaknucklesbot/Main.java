@@ -21,7 +21,7 @@ import java.util.Collection;
 
 /*
  *  TODO:
- *  - [ ] Add moderation category
+ *  - [x] Add moderation category
  *  - [ ] Add permission restriction to moderation commands
  *  - [ ] Add QR command (embed string in QR code)
  *  - [ ] Add version command (print out package- and jvm version)

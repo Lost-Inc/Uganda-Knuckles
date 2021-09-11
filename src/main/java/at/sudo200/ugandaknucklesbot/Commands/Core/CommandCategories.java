@@ -12,6 +12,7 @@ public interface CommandCategories {
     String FUN = ":rofl: Fun";
     String INTERNET = ":globe_with_meridians: Internet";
     String MISC = ":sparkles: Misc";
+    String MODERATION = ":cop: Moderation";
     String SEARCH = ":mag: Search";
     String VOICE = ":microphone2: Voice";
 }

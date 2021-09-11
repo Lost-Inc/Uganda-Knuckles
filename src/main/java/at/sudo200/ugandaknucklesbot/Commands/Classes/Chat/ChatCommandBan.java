@@ -16,8 +16,8 @@ public class ChatCommandBan extends BotCommand {
     @Override
     protected String @NotNull [] getCategories() {
         return new String[]{
-                CommandCategories.UTIL,
-                CommandCategories.CHAT
+                CommandCategories.MODERATION,
+                CommandCategories.CHAT, CommandCategories.UTIL
         };
     }
 

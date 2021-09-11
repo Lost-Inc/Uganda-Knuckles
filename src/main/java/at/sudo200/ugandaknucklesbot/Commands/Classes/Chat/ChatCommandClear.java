@@ -15,9 +15,9 @@ public class ChatCommandClear extends BotCommand {
     protected String @NotNull [] getCategories() {
         return new String[]{
                 // Main category
-                CommandCategories.UTIL,
+                CommandCategories.MODERATION,
                 // Auxiliary categories
-                CommandCategories.CHAT,
+                CommandCategories.CHAT, CommandCategories.UTIL
         };
     }
 

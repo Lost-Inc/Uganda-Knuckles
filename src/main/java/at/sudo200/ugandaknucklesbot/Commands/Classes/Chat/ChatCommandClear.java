@@ -4,9 +4,12 @@ import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class ChatCommandClear extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
@@ -40,6 +43,11 @@ public class ChatCommandClear extends BotCommand {
     protected void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(), "**How many do ja want to delete?**");
+            return;
+        }
+
+        if (!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getAuthor())).hasPermission(Permission.MESSAGE_MANAGE)) {
+            utilsChat.sendInfo(param.message.getChannel(), "**You are not pog enough to use this!**");
             return;
         }
 

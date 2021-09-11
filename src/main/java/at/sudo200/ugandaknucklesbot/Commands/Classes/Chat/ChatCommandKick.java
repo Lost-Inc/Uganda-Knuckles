@@ -5,10 +5,13 @@ import at.sudo200.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.exceptions.HierarchyException;
 import net.dv8tion.jda.api.requests.restaction.AuditableRestAction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class ChatCommandKick extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
@@ -42,6 +45,12 @@ public class ChatCommandKick extends BotCommand {
             utilsChat.sendInfo(param.message.getChannel(), "You have to say who you want to kick.");
             return;
         }
+
+        if (!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getAuthor())).hasPermission(Permission.KICK_MEMBERS)) {
+            utilsChat.sendInfo(param.message.getChannel(), "**You are not pog enough to use this!**");
+            return;
+        }
+
         try {
             AuditableRestAction<Void> kick = utilsChat.getMemberByMention(param.args[0], param.message.getGuild()).kick();
             if (param.args.length > 1) {

@@ -22,7 +22,7 @@ import java.util.Collection;
 /*
  *  TODO:
  *  - [x] Add moderation category
- *  - [ ] Add permission restriction to moderation commands
+ *  - [x] Add permission restriction to moderation commands
  *  - [ ] Add QR command (embed string in QR code)
  *  - [ ] Add version command (print out package- and jvm version)
  *  - [ ] Add queue command (print out current audio track queue)

@@ -1,12 +1,17 @@
 package at.sudo200.ugandaknucklesbot.Commands.Classes.Chat;
 
+import at.sudo200.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomCatAPIResponse;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
+import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.Gson;
+import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.lang.reflect.Type;
 
 public class ChatCommandRandomCat extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
@@ -37,13 +42,9 @@ public class ChatCommandRandomCat extends BotCommand {
         return null;
     }
 
-    @Override // TODO: FIX!
+    @Override
     protected void execute(@NotNull CommandParameter param) {
-        utilsChat.sendInfo(param.message.getChannel(),
-                "**This command is currently broken :broken_heart:**\n" +
-                        "Like your girlfriend's heart! Go fix it!"
-        );
-        /*
+
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
         String response = HttpRequest.get("https://aws.random.cat/meow").body();
         try {
@@ -56,7 +57,7 @@ public class ChatCommandRandomCat extends BotCommand {
                     param.message.getChannel(),
                     "**Something went severely wrong**\nBlame your neighbor!\n\n" + e
             );
-        }*/
+        }
 
     }
 }

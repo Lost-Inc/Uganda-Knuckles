@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'at.sudo200'
-version '1.0-SNAPSHOT'
+version '1.0.0'
 
 repositories {
     mavenCentral()
@@ -23,6 +23,20 @@ dependencies {
     implementation "com.google.zxing:javase:3.4.1"
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'at.sudo200.ugandaknucklesbot.Main'
+        )
+    }
+}
+
 shadowJar {
 
 }
+
+artifacts {
+    archives shadowJar
+}
+
+jar.dependsOn shadowJar

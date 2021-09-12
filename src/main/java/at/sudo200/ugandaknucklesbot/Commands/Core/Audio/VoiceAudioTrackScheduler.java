@@ -18,11 +18,20 @@ public class VoiceAudioTrackScheduler extends AudioEventAdapter {
         this.player = player;
     }
 
+    /**
+     * Queues songs
+     * @param tracks Track(s) to be queued
+     */
     public void queue(AudioTrack @NotNull ... tracks) {
         this.tracks.addAll(Arrays.asList(tracks));
-        player.startTrack(this.tracks.poll(), true);
+        if (player.startTrack(this.tracks.peek(), true))
+            this.tracks.poll();
     }
 
+    /**
+     * Getter for the queue
+     * @return Copy of the queue
+     */
     public Queue<AudioTrack> getQueue() {
         return new ConcurrentLinkedQueue<>(tracks);
     }

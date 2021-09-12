@@ -51,6 +51,11 @@ public class ChatCommandKick extends BotCommand {
             return;
         }
 
+        if(!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getJDA().getSelfUser())).hasPermission(Permission.KICK_MEMBERS)) {
+            utilsChat.sendInfo(param.message.getChannel(), "**I don't have permission to be pog!**");
+            return;
+        }
+
         try {
             AuditableRestAction<Void> kick = utilsChat.getMemberByMention(param.args[0], param.message.getGuild()).kick();
             if (param.args.length > 1) {

@@ -51,6 +51,11 @@ public class ChatCommandClear extends BotCommand {
             return;
         }
 
+        if(!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getJDA().getSelfUser())).hasPermission(Permission.MESSAGE_MANAGE)) {
+            utilsChat.sendInfo(param.message.getChannel(), "**I don't have permission to be pog!**");
+            return;
+        }
+
         final MessageChannel channel = param.message.getChannel();
         final String countStr = param.args[0];
         int count;

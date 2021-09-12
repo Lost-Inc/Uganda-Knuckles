@@ -19,7 +19,7 @@ import java.util.Collection;
 
 /*
  *  TODO:
- *  - [ ] Add permission checking to every command
+ *  - [x] Add permission checking to every command
  *  - [ ] Add Aliases to voice commands, to work like groovy
  *  - [ ] Fix typos and similar
  */

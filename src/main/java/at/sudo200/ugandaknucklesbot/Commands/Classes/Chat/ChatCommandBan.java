@@ -51,6 +51,11 @@ public class ChatCommandBan extends BotCommand {
             return;
         }
 
+        if(!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getJDA().getSelfUser())).hasPermission(Permission.BAN_MEMBERS)) {
+            utilsChat.sendInfo(param.message.getChannel(), "**I don't have permission to be pog!**");
+            return;
+        }
+
         try {
             AuditableRestAction<Void> ban = utilsChat.getMemberByMention(param.args[0], param.message.getGuild()).ban(0);
             if (param.args.length > 1) {

@@ -13,7 +13,9 @@ public class VoiceCommandPause extends BotCommand {
 
     @Override
     protected String @Nullable [] getAliases() {
-        return null;
+        return new String[] {
+                "pa"
+        };
     }
 
     @Override

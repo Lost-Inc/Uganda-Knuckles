@@ -13,7 +13,9 @@ public class VoiceCommandResume extends BotCommand {
 
     @Override
     protected String @Nullable [] getAliases() {
-        return null;
+        return new String[] {
+                "re"
+        };
     }
 
     @Override

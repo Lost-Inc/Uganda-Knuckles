@@ -30,11 +30,12 @@ public class ChatCommandAvatar extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[]
+        return new String[] {
                 // Main category
-                {CommandCategories.UTIL,
-                        // Auxiliary categories
-                        CommandCategories.CHAT};
+                CommandCategories.UTIL,
+                // Auxiliary categories
+                CommandCategories.CHAT
+        };
     }
 
     @Override

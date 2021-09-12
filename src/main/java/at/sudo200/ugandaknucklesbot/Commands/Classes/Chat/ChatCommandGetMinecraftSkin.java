@@ -28,11 +28,12 @@ public class ChatCommandGetMinecraftSkin extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[]
+        return new String[] {
                 // Main category
-                {CommandCategories.MISC,
-                        // Auxiliary categories
-                        CommandCategories.CHAT, CommandCategories.INTERNET, CommandCategories.IMAGE};
+                CommandCategories.MISC,
+                // Auxiliary categories
+                CommandCategories.CHAT, CommandCategories.INTERNET, CommandCategories.IMAGE
+        };
     }
 
     @Override

@@ -1,4 +1,4 @@
-package at.sudo200.ugandaknucklesbot.listeners;
+package at.sudo200.ugandaknucklesbot.Listeners;
 
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandHandler;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;

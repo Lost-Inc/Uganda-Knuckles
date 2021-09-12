@@ -20,11 +20,12 @@ public class ChatCommandPoop extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[]
-        // Main category
-        {CommandCategories.FUN,
+        return new String[] {
+                // Main category
+                CommandCategories.FUN,
                 // Auxiliary categories
-                CommandCategories.CHAT};
+                CommandCategories.CHAT
+        };
     }
 
     @Override

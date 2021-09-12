@@ -2,9 +2,8 @@ package at.sudo200.ugandaknucklesbot;
 
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.*;
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.*;
-import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandHandler;
-import at.sudo200.ugandaknucklesbot.listeners.MessageReceiveListener;
+import at.sudo200.ugandaknucklesbot.Listeners.MessageReceiveListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -19,8 +18,6 @@ import java.util.Collection;
 
 /*
  *  TODO:
- *  - [x] Add permission checking to every command
- *  - [x] Add Aliases to voice commands, to work like groovy
  *  - [ ] Fix typos and similar
  */
 
@@ -54,7 +51,7 @@ public class Main {
         main.jda.getPresence().setPresence(OnlineStatus.ONLINE, Activity.listening("@" + main.jda.getSelfUser().getName()), false);
 
         // Register your Commands here
-        BotCommand[] commands = {
+        main.handler.register(
                 // Chat commands
                 new ChatCommandInator(),
                 new ChatCommandLenny(),
@@ -83,9 +80,7 @@ public class Main {
                 new VoiceCommandResume(),
                 new VoiceCommandSync(),
                 new VoiceCommandStop(),
-                new VoiceCommandLeave(),
-        };
-
-        main.handler.register(commands);
+                new VoiceCommandLeave()
+        );
     }
 }

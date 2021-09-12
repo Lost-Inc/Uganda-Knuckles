@@ -81,7 +81,7 @@ public class ChatCommandDice extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[]{
+        return new String[] {
                 CommandCategories.UTIL,
                 CommandCategories.CHAT
         };
@@ -100,30 +100,26 @@ public class ChatCommandDice extends BotCommand {
     @Override
     protected void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0 ) {
-            utilsChat.sendInfo(param.message.getChannel(), "```c\n" + numbers[random.nextInt(6)+1] + "\n```"); //Integer.toString( random.nextInt(5+1))
+            utilsChat.sendInfo(param.message.getChannel(), "```c\n" + numbers[random.nextInt(6)+1] + "\n```");
             return;
         }
         try{
             int dice = Integer.parseInt(param.args[0]);
-            int randomnumber = random.nextInt(dice);
-            StringBuilder asciinumber = new StringBuilder("```c\n");
-            for (char c: Integer.toString(randomnumber).toCharArray()) {
-                asciinumber.append(numbers[Integer.parseInt(String.valueOf(c))]);
-                asciinumber.append("\n\n");
+            int randomNum = random.nextInt(dice);
+            StringBuilder asciiBuilder = new StringBuilder("```c\n");
+            for (char c: Integer.toString(randomNum).toCharArray()) {
+                asciiBuilder.append(numbers[Integer.parseInt(String.valueOf(c))]);
+                asciiBuilder.append("\n\n");
             }
-            asciinumber.append("\n```");
+            asciiBuilder.append("\n```");
 
-            utilsChat.sendInfo(param.message.getChannel(), asciinumber.toString());
+            utilsChat.sendInfo(param.message.getChannel(), asciiBuilder.toString());
         }
         catch (NumberFormatException e){
-            utilsChat.sendInfo(param.message.getChannel(),param.args[0] + " is not a number!");
+            utilsChat.sendInfo(param.message.getChannel(),param.args[0] + " is not a number!\nAs far as I know");
         }
         catch (IllegalArgumentException e){
-            utilsChat.sendInfo(param.message.getChannel(), "Number has to be positive!\n\nLike your attitude");
+            utilsChat.sendInfo(param.message.getChannel(), "Number has to be positive!\n\nLike your attitude :grin:");
         }
-
-
-
-
     }
 }

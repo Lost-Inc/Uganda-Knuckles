@@ -26,11 +26,12 @@ public class ChatCommandLenny extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[]
+        return new String[] {
                 // Main category
-                {CommandCategories.FUN,
-                        // Auxiliary categories
-                        CommandCategories.CHAT};
+                CommandCategories.FUN,
+                // Auxiliary categories
+                CommandCategories.CHAT
+        };
     }
 
     @Override

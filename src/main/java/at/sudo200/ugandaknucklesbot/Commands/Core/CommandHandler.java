@@ -22,15 +22,14 @@ public class CommandHandler {
     private final HashMap<String, Collection<BotCommand>> categories = new HashMap<>();
     private final UtilsChat utilsChat = new UtilsChat();
 
-    private CommandHandler() {
-    }
+    private CommandHandler() {}
 
     public static CommandHandler get() {
         return instance;
     }
 
-    // methods for registering commands
-    public boolean register(@NotNull BotCommand command) {
+
+    private boolean register(@NotNull BotCommand command) {
         for (String categoryName : command.getCategories()) {
             if (!categories.containsKey(categoryName)) {
                 categories.put(categoryName, new ArrayList<>());
@@ -43,7 +42,8 @@ public class CommandHandler {
         return this.commands.add(command);
     }
 
-    public boolean register(BotCommand @NotNull [] commands) {
+    // methods for registering commands
+    public boolean register(BotCommand @NotNull ...commands) {
         boolean okay = true;
         for (BotCommand command : commands)
             if (!register(command))

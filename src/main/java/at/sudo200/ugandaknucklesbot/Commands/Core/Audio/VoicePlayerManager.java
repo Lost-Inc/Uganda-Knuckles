@@ -11,6 +11,10 @@ public class VoicePlayerManager {
         AudioSourceManagers.registerRemoteSources(playerManager);
     }
 
+    /**
+     * @return PlayerManager
+     * @author sudo200
+     */
     public static AudioPlayerManager get() {
         return playerManager;
     }

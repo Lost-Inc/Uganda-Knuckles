@@ -18,7 +18,7 @@ public class ChatCommandKick extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[]{
+        return new String[] {
                 CommandCategories.MODERATION,
                 CommandCategories.CHAT, CommandCategories.UTIL
         };

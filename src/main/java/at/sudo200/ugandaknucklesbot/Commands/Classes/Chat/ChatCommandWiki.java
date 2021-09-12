@@ -32,11 +32,12 @@ public class ChatCommandWiki extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[]
+        return new String[] {
                 // Main category
-                {CommandCategories.SEARCH,
-                        // Auxiliary categories
-                        CommandCategories.CHAT, CommandCategories.INTERNET};
+                CommandCategories.SEARCH,
+                // Auxiliary categories
+                CommandCategories.CHAT, CommandCategories.INTERNET
+        };
     }
 
     @Override

@@ -30,11 +30,12 @@ public class ChatCommandFood extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[]
+        return new String[] {
                 // Main category
-                {CommandCategories.IMAGE,
-                        // Auxiliary categories
-                        CommandCategories.CHAT, CommandCategories.FUN, CommandCategories.INTERNET};
+                CommandCategories.IMAGE,
+                // Auxiliary categories
+                CommandCategories.CHAT, CommandCategories.FUN, CommandCategories.INTERNET
+        };
     }
 
     @Override

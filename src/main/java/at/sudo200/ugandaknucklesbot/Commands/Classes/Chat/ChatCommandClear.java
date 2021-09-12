@@ -16,7 +16,7 @@ public class ChatCommandClear extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[]{
+        return new String[] {
                 // Main category
                 CommandCategories.MODERATION,
                 // Auxiliary categories
@@ -79,7 +79,7 @@ public class ChatCommandClear extends BotCommand {
         try {
             channel.getIterableHistory().takeAsync(count + 1).thenAccept(channel::purgeMessages);
         } catch (IllegalArgumentException e) {
-            utilsChat.sendInfo(channel, "**Sry, I cannot erase the world!**\nOnly 100 messages!");
+            utilsChat.sendInfo(channel, "**Sry, I cannot erase the world!**\nOnly 99 messages!");
         }
     }
 }

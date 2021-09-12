@@ -18,7 +18,7 @@ public class ChatCommandBan extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[]{
+        return new String[] {
                 CommandCategories.MODERATION,
                 CommandCategories.CHAT, CommandCategories.UTIL
         };
@@ -31,7 +31,7 @@ public class ChatCommandBan extends BotCommand {
 
     @Override
     protected @NotNull String getHelp() {
-        return "Yes, it bans a member of your choice\n\n(forever, thats a long time)";
+        return "Yes, it bans a member of your choice\n\n(forever, that's a long time)";
     }
 
     @Override

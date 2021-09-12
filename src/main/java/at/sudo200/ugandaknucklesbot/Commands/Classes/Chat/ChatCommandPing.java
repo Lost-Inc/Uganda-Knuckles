@@ -16,7 +16,7 @@ public class ChatCommandPing extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[]{
+        return new String[] {
                 // Main category
                 CommandCategories.MISC,
                 // Auxiliary categories
@@ -44,7 +44,7 @@ public class ChatCommandPing extends BotCommand {
         final EmbedBuilder builder = utilsChat.getDefaultEmbed();
         final String normal = "**`Pong!`**";
         final String special =
-                "```\n" +
+                        "```\n" +
                         " ____                   _ \n" +
                         "|  _ \\ ___  _ __   __ _| |\n" +
                         "| |_) / _ \\| '_ \\ / _` | |\n" +
@@ -53,7 +53,7 @@ public class ChatCommandPing extends BotCommand {
                         "                  |___/   " +
                         "```";
 
-        builder.setDescription(random.nextInt(500) == 0 ? special : normal);
+        builder.setDescription(random.nextInt(10) == 0 ? special : normal);
         builder.addField("Bot <-> Discord", param.message.getJDA().getGatewayPing() + " ms", true);
 
         utilsChat.send(param.message.getChannel(), builder.build());

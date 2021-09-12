@@ -24,11 +24,12 @@ public class ChatCommandInator extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[]
+        return new String[] {
                 // Main category
-                {CommandCategories.FUN,
-                        // Auxiliary categories
-                        CommandCategories.CHAT};
+                CommandCategories.FUN,
+                // Auxiliary categories
+                CommandCategories.CHAT
+                };
     }
 
     @Override
@@ -40,7 +41,7 @@ public class ChatCommandInator extends BotCommand {
     protected void execute(@NotNull CommandParameter param) {
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
 
-        builder.setTitle("Behold, the " + param.args[0] + "inator!");
+        builder.setTitle(String.format("Behold, the %sinator!", String.join(" ", param.args)));
         utilsChat.send(param.message.getChannel(), builder.build());
     }
 }

@@ -26,8 +26,8 @@ import java.util.Collection;
  *  - [x] Add invite command (prints out bot invite link)
  *  - [x] Add queue command (print out current audio track queue)
  *  - [x] Add stop command (stop audio player, leave bot in channel)
- *  - [ ] Add pause command (pause audio player)
- *  - [ ] Add resume command (resume audio player)
+ *  - [x] Add pause command (pause audio player)
+ *  - [x] Add resume command (resume audio player)
  *  - [ ] Add permission checking to every command
  *  - [ ] Add Aliases to voice commands, to work like groovy
  *  - [ ] Fix typos and similar
@@ -87,7 +87,9 @@ public class Main {
                 new ChatCommandVersion(),
                 // Voice commands
                 new VoiceCommandPlay(),
+                new VoiceCommandPause(),
                 new VoiceCommandQueue(),
+                new VoiceCommandResume(),
                 new VoiceCommandSync(),
                 new VoiceCommandStop(),
                 new VoiceCommandLeave(),

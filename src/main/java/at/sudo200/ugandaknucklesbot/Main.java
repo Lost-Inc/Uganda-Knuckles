@@ -3,6 +3,7 @@ package at.sudo200.ugandaknucklesbot;
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.*;
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLeave;
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandPlay;
+import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandQueue;
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandSync;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandHandler;
@@ -26,11 +27,12 @@ import java.util.Collection;
  *  - [x] Add QR command (embed string in QR code)
  *  - [x] Add version command (print out package- and jvm version)
  *  - [x] Add invite command (prints out bot invite link)
- *  - [ ] Add queue command (print out current audio track queue)
+ *  - [x] Add queue command (print out current audio track queue)
  *  - [ ] Add stop command (destroy audio player, leave bot in channel)
  *  - [ ] Add pause command (pause audio player)
  *  - [ ] Add resume command (resume audio player)
  *  - [ ] Add permission checking to every command
+ *  - [ ] Add Aliases to voice commands, to work like groovy
  *  - [ ] Fix typos and similar
  */
 
@@ -88,6 +90,7 @@ public class Main {
                 new ChatCommandVersion(),
                 // Voice commands
                 new VoiceCommandPlay(),
+                new VoiceCommandQueue(),
                 new VoiceCommandSync(),
                 new VoiceCommandLeave(),
         };

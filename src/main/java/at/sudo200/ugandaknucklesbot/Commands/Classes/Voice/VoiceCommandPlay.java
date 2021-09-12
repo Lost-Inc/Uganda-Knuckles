@@ -23,14 +23,23 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.Queue;
 import java.util.Random;
 
 public class VoiceCommandPlay extends BotCommand {
-    public static final HashMap<Long, AudioPlayer> players = new HashMap<>();
+    private static final HashMap<Long, AudioPlayer> players = new HashMap<>();
     private static final HashMap<Long, VoiceAudioTrackScheduler> trackSchedulers = new HashMap<>();
     private final Random random = new Random();
     private final UtilsChat utilsChat = new UtilsChat();
     private final UtilsVoice utilsVoice = new UtilsVoice();
+
+    public static @Nullable Queue<AudioTrack> getQueueByGuildID(long id) {
+        return trackSchedulers.get(id) == null ? null : trackSchedulers.get(id).getQueue();
+    }
+
+    public static @Nullable AudioPlayer getPlayerByGuildID(long id) {
+        return players.get(id);
+    }
 
     @Override
     protected String @NotNull [] getCategories() {
@@ -54,7 +63,9 @@ public class VoiceCommandPlay extends BotCommand {
 
     @Override
     protected String @Nullable [] getAliases() {
-        return null;
+        return new String[] {
+                "p"
+        };
     }
 
     @Override
@@ -62,7 +73,7 @@ public class VoiceCommandPlay extends BotCommand {
         final Guild guild = param.message.getGuild();
         final User user = param.message.getAuthor();
 
-        if(utilsVoice.getVoiceState(user, guild).getChannel() == null) {
+        if(utilsVoice.getVoiceState(user, guild).getChannel() == null) {// If not in a voice channel
             utilsChat.sendInfo(param.message.getChannel(), "**Please join a voice channel first!**\n\nWhen will you learn!");
             return;
         }
@@ -79,22 +90,22 @@ public class VoiceCommandPlay extends BotCommand {
         }
 
         final AudioPlayerManager audioPlayerManager = VoicePlayerManager.get();
-        final AudioPlayer player = players.containsKey(guild.getIdLong()) ?
-                players.get(guild.getIdLong()) :
-                audioPlayerManager.createPlayer();
-        final VoiceAudioTrackScheduler trackScheduler = trackSchedulers.containsKey(guild.getIdLong()) ?
+        final AudioPlayer player = players.containsKey(guild.getIdLong()) ?// If a player exists for the guild,
+                players.get(guild.getIdLong()) ://                            it gets used,
+                audioPlayerManager.createPlayer();//                          else a new one gets created
+        final VoiceAudioTrackScheduler trackScheduler = trackSchedulers.containsKey(guild.getIdLong()) ?// basically the same procedure as for the player
                 trackSchedulers.get(guild.getIdLong()) :
                 new VoiceAudioTrackScheduler(player);
-        if (!trackSchedulers.containsKey(guild.getIdLong()))
+        if (!trackSchedulers.containsKey(guild.getIdLong()))// Save new TrackScheduler
             trackSchedulers.put(guild.getIdLong(), trackScheduler);
-        if (!players.containsKey(guild.getIdLong())) {
-            players.put(guild.getIdLong(), player);
+        if (!players.containsKey(guild.getIdLong())) {// Set params and save new AudioPlayer
             player.addListener(new VoiceAudioTrackMessenger(param.message));
             player.addListener(trackScheduler);
             player.setVolume(50);
+            players.put(guild.getIdLong(), player);
         }
 
-        audioPlayerManager.loadItem(
+        audioPlayerManager.loadItem(// Load song
                 String.join(" ", param.args),
                 new AudioLoadResultHandler() {
                     @Override
@@ -121,8 +132,10 @@ public class VoiceCommandPlay extends BotCommand {
         final VoiceChannel channel = utilsVoice.getVoiceState(user, guild).getChannel();
         final AudioManager manager = guild.getAudioManager();
 
-        manager.setAutoReconnect(true);
-        manager.setSendingHandler(new VoiceAudioSendHandler(player));
-        manager.openAudioConnection(channel);
+        if(!manager.isConnected()) {
+            manager.setAutoReconnect(true);
+            manager.setSendingHandler(new VoiceAudioSendHandler(player));
+            manager.openAudioConnection(channel);
+        }
     }
 }

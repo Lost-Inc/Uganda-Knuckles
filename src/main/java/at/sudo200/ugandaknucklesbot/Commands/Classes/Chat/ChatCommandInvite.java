@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 public class ChatCommandInvite extends BotCommand {
     private final UtilsChat utilsChat = new UtilsChat();
 
-    private final String invite = "https://discord.com/api/oauth2/authorize?client_id=742638098600558662&permissions=8&scope=bot%20applications.commands";
+    private final String invite = "https://discord.com/api/oauth2/authorize?client_id=720214661047386176&permissions=8&scope=bot%20applications.commands";
 
     @Override
     protected String @Nullable [] getAliases() {

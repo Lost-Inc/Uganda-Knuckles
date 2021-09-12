@@ -1,10 +1,7 @@
 package at.sudo200.ugandaknucklesbot;
 
 import at.sudo200.ugandaknucklesbot.Commands.Classes.Chat.*;
-import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLeave;
-import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandPlay;
-import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandQueue;
-import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandSync;
+import at.sudo200.ugandaknucklesbot.Commands.Classes.Voice.*;
 import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandHandler;
 import at.sudo200.ugandaknucklesbot.listeners.MessageReceiveListener;
@@ -28,7 +25,7 @@ import java.util.Collection;
  *  - [x] Add version command (print out package- and jvm version)
  *  - [x] Add invite command (prints out bot invite link)
  *  - [x] Add queue command (print out current audio track queue)
- *  - [ ] Add stop command (destroy audio player, leave bot in channel)
+ *  - [x] Add stop command (stop audio player, leave bot in channel)
  *  - [ ] Add pause command (pause audio player)
  *  - [ ] Add resume command (resume audio player)
  *  - [ ] Add permission checking to every command
@@ -92,6 +89,7 @@ public class Main {
                 new VoiceCommandPlay(),
                 new VoiceCommandQueue(),
                 new VoiceCommandSync(),
+                new VoiceCommandStop(),
                 new VoiceCommandLeave(),
         };
 

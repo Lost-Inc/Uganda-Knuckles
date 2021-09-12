@@ -4,6 +4,7 @@ import at.sudo200.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.sudo200.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.sudo200.ugandaknucklesbot.Util.UtilsChat;
+import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -42,6 +43,18 @@ public class VoiceCommandQueue extends BotCommand {
     protected void execute(@NotNull CommandParameter param) {
         StringBuilder queueString = new StringBuilder();
         Queue<AudioTrack> queue = VoiceCommandPlay.getQueueByGuildID(param.message.getGuild().getIdLong());
+        AudioPlayer player = VoiceCommandPlay.getPlayerByGuildID(param.message.getGuild().getIdLong());
+        AudioTrack track = player == null ? null : player.getPlayingTrack();
+
+        if(track != null) {// If currently playing track
+            queueString.append(String.format(
+                    "__Currently Playing__: **%s**\n\n",
+                    track.getInfo().title
+            ));
+        }
+
+        queueString.append("```java\n");
+
         if(queue == null || queue.isEmpty())
             queueString.append("Nothing to see here (O.O)");
         else {
@@ -53,11 +66,10 @@ public class VoiceCommandQueue extends BotCommand {
                         tracks[i].getInfo().title
                 ));
         }
+        queueString.append("```");
         utilsChat.sendInfo(
                 param.message.getChannel(),
-                "```java\n" +
-                        queueString.toString() +
-                        "```"
+                queueString.toString()
                 );
     }
 }

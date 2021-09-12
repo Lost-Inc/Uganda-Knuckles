@@ -19,15 +19,6 @@ import java.util.Collection;
 
 /*
  *  TODO:
- *  - [x] Add moderation category
- *  - [x] Add permission restriction to moderation commands
- *  - [x] Add QR command (embed string in QR code)
- *  - [x] Add version command (print out package- and jvm version)
- *  - [x] Add invite command (prints out bot invite link)
- *  - [x] Add queue command (print out current audio track queue)
- *  - [x] Add stop command (stop audio player, leave bot in channel)
- *  - [x] Add pause command (pause audio player)
- *  - [x] Add resume command (resume audio player)
  *  - [ ] Add permission checking to every command
  *  - [ ] Add Aliases to voice commands, to work like groovy
  *  - [ ] Fix typos and similar

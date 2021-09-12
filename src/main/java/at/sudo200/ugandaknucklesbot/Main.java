@@ -30,6 +30,7 @@ import java.util.Collection;
  *  - [ ] Add stop command (destroy audio player, leave bot in channel)
  *  - [ ] Add pause command (pause audio player)
  *  - [ ] Add resume command (resume audio player)
+ *  - [ ] Add permission checking to every command
  *  - [ ] Fix typos and similar
  */
 
@@ -76,6 +77,7 @@ public class Main {
                 new ChatCommandInvite(),
                 new ChatCommandRandomDog(),
                 new ChatCommandFood(),
+                new ChatCommandQRCode(),
                 new ChatCommandPing(),
                 new ChatCommandGetMinecraftSkin(),
                 new ChatCommandUselessWeb(),

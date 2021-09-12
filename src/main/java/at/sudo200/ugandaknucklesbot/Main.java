@@ -24,7 +24,8 @@ import java.util.Collection;
  *  - [x] Add moderation category
  *  - [x] Add permission restriction to moderation commands
  *  - [ ] Add QR command (embed string in QR code)
- *  - [ ] Add version command (print out package- and jvm version)
+ *  - [x] Add version command (print out package- and jvm version)
+ *  - [x] Add invite command (prints out bot invite link)
  *  - [ ] Add queue command (print out current audio track queue)
  *  - [ ] Add stop command (destroy audio player, leave bot in channel)
  *  - [ ] Add pause command (pause audio player)
@@ -72,6 +73,7 @@ public class Main {
                 new ChatCommandRandomCat(),
                 new ChatCommandPoop(),
                 new ChatCommandDice(),
+                new ChatCommandInvite(),
                 new ChatCommandRandomDog(),
                 new ChatCommandFood(),
                 new ChatCommandPing(),

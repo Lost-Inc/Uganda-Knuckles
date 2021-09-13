@@ -16,11 +16,6 @@ import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/*
- *  TODO:
- *  - [ ] Fix typos and similar
- */
-
 public class Main {
     private final Collection<GatewayIntent> gatewayIntents = new ArrayList<>();
     private final JDA jda;
@@ -78,6 +73,7 @@ public class Main {
                 new VoiceCommandPause(),
                 new VoiceCommandQueue(),
                 new VoiceCommandResume(),
+                new VoiceCommandSkip(),
                 new VoiceCommandSync(),
                 new VoiceCommandStop(),
                 new VoiceCommandLeave()

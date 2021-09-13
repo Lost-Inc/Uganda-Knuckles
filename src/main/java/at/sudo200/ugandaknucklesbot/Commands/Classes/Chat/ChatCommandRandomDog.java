@@ -24,7 +24,7 @@ public class ChatCommandRandomDog extends BotCommand {
 
     @Override
     protected @NotNull String getHelp() {
-        return "Imports dog picures from the internet\n" +
+        return "Imports dog pictures from the internet\n" +
                 "I know, it ain't cats";
     }
 

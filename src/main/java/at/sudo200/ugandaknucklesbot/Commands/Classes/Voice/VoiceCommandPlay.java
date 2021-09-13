@@ -37,6 +37,10 @@ public class VoiceCommandPlay extends BotCommand {
         return trackSchedulers.get(id) == null ? null : trackSchedulers.get(id).getQueue();
     }
 
+    public static @Nullable VoiceAudioTrackScheduler getTrackSchedulerByGuildID(long id) {
+        return trackSchedulers.get(id);
+    }
+
     public static @Nullable AudioPlayer getPlayerByGuildID(long id) {
         return players.get(id);
     }

@@ -21,11 +21,20 @@ public class VoiceAudioTrackScheduler extends AudioEventAdapter {
     /**
      * Queues songs
      * @param tracks Track(s) to be queued
+     * @author sudo200
      */
     public void queue(AudioTrack @NotNull ... tracks) {
         this.tracks.addAll(Arrays.asList(tracks));
         if (player.startTrack(this.tracks.peek(), true))
             this.tracks.poll();
+    }
+
+    /**
+     * Skips the current track
+     * @author sudo200
+     */
+    public void skip() {
+        player.playTrack(tracks.poll());
     }
 
     /**

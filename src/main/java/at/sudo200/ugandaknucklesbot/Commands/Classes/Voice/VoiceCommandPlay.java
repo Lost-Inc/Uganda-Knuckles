@@ -115,11 +115,19 @@ public class VoiceCommandPlay extends BotCommand {
                     @Override
                     public void trackLoaded(AudioTrack track) {
                         trackScheduler.queue(track);
+                        utilsChat.sendInfo(
+                                param.message.getChannel(),
+                                String.format("Queued \"%s\" by \"%s\" [%s]", track.getInfo().title, track.getInfo().author, user.getAsMention())
+                        );
                     }
 
                     @Override
                     public void playlistLoaded(AudioPlaylist playlist) {
                         trackScheduler.queue(playlist.getTracks().toArray(new AudioTrack[0]));
+                        utilsChat.sendInfo(
+                                param.message.getChannel(),
+                                String.format("Queued Playlist \"%s\" [%s]", playlist.getName(), user.getAsMention())
+                        );
                     }
 
                     @Override

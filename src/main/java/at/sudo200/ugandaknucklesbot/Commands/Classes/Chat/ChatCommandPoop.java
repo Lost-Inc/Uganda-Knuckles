@@ -55,8 +55,10 @@ public class ChatCommandPoop extends BotCommand {
 
             user.openPrivateChannel()
                     .flatMap(privateChannel -> privateChannel.sendMessage(builder.build()))
-                    .queue(message -> {
-                            }, error ->
+                    .queue(message -> utilsChat.sendInfo(
+                                            param.message.getChannel(),
+                                            "**Payload sent!**"
+                                    ), error ->
                                     utilsChat.sendInfo(
                                             param.message.getChannel(),
                                             "**Could not send private message!**\n" +

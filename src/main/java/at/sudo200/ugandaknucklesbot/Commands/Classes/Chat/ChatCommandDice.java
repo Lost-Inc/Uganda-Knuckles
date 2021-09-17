@@ -81,7 +81,7 @@ public class ChatCommandDice extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 CommandCategories.UTIL,
                 CommandCategories.CHAT
         };
@@ -100,26 +100,47 @@ public class ChatCommandDice extends BotCommand {
     @Override
     protected void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0 ) {
-            utilsChat.sendInfo(param.message.getChannel(), "```c\n" + numbers[random.nextInt(6)+1] + "\n```");
+            utilsChat.sendInfo(param.message.getChannel(), "```c\n" + numbers[random.nextInt(6)+1] + "\n```"); //Integer.toString( random.nextInt(5+1))
             return;
         }
-        try{
-            int dice = Integer.parseInt(param.args[0]);
-            int randomNum = random.nextInt(dice);
-            StringBuilder asciiBuilder = new StringBuilder("```c\n");
-            for (char c: Integer.toString(randomNum).toCharArray()) {
-                asciiBuilder.append(numbers[Integer.parseInt(String.valueOf(c))]);
-                asciiBuilder.append("\n\n");
-            }
-            asciiBuilder.append("\n```");
 
-            utilsChat.sendInfo(param.message.getChannel(), asciiBuilder.toString());
+        final String countStr = param.args[0];
+        int dice = Integer.parseInt(countStr);
+
+        try {
+            if (countStr.toLowerCase().startsWith("0x"))
+                dice = Integer.parseInt(countStr.substring(2), 16);
+            else if (countStr.toLowerCase().startsWith("0o"))
+                dice = Integer.parseInt(countStr.substring(2), 8);
+            else if (countStr.toLowerCase().startsWith("0b"))
+                dice = Integer.parseInt(countStr.substring(2), 2);
+        }
+         catch (NumberFormatException e) {
+            utilsChat.sendInfo(param.message.getChannel(), "**\"" + countStr + "\" is not a valid number!**\n\nas far as I know :confused:");
+            return;
+    }
+
+        try{
+            //int dice = Integer.parseInt(param.args[0]);
+            int randomnumber = random.nextInt(dice);
+            StringBuilder asciinumber = new StringBuilder("```c\n");
+            for (char c: Integer.toString(randomnumber).toCharArray()) {
+                asciinumber.append(numbers[Integer.parseInt(String.valueOf(c))]);
+                asciinumber.append("\n\n");
+            }
+            asciinumber.append("\n```");
+
+            utilsChat.sendInfo(param.message.getChannel(), asciinumber.toString());
         }
         catch (NumberFormatException e){
-            utilsChat.sendInfo(param.message.getChannel(),param.args[0] + " is not a number!\nAs far as I know");
+            utilsChat.sendInfo(param.message.getChannel(),param.args[0] + " is not a number!");
         }
         catch (IllegalArgumentException e){
-            utilsChat.sendInfo(param.message.getChannel(), "Number has to be positive!\n\nLike your attitude :grin:");
+            utilsChat.sendInfo(param.message.getChannel(), "Number has to be positive!\n\nLike your attitude");
         }
+
+
+
+
     }
 }

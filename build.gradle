@@ -3,7 +3,7 @@ plugins {
     id "java"
 }
 
-group 'at.sudo200'
+group 'at.lost_inc'
 version '1.0.0'
 
 repositories {
@@ -26,7 +26,7 @@ dependencies {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'at.sudo200.ugandaknucklesbot.Main',
+                'Main-Class': 'at.lost_inc.ugandaknucklesbot.Main',
                 'Implementation-Version': project.version.toString()
         )
     }

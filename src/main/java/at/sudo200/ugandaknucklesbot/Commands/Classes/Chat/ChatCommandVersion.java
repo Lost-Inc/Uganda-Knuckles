@@ -16,7 +16,9 @@ public class ChatCommandVersion extends BotCommand {
             version = System.getProperty("java.runtime.version"),
             osName = System.getProperty("os.name"),
             osArch = System.getProperty("os.arch"),
-            osVersion = System.getProperty("os.version");
+            osVersion = System.getProperty("os.version"),                                                           // MB
+            usedMem = Long.toString((long) ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / Math.pow(1024, 2))),
+            threads = Integer.toString(Thread.activeCount());
 
 
     @Override
@@ -51,12 +53,16 @@ public class ChatCommandVersion extends BotCommand {
                                 "\n" +
                                 "**JVM:**\n" +
                                 "%s %s\n" +
+                                "Used Mem: ~%s MB\n" +
+                                "%s active threads\n" +
                                 "\n" +
                                 "**OS:**\n" +
-                                "%s %s (%s)",
+                                "%s %s (%s)\n",
                         botVersion,
                         name,
                         version,
+                        usedMem,
+                        threads,
                         osName,
                         osVersion,
                         osArch

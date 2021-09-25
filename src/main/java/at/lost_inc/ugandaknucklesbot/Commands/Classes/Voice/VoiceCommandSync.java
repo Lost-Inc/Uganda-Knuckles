@@ -4,6 +4,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioEchoHandler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
 import net.dv8tion.jda.api.entities.Guild;
@@ -78,7 +79,7 @@ public class VoiceCommandSync extends BotCommand {
                     voiceState.getChannel()
             );
 
-            new Timer().schedule(new Task(() -> {// Schedule task for token expiration
+            new Timer().schedule(new TimerTaskRunnable(() -> {// Schedule task for token expiration
                 guilds.remove(hash);
                 vcs.remove(guild);
             }), 5 * 60 * 1000);
@@ -138,18 +139,5 @@ public class VoiceCommandSync extends BotCommand {
         } catch (java.security.NoSuchAlgorithmException ignored) {
         }
         return "";
-    }
-
-    private static class Task extends TimerTask {
-        private final Runnable runnable;
-
-        public Task(Runnable function) {
-            runnable = function;
-        }
-
-        @Override
-        public void run() {
-            runnable.run();
-        }
     }
 }

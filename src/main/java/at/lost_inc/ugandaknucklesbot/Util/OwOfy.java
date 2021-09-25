@@ -1,7 +1,9 @@
 package at.lost_inc.ugandaknucklesbot.Util;
 
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -14,7 +16,7 @@ import java.util.Random;
  */
 
 public class OwOfy {
-    public static final List<String> faces = Arrays.asList(
+    private static final List<String> faces = Arrays.asList(
             "(*^ω^)",
             "(◕‿◕✿)",
             "(◕ᴥ◕)",
@@ -32,6 +34,11 @@ public class OwOfy {
     );
 
     private OwOfy() {
+    }
+
+    @Contract(" -> new")
+    public static @NotNull List<String> getFaces() {
+        return new ArrayList<>(faces);
     }
 
     /**

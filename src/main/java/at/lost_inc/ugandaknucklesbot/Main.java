@@ -61,6 +61,7 @@ public class Main {
                 new ChatCommandFood(),
                 new ChatCommandQRCode(),
                 new ChatCommandPing(),
+                new ChatCommandLeet(),
                 new ChatCommandOwO(),
                 new ChatCommandGetMinecraftSkin(),
                 new ChatCommandUselessWeb(),

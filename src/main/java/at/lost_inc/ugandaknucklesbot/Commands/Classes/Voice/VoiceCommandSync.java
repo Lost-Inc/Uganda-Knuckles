@@ -18,7 +18,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class VoiceCommandSync extends BotCommand {
     private static final HashMap<String, Guild> guilds = new HashMap<>();
@@ -79,7 +78,7 @@ public class VoiceCommandSync extends BotCommand {
                     voiceState.getChannel()
             );
 
-            new Timer().schedule(new TimerTaskRunnable(() -> {// Schedule task for token expiration
+            new Timer(true).schedule(new TimerTaskRunnable(() -> {// Schedule task for token expiration
                 guilds.remove(hash);
                 vcs.remove(guild);
             }), 5 * 60 * 1000);

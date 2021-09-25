@@ -16,14 +16,14 @@ public class VoiceCommandQueue extends BotCommand {
 
     @Override
     protected String @Nullable [] getAliases() {
-        return new String[] {
+        return new String[]{
                 "q"
         };
     }
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 CommandCategories.VOICE,
                 CommandCategories.UTIL
         };
@@ -46,7 +46,7 @@ public class VoiceCommandQueue extends BotCommand {
         AudioPlayer player = VoiceCommandPlay.getPlayerByGuildID(param.message.getGuild().getIdLong());
         AudioTrack track = player == null ? null : player.getPlayingTrack();
 
-        if(track != null) {// If currently playing track
+        if (track != null) {// If currently playing track
             queueString.append(String.format(
                     "__Currently Playing__: **%s**\n\n",
                     track.getInfo().title
@@ -55,7 +55,7 @@ public class VoiceCommandQueue extends BotCommand {
 
         queueString.append("```java\n");
 
-        if(queue == null || queue.isEmpty())
+        if (queue == null || queue.isEmpty())
             queueString.append("Nothing to see here (O.O)");
         else {
             final AudioTrack[] tracks = queue.toArray(new AudioTrack[0]);
@@ -70,6 +70,6 @@ public class VoiceCommandQueue extends BotCommand {
         utilsChat.sendInfo(
                 param.message.getChannel(),
                 queueString.toString()
-                );
+        );
     }
 }

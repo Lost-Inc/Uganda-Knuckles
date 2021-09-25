@@ -18,7 +18,7 @@ public class ChatCommandKick extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 CommandCategories.MODERATION,
                 CommandCategories.CHAT, CommandCategories.UTIL
         };
@@ -51,7 +51,7 @@ public class ChatCommandKick extends BotCommand {
             return;
         }
 
-        if(!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getJDA().getSelfUser())).hasPermission(Permission.KICK_MEMBERS)) {
+        if (!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getJDA().getSelfUser())).hasPermission(Permission.KICK_MEMBERS)) {
             utilsChat.sendInfo(param.message.getChannel(), "**I don't have permission to be pog!**");
             return;
         }

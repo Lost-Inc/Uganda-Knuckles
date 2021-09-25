@@ -30,7 +30,7 @@ public class ChatCommandRandomCat extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 // Main category
                 CommandCategories.IMAGE,
                 // Auxiliary categories
@@ -52,8 +52,7 @@ public class ChatCommandRandomCat extends BotCommand {
             RandomCatAPIResponse randomCatAPIResponse = gson.fromJson(response, (Type) RandomCatAPIResponse.class);
             builder.setImage(randomCatAPIResponse.file);
             utilsChat.send(param.message.getChannel(), builder.build());
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             utilsChat.sendInfo(
                     param.message.getChannel(),
                     "**Something went severely wrong**\nBlame your neighbor!\n\n" + e

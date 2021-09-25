@@ -1,8 +1,8 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioTrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioSendHandler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioTrackMessenger;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioTrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoicePlayerManager;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
@@ -67,7 +67,7 @@ public class VoiceCommandPlay extends BotCommand {
 
     @Override
     protected String @Nullable [] getAliases() {
-        return new String[] {
+        return new String[]{
                 "p"
         };
     }
@@ -77,7 +77,7 @@ public class VoiceCommandPlay extends BotCommand {
         final Guild guild = param.message.getGuild();
         final User user = param.message.getAuthor();
 
-        if(utilsVoice.getVoiceState(user, guild).getChannel() == null) {// If not in a voice channel
+        if (utilsVoice.getVoiceState(user, guild).getChannel() == null) {// If not in a voice channel
             utilsChat.sendInfo(param.message.getChannel(), "**Please join a voice channel first!**\n\nWhen will you learn!");
             return;
         }
@@ -144,7 +144,7 @@ public class VoiceCommandPlay extends BotCommand {
         final VoiceChannel channel = utilsVoice.getVoiceState(user, guild).getChannel();
         final AudioManager manager = guild.getAudioManager();
 
-        if(!manager.isConnected()) {
+        if (!manager.isConnected()) {
             manager.setAutoReconnect(true);
             manager.setSendingHandler(new VoiceAudioSendHandler(player));
             manager.openAudioConnection(channel);

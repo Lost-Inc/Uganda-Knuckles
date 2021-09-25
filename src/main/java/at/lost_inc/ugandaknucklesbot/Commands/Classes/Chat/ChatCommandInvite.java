@@ -1,8 +1,8 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -19,7 +19,7 @@ public class ChatCommandInvite extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 CommandCategories.MISC,
                 CommandCategories.CHAT, CommandCategories.UTIL
         };
@@ -41,7 +41,7 @@ public class ChatCommandInvite extends BotCommand {
                 param.message.getChannel(),
                 String.format(
                         "You wanna add me to your own discord server?\n" +
-                        "[Click here!](%s)",
+                                "[Click here!](%s)",
                         invite
                 )
         );

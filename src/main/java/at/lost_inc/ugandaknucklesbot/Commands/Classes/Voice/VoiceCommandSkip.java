@@ -2,9 +2,9 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioTrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -13,14 +13,14 @@ public class VoiceCommandSkip extends BotCommand {
 
     @Override
     protected String @Nullable [] getAliases() {
-        return new String[] {
+        return new String[]{
                 "s"
         };
     }
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 CommandCategories.VOICE,
                 CommandCategories.UTIL,
         };
@@ -40,7 +40,7 @@ public class VoiceCommandSkip extends BotCommand {
     protected void execute(@NotNull CommandParameter param) {
         VoiceAudioTrackScheduler scheduler = VoiceCommandPlay.getTrackSchedulerByGuildID(param.message.getGuild().getIdLong());
 
-        if(scheduler != null)
+        if (scheduler != null)
             scheduler.skip();
         else
             utilsChat.sendInfo(param.message.getChannel(), "**I cannot skip, what has never started!**");

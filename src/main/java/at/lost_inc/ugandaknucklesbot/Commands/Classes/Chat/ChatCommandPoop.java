@@ -1,9 +1,9 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
-import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
@@ -20,7 +20,7 @@ public class ChatCommandPoop extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 // Main category
                 CommandCategories.FUN,
                 // Auxiliary categories
@@ -56,9 +56,9 @@ public class ChatCommandPoop extends BotCommand {
             user.openPrivateChannel()
                     .flatMap(privateChannel -> privateChannel.sendMessage(builder.build()))
                     .queue(message -> utilsChat.sendInfo(
-                                            param.message.getChannel(),
-                                            "**Payload sent!**"
-                                    ), error ->
+                                    param.message.getChannel(),
+                                    "**Payload sent!**"
+                            ), error ->
                                     utilsChat.sendInfo(
                                             param.message.getChannel(),
                                             "**Could not send private message!**\n" +

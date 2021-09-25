@@ -40,7 +40,7 @@ public class VoiceCommandLeave extends BotCommand {
 
     @Override
     protected String @Nullable [] getAliases() {
-        return new String[] {
+        return new String[]{
                 "dc",
                 "l"
         };

@@ -13,14 +13,14 @@ public class VoiceCommandStop extends BotCommand {
 
     @Override
     protected String @Nullable [] getAliases() {
-        return new String[] {
+        return new String[]{
                 "s"
         };
     }
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 CommandCategories.VOICE,
                 CommandCategories.UTIL,
         };
@@ -40,7 +40,7 @@ public class VoiceCommandStop extends BotCommand {
     protected void execute(@NotNull CommandParameter param) {
         final AudioPlayer player = VoiceCommandPlay.getPlayerByGuildID(param.message.getGuild().getIdLong());
 
-        if(player != null)
+        if (player != null)
             player.destroy();
         else
             utilsChat.sendInfo(param.message.getChannel(), "**I cannot stop, what's already stopped!**");

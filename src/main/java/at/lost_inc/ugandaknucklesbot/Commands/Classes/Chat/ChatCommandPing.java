@@ -1,9 +1,9 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
-import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -16,7 +16,7 @@ public class ChatCommandPing extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 // Main category
                 CommandCategories.MISC,
                 // Auxiliary categories
@@ -44,7 +44,7 @@ public class ChatCommandPing extends BotCommand {
         final EmbedBuilder builder = utilsChat.getDefaultEmbed();
         final String normal = "**`Pong!`**";
         final String special =
-                        "```\n" +
+                "```\n" +
                         " ____                   _ \n" +
                         "|  _ \\ ___  _ __   __ _| |\n" +
                         "| |_) / _ \\| '_ \\ / _` | |\n" +

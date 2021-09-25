@@ -1,8 +1,8 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -16,7 +16,7 @@ public class ChatCommandClear extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 // Main category
                 CommandCategories.MODERATION,
                 // Auxiliary categories
@@ -51,7 +51,7 @@ public class ChatCommandClear extends BotCommand {
             return;
         }
 
-        if(!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getJDA().getSelfUser())).hasPermission(Permission.MESSAGE_MANAGE)) {
+        if (!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getJDA().getSelfUser())).hasPermission(Permission.MESSAGE_MANAGE)) {
             utilsChat.sendInfo(param.message.getChannel(), "**I don't have permission to be pog!**");
             return;
         }

@@ -22,7 +22,8 @@ public class CommandHandler {
     private final HashMap<String, Collection<BotCommand>> categories = new HashMap<>();
     private final UtilsChat utilsChat = new UtilsChat();
 
-    private CommandHandler() {}
+    private CommandHandler() {
+    }
 
     public static CommandHandler get() {
         return instance;
@@ -43,7 +44,7 @@ public class CommandHandler {
     }
 
     // methods for registering commands
-    public boolean register(BotCommand @NotNull ...commands) {
+    public boolean register(BotCommand @NotNull ... commands) {
         boolean okay = true;
         for (BotCommand command : commands)
             if (!register(command))

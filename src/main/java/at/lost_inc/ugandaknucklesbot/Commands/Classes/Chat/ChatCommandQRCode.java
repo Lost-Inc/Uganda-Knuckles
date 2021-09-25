@@ -1,8 +1,8 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -30,7 +30,7 @@ public class ChatCommandQRCode extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 CommandCategories.IMAGE,
                 CommandCategories.CHAT, CommandCategories.UTIL, CommandCategories.FUN
         };
@@ -48,7 +48,7 @@ public class ChatCommandQRCode extends BotCommand {
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        if(param.args.length == 0) {
+        if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(), "Please mate, tell me __what__ to encode!\n\nLosin' my hope....");
             return;
         }
@@ -58,8 +58,7 @@ public class ChatCommandQRCode extends BotCommand {
 
         try {
             matrix = writer.encode(String.join(" ", param.args), BarcodeFormat.QR_CODE, 512, 512);
-        }
-        catch (WriterException e) {
+        } catch (WriterException e) {
             utilsChat.sendInfo(param.message.getChannel(), "Oof!\n\nThe QR code factory blew up!");
             return;
         }
@@ -69,8 +68,7 @@ public class ChatCommandQRCode extends BotCommand {
         try {
             temp = File.createTempFile(Integer.toString(random.nextInt(899) + 100), ".png");
             ImageIO.write(image, "png", temp);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             utilsChat.sendInfo(param.message.getChannel(), "Oof!\n\nCould not package your QR code into a file!");
             return;
         }

@@ -1,9 +1,9 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
-import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,14 +13,14 @@ public class VoiceCommandResume extends BotCommand {
 
     @Override
     protected String @Nullable [] getAliases() {
-        return new String[] {
+        return new String[]{
                 "re"
         };
     }
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 CommandCategories.VOICE,
                 CommandCategories.UTIL
         };
@@ -40,12 +40,12 @@ public class VoiceCommandResume extends BotCommand {
     protected void execute(@NotNull CommandParameter param) {
         AudioPlayer player = VoiceCommandPlay.getPlayerByGuildID(param.message.getGuild().getIdLong());
 
-        if(player == null) {
+        if (player == null) {
             utilsChat.sendInfo(param.message.getChannel(), "**I cannot resume, what has never started!**");
             return;
         }
 
-        if(player.isPaused())
+        if (player.isPaused())
             player.setPaused(false);
         else
             utilsChat.sendInfo(param.message.getChannel(), "**I see, you think it gets better than this, right?**");

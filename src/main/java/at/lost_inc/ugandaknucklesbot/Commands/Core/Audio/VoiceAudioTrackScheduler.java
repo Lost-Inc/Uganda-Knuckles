@@ -20,6 +20,7 @@ public class VoiceAudioTrackScheduler extends AudioEventAdapter {
 
     /**
      * Queues songs
+     *
      * @param tracks Track(s) to be queued
      * @author sudo200
      */
@@ -31,6 +32,7 @@ public class VoiceAudioTrackScheduler extends AudioEventAdapter {
 
     /**
      * Skips the current track
+     *
      * @author sudo200
      */
     public void skip() {
@@ -39,6 +41,7 @@ public class VoiceAudioTrackScheduler extends AudioEventAdapter {
 
     /**
      * Getter for the queue
+     *
      * @return Copy of the queue
      */
     public Queue<AudioTrack> getQueue() {

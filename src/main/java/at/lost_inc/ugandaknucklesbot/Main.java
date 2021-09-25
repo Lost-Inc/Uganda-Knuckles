@@ -32,12 +32,12 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main main;
+        Main main = null;
         try {
             main = new Main();
         } catch (LoginException e) {
             e.printStackTrace();
-            return;
+            System.exit(3);
         }
         // Listeners
         main.jda.addEventListener(new MessageReceiveListener());

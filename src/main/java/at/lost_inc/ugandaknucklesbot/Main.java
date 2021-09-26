@@ -14,7 +14,7 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Collection; 
 
 public class Main {
     private final Collection<GatewayIntent> gatewayIntents = new ArrayList<>();
@@ -70,6 +70,7 @@ public class Main {
                 new ChatCommandKick(),
                 new ChatCommandBan(),
                 new ChatCommandVersion(),
+                new ChatCommandReminder(),
                 // Voice commands
                 new VoiceCommandPlay(),
                 new VoiceCommandPause(),

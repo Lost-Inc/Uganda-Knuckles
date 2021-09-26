@@ -1,6 +1,5 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Core;
 
-import org.intellij.lang.annotations.MagicConstant;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

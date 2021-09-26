@@ -11,6 +11,10 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 
+/** Class containing the logic making the bot tick
+ *  @author sudo200
+ */
+
 public class CommandHandler {
     private static final CommandHandler instance;
 

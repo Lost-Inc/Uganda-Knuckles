@@ -3,7 +3,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Core;
 import net.dv8tion.jda.api.entities.Message;
 
 /**
- * Object, which containing the command args and message object
+ * Object containing the command args and message object
  *
  * @author sudo200
  */

@@ -2,7 +2,6 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.WikipediaSummaryRestAPI;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.github.kevinsawicki.http.HttpRequest;
@@ -34,9 +33,9 @@ public class ChatCommandWiki extends BotCommand {
     protected String @NotNull [] getCategories() {
         return new String[]{
                 // Main category
-                CommandCategories.SEARCH,
+                BotCommand.ICategories.SEARCH,
                 // Auxiliary categories
-                CommandCategories.CHAT, CommandCategories.INTERNET
+                BotCommand.ICategories.CHAT, BotCommand.ICategories.INTERNET
         };
     }
 

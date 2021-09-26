@@ -1,7 +1,6 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.Permission;
@@ -18,9 +17,9 @@ public class ChatCommandClear extends BotCommand {
     protected String @NotNull [] getCategories() {
         return new String[]{
                 // Main category
-                CommandCategories.MODERATION,
+                BotCommand.ICategories.MODERATION,
                 // Auxiliary categories
-                CommandCategories.CHAT, CommandCategories.UTIL
+                BotCommand.ICategories.CHAT, BotCommand.ICategories.UTIL
         };
     }
 

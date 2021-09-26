@@ -1,7 +1,6 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.Leetify;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -19,8 +18,8 @@ public class ChatCommandLeet extends BotCommand {
     @Override
     protected String @NotNull [] getCategories() {
         return new String[] {
-                CommandCategories.FUN,
-                CommandCategories.CHAT,
+                BotCommand.ICategories.FUN,
+                BotCommand.ICategories.CHAT,
         };
     }
 

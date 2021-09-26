@@ -5,7 +5,6 @@ import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioTrackMessenge
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioTrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoicePlayerManager;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
@@ -49,9 +48,9 @@ public class VoiceCommandPlay extends BotCommand {
     protected String @NotNull [] getCategories() {
         return new String[]{
                 // Main category
-                CommandCategories.VOICE,
+                BotCommand.ICategories.VOICE,
                 // Auxiliary categories
-                CommandCategories.UTIL,
+                BotCommand.ICategories.UTIL,
         };
     }
 

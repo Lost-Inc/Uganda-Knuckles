@@ -1,7 +1,6 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.google.zxing.BarcodeFormat;
@@ -31,8 +30,8 @@ public class ChatCommandQRCode extends BotCommand {
     @Override
     protected String @NotNull [] getCategories() {
         return new String[]{
-                CommandCategories.IMAGE,
-                CommandCategories.CHAT, CommandCategories.UTIL, CommandCategories.FUN
+                BotCommand.ICategories.IMAGE,
+                BotCommand.ICategories.CHAT, BotCommand.ICategories.UTIL, BotCommand.ICategories.FUN
         };
     }
 

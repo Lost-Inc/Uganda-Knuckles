@@ -1,7 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand.ICategories;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
@@ -32,9 +32,9 @@ public class VoiceCommandLeave extends BotCommand {
         return new String[]
                 {
                         // Main Category
-                        CommandCategories.VOICE,
+                        BotCommand.ICategories.VOICE,
                         // Auxiliary Catergories
-                        CommandCategories.UTIL
+                        BotCommand.ICategories.UTIL
                 };
     }
 

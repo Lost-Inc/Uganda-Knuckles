@@ -2,7 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomFoodAPIResponse;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand.ICategories;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.github.kevinsawicki.http.HttpRequest;
@@ -32,9 +32,9 @@ public class ChatCommandFood extends BotCommand {
     protected String @NotNull [] getCategories() {
         return new String[]{
                 // Main category
-                CommandCategories.IMAGE,
+                BotCommand.ICategories.IMAGE,
                 // Auxiliary categories
-                CommandCategories.CHAT, CommandCategories.FUN, CommandCategories.INTERNET
+                BotCommand.ICategories.CHAT, BotCommand.ICategories.FUN, BotCommand.ICategories.INTERNET
         };
     }
 

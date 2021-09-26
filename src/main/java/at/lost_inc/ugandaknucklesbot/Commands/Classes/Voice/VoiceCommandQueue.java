@@ -1,7 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand.ICategories;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
@@ -24,8 +24,8 @@ public class VoiceCommandQueue extends BotCommand {
     @Override
     protected String @NotNull [] getCategories() {
         return new String[]{
-                CommandCategories.VOICE,
-                CommandCategories.UTIL
+                BotCommand.ICategories.VOICE,
+                BotCommand.ICategories.UTIL
         };
     }
 

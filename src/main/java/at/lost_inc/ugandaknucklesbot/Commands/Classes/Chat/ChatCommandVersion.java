@@ -1,7 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandCategories;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand.ICategories;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
@@ -29,8 +29,8 @@ public class ChatCommandVersion extends BotCommand {
     @Override
     protected String @NotNull [] getCategories() {
         return new String[]{
-                CommandCategories.MISC,
-                CommandCategories.CHAT
+                BotCommand.ICategories.MISC,
+                BotCommand.ICategories.CHAT
         };
     }
 

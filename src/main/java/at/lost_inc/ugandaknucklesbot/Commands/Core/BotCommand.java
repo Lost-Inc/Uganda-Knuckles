@@ -1,5 +1,6 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Core;
 
+import org.intellij.lang.annotations.MagicConstant;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,6 +11,22 @@ import org.jetbrains.annotations.Nullable;
  * @author sudo200
  */
 public abstract class BotCommand {
+
+    /** Interface containing categories for bot commands
+     *  @author sudo200
+     */
+    public interface ICategories {
+        String UTIL = ":tools: Utility";
+        String CHAT = ":speech_balloon: Chat";
+        String IMAGE = ":frame_photo: Image";
+        String FUN = ":rofl: Fun";
+        String INTERNET = ":globe_with_meridians: Internet";
+        String MISC = ":sparkles: Misc";
+        String MODERATION = ":cop: Moderation";
+        String SEARCH = ":mag: Search";
+        String VOICE = ":microphone2: Voice";
+    }
+
     /**
      * Returns aliases for the command.
      * When no aliases are defined, null is returned instead
@@ -25,7 +42,7 @@ public abstract class BotCommand {
      *
      * @return Array of category strings
      * @author sudo200
-     * @see CommandCategories
+     * @see BotCommand.ICategories
      */
     protected abstract String @NotNull [] getCategories();
 

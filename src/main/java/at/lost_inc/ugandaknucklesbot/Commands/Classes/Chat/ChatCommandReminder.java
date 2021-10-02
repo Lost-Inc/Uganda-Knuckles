@@ -4,6 +4,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -68,18 +69,21 @@ public class ChatCommandReminder extends BotCommand {
         final String delay = param.args[0];
 
         new Timer(true).schedule(new TimerTaskRunnable(() -> {
-            for(int i = 1; i < users.size(); i++)
-                utilsChat.send(param.message.getChannel(), users.get(i).getAsMention());
+            String[] remindtext = param.args;
+            remindtext[0] = "";
+            EmbedBuilder builder = utilsChat.getDefaultEmbed();
+            builder.setTitle("Reminder");
+
             if(param.args.length ==  1)
                 utilsChat.send(param.message.getChannel(), "Reminder: " + param.message.getAuthor().getAsMention());
+
             else {
-                String[] remindtext = param.args;
-                remindtext[0] = "";
                 for(int i = 1; i < param.args.length; i++){
                     for(int k = 1; k < users.size(); k++){
                         remindtext[i] = remindtext[i].replaceAll("(<@!?|&?[0-9]{18}>)", "");
                     }
                 }
+                builder.setDescription(String.join(" ", remindtext).substring(1));
                 utilsChat.send(param.message.getChannel(), param.message.getAuthor().getAsMention());
                 utilsChat.sendInfo(
                         param.message.getChannel(),
@@ -88,6 +92,21 @@ public class ChatCommandReminder extends BotCommand {
                                 String.join(" ", remindtext).substring(1),
                                 delay
                         ));
+            }
+            User user = param.message.getAuthor();
+            user.openPrivateChannel()
+                    .flatMap(privateChannel -> privateChannel.sendMessage(builder.build()))
+                    .queue();
+
+            for(int i = 1; i < users.size(); i++){
+                utilsChat.send(param.message.getChannel(), users.get(i).getAsMention());
+
+                if (users.get(i).getIdLong() == param.message.getJDA().getSelfUser().getIdLong())
+                    continue;
+
+                users.get(i).openPrivateChannel()
+                        .flatMap(privateChannel -> privateChannel.sendMessage(builder.build()))
+                        .queue();
             }
         }), time);
 

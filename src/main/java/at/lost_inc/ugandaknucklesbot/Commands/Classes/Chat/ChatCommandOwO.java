@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.OwOfy;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
@@ -9,10 +10,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class ChatCommandOwO extends BotCommand {
-    private final Random random = new Random();
+public final class ChatCommandOwO extends BotCommand {
+    private final Random random = ServiceManager.provideUnchecked(Random.class);
 
-    private final UtilsChat utilsChat = new UtilsChat();
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
     protected String @Nullable [] getAliases() {
@@ -21,7 +22,7 @@ public class ChatCommandOwO extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 BotCommand.ICategories.FUN,
                 BotCommand.ICategories.CHAT,
         };
@@ -39,7 +40,7 @@ public class ChatCommandOwO extends BotCommand {
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        if(param.args.length == 0) {
+        if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(), "I nyeed text to convewt! (つ✧ω✧)つ");
             return;
         }

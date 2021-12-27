@@ -8,11 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-/** "Library" for converting text
- *  into weeb-text (*^.^*)
+/**
+ * "Library" for converting text
+ * into weeb-text (*^.^*)
  *
- * @see <a href="https://github.com/BillNickYT/OwOfy">Original Author</a>
  * @author sudo200
+ * @see <a href="https://github.com/BillNickYT/OwOfy">Original Author</a>
  */
 
 public class OwOfy {
@@ -42,10 +43,10 @@ public class OwOfy {
     }
 
     /**
-     *  @author sudo200
-     *  @param input text to convert
-     *  @param useFace whether to add faces for extra weeb-ness
-     *  @return weeb-text (つ✧ω✧)つ
+     * @param input   text to convert
+     * @param useFace whether to add faces for extra weeb-ness
+     * @return weeb-text (つ✧ω✧)つ
+     * @author sudo200
      */
     public static String owofy(String input, boolean useFace) {
 
@@ -56,16 +57,18 @@ public class OwOfy {
         out = replaceAllWithCharAfter(out, "N", "aeiou", "Ny");
         out = replaceAllWithCharAfter(out, "N", "AEIOU", "Ny");
         out = out.replace("ove", "uv");
-        if(useFace)
+        if (useFace)
             out += " " + face;
 
         return out;
     }
 
-    /** method converting text into weeb-text
-     *  @author sudo200
-     *  @param input text to convert
-     *  @return weeb-text (つ✧ω✧)つ
+    /**
+     * method converting text into weeb-text
+     *
+     * @param input text to convert
+     * @return weeb-text (つ✧ω✧)つ
+     * @author sudo200
      */
     public static String owofy(String input) {
         return owofy(input, true);
@@ -75,8 +78,8 @@ public class OwOfy {
 
         StringBuilder out = new StringBuilder();
 
-        for(char c : text.toCharArray())
-            if(chars.contains(String.valueOf(c)))
+        for (char c : text.toCharArray())
+            if (chars.contains(String.valueOf(c)))
                 out.append(newChar);
             else
                 out.append(c);
@@ -87,16 +90,15 @@ public class OwOfy {
         StringBuilder out = new StringBuilder();
 
         int current = 0;
-        for(char c : text.toCharArray()) {
-            if(chars.contains(String.valueOf(c)))
+        for (char c : text.toCharArray()) {
+            if (chars.contains(String.valueOf(c)))
                 try {
-                    char after = text.charAt(current+1);
-                    if(charsAfter.contains(String.valueOf(after)))
+                    char after = text.charAt(current + 1);
+                    if (charsAfter.contains(String.valueOf(after)))
                         out.append(newChar);
                     else
                         out.append(c);
-                }
-            catch(Exception ex) {
+                } catch (Exception ex) {
                     out.append(c);
                 }
             else

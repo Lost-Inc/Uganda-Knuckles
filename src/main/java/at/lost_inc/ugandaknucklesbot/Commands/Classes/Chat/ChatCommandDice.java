@@ -2,15 +2,16 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public class ChatCommandDice extends BotCommand {
-    private final UtilsChat utilsChat = new UtilsChat();
-    private final Random random = new Random();
+public final class ChatCommandDice extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private final Random random = ServiceManager.provideUnchecked(Random.class);
     private final String[] numbers = new String[]{
             " 0000\n" +
                     "00  00\n" +

@@ -2,12 +2,13 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ChatCommandInvite extends BotCommand {
-    private final UtilsChat utilsChat = new UtilsChat();
+public final class ChatCommandInvite extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     private final String invite = "https://discord.com/api/oauth2/authorize?client_id=742638098600558662&permissions=8&scope=bot%20applications.commands";
 

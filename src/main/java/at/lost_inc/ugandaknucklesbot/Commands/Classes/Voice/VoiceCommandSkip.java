@@ -3,12 +3,13 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioTrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class VoiceCommandSkip extends BotCommand {
-    private final UtilsChat utilsChat = new UtilsChat();
+public final class VoiceCommandSkip extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
     protected String @Nullable [] getAliases() {

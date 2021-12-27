@@ -6,8 +6,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Hashtable;
 
-/** "Library" for converting text into leet speech
- *  @author sudo200
+/**
+ * "Library" for converting text into leet speech
+ *
+ * @author sudo200
  */
 public class Leetify {
     private static final Hashtable<Character, Character> LeetTable = new Hashtable<>();
@@ -41,12 +43,12 @@ public class Leetify {
     @Contract(" -> new")
     public static @NotNull Hashtable<Character, Character> getLeetTable() {
         return new Hashtable<>(LeetTable);
-    };
+    }
 
     public static @NotNull String leetify(@NotNull String text) {
         final StringBuilder builder = new StringBuilder();
 
-        for(char ch : text.toCharArray()) {
+        for (char ch : text.toCharArray()) {
             Character leetChar = LeetTable.get(ch);
             builder.append(leetChar == null ? ch : leetChar);
         }

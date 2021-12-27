@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -9,8 +10,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.net.UnknownHostException;
 
-public class ChatCommandDNSLookup extends BotCommand {
-    private final UtilsChat utilsChat = new UtilsChat();
+public final class ChatCommandDNSLookup extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
     protected String @Nullable [] getAliases() {

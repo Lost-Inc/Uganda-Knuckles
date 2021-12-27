@@ -4,6 +4,11 @@ import at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.*;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.*;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandHandler;
 import at.lost_inc.ugandaknucklesbot.Listeners.MessageReceiveListener;
+import at.lost_inc.ugandaknucklesbot.Listeners.SlashCommandEventListener;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
+import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
+import com.google.gson.Gson;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -14,12 +19,21 @@ import net.dv8tion.jda.api.utils.MemberCachePolicy;
 
 import javax.security.auth.login.LoginException;
 import java.util.ArrayList;
-import java.util.Collection; 
+import java.util.Collection;
+import java.util.Random;
 
-public class Main {
+public final class Main {
     private final Collection<GatewayIntent> gatewayIntents = new ArrayList<>();
     private final JDA jda;
     private final CommandHandler handler;
+
+    static {
+        // Register Standard Services
+        ServiceManager.setProvider(Random.class, new Random());
+        ServiceManager.setProvider(UtilsChat.class, new UtilsChat());
+        ServiceManager.setProvider(UtilsVoice.class, new UtilsVoice());
+        ServiceManager.setProvider(Gson.class, new Gson());
+    }
 
     private Main() throws LoginException { // Token retrieved from Environment
         this.gatewayIntents.add(GatewayIntent.GUILD_MEMBERS);
@@ -41,6 +55,7 @@ public class Main {
         }
         // Listeners
         main.jda.addEventListener(new MessageReceiveListener());
+        main.jda.addEventListener(new SlashCommandEventListener());
 
         // Set presence
         main.jda.getPresence().setPresence(OnlineStatus.ONLINE, Activity.listening("@" + main.jda.getSelfUser().getName()), false);
@@ -63,14 +78,14 @@ public class Main {
                 new ChatCommandPing(),
                 new ChatCommandLeet(),
                 new ChatCommandOwO(),
-                new ChatCommandGetMinecraftSkin(),
+                new ChatCommandMCSkin(),
                 new ChatCommandUselessWeb(),
                 new ChatCommandWiki(),
                 new ChatCommandClear(),
                 new ChatCommandKick(),
                 new ChatCommandBan(),
                 new ChatCommandVersion(),
-                new ChatCommandReminder(),
+                new ChatCommandRemind(),
                 // Voice commands
                 new VoiceCommandPlay(),
                 new VoiceCommandPause(),

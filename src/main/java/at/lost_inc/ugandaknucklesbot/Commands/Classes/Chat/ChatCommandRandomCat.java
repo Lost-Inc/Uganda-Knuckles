@@ -3,6 +3,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomCatAPIResponse;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.Gson;
@@ -12,9 +13,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Type;
 
-public class ChatCommandRandomCat extends BotCommand {
-    private final UtilsChat utilsChat = new UtilsChat();
-    private final Gson gson = new Gson();
+public final class ChatCommandRandomCat extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private final Gson gson = ServiceManager.provideUnchecked(Gson.class);
 
     @Override
     protected @NotNull String getName() {

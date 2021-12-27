@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
 import net.dv8tion.jda.api.JDA;
@@ -11,9 +12,9 @@ import net.dv8tion.jda.api.managers.AudioManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class VoiceCommandLeave extends BotCommand {
-    private final UtilsChat utilsChat = new UtilsChat();
-    private final UtilsVoice utilsVoice = new UtilsVoice();
+public final class VoiceCommandLeave extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private final UtilsVoice utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
 
     @Override
     protected @NotNull String getName() {

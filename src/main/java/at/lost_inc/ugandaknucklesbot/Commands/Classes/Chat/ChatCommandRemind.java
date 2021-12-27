@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -12,8 +13,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Timer;
 
-public class ChatCommandReminder extends BotCommand {
-    private final UtilsChat utilsChat = new UtilsChat();
+public class ChatCommandRemind extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
     protected String @Nullable [] getAliases() {
@@ -36,7 +37,7 @@ public class ChatCommandReminder extends BotCommand {
 
     @Override
     protected @NotNull String getHelp() {
-        return  "Reminds you after a certain time.\n "+
+        return "Reminds you after a certain time.\n " +
                 "Usage:\n" +
                 "```\n" +
                 "@<Botname> remind <number><s | m | h> [text] [mentions...]\n" +
@@ -65,7 +66,7 @@ public class ChatCommandReminder extends BotCommand {
             return;
         }
 
-        List <User> users = param.message.getMentionedUsers();
+        List<User> users = param.message.getMentionedUsers();
         final String delay = param.args[0];
 
         new Timer(true).schedule(new TimerTaskRunnable(() -> {
@@ -74,12 +75,12 @@ public class ChatCommandReminder extends BotCommand {
             EmbedBuilder builder = utilsChat.getDefaultEmbed();
             builder.setTitle("Reminder");
 
-            if(param.args.length ==  1)
+            if (param.args.length == 1)
                 utilsChat.send(param.message.getChannel(), "Reminder: " + param.message.getAuthor().getAsMention());
 
             else {
-                for(int i = 1; i < param.args.length; i++){
-                    for(int k = 1; k < users.size(); k++){
+                for (int i = 1; i < param.args.length; i++) {
+                    for (int k = 1; k < users.size(); k++) {
                         remindtext[i] = remindtext[i].replaceAll("(<@!?|&?[0-9]{18}>)", "");
                     }
                 }
@@ -98,7 +99,7 @@ public class ChatCommandReminder extends BotCommand {
                     .flatMap(privateChannel -> privateChannel.sendMessage(builder.build()))
                     .queue();
 
-            for(int i = 1; i < users.size(); i++){
+            for (int i = 1; i < users.size(); i++) {
                 utilsChat.send(param.message.getChannel(), users.get(i).getAsMention());
 
                 if (users.get(i).getIdLong() == param.message.getJDA().getSelfUser().getIdLong())

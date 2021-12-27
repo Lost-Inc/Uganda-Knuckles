@@ -14,7 +14,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.OffsetDateTime;
-import java.util.*;
+import java.util.EnumSet;
+import java.util.Formatter;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class SlashCommandMessageAdapter implements Message {
@@ -80,12 +83,12 @@ public class SlashCommandMessageAdapter implements Message {
 
     @NotNull
     @Override
-    public List<IMentionable> getMentions(@NotNull MentionType... types) {
+    public List<IMentionable> getMentions(@NotNull MentionType @NotNull ... types) {
         throw new UnsupportedOperationException("Message adapted from slash command!");
     }
 
     @Override
-    public boolean isMentioned(@NotNull IMentionable mentionable, @NotNull MentionType... types) {
+    public boolean isMentioned(@NotNull IMentionable mentionable, @NotNull MentionType @NotNull ... types) {
         throw new UnsupportedOperationException("Message adapted from slash command!");
     }
 
@@ -210,7 +213,7 @@ public class SlashCommandMessageAdapter implements Message {
     public Category getCategory() {
         final TextChannel channel = event.getTextChannel();
         return Objects.requireNonNull(
-                event.getGuild()
+                        event.getGuild()
                 )
                 .getCategories()
                 .stream()
@@ -223,10 +226,10 @@ public class SlashCommandMessageAdapter implements Message {
                 .orElse(null);
     }
 
-    @NotNull
+
     @Override
-    public Guild getGuild() {
-        return event.getGuild();
+    public @NotNull Guild getGuild() {
+        return Objects.requireNonNull(event.getGuild());
     }
 
     @NotNull
@@ -296,7 +299,7 @@ public class SlashCommandMessageAdapter implements Message {
 
     @NotNull
     @Override
-    public MessageAction editMessageFormat(@NotNull String format, @NotNull Object... args) {
+    public MessageAction editMessageFormat(@NotNull String format, @NotNull Object @NotNull ... args) {
         throw new UnsupportedOperationException("Message adapted from slash command!");
     }
 

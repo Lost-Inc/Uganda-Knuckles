@@ -1,41 +1,70 @@
 package at.lost_inc.ugandaknucklesbot.Util;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.utils.AttachmentOption;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.io.File;
+import java.util.function.Consumer;
 
 // Class containing utility methods
 public class UtilsChat {
 
     // Sends a string, embed or file into a channel
     public void send(@NotNull MessageChannel channel, String message) {
-        channel.sendMessage(message).queue();
+        send(channel, message, null);
     }
+
+    public void send(@NotNull MessageChannel channel, String message, @Nullable Consumer<? super Message> onSuccess) {
+        send(channel, message, onSuccess, null);
+    }
+
+    public void send(@NotNull MessageChannel channel, String message, @Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure) {
+        channel.sendMessage(message).queue(onSuccess, onFailure);
+    }
+
 
     public void send(@NotNull MessageChannel channel, MessageEmbed embed) {
-        channel.sendMessage(embed).queue();
+        send(channel, embed, null);
     }
 
-    public void send(@NotNull MessageChannel channel, File file, AttachmentOption... options) {
-        channel.sendFile(file, options).queue();
+    public void send(@NotNull MessageChannel channel, MessageEmbed embed, @Nullable Consumer<? super Message> onSuccess) {
+        send(channel, embed, onSuccess, null);
+    }
+
+    public void send(@NotNull MessageChannel channel, MessageEmbed embed, @Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure) {
+        channel.sendMessage(embed).queue(onSuccess, onFailure);
+    }
+
+
+    public void send(@NotNull MessageChannel channel, File file, @Nullable AttachmentOption... options) {
+        send(null, channel, file, options);
+    }
+
+    public void send(@Nullable Consumer<? super Message> onSuccess, @NotNull MessageChannel channel, File file, @Nullable AttachmentOption... options) {
+        send(onSuccess, null, channel, file, options);
+    }
+
+    public void send(@Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure, @NotNull MessageChannel channel, File file, @Nullable AttachmentOption... options) {
+        channel.sendFile(file, options).queue(onSuccess, onFailure);
     }
 
     // Method for sending fancy replies
-    public void sendInfo(MessageChannel channel, String message) {
-        EmbedBuilder builder = this.getDefaultEmbed();
-        builder.setDescription(message);
-        channel.sendMessage(builder.build()).queue();
+    public void sendInfo(@NotNull MessageChannel channel, String message) {
+        sendInfo(channel, message, null);
     }
 
-    public void send(MessageChannel channel, File file) {
-        channel.sendFile(file).queue();
+    public void sendInfo(@NotNull MessageChannel channel, String message, @Nullable Consumer<? super Message> onSuccess) {
+        sendInfo(channel, message, onSuccess, null);
+    }
+
+    public void sendInfo(@NotNull MessageChannel channel, String message, @Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure) {
+        EmbedBuilder builder = getDefaultEmbed();
+        builder.setDescription(message);
+        send(channel, message, onSuccess, onFailure);
     }
 
     // Returns an embed with default properties already set

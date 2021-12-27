@@ -6,6 +6,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioTrackSchedule
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoicePlayerManager;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
@@ -25,12 +26,12 @@ import java.util.HashMap;
 import java.util.Queue;
 import java.util.Random;
 
-public class VoiceCommandPlay extends BotCommand {
+public final class VoiceCommandPlay extends BotCommand {
     private static final HashMap<Long, AudioPlayer> players = new HashMap<>();
     private static final HashMap<Long, VoiceAudioTrackScheduler> trackSchedulers = new HashMap<>();
-    private final Random random = new Random();
-    private final UtilsChat utilsChat = new UtilsChat();
-    private final UtilsVoice utilsVoice = new UtilsVoice();
+    private final Random random = ServiceManager.provideUnchecked(Random.class);
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private final UtilsVoice utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
 
     public static @Nullable Queue<AudioTrack> getQueueByGuildID(long id) {
         return trackSchedulers.get(id) == null ? null : trackSchedulers.get(id).getQueue();

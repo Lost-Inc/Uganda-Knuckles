@@ -2,13 +2,14 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.Leetify;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ChatCommandLeet extends BotCommand {
-    private final UtilsChat utilsChat = new UtilsChat();
+public final class ChatCommandLeet extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
     protected String @Nullable [] getAliases() {
@@ -17,7 +18,7 @@ public class ChatCommandLeet extends BotCommand {
 
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 BotCommand.ICategories.FUN,
                 BotCommand.ICategories.CHAT,
         };
@@ -35,7 +36,7 @@ public class ChatCommandLeet extends BotCommand {
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        if(param.args.length == 0) {
+        if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(), "I n33d 73x7 70 c0nv3r7!");
         }
 

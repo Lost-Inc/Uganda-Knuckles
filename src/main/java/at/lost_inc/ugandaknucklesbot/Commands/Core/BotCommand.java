@@ -11,21 +11,6 @@ import org.jetbrains.annotations.Nullable;
  */
 public abstract class BotCommand {
 
-    /** Interface containing categories for bot commands
-     *  @author sudo200
-     */
-    public interface ICategories {
-        String UTIL = ":tools: Utility";
-        String CHAT = ":speech_balloon: Chat";
-        String IMAGE = ":frame_photo: Image";
-        String FUN = ":rofl: Fun";
-        String INTERNET = ":globe_with_meridians: Internet";
-        String MISC = ":sparkles: Misc";
-        String MODERATION = ":cop: Moderation";
-        String SEARCH = ":mag: Search";
-        String VOICE = ":microphone2: Voice";
-    }
-
     /**
      * Returns aliases for the command.
      * When no aliases are defined, null is returned instead
@@ -65,4 +50,21 @@ public abstract class BotCommand {
      * @see CommandParameter
      */
     protected abstract void execute(@NotNull CommandParameter param);
+
+    /**
+     * Interface containing categories for bot commands
+     *
+     * @author sudo200
+     */
+    public interface ICategories {
+        String UTIL = ":tools: Utility";
+        String CHAT = ":speech_balloon: Chat";
+        String IMAGE = ":frame_photo: Image";
+        String FUN = ":rofl: Fun";
+        String INTERNET = ":globe_with_meridians: Internet";
+        String MISC = ":sparkles: Misc";
+        String MODERATION = ":cop: Moderation";
+        String SEARCH = ":mag: Search";
+        String VOICE = ":microphone2: Voice";
+    }
 }

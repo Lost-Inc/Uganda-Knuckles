@@ -2,12 +2,14 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import net.dv8tion.jda.api.entities.Message;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,11 +18,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+import java.util.function.Consumer;
 
-public class ChatCommandQRCode extends BotCommand {
-    private final Random random = new Random();
+public final class ChatCommandQRCode extends BotCommand {
+    private final Random random = ServiceManager.provideUnchecked(Random.class);
 
-    private final UtilsChat utilsChat = new UtilsChat();
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
     protected String @Nullable [] getAliases() {
@@ -72,6 +75,7 @@ public class ChatCommandQRCode extends BotCommand {
             return;
         }
 
-        param.message.getChannel().sendFile(temp).queue(message -> temp.delete());
+        Consumer<?> cb = t -> temp.delete();
+        utilsChat.send((Consumer<? super Message>) cb,(Consumer<? super Throwable>) cb, param.message.getChannel(), temp);
     }
 }

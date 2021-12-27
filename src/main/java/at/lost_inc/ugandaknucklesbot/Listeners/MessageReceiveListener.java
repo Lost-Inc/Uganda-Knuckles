@@ -10,6 +10,6 @@ public class MessageReceiveListener extends ListenerAdapter {
 
     @Override// Pass all events to the command handler
     public void onMessageReceived(@NotNull MessageReceivedEvent event) {
-        handler.handle(event);
+        handler.handle(event.getMessage());
     }
 }

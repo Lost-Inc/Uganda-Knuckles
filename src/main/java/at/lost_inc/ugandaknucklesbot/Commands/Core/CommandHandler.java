@@ -1,21 +1,21 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Core;
 
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.entities.Message;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
 
-/** Class containing the logic making the bot tick
- *  @author sudo200
+/**
+ * Class containing the logic making the bot tick
+ *
+ * @author sudo200
  */
 
-public class CommandHandler {
+public final class CommandHandler {
     private static final CommandHandler instance;
 
     static {
@@ -23,8 +23,8 @@ public class CommandHandler {
     }
 
     private final Collection<BotCommand> commands = new ArrayList<>();
-    private final HashMap<String, Collection<BotCommand>> categories = new HashMap<>();
-    private final UtilsChat utilsChat = new UtilsChat();
+    private final Map<String, Collection<BotCommand>> categories = new HashMap<>();
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     private CommandHandler() {
     }
@@ -58,14 +58,13 @@ public class CommandHandler {
     }
 
     // method called by MessageReceiveListener
-    public void handle(@NotNull MessageReceivedEvent event) {
+    public void handle(@NotNull Message event) {
         // Object, that gets passed to the command classes
         CommandParameter param = new CommandParameter();
         String[] args = event
-                .getMessage()
                 .getContentRaw()
                 .trim()
-                .split(" ");
+                .split(" +");// "+" makes it work with more spaces
 
 
         // If not mentioned, ignore
@@ -81,7 +80,7 @@ public class CommandHandler {
 
         if (args[1].equalsIgnoreCase("help")) {// help command
             Thread helpThread = new Thread(() -> {
-                EmbedBuilder builder = utilsChat.getDefaultEmbed();
+                final EmbedBuilder builder = utilsChat.getDefaultEmbed();
                 if (args.length != 3) {// show categories
                     builder.setTitle(":book: Help categories");
                     for (String name : categories.keySet())
@@ -96,7 +95,7 @@ public class CommandHandler {
                                 false
                         );
                 } else {
-                    String key = categories.keySet().stream().filter(k -> k.matches("(?i).*" + args[2] + ".*")).findFirst().orElse(null);
+                    final String key = categories.keySet().stream().filter(k -> k.matches("(?i).*" + args[2] + ".*")).findFirst().orElse(null);
                     if (key != null) {// show commands from category
                         builder.setTitle(key);
                         for (BotCommand command : categories.get(key))
@@ -105,8 +104,18 @@ public class CommandHandler {
                                     command.getHelp() + (command.getAliases() != null ? "\n\n*Aliases:* " + String.join(",", command.getAliases()) : ""),
                                     false
                             );
-                    } else // category does not exist
-                        builder.setDescription("**There is no category called \"" + args[2] + "\"!**\nTry \"all\"");
+                    } else {
+                        final BotCommand command = commands.stream().filter(c -> c.getName().matches("(?i).*" + args[2] + ".*")).findFirst().orElse(null);
+                        if (command != null) {// show help of specific command
+                            builder.setTitle("Help for \"" + command.getName() + "\" command");
+                            builder.addField(
+                                    command.getName(),
+                                    command.getHelp() + (command.getAliases() != null ? "\n\n*Aliases:* " + String.join(",", command.getAliases()) : ""),
+                                    false
+                            );
+                        } else // command does not exist
+                            builder.setDescription("**There is nothing called \"" + args[2] + "\"!**\nTry \"all\"");
+                    }
                 }
                 utilsChat.send(event.getChannel(), builder.build());
             });
@@ -116,7 +125,7 @@ public class CommandHandler {
         }
 
         param.args = Arrays.copyOfRange(args, 2, args.length);
-        param.message = event.getMessage();
+        param.message = event;
 
         BotCommand[] commands = this.commands.toArray(new BotCommand[0]);
         BotCommand cmd = search(commands, args[1]);

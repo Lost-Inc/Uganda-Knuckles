@@ -3,6 +3,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioEchoHandler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
@@ -18,12 +19,12 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 
-public class VoiceCommandSync extends BotCommand {
+public final class VoiceCommandSync extends BotCommand {
     private static final HashMap<String, Guild> guilds = new HashMap<>();
     private static final HashMap<Guild, VoiceChannel> vcs = new HashMap<>();
-    private final Random random = new Random();
-    private final UtilsChat utilsChat = new UtilsChat();
-    private final UtilsVoice utilsVoice = new UtilsVoice();
+    private final Random random = ServiceManager.provideUnchecked(Random.class);
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private final UtilsVoice utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
 
     @Override
     protected String @Nullable [] getAliases() {
@@ -58,7 +59,11 @@ public class VoiceCommandSync extends BotCommand {
 
         if (param.args.length == 0) {// Called without token
             if (guilds.containsValue(guild)) {// Check for already existing token
-                utilsChat.sendInfo(channel, "**Somebody already generated a token for this server!**\n\nWhen will you learn!");
+                utilsChat.sendInfo(channel, String.format(
+                        "**Somebody already generated a token for this server!**\n\nToken: `%s`",
+                        guilds.entrySet().stream().filter(entry -> entry.getValue().equals(guild))
+                                .findFirst().orElse(null)
+                ));
                 return;
             }
 

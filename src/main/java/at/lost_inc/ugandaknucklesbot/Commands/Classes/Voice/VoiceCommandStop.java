@@ -2,13 +2,14 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class VoiceCommandStop extends BotCommand {
-    private final UtilsChat utilsChat = new UtilsChat();
+public final class VoiceCommandStop extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
     protected String @Nullable [] getAliases() {
@@ -41,7 +42,5 @@ public class VoiceCommandStop extends BotCommand {
 
         if (player != null)
             player.destroy();
-        else
-            utilsChat.sendInfo(param.message.getChannel(), "**I cannot stop, what's already stopped!**");
     }
 }

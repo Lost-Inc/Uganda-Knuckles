@@ -1,4 +1,4 @@
-package at.lost_inc.ugandaknucklesbot.Util;
+package de.bill.owo;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -12,7 +12,6 @@ import java.util.Random;
  * "Library" for converting text
  * into weeb-text (*^.^*)
  *
- * @author sudo200
  * @see <a href="https://github.com/BillNickYT/OwOfy">Original Author</a>
  */
 

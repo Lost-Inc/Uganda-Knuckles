@@ -129,13 +129,7 @@ public class SlashCommandMessageAdapter implements Message {
     @NotNull
     @Override
     public String getContentDisplay() {
-        return String.join(
-                " ",
-                event.getSubcommandName(),
-                event.getOptions().stream()
-                        .map(OptionMapping::getAsString)
-                        .collect(Collectors.joining())
-        );
+        return getContentRaw();
     }
 
     @NotNull
@@ -153,13 +147,7 @@ public class SlashCommandMessageAdapter implements Message {
     @NotNull
     @Override
     public String getContentStripped() {
-        return String.join(
-                " ",
-                event.getSubcommandName(),
-                event.getOptions().stream()
-                        .map(OptionMapping::getAsString)
-                        .collect(Collectors.joining())
-        );
+        return getContentRaw();
     }
 
     @NotNull

@@ -71,7 +71,6 @@ public final class Main {
                 new ChatCommandRandomCat(),
                 new ChatCommandPoop(),
                 new ChatCommandDice(),
-                new ChatCommandInvite(),
                 new ChatCommandRandomDog(),
                 new ChatCommandFood(),
                 new ChatCommandQRCode(),
@@ -86,6 +85,7 @@ public final class Main {
                 new ChatCommandBan(),
                 new ChatCommandVersion(),
                 new ChatCommandRemind(),
+                new ChatCommandReddit(),
                 // Voice commands
                 new VoiceCommandPlay(),
                 new VoiceCommandPause(),

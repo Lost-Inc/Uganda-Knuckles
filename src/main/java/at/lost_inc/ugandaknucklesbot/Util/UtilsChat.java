@@ -64,7 +64,7 @@ public class UtilsChat {
     public void sendInfo(@NotNull MessageChannel channel, String message, @Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure) {
         EmbedBuilder builder = getDefaultEmbed();
         builder.setDescription(message);
-        send(channel, message, onSuccess, onFailure);
+        send(channel, builder.build(), onSuccess, onFailure);
     }
 
     // Returns an embed with default properties already set

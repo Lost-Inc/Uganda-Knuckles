@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class SlashCommandMessageAdapter implements Message {
+public final class SlashCommandMessageAdapter implements Message {
     private final SlashCommandEvent event;
 
     public SlashCommandMessageAdapter(SlashCommandEvent event) {

@@ -4,23 +4,20 @@ import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.ApplicationInfo;
+import net.dv8tion.jda.api.entities.TeamMember;
+import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public final class ChatCommandVersion extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
-    private final String
-            botVersion = getClass().getPackage().getImplementationVersion() == null ? "Development Version" : "v" + getClass().getPackage().getImplementationVersion(),
-            name = System.getProperty("java.runtime.name"),
-            version = System.getProperty("java.runtime.version"),
-            osName = System.getProperty("os.name"),
-            osArch = System.getProperty("os.arch"),
-            osVersion = System.getProperty("os.version"),                                                           // MB
-            usedMem = Long.toString((long) ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / Math.pow(1024, 2))),
-            threads = Integer.toString(Thread.activeCount());
-
-
+    private static final String botVersion =
+            ChatCommandVersion.class.getPackage().getImplementationVersion() == null ?
+                    "Development Version" :
+                    "v" + ChatCommandVersion.class.getPackage().getImplementationVersion();
     @Override
     protected String @Nullable [] getAliases() {
         return null;
@@ -46,27 +43,35 @@ public final class ChatCommandVersion extends BotCommand {
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        utilsChat.sendInfo(
-                param.message.getChannel(),
-                String.format(
-                        "**Uganda Knuckles** %s\n" +
-                                "\n" +
-                                "**JVM:**\n" +
-                                "%s %s\n" +
-                                "Used Mem: ~%s MB\n" +
-                                "%s active threads\n" +
-                                "\n" +
-                                "**OS:**\n" +
-                                "%s %s (%s)\n",
-                        botVersion,
-                        name,
-                        version,
-                        usedMem,
-                        threads,
-                        osName,
-                        osVersion,
-                        osArch
-                )
-        );
+        utilsChat.sendInfo(param.message.getChannel(), "Getting info...", msg ->
+                msg.getJDA().retrieveApplicationInfo().queue(info -> {
+                    final EmbedBuilder builder = utilsChat.getDefaultEmbed();
+
+                    builder.setDescription(String.format(
+                            "**%s** %s\n" +
+                                    "\n" +
+                                    "**Developer(s):**\n" +
+                                    "%s\n" +
+                                    "and contributors",
+                            info.getJDA().getSelfUser().getName(),
+                            botVersion,
+                            info.getTeam() != null ?
+                                    String.join(
+                                            "\n",
+                                            info.getTeam().getMembers().stream()
+                                                    .map(TeamMember::getUser).map(User::getName)
+                                                    .map(s -> "+ " + s).toArray(String[]::new)
+                                    ) :
+                                    info.getOwner().getName()
+                    ));
+                    builder.setThumbnail(info.getJDA().getSelfUser().getAvatarUrl());
+                    builder.setAuthor(null, null,
+                            info.getTeam() != null ?
+                                    info.getTeam().getIconUrl() :
+                                    info.getOwner().getAvatarUrl()
+                    );
+
+                    msg.editMessage(builder.build()).queue();
+                }));
     }
 }

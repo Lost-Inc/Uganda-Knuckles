@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.net.UnknownHostException;
 
-public final class ChatCommandDNSLookup extends BotCommand {
+public final class ChatCommandResolve extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override

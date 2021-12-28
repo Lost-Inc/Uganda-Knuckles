@@ -47,7 +47,7 @@ public final class ChatCommandAvatar extends BotCommand {
 
         Member member = utilsChat.getMemberByMention(param.args[0], param.message.getGuild());
         if (member == null) {
-            utilsChat.sendInfo(param.message.getChannel(), "**Could not get User for some reason**\nTry to make him send a message or join a voice channel");
+            utilsChat.sendInfo(param.message.getChannel(), "**Could not getPlayer User for some reason**\nTry to make him send a message or join a voice channel");
             return;
         }
 

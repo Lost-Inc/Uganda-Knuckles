@@ -11,7 +11,7 @@ import java.util.Hashtable;
  *
  * @author sudo200
  */
-public class Leetify {
+public final class Leetify {
     private static final Hashtable<Character, Character> LeetTable = new Hashtable<>();
 
     static {

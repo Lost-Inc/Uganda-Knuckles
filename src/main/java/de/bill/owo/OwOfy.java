@@ -15,7 +15,7 @@ import java.util.Random;
  * @see <a href="https://github.com/BillNickYT/OwOfy">Original Author</a>
  */
 
-public class OwOfy {
+public final class OwOfy {
     private static final List<String> faces = Arrays.asList(
             "(*^ω^)",
             "(◕‿◕✿)",

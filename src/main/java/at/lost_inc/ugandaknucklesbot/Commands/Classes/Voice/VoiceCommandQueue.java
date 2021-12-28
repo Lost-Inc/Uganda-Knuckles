@@ -1,22 +1,24 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler.PlayQueue;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
-import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import com.sedmelluq.discord.lavaplayer.track.AudioTrackInfo;
+import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Queue;
-
 public final class VoiceCommandQueue extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
 
     @Override
     protected String @Nullable [] getAliases() {
-        return new String[]{
+        return new String[] {
                 "q"
         };
     }
@@ -41,35 +43,28 @@ public final class VoiceCommandQueue extends BotCommand {
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        StringBuilder queueString = new StringBuilder();
-        Queue<AudioTrack> queue = VoiceCommandPlay.getQueueByGuildID(param.message.getGuild().getIdLong());
-        AudioPlayer player = VoiceCommandPlay.getPlayerByGuildID(param.message.getGuild().getIdLong());
-        AudioTrack track = player == null ? null : player.getPlayingTrack();
+        final PlayQueue queue = playerService.getScheduler(param.message.getGuild()).get().getQueue();
+        final EmbedBuilder builder = utilsChat.getDefaultEmbed().setTitle("Queue");
+        final StringBuilder stringBuilder = new StringBuilder("```haskell\n");
 
-        if (track != null) {// If currently playing track
-            queueString.append(String.format(
-                    "__Currently Playing__: **%s**\n\n",
-                    track.getInfo().title
-            ));
-        }
 
-        queueString.append("```java\n");
+        if(queue.audioTracks.size() != 0)
+            for(int i = 0; i < queue.audioTracks.size(); ++i) {
+                final AudioTrackInfo info = queue.audioTracks.get(i).getInfo();
+                if(i+1 == queue.getTrackNum())
+                    stringBuilder.append("\t\u2554Current Track\n");
+                stringBuilder.append(i+1).append(". ").append(info.author).append(" - \"").append(info.title).append('\"');
+                if(i+1 == queue.getTrackNum())
+                    stringBuilder.append("\n\t\u255ACurrent Track");
+                stringBuilder.append('\n');
+            }
+        else
+            stringBuilder.append("Nothing to see here!\n");
 
-        if (queue == null || queue.isEmpty())
-            queueString.append("Nothing to see here (O.O)");
-        else {
-            final AudioTrack[] tracks = queue.toArray(new AudioTrack[0]);
-            for (int i = 0; i < queue.size(); i++)
-                queueString.append(String.format(
-                        "%d) %s\n",
-                        i + 1,
-                        tracks[i].getInfo().title
-                ));
-        }
-        queueString.append("```");
-        utilsChat.sendInfo(
-                param.message.getChannel(),
-                queueString.toString()
+        builder.setDescription(stringBuilder.append("```"));
+
+        utilsChat.send(param.message.getChannel(), builder.build(), null,
+                e -> utilsChat.sendInfo(param.message.getChannel(), "Sorry, your queue is to big for Discord!")
         );
     }
 }

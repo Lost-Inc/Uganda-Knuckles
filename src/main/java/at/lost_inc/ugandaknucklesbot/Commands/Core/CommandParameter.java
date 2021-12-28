@@ -7,7 +7,7 @@ import net.dv8tion.jda.api.entities.Message;
  *
  * @author sudo200
  */
-public class CommandParameter {
+public final class CommandParameter {
     public Message message;
     public String[] args;
 }

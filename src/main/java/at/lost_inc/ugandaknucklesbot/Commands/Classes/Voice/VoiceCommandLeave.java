@@ -3,12 +3,9 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Service.Temp.NotAvailable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
-import net.dv8tion.jda.api.JDA;
-import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.GuildVoiceState;
-import net.dv8tion.jda.api.managers.AudioManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,29 +38,14 @@ public final class VoiceCommandLeave extends BotCommand {
     @Override
     protected String @Nullable [] getAliases() {
         return new String[]{
+                "disconnect",
                 "dc",
-                "l"
+                "l",
         };
     }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        Guild guild = param.message.getGuild();
-        AudioManager audioManager = guild.getAudioManager();
-        JDA jda = param.message.getJDA();
-        GuildVoiceState userVoiceState = utilsVoice.getVoiceState(param.message.getAuthor(), guild);
-        GuildVoiceState botVoiceState = utilsVoice.getVoiceState(jda.getUserById(jda.getSelfUser().getId()), guild);
-
-        if (!userVoiceState.inVoiceChannel()) {
-            utilsChat.sendInfo(param.message.getChannel(), "**Join a voice channel first!**");
-            return;
-        }
-
-        if (!botVoiceState.inVoiceChannel()) {
-            utilsChat.sendInfo(param.message.getChannel(), "**I already left!**");
-            return;
-        }
-
-        audioManager.closeAudioConnection();
+        param.message.getGuild().getAudioManager().closeAudioConnection();
     }
 }

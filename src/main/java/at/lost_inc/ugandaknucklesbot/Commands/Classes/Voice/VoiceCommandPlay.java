@@ -1,23 +1,22 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioSendHandler;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioTrackMessenger;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoiceAudioTrackScheduler;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.VoicePlayerManager;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerManagerService;
+import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Service.Temp.NotAvailable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
-import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
-import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
-import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
+import com.sedmelluq.discord.lavaplayer.player.FunctionalResultHandler;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
+import net.dv8tion.jda.api.audio.AudioSendHandler;
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.entities.VoiceChannel;
+import net.dv8tion.jda.api.entities.GuildVoiceState;
+import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.managers.AudioManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,25 +24,13 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicReference;
 
 public final class VoiceCommandPlay extends BotCommand {
-    private static final HashMap<Long, AudioPlayer> players = new HashMap<>();
-    private static final HashMap<Long, VoiceAudioTrackScheduler> trackSchedulers = new HashMap<>();
-    private final Random random = ServiceManager.provideUnchecked(Random.class);
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final UtilsVoice utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
-
-    public static @Nullable Queue<AudioTrack> getQueueByGuildID(long id) {
-        return trackSchedulers.get(id) == null ? null : trackSchedulers.get(id).getQueue();
-    }
-
-    public static @Nullable VoiceAudioTrackScheduler getTrackSchedulerByGuildID(long id) {
-        return trackSchedulers.get(id);
-    }
-
-    public static @Nullable AudioPlayer getPlayerByGuildID(long id) {
-        return players.get(id);
-    }
+    private final AudioPlayerManager playerManager = ServiceManager.provideUnchecked(AudioPlayerManagerService.class).get();
+    private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
 
     @Override
     protected String @NotNull [] getCategories() {
@@ -62,7 +49,7 @@ public final class VoiceCommandPlay extends BotCommand {
 
     @Override
     protected @NotNull String getHelp() {
-        return "Plays a song right in your voice channel!\n||RIP Groovy 2021||";
+        return "Plays a song right in your voice channel!\n||RIP [Groovy, Rhythm] 2021||";
     }
 
     @Override
@@ -74,80 +61,45 @@ public final class VoiceCommandPlay extends BotCommand {
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        final Guild guild = param.message.getGuild();
-        final User user = param.message.getAuthor();
-
-        if (utilsVoice.getVoiceState(user, guild).getChannel() == null) {// If not in a voice channel
-            utilsChat.sendInfo(param.message.getChannel(), "**Please join a voice channel first!**\n\nWhen will you learn!");
+        if(param.args.length == 0) {
+            utilsChat.sendInfo(param.message.getChannel(), "Give me a link to what you want to be played...");
             return;
         }
 
-        if (param.args.length == 0) {
-            if (random.nextInt(10) == 0) {
-                utilsChat.sendInfo(param.message.getChannel(), "...this is what you get! :smiling_imp:");
-                param.args = new String[1];
-                param.args[0] = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-            } else {
-                utilsChat.sendInfo(param.message.getChannel(), "**Please tell me what to play!**\nOr else...");
-                return;
-            }
+        final Guild guild = param.message.getGuild();
+        final AudioManager audioManager = guild.getAudioManager();
+        final MessageChannel channel = param.message.getChannel();
+        final GuildVoiceState voiceState = utilsVoice.getVoiceState(param.message.getAuthor(), guild);
+        if(!voiceState.inVoiceChannel()) {
+            utilsChat.sendInfo(channel, "Please join a voice channel first!");
+            return;
         }
+        final AtomicReference<TrackScheduler> scheduler = playerService.getScheduler(guild);
+        final AtomicReference<AudioPlayer> player = playerService.getPlayer(guild);
+        final AtomicReference<AudioSendHandler> sendHandler = playerService.getAudioHandler(guild).get();
 
-        final AudioPlayerManager audioPlayerManager = VoicePlayerManager.get();
-        final AudioPlayer player = players.containsKey(guild.getIdLong()) ?// If a player exists for the guild,
-                players.get(guild.getIdLong()) ://                            it gets used,
-                audioPlayerManager.createPlayer();//                          else a new one gets created
-        final VoiceAudioTrackScheduler trackScheduler = trackSchedulers.containsKey(guild.getIdLong()) ?// basically the same procedure as for the player
-                trackSchedulers.get(guild.getIdLong()) :
-                new VoiceAudioTrackScheduler(player);
-        if (!trackSchedulers.containsKey(guild.getIdLong()))// Save new TrackScheduler
-            trackSchedulers.put(guild.getIdLong(), trackScheduler);
-        if (!players.containsKey(guild.getIdLong())) {// Set params and save new AudioPlayer
-            player.addListener(new VoiceAudioTrackMessenger(param.message));
-            player.addListener(trackScheduler);
-            player.setVolume(50);
-            players.put(guild.getIdLong(), player);
-        }
+        final Runnable cb = () -> {
+            if(audioManager.getConnectedChannel() == null)
+                audioManager.openAudioConnection(voiceState.getChannel());
+            if(audioManager.getSendingHandler() == null)
+                audioManager.setSendingHandler(sendHandler.get());
 
-        audioPlayerManager.loadItem(// Load song
-                String.join(" ", param.args),
-                new AudioLoadResultHandler() {
-                    @Override
-                    public void trackLoaded(AudioTrack track) {
-                        trackScheduler.queue(track);
-                        utilsChat.sendInfo(
-                                param.message.getChannel(),
-                                String.format("Queued \"%s\" by \"%s\" [%s]", track.getInfo().title, track.getInfo().author, user.getAsMention())
-                        );
-                    }
 
-                    @Override
-                    public void playlistLoaded(AudioPlaylist playlist) {
-                        trackScheduler.queue(playlist.getTracks().toArray(new AudioTrack[0]));
-                        utilsChat.sendInfo(
-                                param.message.getChannel(),
-                                String.format("Queued Playlist \"%s\" [%s]", playlist.getName(), user.getAsMention())
-                        );
-                    }
+            if(player.get().getPlayingTrack() == null)
+                scheduler.get().start();
+        };
 
-                    @Override
-                    public void noMatches() {
-                        utilsChat.sendInfo(param.message.getChannel(), "Whatever this is, it's not playable!\n\nFor me at least...");
-                    }
-
-                    @Override
-                    public void loadFailed(FriendlyException exception) {
-                    }
-                }
-        );
-
-        final VoiceChannel channel = utilsVoice.getVoiceState(user, guild).getChannel();
-        final AudioManager manager = guild.getAudioManager();
-
-        if (!manager.isConnected()) {
-            manager.setAutoReconnect(true);
-            manager.setSendingHandler(new VoiceAudioSendHandler(player));
-            manager.openAudioConnection(channel);
-        }
+        playerManager.loadItem(String.join(" ", param.args), new FunctionalResultHandler(
+                track -> {
+                    scheduler.get().queue(track);
+                    utilsChat.sendInfo(channel, String.format("Queued \"%s\" by \"%s\"", track.getInfo().title, track.getInfo().author), message -> cb.run());
+                },
+                audioPlaylist -> {
+                    scheduler.get().queue(audioPlaylist.getTracks().toArray(new AudioTrack[0]));
+                    utilsChat.sendInfo(channel, String.format("Queued playlist \"%s\"", audioPlaylist.getName()), message -> cb.run());
+                },
+                () -> utilsChat.sendInfo(channel, "**Nothing to hear here**"),
+                e -> utilsChat.sendInfo(channel, e.getMessage())
+        ));
     }
 }

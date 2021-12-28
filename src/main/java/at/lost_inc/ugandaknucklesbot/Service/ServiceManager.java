@@ -12,7 +12,7 @@ public final class ServiceManager {
     private ServiceManager() {
     }
 
-    public static <T> void setProvider(Class<T> service, T provider) {
+    public synchronized static <T> void setProvider(Class<T> service, @NotNull T provider) {
         services.put(service, provider);
     }
 

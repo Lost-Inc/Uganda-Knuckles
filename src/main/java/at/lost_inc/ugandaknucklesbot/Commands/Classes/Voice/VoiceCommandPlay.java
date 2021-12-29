@@ -84,7 +84,6 @@ public final class VoiceCommandPlay extends BotCommand {
             if(audioManager.getSendingHandler() == null)
                 audioManager.setSendingHandler(sendHandler.get());
 
-
             if(player.get().getPlayingTrack() == null)
                 scheduler.get().start();
         };

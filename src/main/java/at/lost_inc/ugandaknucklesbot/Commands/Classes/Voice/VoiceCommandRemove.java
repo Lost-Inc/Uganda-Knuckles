@@ -80,10 +80,15 @@ public final class VoiceCommandRemove extends BotCommand {
 
         final TrackScheduler scheduler = playerService.getScheduler(param.message.getGuild()).get();
         try {
-            scheduler.remove(Integer.parseUnsignedInt(String.join(" ", param.args)) - 1);
+            final int number = Integer.parseUnsignedInt(String.join(" ", param.args));
+            if(scheduler.getTrackNum() >= number) {
+                utilsChat.sendInfo(param.message.getChannel(), "**History cannot be changed!**");
+                return;
+            }
+            scheduler.remove(number - 1);
         }
         catch (NumberFormatException e) {
-            utilsChat.sendInfo(param.message.getChannel(), "**What that is, it's not a number**");
+            utilsChat.sendInfo(param.message.getChannel(), "**Whatever that is, it's not a number**");
         }
     }
 }

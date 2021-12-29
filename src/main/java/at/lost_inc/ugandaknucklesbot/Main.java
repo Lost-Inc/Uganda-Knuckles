@@ -3,6 +3,7 @@ package at.lost_inc.ugandaknucklesbot;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.*;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.*;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandHandler;
+import at.lost_inc.ugandaknucklesbot.Listeners.GuildVoiceListener;
 import at.lost_inc.ugandaknucklesbot.Listeners.MessageReceiveListener;
 import at.lost_inc.ugandaknucklesbot.Listeners.SlashCommandEventListener;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerManagerService;
@@ -72,8 +73,11 @@ public final class Main {
         }
 
         // Listeners
-        main.jda.addEventListener(new MessageReceiveListener());
-        main.jda.addEventListener(new SlashCommandEventListener());
+        main.jda.addEventListener(
+                new MessageReceiveListener(),
+                new SlashCommandEventListener(),
+                new GuildVoiceListener()
+                );
         logger.trace("Added event listeners");
 
         // Set presence
@@ -116,6 +120,7 @@ public final class Main {
                 new VoiceCommandSkip(),
                 new VoiceCommandSync(),
                 new VoiceCommandStop(),
+                new VoiceCommandLoop(),
                 new VoiceCommandLeave()
         );
         logger.trace("Registration complete");

@@ -1,6 +1,6 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler.PlayQueue;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
@@ -43,11 +43,15 @@ public final class VoiceCommandQueue extends BotCommand {
 
     @Override
     protected void execute(@NotNull CommandParameter param) {
-        final PlayQueue queue = playerService.getScheduler(param.message.getGuild()).get().getQueue();
+        final TrackScheduler scheduler = playerService.getScheduler(param.message.getGuild()).get();
+        final TrackScheduler.PlayQueue queue = scheduler.getQueue();
         final EmbedBuilder builder = utilsChat.getDefaultEmbed().setTitle("Queue");
-        final StringBuilder stringBuilder = new StringBuilder("```haskell\n");
+        final StringBuilder stringBuilder = new StringBuilder();
 
+        if(scheduler.getLooping())
+            stringBuilder.append("**Looping enabled!**\n\n");
 
+        stringBuilder.append("```haskell\n");
         if(queue.audioTracks.size() != 0)
             for(int i = 0; i < queue.audioTracks.size(); ++i) {
                 final AudioTrackInfo info = queue.audioTracks.get(i).getInfo();

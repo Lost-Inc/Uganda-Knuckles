@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Service.Temp.NotAvailable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -10,8 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public final class VoiceCommandLeave extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final UtilsVoice utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
+    private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
 
     @Override
     protected @NotNull String getName() {
@@ -47,5 +47,6 @@ public final class VoiceCommandLeave extends BotCommand {
     @Override
     protected void execute(@NotNull CommandParameter param) {
         param.message.getGuild().getAudioManager().closeAudioConnection();
+        playerService.destroy(param.message.getGuild());
     }
 }

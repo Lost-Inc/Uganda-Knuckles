@@ -11,6 +11,8 @@ import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public final class ChatCommandVersion extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
@@ -65,7 +67,10 @@ public final class ChatCommandVersion extends BotCommand {
                                     info.getOwner().getName()
                     ));
                     builder.setThumbnail(info.getJDA().getSelfUser().getAvatarUrl());
-                    builder.setAuthor(null, null,
+                    builder.setAuthor(
+                            info.getTeam() != null ?
+                        Objects.requireNonNull(info.getTeam().getOwner()).getUser().getName() :
+                            info.getOwner().getName(), null,
                             info.getTeam() != null ?
                                     info.getTeam().getIconUrl() :
                                     info.getOwner().getAvatarUrl()

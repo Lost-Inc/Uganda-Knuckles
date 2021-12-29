@@ -12,20 +12,34 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public interface AudioPlayerService {
     /**
-     * Get's the {@link AudioPlayer} for the specific {@link Guild};
+     * Gets the {@link AudioPlayer} for the specific {@link Guild};
      * if there isn't one, it creates one
      * @param guild the Guild
-     * @return Audioplayer
+     * @return {@link AudioPlayer}
      */
     @NotNull AtomicReference<AudioPlayer> getPlayer(@NotNull Guild guild);
 
     /**
-     * Get's the {@link TrackScheduler} for the specific {@link Guild};
+     * Gets the {@link TrackScheduler} for the specific {@link Guild};
      * if there isn't one, it creates one
      * @param guild the Guild
-     * @return TrackScheduler
+     * @return {@link TrackScheduler}
      */
     @NotNull AtomicReference<TrackScheduler> getScheduler(@NotNull Guild guild);
 
+    /**
+     * Gets the {@link AudioSendHandler} for the specific {@link Guild};
+     * if there isn't one, it returns an empty {@link Optional}
+     * @param guild the Guild
+     * @return {@link AudioSendHandler}
+     */
     @NotNull Optional<AtomicReference<AudioSendHandler>> getAudioHandler(@NotNull Guild guild);
+
+    /**
+     * Destroys the {@link AudioPlayer}, {@link TrackScheduler} and {@link AudioSendHandler} for the
+     * specific {@link Guild}
+     * @param guild the Guild
+     * @return {@link Boolean#TRUE} if destroyed
+     */
+    boolean destroy(@NotNull Guild guild);
 }

@@ -38,7 +38,9 @@ public final class ChatCommandMCSkin extends BotCommand {
 
     @Override
     protected String @Nullable [] getAliases() {
-        return null;
+        return new String[] {
+                "mcs"
+        };
     }
 
     @Override

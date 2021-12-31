@@ -113,6 +113,7 @@ public final class Main {
                 new ChatCommandReddit(),
                 new ChatCommand8Ball(),
                 new ChatCommandServerStats(),
+                new ChatCommandKill(),
                 // Voice commands
                 new VoiceCommandPlay(),
                 new VoiceCommandPause(),

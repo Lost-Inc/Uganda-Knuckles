@@ -111,6 +111,8 @@ public final class Main {
                 new ChatCommandVersion(),
                 new ChatCommandRemind(),
                 new ChatCommandReddit(),
+                new ChatCommand8Ball(),
+                new ChatCommandServerStats(),
                 // Voice commands
                 new VoiceCommandPlay(),
                 new VoiceCommandPause(),

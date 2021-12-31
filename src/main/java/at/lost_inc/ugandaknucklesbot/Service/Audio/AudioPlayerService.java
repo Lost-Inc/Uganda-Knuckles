@@ -1,6 +1,5 @@
 package at.lost_inc.ugandaknucklesbot.Service.Audio;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler.VoiceAudioSendHandler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import net.dv8tion.jda.api.audio.AudioSendHandler;

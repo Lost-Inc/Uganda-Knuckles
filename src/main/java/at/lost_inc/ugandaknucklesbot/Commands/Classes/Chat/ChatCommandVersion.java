@@ -5,7 +5,6 @@ import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.ApplicationInfo;
 import net.dv8tion.jda.api.entities.TeamMember;
 import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
@@ -14,12 +13,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 public final class ChatCommandVersion extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-
     private static final String botVersion =
             ChatCommandVersion.class.getPackage().getImplementationVersion() == null ?
                     "Development Version" :
                     "v" + ChatCommandVersion.class.getPackage().getImplementationVersion();
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+
     @Override
     protected String @Nullable [] getAliases() {
         return null;
@@ -40,7 +39,7 @@ public final class ChatCommandVersion extends BotCommand {
 
     @Override
     protected @NotNull String getHelp() {
-        return "Prints out information about the currently running backend, for those who are interested\n\nprobably nobody";
+        return "Prints out info about the bot, and credits it's devs";
     }
 
     @Override
@@ -69,8 +68,8 @@ public final class ChatCommandVersion extends BotCommand {
                     builder.setThumbnail(info.getJDA().getSelfUser().getAvatarUrl());
                     builder.setAuthor(
                             info.getTeam() != null ?
-                        Objects.requireNonNull(info.getTeam().getOwner()).getUser().getName() :
-                            info.getOwner().getName(), null,
+                                    Objects.requireNonNull(info.getTeam().getOwner()).getUser().getName() :
+                                    info.getOwner().getName(), null,
                             info.getTeam() != null ?
                                     info.getTeam().getIconUrl() :
                                     info.getOwner().getAvatarUrl()

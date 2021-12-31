@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Hashtable;
+import java.util.stream.Collectors;
 
 /**
  * "Library" for converting text into leet speech
@@ -45,14 +46,14 @@ public final class Leetify {
         return new Hashtable<>(LeetTable);
     }
 
-    public static @NotNull String leetify(@NotNull String text) {
+    public static @NotNull CharSequence leetify(@NotNull CharSequence text) {
         final StringBuilder builder = new StringBuilder();
 
-        for (char ch : text.toCharArray()) {
-            Character leetChar = LeetTable.get(ch);
+        for (char ch : text.chars().mapToObj(i -> (char) i).collect(Collectors.toList())) {
+            final Character leetChar = LeetTable.get(ch);
             builder.append(leetChar == null ? ch : leetChar);
         }
 
-        return builder.toString();
+        return builder;
     }
 }

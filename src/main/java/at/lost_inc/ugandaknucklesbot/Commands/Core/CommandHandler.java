@@ -3,11 +3,14 @@ package at.lost_inc.ugandaknucklesbot.Commands.Core;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Class containing the logic making the bot tick
@@ -43,7 +46,6 @@ public final class CommandHandler {
             if (!com.contains(command))
                 com.add(command);
         }
-        System.gc();
         return this.commands.add(command);
     }
 
@@ -53,7 +55,7 @@ public final class CommandHandler {
         for (BotCommand command : commands)
             if (!register(command))
                 okay = false;
-
+            System.gc();
         return okay;
     }
 
@@ -119,6 +121,7 @@ public final class CommandHandler {
                 }
                 utilsChat.send(event.getChannel(), builder.build());
             });
+            helpThread.setName("HelpThread-" + helpThread.hashCode());
             helpThread.setPriority(Thread.NORM_PRIORITY - 1);
             helpThread.start();
             return;
@@ -136,7 +139,7 @@ public final class CommandHandler {
         Thread thread = new Thread(() -> {// Async thread
             // Execute the command; exceptions are thrown in seperate thread, so they won't crash the bot (pls still catch 'em yourself)
             cmd.execute(param);
-        });
+        }, "CommandThread-" + cmd.getName() + '-' + cmd.hashCode());
         /* Thread priority is set lower than usual,
          *   because the main thread is important
          */

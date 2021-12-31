@@ -47,7 +47,7 @@ public final class ChatCommandRemind extends BotCommand {
     @Override
     protected void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0) {
-            utilsChat.sendInfo(param.message.getChannel(), "");
+            utilsChat.sendInfo(param.message.getChannel(), "Have you seen my usage?\n\"" + getHelp() + '"');
             return;
         }
 

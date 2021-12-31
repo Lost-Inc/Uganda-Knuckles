@@ -9,7 +9,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 public class UtilsVoice {
-    // Gets voicestate of user from guild
+    /**
+     * Gets voicestate of user from guild
+     * @param user user to get voice state from
+     * @param guild guild to get voice state from
+     * @return user voice state
+     */
     public final @NotNull GuildVoiceState getVoiceState(User user, @NotNull Guild guild) {
         @NotNull Member member = Objects.requireNonNull(guild.getMember(user));
         return Objects.requireNonNull(member.getVoiceState());

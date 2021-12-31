@@ -14,15 +14,15 @@ import java.util.function.Consumer;
 public class UtilsChat {
 
     // Sends a string, embed or file into a channel
-    public final void send(@NotNull MessageChannel channel, String message) {
+    public final void send(@NotNull MessageChannel channel, CharSequence message) {
         send(channel, message, null);
     }
 
-    public final void send(@NotNull MessageChannel channel, String message, @Nullable Consumer<? super Message> onSuccess) {
+    public final void send(@NotNull MessageChannel channel, CharSequence message, @Nullable Consumer<? super Message> onSuccess) {
         send(channel, message, onSuccess, null);
     }
 
-    public final void send(@NotNull MessageChannel channel, String message, @Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure) {
+    public final void send(@NotNull MessageChannel channel, CharSequence message, @Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure) {
         channel.sendMessage(message).queue(onSuccess, onFailure);
     }
 
@@ -53,15 +53,15 @@ public class UtilsChat {
     }
 
     // Method for sending fancy replies
-    public final void sendInfo(@NotNull MessageChannel channel, String message) {
+    public final void sendInfo(@NotNull MessageChannel channel, CharSequence message) {
         sendInfo(channel, message, null);
     }
 
-    public final void sendInfo(@NotNull MessageChannel channel, String message, @Nullable Consumer<? super Message> onSuccess) {
+    public final void sendInfo(@NotNull MessageChannel channel, CharSequence message, @Nullable Consumer<? super Message> onSuccess) {
         sendInfo(channel, message, onSuccess, null);
     }
 
-    public final void sendInfo(@NotNull MessageChannel channel, String message, @Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure) {
+    public final void sendInfo(@NotNull MessageChannel channel, CharSequence message, @Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure) {
         EmbedBuilder builder = getDefaultEmbed();
         builder.setDescription(message);
         send(channel, builder.build(), onSuccess, onFailure);

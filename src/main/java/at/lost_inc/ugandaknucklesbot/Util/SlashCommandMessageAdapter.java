@@ -137,10 +137,10 @@ public final class SlashCommandMessageAdapter implements Message {
     public String getContentRaw() {
         return String.join(
                 " ",
-                event.getSubcommandName(),
+                event.getName(),
                 event.getOptions().stream()
                         .map(OptionMapping::getAsString)
-                        .collect(Collectors.joining())
+                        .collect(Collectors.joining(" "))
         );
     }
 

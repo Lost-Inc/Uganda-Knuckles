@@ -37,7 +37,7 @@ public final class ChatCommandReddit extends BotCommand {
      */
     @Override
     protected String @NotNull [] getCategories() {
-        return new String[] {
+        return new String[]{
                 ICategories.INTERNET
         };
     }
@@ -74,7 +74,7 @@ public final class ChatCommandReddit extends BotCommand {
             param.args[0] = "r/whoosh";
         }
 
-        if(!param.args[0].startsWith("r/"))
+        if (!param.args[0].startsWith("r/"))
             param.args[0] = "r/" + param.args[0];
 
         final EmbedBuilder builder = utilsChat.getDefaultEmbed();
@@ -85,8 +85,7 @@ public final class ChatCommandReddit extends BotCommand {
 
         try {
             postData = gson.fromJson(jsonString, Subreddit.class).data.children[0].data;
-        }
-        catch (RuntimeException e) {
+        } catch (RuntimeException e) {
             utilsChat.sendInfo(param.message.getChannel(), "It seem, as if there is no subreddit called \"" + String.join(" ", param.args) + "\"");
             return;
         }

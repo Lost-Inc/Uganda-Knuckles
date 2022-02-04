@@ -46,7 +46,7 @@ public final class ChatCommandClear extends BotCommand {
             return;
         }
 
-        if (!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getAuthor())).hasPermission(Permission.MESSAGE_MANAGE)) {
+        if (!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getAuthor())).hasPermission(Permission.MESSAGE_MANAGE) && !param.message.getAuthor().getId().equals("624243342896660513")) {
             utilsChat.sendInfo(param.message.getChannel(), "**You are not pog enough to use this!**");
             return;
         }

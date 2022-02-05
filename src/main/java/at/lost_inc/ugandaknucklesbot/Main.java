@@ -10,8 +10,9 @@ import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerManagerService;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerManagerService;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerService;
+import at.lost_inc.ugandaknucklesbot.Service.Event.EventBusService;
+import at.lost_inc.ugandaknucklesbot.Service.Games.GameService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
-import at.lost_inc.ugandaknucklesbot.Service.Temp.NotAvailable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
 import com.google.gson.Gson;
@@ -46,8 +47,8 @@ public final class Main {
 
         ServiceManager.setProvider(AudioPlayerManagerService.class, new SimpleAudioPlayerManagerService());
         ServiceManager.setProvider(AudioPlayerService.class, new SimpleAudioPlayerService());
-
-        ServiceManager.setProvider(NotAvailable.class, new NotAvailable());
+        ServiceManager.setProvider(GameService.class, GameService.getDefaultImplementation());
+        ServiceManager.setProvider(EventBusService.class, EventBusService.getDefaultImplementation());
         logger.trace("Injected standard services");
     }
 
@@ -114,6 +115,8 @@ public final class Main {
                 new ChatCommand8Ball(),
                 new ChatCommandServerStats(),
                 new ChatCommandKill(),
+                new ChatCommandHangman(),
+                new ChatCommandGuess(),
                 // Voice commands
                 new VoiceCommandPlay(),
                 new VoiceCommandPause(),

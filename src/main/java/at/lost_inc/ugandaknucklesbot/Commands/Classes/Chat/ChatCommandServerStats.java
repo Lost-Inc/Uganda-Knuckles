@@ -66,19 +66,9 @@ public final class ChatCommandServerStats extends BotCommand {
                                         "It has %d boosts, which brings it to level %d",
                                 OffsetDateTime.now().getYear() - guild.getTimeCreated().getYear(),
                                 OffsetDateTime.now().getMonthValue() - guild.getTimeCreated().getMonthValue(),
-                                guild.getBoostCount(), getBoostTier(guild.getBoostTier())
+                                guild.getBoostCount(), guild.getBoostTier().getKey()
                         ), false).build()
                 );
-    }
-
-    private int getBoostTier(@NotNull Guild.BoostTier tier) {
-        switch (tier) {
-            case NONE: return 0;
-            case TIER_1: return 1;
-            case TIER_2: return 2;
-            case TIER_3: return 3;
-            default: return -1;
-        }
     }
 
 

@@ -25,6 +25,8 @@ public final class CommandHandler {
         instance = new CommandHandler();
     }
 
+    private final ThreadGroup threadGroup = new ThreadGroup("bot commands");
+
     private final Collection<BotCommand> commands = new ArrayList<>();
     private final Map<String, Collection<BotCommand>> categories = new HashMap<>();
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
@@ -81,7 +83,7 @@ public final class CommandHandler {
         if (args.length == 1) return;
 
         if (args[1].equalsIgnoreCase("help")) {// help command
-            Thread helpThread = new Thread(() -> {
+            Thread helpThread = new Thread(threadGroup, () -> {
                 final EmbedBuilder builder = utilsChat.getDefaultEmbed();
                 if (args.length != 3) {// show categories
                     builder.setTitle(":book: Help categories");
@@ -136,7 +138,7 @@ public final class CommandHandler {
         if (cmd == null)
             return;
 
-        Thread thread = new Thread(() -> {// Async thread
+        Thread thread = new Thread(threadGroup, () -> {// Async thread
             // Execute the command; exceptions are thrown in seperate thread, so they won't crash the bot (pls still catch 'em yourself)
             cmd.execute(param);
         }, "CommandThread-" + cmd.getName() + '-' + cmd.hashCode());

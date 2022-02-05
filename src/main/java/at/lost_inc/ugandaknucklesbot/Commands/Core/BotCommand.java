@@ -59,6 +59,7 @@ public abstract class BotCommand {
     public interface ICategories {
         String UTIL = ":tools: Utility";
         String CHAT = ":speech_balloon: Chat";
+        String GAME = ":game_die: Games";
         String IMAGE = ":frame_photo: Image";
         String FUN = ":rofl: Fun";
         String INTERNET = ":globe_with_meridians: Internet";

@@ -12,7 +12,7 @@ import java.util.Random;
 public final class ChatCommand8Ball extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final Random rand = ServiceManager.provideUnchecked(Random.class);
-    private final String[] answers = new String[] {
+    private static final String[] answers = new String[] {
             "Why not??",
             "Dude, hell no!",
             "Sorry, the 8ball is currently not in reach!\n" +
@@ -20,7 +20,7 @@ public final class ChatCommand8Ball extends BotCommand {
             "yeeeeeeeeee!!!",
             "nooooooooooo!!!!",
             "I dunno, why ask me something like that?",
-            "You know the answer yourself, so you?",
+            "You know the answer yourself, do you?",
             "F@*~ no!!!!",
             "yeeeesssss, of courseeee!",
             "I mean, why not? Yes!",

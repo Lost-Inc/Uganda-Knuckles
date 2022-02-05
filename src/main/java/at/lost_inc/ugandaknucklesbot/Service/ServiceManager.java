@@ -31,8 +31,11 @@ public final class ServiceManager {
      * Maps a provider for a service to a class.
      * @param service the service class
      * @param provider the service class instance
+     * @throws ClassCastException if the provider is not compatible with the service-class
      */
-    public synchronized static <T> void setProvider(Class<T> service, @NotNull T provider) {
+    public synchronized static <T> void setProvider(@NotNull Class<T> service, @NotNull T provider) throws ClassCastException {
+        if(provider.getClass().isInstance(service))
+            throw new ClassCastException(provider.getClass().getName() + " is not compatible with " + service.getName() + '!');
         services.put(service, provider);
     }
 

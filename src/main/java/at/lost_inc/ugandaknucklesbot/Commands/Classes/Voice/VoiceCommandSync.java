@@ -4,6 +4,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler.VoiceAudioEchoH
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Util.Hash;
 import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
@@ -72,7 +73,7 @@ public final class VoiceCommandSync extends BotCommand {
                 return;
             }
             // Generate token
-            final String hash = getMD5Hash(Integer.toString(random.nextInt(Integer.MAX_VALUE))).substring(0, 5);
+            final String hash = Hash.getMD5Hash(Integer.toString(random.nextInt(Integer.MAX_VALUE))).substring(0, 5);
             guilds.put(// Store token
                     hash,
                     guild
@@ -128,19 +129,5 @@ public final class VoiceCommandSync extends BotCommand {
             priManager.openAudioConnection(voiceState.getChannel());
             secManager.openAudioConnection(secVoiceChannel);
         }
-    }
-
-    private @NotNull String getMD5Hash(@NotNull String md5) {
-        try {
-            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
-            byte[] array = md.digest(md5.getBytes());
-            StringBuilder stringBuilder = new StringBuilder();
-            for (byte b : array) {
-                stringBuilder.append(Integer.toHexString((b & 0xFF) | 0x100), 1, 3);
-            }
-            return stringBuilder.toString();
-        } catch (java.security.NoSuchAlgorithmException ignored) {
-        }
-        return "";
     }
 }

@@ -13,6 +13,7 @@ import at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.Event.EventBusService;
 import at.lost_inc.ugandaknucklesbot.Service.Games.GameService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Util.Hash;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
 import com.google.gson.Gson;
@@ -39,6 +40,8 @@ public final class Main {
     private final CommandHandler handler;
 
     static {
+        Hash.getMD5Hash("");
+
         // Register Standard Services
         ServiceManager.setProvider(Random.class, new Random());
         ServiceManager.setProvider(UtilsChat.class, new UtilsChat());

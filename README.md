@@ -12,11 +12,11 @@
 ![](https://img.shields.io/github/repo-size/Lost-Inc/Uganda-Knuckles?color=%23000&label=Repo%20size&style=flat-square)
 ***
 ## Current features
-* [x] Moderation commands (kick, ban, clear)\
-* [x] Search commands (wikipedia, urban dictionary)\
-* [x] Image commands (random cat-, dog- and food images)\
-* [x] Text commands (convert text into leet-speech, weeb-speech, qr-code)\
-* [x] A very mature audio system with queue\
+* [x] Moderation commands (kick, ban, clear)
+* [x] Search commands (wikipedia, urban dictionary)
+* [x] Image commands (random cat-, dog- and food images)
+* [x] Text commands (convert text into leet-speech, weeb-speech, qr-code)
+* [x] A very mature audio system with queue
 * [x] Even more, but [explore it for yourself](https://discord.com/api/oauth2/authorize?client_id=720214661047386176&permissions=8&scope=applications.commands%20bot)!
 ***
 ## Issues

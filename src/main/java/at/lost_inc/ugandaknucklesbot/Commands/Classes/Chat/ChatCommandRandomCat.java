@@ -39,11 +39,6 @@ public final class ChatCommandRandomCat extends BotCommand {
     }
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected void execute(@NotNull CommandParameter param) {
 
         EmbedBuilder builder = utilsChat.getDefaultEmbed();

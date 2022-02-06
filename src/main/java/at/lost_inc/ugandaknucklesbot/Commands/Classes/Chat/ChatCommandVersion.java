@@ -20,11 +20,6 @@ public final class ChatCommandVersion extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected String @NotNull [] getCategories() {
         return new String[]{
                 BotCommand.ICategories.MISC,
@@ -40,6 +35,13 @@ public final class ChatCommandVersion extends BotCommand {
     @Override
     protected @NotNull String getHelp() {
         return "Prints out info about the bot, and credits it's devs";
+    }
+
+    @Override
+    protected String @Nullable [] getAliases() {
+        return new String[] {
+                "v"
+        };
     }
 
     @Override

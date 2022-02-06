@@ -35,11 +35,6 @@ public final class ChatCommandPing extends BotCommand {
     }
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected void execute(@NotNull CommandParameter param) {
         final EmbedBuilder builder = utilsChat.getDefaultEmbed();
         final String normal = "**`Pong!`**";

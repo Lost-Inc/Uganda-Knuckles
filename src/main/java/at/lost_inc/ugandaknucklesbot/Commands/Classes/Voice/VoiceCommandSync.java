@@ -63,7 +63,7 @@ public final class VoiceCommandSync extends BotCommand {
                 utilsChat.sendInfo(channel, String.format(
                         "**Somebody already generated a token for this server!**\n\nToken: `%s`",
                         guilds.entrySet().stream().filter(entry -> entry.getValue().equals(guild))
-                                .findFirst().orElse(null)
+                                .findFirst().get().getKey()
                 ));
                 return;
             }

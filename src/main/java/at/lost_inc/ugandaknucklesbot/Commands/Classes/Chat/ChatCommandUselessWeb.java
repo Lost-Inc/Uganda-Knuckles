@@ -118,11 +118,6 @@ public final class ChatCommandUselessWeb extends BotCommand {
     }
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected void execute(@NotNull CommandParameter param) {
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
         String uselessWebsite = urls[random.nextInt(urls.length)];

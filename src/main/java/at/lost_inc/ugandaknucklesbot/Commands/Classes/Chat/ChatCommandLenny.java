@@ -35,11 +35,6 @@ public final class ChatCommandLenny extends BotCommand {
     }
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected void execute(@NotNull CommandParameter param) {
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
         builder.setTitle("( \u0361° \u035c\u0296 \u0361 °)");

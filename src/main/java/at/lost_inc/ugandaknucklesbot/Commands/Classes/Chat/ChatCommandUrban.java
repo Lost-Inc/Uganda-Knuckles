@@ -39,11 +39,6 @@ public final class ChatCommandUrban extends BotCommand {
     }
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(), "Mate, please, what do you want me to search?");

@@ -16,18 +16,6 @@ public final class ChatCommandReddit extends BotCommand {
     private final Gson gson = ServiceManager.provideUnchecked(Gson.class);
 
     /**
-     * Returns aliases for the command.
-     * When no aliases are defined, null is returned instead
-     *
-     * @return Array of alias strings or null
-     * @author sudo200
-     */
-    @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    /**
      * Returns category strings
      * of the categories the command belongs to
      *

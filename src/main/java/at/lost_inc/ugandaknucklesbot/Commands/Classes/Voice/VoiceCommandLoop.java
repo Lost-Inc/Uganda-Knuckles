@@ -16,7 +16,7 @@ public final class VoiceCommandLoop extends BotCommand {
     @Override
     protected String @Nullable [] getAliases() {
         return new String[] {
-                "lo"
+                "lp"
         };
     }
 

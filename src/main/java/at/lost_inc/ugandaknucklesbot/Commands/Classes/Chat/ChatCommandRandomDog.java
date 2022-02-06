@@ -39,11 +39,6 @@ public final class ChatCommandRandomDog extends BotCommand {
     }
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected void execute(@NotNull CommandParameter param) {
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
         String response = HttpRequest.get("https://random.dog/woof.json").body();

@@ -35,11 +35,6 @@ public final class ChatCommandClear extends BotCommand {
     }
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(), "**How many do ja want to delete?**");

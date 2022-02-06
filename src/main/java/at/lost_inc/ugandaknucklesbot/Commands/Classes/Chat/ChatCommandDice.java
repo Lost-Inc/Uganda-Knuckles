@@ -10,7 +10,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Random;
 
 public final class ChatCommandDice extends BotCommand {
-    private static final String[] numbers = new String[]{
+    private static final String[] numbers = new String[] {
             " 0000\n" +
                     "00  00\n" +
                     "00  00\n" +
@@ -73,11 +73,6 @@ public final class ChatCommandDice extends BotCommand {
     };
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final Random random = ServiceManager.provideUnchecked(Random.class);
-
-    @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
 
     @Override
     protected String @NotNull [] getCategories() {

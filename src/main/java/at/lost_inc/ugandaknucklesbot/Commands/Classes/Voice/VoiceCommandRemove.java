@@ -9,6 +9,8 @@ import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
+
 public final class VoiceCommandRemove extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
@@ -74,7 +76,9 @@ public final class VoiceCommandRemove extends BotCommand {
         if(param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(),
                     "Please tell me the index of the track to remove!\n" +
-                    "You can get it using `@" + param.message.getJDA().getSelfUser().getName() + " q`");
+                    "You can get it using `@" +
+                            Objects.requireNonNull(param.message.getGuild().getMemberById(param.message.getJDA().getSelfUser().getId())).getEffectiveName()
+                            + " q`");
             return;
         }
 

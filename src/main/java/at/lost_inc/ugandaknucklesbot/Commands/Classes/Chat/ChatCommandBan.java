@@ -35,11 +35,6 @@ public final class ChatCommandBan extends BotCommand {
     }
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0 || !utilsChat.isMention(param.args[0])) {
             utilsChat.sendInfo(param.message.getChannel(), "You have to say who you want to ban.");

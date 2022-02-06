@@ -18,7 +18,9 @@ public abstract class BotCommand {
      * @return Array of alias strings or null
      * @author sudo200
      */
-    protected abstract String @Nullable [] getAliases();
+    protected String @Nullable [] getAliases() {
+        return null;
+    }
 
     /**
      * Returns category strings

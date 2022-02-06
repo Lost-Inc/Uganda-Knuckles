@@ -17,11 +17,6 @@ public final class ChatCommandServerStats extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected String @NotNull [] getCategories() {
         return new String[] {
                 ICategories.UTIL,

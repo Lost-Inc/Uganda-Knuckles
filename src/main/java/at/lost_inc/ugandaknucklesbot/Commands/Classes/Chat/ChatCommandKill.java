@@ -53,11 +53,6 @@ public final class ChatCommandKill extends BotCommand {
     };
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected String @NotNull [] getCategories() {
         return new String[] {
                 ICategories.FUN,

@@ -26,11 +26,6 @@ public final class ChatCommandQRCode extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected String @NotNull [] getCategories() {
         return new String[]{
                 BotCommand.ICategories.IMAGE,

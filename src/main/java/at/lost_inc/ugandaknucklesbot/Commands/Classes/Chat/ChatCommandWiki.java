@@ -41,11 +41,6 @@ public final class ChatCommandWiki extends BotCommand {
     }
 
     @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
     protected void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0) {// If the user didn't specify an article
             param.args = new String[1];// we know what to do B)

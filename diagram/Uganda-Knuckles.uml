@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>/home/fabian/Dokumente/IntelliJ/Java/Uganda Knuckles Bot/src/main</OriginalElement>
+  <nodes>
+    <node x="1737.0" y="348.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandRandomCat</node>
+    <node x="1795.0" y="2434.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomCatAPIResponse</node>
+    <node x="2235.0" y="2050.0">at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler.VoiceAudioSendHandler</node>
+    <node x="1737.0" y="892.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandVersion</node>
+    <node x="2031.0" y="1088.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandSkip</node>
+    <node x="2031.0" y="892.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandPause</node>
+    <node x="855.0" y="0.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandKick</node>
+    <node x="1149.0" y="1088.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLeave</node>
+    <node x="561.0" y="696.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandHangman</node>
+    <node x="1361.0" y="2050.0">at.lost_inc.ugandaknucklesbot.Service.Event.EventBusService</node>
+    <node x="1737.0" y="1088.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandGuess</node>
+    <node x="2031.0" y="522.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandWiki</node>
+    <node x="2092.0" y="2434.0">at.lost_inc.ugandaknucklesbot.Util.Leetify</node>
+    <node x="561.0" y="0.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandQRCode</node>
+    <node x="0.0" y="2268.0">at.lost_inc.ugandaknucklesbot.Util.Hash</node>
+    <node x="855.0" y="892.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandResume</node>
+    <node x="1149.0" y="522.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandRandomDog</node>
+    <node x="1443.0" y="174.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandRemind</node>
+    <node x="1149.0" y="174.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommand8Ball</node>
+    <node x="521.0" y="1294.0">at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand</node>
+    <node x="2031.0" y="348.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandBan</node>
+    <node x="561.0" y="348.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandAvatar</node>
+    <node x="1116.0" y="2268.0">at.lost_inc.ugandaknucklesbot.Commands.Core.CommandHandler</node>
+    <node x="855.0" y="1088.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandStop</node>
+    <node x="808.0" y="2050.0">at.lost_inc.ugandaknucklesbot.Service.Games.GameService</node>
+    <node x="1443.0" y="718.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandKill</node>
+    <node x="855.0" y="348.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandFood</node>
+    <node x="1149.0" y="718.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandOwO</node>
+    <node x="1443.0" y="1088.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandSync</node>
+    <node x="0.0" y="2434.0">at.lost_inc.ugandaknucklesbot.Util.UtilsVoice</node>
+    <node x="0.0" y="2145.0">at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerManagerService</node>
+    <node x="329.0" y="2268.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomDogAPIResponse</node>
+    <node x="561.0" y="892.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandRemove</node>
+    <node x="561.0" y="522.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandInator</node>
+    <node x="855.0" y="696.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLoop</node>
+    <node x="1149.0" y="892.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandMCSkin</node>
+    <node x="561.0" y="174.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandClear</node>
+    <node x="855.0" y="174.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandUrban</node>
+    <node x="1774.0" y="2268.0">de.bill.owo.OwOfy</node>
+    <node x="1737.0" y="718.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandServerStats</node>
+    <node x="407.0" y="2050.0">at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler.VoiceAudioEchoHandler</node>
+    <node x="0.0" y="1619.0">at.lost_inc.ugandaknucklesbot.Util.UtilsChat</node>
+    <node x="40.0" y="2050.0">at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerManagerService</node>
+    <node x="561.0" y="1088.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandPlay</node>
+    <node x="425.0" y="2434.0">at.lost_inc.ugandaknucklesbot.Listeners.SlashCommandEventListener</node>
+    <node x="1336.0" y="1619.0">at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService</node>
+    <node x="1149.0" y="348.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandLeet</node>
+    <node x="1453.0" y="2268.0">at.lost_inc.ugandaknucklesbot.Service.ServiceManager</node>
+    <node x="626.0" y="2268.0">at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter</node>
+    <node x="2031.0" y="718.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandPing</node>
+    <node x="818.0" y="2434.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.UrbanDictionaryAPIResponse</node>
+    <node x="1737.0" y="174.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandUselessWeb</node>
+    <node x="2095.0" y="2268.0">at.lost_inc.ugandaknucklesbot.Listeners.MessageReceiveListener</node>
+    <node x="1175.0" y="2434.0">at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable</node>
+    <node x="1443.0" y="348.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandPoop</node>
+    <node x="0.0" y="2557.0">at.lost_inc.ugandaknucklesbot.Main</node>
+    <node x="969.0" y="1619.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.WikipediaSummaryRestAPI</node>
+    <node x="855.0" y="522.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandResolve</node>
+    <node x="1737.0" y="522.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandLenny</node>
+    <node x="1488.0" y="2434.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomFoodAPIResponse</node>
+    <node x="1794.0" y="2050.0">at.lost_inc.ugandaknucklesbot.Listeners.GuildVoiceListener</node>
+    <node x="1443.0" y="522.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandDice</node>
+    <node x="0.0" y="0.0">at.lost_inc.ugandaknucklesbot.Util.SlashCommandMessageAdapter</node>
+    <node x="1953.0" y="1619.0">at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler</node>
+    <node x="2031.0" y="174.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandReddit</node>
+    <node x="1443.0" y="892.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandQueue</node>
+    <node x="883.0" y="2268.0">at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.reddit.Subreddit</node>
+    <node x="1296.0" y="1780.0">at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerService</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandInator" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="-142.0" y="0.0" />
+      <point x="526.0" y="594.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandWiki" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="72.0" />
+      <point x="2173.0" y="692.0" />
+      <point x="2338.0" y="692.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandPing" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="2173.0" y="692.0" />
+      <point x="2338.0" y="692.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerService" target="at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService" relationship="REALIZATION">
+      <point x="40.0" y="-72.0" />
+      <point x="0.0" y="60.5" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLoop" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-83.0" />
+      <point x="997.0" y="679.0" />
+      <point x="526.0" y="679.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandDice" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="72.0" />
+      <point x="1585.0" y="692.0" />
+      <point x="2338.0" y="692.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandHangman" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="-142.0" y="0.0" />
+      <point x="526.0" y="779.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandFood" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="997.0" y="335.0" />
+      <point x="526.0" y="335.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandSync" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="83.0" />
+      <point x="1585.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandRandomCat" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="1879.0" y="335.0" />
+      <point x="2338.0" y="335.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandVersion" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-83.0" />
+      <point x="1879.0" y="875.0" />
+      <point x="1734.0" y="875.0" />
+      <point x="1734.0" y="692.0" />
+      <point x="2338.0" y="692.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandMCSkin" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-83.0" />
+      <point x="1291.0" y="875.0" />
+      <point x="526.0" y="875.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandQueue" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-83.0" />
+      <point x="1585.0" y="875.0" />
+      <point x="1734.0" y="875.0" />
+      <point x="1734.0" y="692.0" />
+      <point x="2338.0" y="692.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandKick" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="142.0" y="0.0" />
+      <point x="1271.5" y="72.0" />
+      <point x="1271.5" y="64.0" />
+      <point x="1291.0" y="64.0" />
+      <point x="1291.0" y="-17.5" />
+      <point x="526.0" y="-17.5" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandLenny" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="72.0" />
+      <point x="1879.0" y="692.0" />
+      <point x="2338.0" y="692.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandRemove" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="-142.0" y="0.0" />
+      <point x="526.0" y="975.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandUselessWeb" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="1879.0" y="136.5" />
+      <point x="2338.0" y="136.5" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandOwO" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="1291.0" y="692.0" />
+      <point x="2338.0" y="692.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandReddit" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="142.0" y="0.0" />
+      <point x="2338.0" y="246.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandGuess" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="83.0" />
+      <point x="1879.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandBan" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="142.0" y="0.0" />
+      <point x="2338.0" y="420.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandRemind" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="1585.0" y="64.0" />
+      <point x="1291.0" y="64.0" />
+      <point x="1291.0" y="-17.5" />
+      <point x="526.0" y="-17.5" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandResume" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-83.0" />
+      <point x="997.0" y="875.0" />
+      <point x="526.0" y="875.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandUrban" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="997.0" y="161.0" />
+      <point x="526.0" y="161.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandClear" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="-142.0" y="0.0" />
+      <point x="526.0" y="246.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandPause" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="142.0" y="0.0" />
+      <point x="2338.0" y="975.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandResolve" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="997.0" y="509.0" />
+      <point x="526.0" y="509.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandKill" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="1585.0" y="692.0" />
+      <point x="2338.0" y="692.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandAvatar" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="-142.0" y="0.0" />
+      <point x="526.0" y="420.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLeave" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="83.0" />
+      <point x="1291.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommand8Ball" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="-19.5" y="-72.0" />
+      <point x="1271.5" y="64.0" />
+      <point x="1291.0" y="64.0" />
+      <point x="1291.0" y="-17.5" />
+      <point x="526.0" y="-17.5" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandPlay" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="83.0" />
+      <point x="703.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandPoop" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="1585.0" y="335.0" />
+      <point x="2338.0" y="335.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandServerStats" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="1879.0" y="692.0" />
+      <point x="2338.0" y="692.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandStop" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="83.0" />
+      <point x="997.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandRandomDog" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="72.0" />
+      <point x="1291.0" y="692.0" />
+      <point x="2338.0" y="692.0" />
+      <point x="2338.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandSkip" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="83.0" />
+      <point x="2173.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandLeet" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="0.0" y="-72.0" />
+      <point x="1291.0" y="335.0" />
+      <point x="526.0" y="335.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandQRCode" target="at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand" relationship="GENERALIZATION">
+      <point x="-142.0" y="0.0" />
+      <point x="526.0" y="72.0" />
+      <point x="526.0" y="1274.0" />
+      <point x="663.0" y="1274.0" />
+      <point x="0.0" y="-83.0" />
+    </edge>
+    <edge source="at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerManagerService" target="at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerManagerService" relationship="REALIZATION">
+      <point x="10.0" y="-39.0" />
+      <point x="0.0" y="27.5" />
+    </edge>
+  </edges>
+  <settings layout="Compact" zoom="0.3267924528301887" showDependencies="false" x="1279.5" y="1297.0" />
+  <SelectedNodes>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandRandomCat</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomCatAPIResponse</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler.VoiceAudioSendHandler</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandVersion</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandSkip</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandPause</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandKick</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLeave</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandHangman</node>
+    <node>at.lost_inc.ugandaknucklesbot.Service.Event.EventBusService</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandGuess</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandWiki</node>
+    <node>at.lost_inc.ugandaknucklesbot.Util.Leetify</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandQRCode</node>
+    <node>at.lost_inc.ugandaknucklesbot.Util.Hash</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandResume</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandRandomDog</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandRemind</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommand8Ball</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandBan</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandAvatar</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Core.CommandHandler</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandStop</node>
+    <node>at.lost_inc.ugandaknucklesbot.Service.Games.GameService</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandKill</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandFood</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandOwO</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandSync</node>
+    <node>at.lost_inc.ugandaknucklesbot.Util.UtilsVoice</node>
+    <node>at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerManagerService</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomDogAPIResponse</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandRemove</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandInator</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandLoop</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandMCSkin</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandClear</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandUrban</node>
+    <node>de.bill.owo.OwOfy</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandServerStats</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler.VoiceAudioEchoHandler</node>
+    <node>at.lost_inc.ugandaknucklesbot.Util.UtilsChat</node>
+    <node>at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerManagerService</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandPlay</node>
+    <node>at.lost_inc.ugandaknucklesbot.Listeners.SlashCommandEventListener</node>
+    <node>at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandLeet</node>
+    <node>at.lost_inc.ugandaknucklesbot.Service.ServiceManager</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandPing</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.UrbanDictionaryAPIResponse</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandUselessWeb</node>
+    <node>at.lost_inc.ugandaknucklesbot.Listeners.MessageReceiveListener</node>
+    <node>at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandPoop</node>
+    <node>at.lost_inc.ugandaknucklesbot.Main</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.WikipediaSummaryRestAPI</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandResolve</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandLenny</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomFoodAPIResponse</node>
+    <node>at.lost_inc.ugandaknucklesbot.Listeners.GuildVoiceListener</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandDice</node>
+    <node>at.lost_inc.ugandaknucklesbot.Util.SlashCommandMessageAdapter</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.ChatCommandReddit</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.VoiceCommandQueue</node>
+    <node>at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.reddit.Subreddit</node>
+    <node>at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerService</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>Project Files</SCOPE>
+  <VISIBILITY>protected</VISIBILITY>
+</Diagram>
+

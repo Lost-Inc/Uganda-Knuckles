@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -10,6 +11,17 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
+
+@Command(
+        name = "uselessweb",
+        help = "Get random websites, you 100% cannot live without!",
+        categories = {
+                // Main category
+                BotCommand.ICategories.FUN,
+                // Auxiliary categories
+                BotCommand.ICategories.CHAT, BotCommand.ICategories.INTERNET
+        }
+)
 public final class ChatCommandUselessWeb extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final Random random = ServiceManager.provideUnchecked(Random.class);
@@ -96,26 +108,6 @@ public final class ChatCommandUselessWeb extends BotCommand {
             "http://papertoilet.com/",
             "https://loopedforinfinity.com/",
     };
-
-    @Override
-    protected @NotNull String getName() {
-        return "uselessweb";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Get random websites, you 100% cannot live without!";
-    }
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
-                // Main category
-                BotCommand.ICategories.FUN,
-                // Auxiliary categories
-                BotCommand.ICategories.CHAT, BotCommand.ICategories.INTERNET
-        };
-    }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

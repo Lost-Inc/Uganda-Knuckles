@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -10,28 +11,19 @@ import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class ChatCommandAvatar extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
-    @Override
-    protected @NotNull String getName() {
-        return "avatar";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Gets the profile picture of a server member by mentioning him";
-    }
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
+@Command(
+        name = "avatar",
+        help = "Gets the profile picture of a server member by mentioning him",
+        categories = {
                 // Main category
                 BotCommand.ICategories.UTIL,
                 // Auxiliary categories
                 BotCommand.ICategories.CHAT
-        };
-    }
+        }
+)
+public final class ChatCommandAvatar extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

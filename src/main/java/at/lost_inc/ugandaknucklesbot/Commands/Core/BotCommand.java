@@ -10,40 +10,6 @@ import org.jetbrains.annotations.Nullable;
  * @author sudo200
  */
 public abstract class BotCommand {
-
-    /**
-     * Returns aliases for the command.
-     * When no aliases are defined, null is returned instead
-     *
-     * @return Array of alias strings or null
-     * @author sudo200
-     */
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    /**
-     * Returns category strings
-     * of the categories the command belongs to
-     *
-     * @return Array of category strings
-     * @author sudo200
-     * @see BotCommand.ICategories
-     */
-    protected abstract String @NotNull [] getCategories();
-
-    /**
-     * @return Command name
-     * @author sudo200
-     */
-    protected abstract @NotNull String getName();
-
-    /**
-     * @return Help page describing the command
-     * @author sudo200
-     */
-    protected abstract @NotNull String getHelp();
-
     /**
      * Method, which contains the logic for this command
      *

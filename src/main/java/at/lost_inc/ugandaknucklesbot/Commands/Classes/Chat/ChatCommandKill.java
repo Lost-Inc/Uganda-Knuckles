@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -14,6 +15,15 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Random;
 
+
+@Command(
+        name = "kill",
+        help = "Kills a person (why is the FBI here?!?)",
+        categories = {
+                BotCommand.ICategories.FUN,
+                BotCommand.ICategories.CHAT,
+        }
+)
 public final class ChatCommandKill extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final Random rand = ServiceManager.provideUnchecked(Random.class);
@@ -51,24 +61,6 @@ public final class ChatCommandKill extends BotCommand {
             "%s hated on someone's taste",
             "%s hated minorities and was canceled on Twitter",
     };
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[] {
-                ICategories.FUN,
-                ICategories.CHAT,
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "kill";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Kills a person (why is the FBI here?!?)";
-    }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Service.Games.GameService;
@@ -15,11 +16,23 @@ import java.util.Optional;
 import java.util.Random;
 import java.util.function.Supplier;
 
+
+@Command(
+        name = "hangman",
+        help = "Play a game of hangman with your friends (who needs paper?)\n" +
+                "To end a game preemptively, append `end` to the command",
+        categories = {
+                BotCommand.ICategories.GAME,
+                BotCommand.ICategories.CHAT
+        },
+        aliases = {
+                "hm"
+        }
+)
 public final class ChatCommandHangman extends BotCommand {
     private final Random rand = ServiceManager.provideUnchecked(Random.class);
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final GameService gameService = ServiceManager.provideUnchecked(GameService.class);
-
 
     private static final String[] guessWords = new String[] {
             "abruptly",
@@ -258,32 +271,6 @@ public final class ChatCommandHangman extends BotCommand {
     static {
         for (int i = 0; i < guessWords.length; i++)
             guessWords[i] = guessWords[i].toUpperCase();
-    }
-
-    @Override
-    protected String @Nullable [] getAliases() {
-        return new String[] {
-                "hm"
-        };
-    }
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[] {
-                ICategories.GAME,
-                ICategories.CHAT
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "hangman";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Play a game of hangman with your friends (who needs paper?)\n" +
-                "To end a game preemptively, append `end` to the command";
     }
 
     @Override

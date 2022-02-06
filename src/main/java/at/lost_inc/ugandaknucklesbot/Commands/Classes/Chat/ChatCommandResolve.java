@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -10,28 +11,19 @@ import org.jetbrains.annotations.Nullable;
 
 import java.net.UnknownHostException;
 
-public final class ChatCommandResolve extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
+@Command(
+        name = "resolve",
+        help = "Performs a dns lookup on the given hostname\n\nYes, I know, its very specific!",
+        categories = {
                 // Main category
                 BotCommand.ICategories.SEARCH,
                 // Auxiliary categories
                 BotCommand.ICategories.CHAT, BotCommand.ICategories.INTERNET, BotCommand.ICategories.UTIL,
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "resolve";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Performs a dns lookup on the given hostname\n\nYes, I know, its very specific!";
-    }
+        }
+)
+public final class ChatCommandResolve extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

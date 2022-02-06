@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -11,28 +12,19 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public final class ChatCommandClear extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
+@Command(
+        name = "clear",
+        help = "Deletes messages\n\nWhat do you expect?",
+        categories = {
                 // Main category
                 BotCommand.ICategories.MODERATION,
                 // Auxiliary categories
                 BotCommand.ICategories.CHAT, BotCommand.ICategories.UTIL
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "clear";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Deletes messages\n\nWhat do you expect?";
-    }
+        }
+)
+public final class ChatCommandClear extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

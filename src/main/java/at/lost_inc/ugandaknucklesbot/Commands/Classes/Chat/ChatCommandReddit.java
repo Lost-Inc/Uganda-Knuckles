@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.reddit.Subreddit;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -11,42 +12,18 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+
+@Command(
+        name = "reddit",
+        help = "Gets the topmost post from a subreddit",
+        categories = {
+                BotCommand.ICategories.INTERNET,
+                BotCommand.ICategories.CHAT
+        }
+)
 public final class ChatCommandReddit extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final Gson gson = ServiceManager.provideUnchecked(Gson.class);
-
-    /**
-     * Returns category strings
-     * of the categories the command belongs to
-     *
-     * @return Array of category strings
-     * @author sudo200
-     * @see ICategories
-     */
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
-                ICategories.INTERNET
-        };
-    }
-
-    /**
-     * @return Command name
-     * @author sudo200
-     */
-    @Override
-    protected @NotNull String getName() {
-        return "reddit";
-    }
-
-    /**
-     * @return Help page describing the command
-     * @author sudo200
-     */
-    @Override
-    protected @NotNull String getHelp() {
-        return "Gets the topmost post from a subreddit";
-    }
 
     /**
      * Method, which contains the logic for this command

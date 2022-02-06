@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
@@ -11,34 +12,21 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+
+@Command(
+        name = "queue",
+        help = "Shows the current queue",
+        categories = {
+                BotCommand.ICategories.VOICE,
+                BotCommand.ICategories.UTIL
+        },
+        aliases = {
+                "q"
+        }
+)
 public final class VoiceCommandQueue extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
-
-    @Override
-    protected String @Nullable [] getAliases() {
-        return new String[] {
-                "q"
-        };
-    }
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
-                BotCommand.ICategories.VOICE,
-                BotCommand.ICategories.UTIL
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "queue";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Shows the current queue";
-    }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler.VoiceAudioEchoHandler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.Hash;
@@ -20,37 +21,23 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 
+
+@Command(
+        name = "sync",
+        help = "Syncs two voicechannels on two different servers.\n\n**Why? Because we can!**",
+        categories = {
+                // Main Category
+                BotCommand.ICategories.UTIL,
+                // Auxiliary categories
+                BotCommand.ICategories.VOICE,
+        }
+)
 public final class VoiceCommandSync extends BotCommand {
     private static final HashMap<String, Guild> guilds = new HashMap<>();
     private static final HashMap<Guild, VoiceChannel> vcs = new HashMap<>();
     private final Random random = ServiceManager.provideUnchecked(Random.class);
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final UtilsVoice utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
-
-    @Override
-    protected String @Nullable [] getAliases() {
-        return null;
-    }
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
-                // Main Category
-                BotCommand.ICategories.UTIL,
-                // Auxiliary categories
-                BotCommand.ICategories.VOICE,
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "sync";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Syncs two voicechannels on two different servers.\n\n**Why? Because we can!**";
-    }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

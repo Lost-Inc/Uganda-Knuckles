@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -20,28 +21,18 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.function.Consumer;
 
-public final class ChatCommandQRCode extends BotCommand {
-    private final Random random = ServiceManager.provideUnchecked(Random.class);
 
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
+@Command(
+        name = "qr",
+        help = "Generates a QR code with your string inside it!\n\nWhy? Because links are boring!",
+        categories = {
                 BotCommand.ICategories.IMAGE,
                 BotCommand.ICategories.CHAT, BotCommand.ICategories.UTIL, BotCommand.ICategories.FUN
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "qr";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Generates a QR code with your string inside it!\n\nWhy? Because links are boring!";
-    }
+        }
+)
+public final class ChatCommandQRCode extends BotCommand {
+    private final Random random = ServiceManager.provideUnchecked(Random.class);
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

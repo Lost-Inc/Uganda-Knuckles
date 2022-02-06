@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
@@ -11,34 +12,21 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.atomic.AtomicReference;
 
+
+@Command(
+        name = "resume",
+        help = "Resumes a paused track",
+        categories = {
+                BotCommand.ICategories.VOICE,
+                BotCommand.ICategories.UTIL
+        },
+        aliases = {
+                "re"
+        }
+)
 public final class VoiceCommandResume extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
-
-    @Override
-    protected String @Nullable [] getAliases() {
-        return new String[]{
-                "re"
-        };
-    }
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
-                BotCommand.ICategories.VOICE,
-                BotCommand.ICategories.UTIL
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "resume";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Resumes a paused track";
-    }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

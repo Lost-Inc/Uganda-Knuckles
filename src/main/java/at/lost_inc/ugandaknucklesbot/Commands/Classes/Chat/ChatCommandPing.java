@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -10,29 +11,20 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public final class ChatCommandPing extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final Random random = ServiceManager.provideUnchecked(Random.class);
 
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
+@Command(
+        name = "ping",
+        help = "Pings the bot.\n(in a technical sense, not like discord ping :no_mouth:)",
+        categories = {
                 // Main category
                 BotCommand.ICategories.MISC,
                 // Auxiliary categories
                 BotCommand.ICategories.CHAT, BotCommand.ICategories.UTIL
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "ping";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Pings the bot.\n(in a technical sense, not like discord ping :no_mouth:)";
-    }
+        }
+)
+public final class ChatCommandPing extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private final Random random = ServiceManager.provideUnchecked(Random.class);
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

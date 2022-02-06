@@ -8,7 +8,10 @@ import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.lang.annotation.AnnotationFormatError;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -25,11 +28,22 @@ public final class CommandHandler {
         instance = new CommandHandler();
     }
 
+    private static class Cmd {
+        public final BotCommand cmd;
+        public final Command props;
+
+        public Cmd(@NotNull BotCommand cmd, @NotNull Command props) {
+            this.cmd = cmd;
+            this.props = props;
+        }
+    }
+
     private final ThreadGroup threadGroup = new ThreadGroup("bot commands");
 
-    private final Collection<BotCommand> commands = new ArrayList<>();
-    private final Map<String, Collection<BotCommand>> categories = new HashMap<>();
+    private final Collection<Cmd> commands = new ArrayList<>();
+    private final Map<String, Collection<Cmd>> categories = new HashMap<>();
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private CommandHandler() {
     }
@@ -40,15 +54,27 @@ public final class CommandHandler {
 
 
     private boolean register(@NotNull BotCommand command) {
-        for (String categoryName : command.getCategories()) {
-            if (!categories.containsKey(categoryName)) {
-                categories.put(categoryName, new ArrayList<>());
-            }
-            Collection<BotCommand> com = categories.get(categoryName);
-            if (!com.contains(command))
-                com.add(command);
+        if(!command.getClass().isAnnotationPresent(Command.class)) {
+            logger.warn(String.format(
+                    "Command annotation was not found in %s! Command will be discarded!",
+                    this.getClass().toString())
+                    );
+            return false;
         }
-        return this.commands.add(command);
+        final Cmd cmd = new Cmd(
+                command,
+                command.getClass().getAnnotation(Command.class)
+        );
+
+        for (String categoryName : cmd.props.categories()) {
+            if (!categories.containsKey(categoryName))
+                categories.put(categoryName, new ArrayList<>());
+
+            Collection<Cmd> com = categories.get(categoryName);
+            if (!com.contains(cmd))
+                com.add(cmd);
+        }
+        return this.commands.add(cmd);
     }
 
     // methods for registering commands
@@ -92,29 +118,29 @@ public final class CommandHandler {
                     builder.addField("All", "\t", true);
                 } else if (args[2].equalsIgnoreCase("all")) {// show all commands
                     builder.setTitle("All commands");
-                    for (BotCommand command : commands)
+                    for (Cmd command : commands)
                         builder.addField(
-                                command.getName(),
-                                command.getHelp() + (command.getAliases() != null ? "\n\n*Aliases:* " + String.join(",", command.getAliases()) : ""),
+                                command.props.name(),
+                                command.props.help() + (command.props.aliases() != null ? "\n\n*Aliases:* " + String.join(",", command.props.aliases()) : ""),
                                 false
                         );
                 } else {
                     final String key = categories.keySet().stream().filter(k -> k.matches("(?i).*" + args[2] + ".*")).findFirst().orElse(null);
                     if (key != null) {// show commands from category
                         builder.setTitle(key);
-                        for (BotCommand command : categories.get(key))
+                        for (Cmd command : categories.get(key))
                             builder.addField(
-                                    command.getName(),
-                                    command.getHelp() + (command.getAliases() != null ? "\n\n*Aliases:* " + String.join(",", command.getAliases()) : ""),
+                                    command.props.name(),
+                                    command.props.help() + (command.props.aliases() != null ? "\n\n*Aliases:* " + String.join(",", command.props.aliases()) : ""),
                                     false
                             );
                     } else {
-                        final BotCommand command = commands.stream().filter(c -> c.getName().matches("(?i).*" + args[2] + ".*")).findFirst().orElse(null);
+                        final Cmd command = commands.stream().filter(c -> c.props.name().matches("(?i).*" + args[2] + ".*")).findFirst().orElse(null);
                         if (command != null) {// show help of specific command
-                            builder.setTitle("Help for \"" + command.getName() + "\" command");
+                            builder.setTitle("Help for \"" + command.props.name() + "\" command");
                             builder.addField(
-                                    command.getName(),
-                                    command.getHelp() + (command.getAliases() != null ? "\n\n*Aliases:* " + String.join(",", command.getAliases()) : ""),
+                                    command.props.name(),
+                                    command.props.help() + (command.props.aliases() != null ? "\n\n*Aliases:* " + String.join(",", command.props.aliases()) : ""),
                                     false
                             );
                         } else // command does not exist
@@ -132,16 +158,16 @@ public final class CommandHandler {
         param.args = Arrays.copyOfRange(args, 2, args.length);
         param.message = event;
 
-        BotCommand[] commands = this.commands.toArray(new BotCommand[0]);
-        BotCommand cmd = search(commands, args[1]);
+        Cmd[] commands = this.commands.toArray(new Cmd[0]);
+        Cmd cmd = search(commands, args[1]);
 
         if (cmd == null)
             return;
 
         Thread thread = new Thread(threadGroup, () -> {// Async thread
             // Execute the command; exceptions are thrown in seperate thread, so they won't crash the bot (pls still catch 'em yourself)
-            cmd.execute(param);
-        }, "CommandThread-" + cmd.getName() + '-' + cmd.hashCode());
+            cmd.cmd.execute(param);
+        }, "CommandThread-" + cmd.props.name() + '-' + cmd.cmd.hashCode());
         /* Thread priority is set lower than usual,
          *   because the main thread is important
          */
@@ -150,12 +176,12 @@ public final class CommandHandler {
     }
 
     // Gets a command from an array of commands based on its name
-    private @Nullable BotCommand search(BotCommand @NotNull [] commands, String command) {
+    private @Nullable Cmd search(Cmd @NotNull [] commands, String command) {
         return Arrays.stream(commands)
                 .filter(
-                        c -> c.getName()
+                        c -> c.props.name()
                                 .equalsIgnoreCase(command) || (
-                                c.getAliases() != null && Arrays.stream(c.getAliases()).anyMatch(a -> a.equalsIgnoreCase(command))
+                                c.props.aliases() != null && Arrays.stream(c.props.aliases()).anyMatch(a -> a.equalsIgnoreCase(command))
                         )
                 )
                 .findFirst()

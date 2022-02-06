@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
@@ -13,36 +14,26 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Timer;
 
+
+@Command(
+        name = "remind",
+        help = "Reminds you after a certain time.\n " +
+                "Usage:\n" +
+                "```\n" +
+                "@<Botname> remind <number><s | m | h> [text] [mentions...]\n" +
+                "```",
+        categories = {
+                BotCommand.ICategories.UTIL,
+                BotCommand.ICategories.CHAT
+        }
+)
 public final class ChatCommandRemind extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
-                BotCommand.ICategories.UTIL,
-                BotCommand.ICategories.CHAT
-
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "remind";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Reminds you after a certain time.\n " +
-                "Usage:\n" +
-                "```\n" +
-                "@<Botname> remind <number><s | m | h> [text] [mentions...]\n" +
-                "```";
-    }
-
-    @Override
     protected void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0) {
-            utilsChat.sendInfo(param.message.getChannel(), "Have you seen my usage?\n\"" + getHelp() + '"');
+            utilsChat.sendInfo(param.message.getChannel(), "Have you seen my usage?\n\"" + this.getClass().getAnnotation(Command.class).help() + '"');
             return;
         }
 

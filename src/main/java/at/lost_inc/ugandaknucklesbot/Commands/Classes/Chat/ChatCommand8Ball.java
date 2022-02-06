@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -9,6 +10,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
+@Command(
+        name = "8ball",
+        help = "Ask the magic 8ball a question\n\nif you dare",
+        categories = {
+                BotCommand.ICategories.FUN,
+                BotCommand.ICategories.CHAT
+        }
+)
 public final class ChatCommand8Ball extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final Random rand = ServiceManager.provideUnchecked(Random.class);
@@ -47,24 +56,6 @@ public final class ChatCommand8Ball extends BotCommand {
             "No front, but, yes",
             "No front, but, no",
     };
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[] {
-                ICategories.FUN,
-                ICategories.CHAT
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "8ball";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Ask the magic 8ball a question\n\nif you dare";
-    }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.WikipediaSummaryRestAPI;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -15,30 +16,21 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URLEncoder;
 
-public final class ChatCommandWiki extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final Gson gson = ServiceManager.provideUnchecked(Gson.class);
 
-    @Override
-    protected @NotNull String getName() {
-        return "wiki";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Search Wikipedia\n" +
-                "Perfect for proving your friends wrong!";
-    }
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
+@Command(
+        name = "wiki",
+        help = "Search Wikipedia\n" +
+                "Perfect for proving your friends wrong!",
+        categories = {
                 // Main category
                 BotCommand.ICategories.SEARCH,
                 // Auxiliary categories
                 BotCommand.ICategories.CHAT, BotCommand.ICategories.INTERNET
-        };
-    }
+        }
+)
+public final class ChatCommandWiki extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private final Gson gson = ServiceManager.provideUnchecked(Gson.class);
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -9,6 +10,16 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
+
+@Command(
+        name = "dice",
+        help = "magic dice",
+        categories = {
+                BotCommand.ICategories.FUN,
+                BotCommand.ICategories.UTIL,
+                BotCommand.ICategories.CHAT
+        }
+)
 public final class ChatCommandDice extends BotCommand {
     private static final String[] numbers = new String[] {
             " 0000\n" +
@@ -73,25 +84,6 @@ public final class ChatCommandDice extends BotCommand {
     };
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final Random random = ServiceManager.provideUnchecked(Random.class);
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
-                ICategories.FUN,
-                BotCommand.ICategories.UTIL,
-                BotCommand.ICategories.CHAT
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "dice";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "magic dice";
-    }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomCatAPIResponse;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -13,30 +14,21 @@ import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Type;
 
-public final class ChatCommandRandomCat extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final Gson gson = ServiceManager.provideUnchecked(Gson.class);
 
-    @Override
-    protected @NotNull String getName() {
-        return "cat";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Imports cute little pussies from the internet\n" +
-                "we mean cats of course";
-    }
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
+@Command(
+        name = "cat",
+        help = "Imports cute little pussies from the internet\n" +
+                "we mean cats of course",
+        categories = {
                 // Main category
                 BotCommand.ICategories.IMAGE,
                 // Auxiliary categories
                 BotCommand.ICategories.CHAT, BotCommand.ICategories.FUN, BotCommand.ICategories.INTERNET
-        };
-    }
+        }
+)
+public final class ChatCommandRandomCat extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private final Gson gson = ServiceManager.provideUnchecked(Gson.class);
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

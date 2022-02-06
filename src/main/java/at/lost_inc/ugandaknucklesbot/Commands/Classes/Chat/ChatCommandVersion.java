@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -12,37 +13,24 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+
+@Command(
+        name = "version",
+        help = "Prints out info about the bot, and credits it's devs",
+        categories = {
+                BotCommand.ICategories.MISC,
+                BotCommand.ICategories.CHAT
+        },
+        aliases = {
+                "v"
+        }
+)
 public final class ChatCommandVersion extends BotCommand {
     private static final String botVersion =
             ChatCommandVersion.class.getPackage().getImplementationVersion() == null ?
                     "Development Version" :
                     "v" + ChatCommandVersion.class.getPackage().getImplementationVersion();
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
-                BotCommand.ICategories.MISC,
-                BotCommand.ICategories.CHAT
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "version";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Prints out info about the bot, and credits it's devs";
-    }
-
-    @Override
-    protected String @Nullable [] getAliases() {
-        return new String[] {
-                "v"
-        };
-    }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

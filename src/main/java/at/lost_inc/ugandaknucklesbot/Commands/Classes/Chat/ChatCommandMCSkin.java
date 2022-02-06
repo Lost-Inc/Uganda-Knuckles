@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -10,38 +11,25 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
-public final class ChatCommandMCSkin extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final Random random = ServiceManager.provideUnchecked(Random.class);
 
-    @Override
-    protected @NotNull String getName() {
-        return "mc-skin";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Grabs the skin of a Minecraft player\n" +
+@Command(
+        name = "mc-skin",
+        help = "Grabs the skin of a Minecraft player\n" +
                 "by name or UUID\n" +
-                "**Important:** Nonexistent players will appear to have the Steve skin";
-    }
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
+                "**Important:** Nonexistent players will appear to have the Steve skin",
+        categories = {
                 // Main category
                 BotCommand.ICategories.MISC,
                 // Auxiliary categories
                 BotCommand.ICategories.CHAT, BotCommand.ICategories.INTERNET, BotCommand.ICategories.IMAGE
-        };
-    }
-
-    @Override
-    protected String @Nullable [] getAliases() {
-        return new String[]{
+        },
+        aliases = {
                 "mcs"
-        };
-    }
+        }
+)
+public final class ChatCommandMCSkin extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private final Random random = ServiceManager.provideUnchecked(Random.class);
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

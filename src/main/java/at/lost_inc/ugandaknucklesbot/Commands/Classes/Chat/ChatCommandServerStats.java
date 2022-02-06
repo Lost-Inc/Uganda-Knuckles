@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -13,26 +14,17 @@ import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+@Command(
+        name = "serverstats",
+        help = "Boring statistic about the server",
+        categories = {
+                BotCommand.ICategories.UTIL,
+                BotCommand.ICategories.CHAT,
+        }
+)
 public final class ChatCommandServerStats extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[] {
-                ICategories.UTIL,
-                ICategories.CHAT,
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "serverstats";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Boring statistic about the server";
-    }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

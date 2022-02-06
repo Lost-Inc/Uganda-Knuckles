@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -13,26 +14,17 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public final class ChatCommandBan extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[]{
+@Command(
+        name = "ban",
+        help = "Yes, it bans a member of your choice\n\n(forever, that's a long time)",
+        categories = {
                 BotCommand.ICategories.MODERATION,
                 BotCommand.ICategories.CHAT, BotCommand.ICategories.UTIL
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "ban";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "Yes, it bans a member of your choice\n\n(forever, that's a long time)";
-    }
+        }
+)
+public final class ChatCommandBan extends BotCommand {
+    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

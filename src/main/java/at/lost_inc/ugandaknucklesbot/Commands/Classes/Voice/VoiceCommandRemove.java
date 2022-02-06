@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
@@ -11,58 +12,21 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+
+@Command(
+        name = "remove",
+        help = "Removes track at specified position",
+        categories = {
+                BotCommand.ICategories.VOICE,
+                BotCommand.ICategories.UTIL
+        },
+        aliases = {
+                "r"
+        }
+)
 public final class VoiceCommandRemove extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
-
-
-    /**
-     * Returns aliases for the command.
-     * When no aliases are defined, null is returned instead
-     *
-     * @return Array of alias strings or null
-     * @author sudo200
-     */
-    @Override
-    protected String @Nullable [] getAliases() {
-        return new String[] {
-                "r"
-        };
-    }
-
-    /**
-     * Returns category strings
-     * of the categories the command belongs to
-     *
-     * @return Array of category strings
-     * @author sudo200
-     * @see ICategories
-     */
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[] {
-                ICategories.VOICE,
-                ICategories.UTIL
-        };
-    }
-
-    /**
-     * @return Command name
-     * @author sudo200
-     */
-    @Override
-    protected @NotNull String getName() {
-        return "remove";
-    }
-
-    /**
-     * @return Help page describing the command
-     * @author sudo200
-     */
-    @Override
-    protected @NotNull String getHelp() {
-        return "Removes track at specified position";
-    }
 
     /**
      * Method, which contains the logic for this command

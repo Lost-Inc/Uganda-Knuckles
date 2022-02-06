@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.Games.GameService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
@@ -12,34 +13,21 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
 
+
+@Command(
+        name = "guess",
+        help = "A command for guessing something.\nUsed with games like hangman",
+        categories = {
+                BotCommand.ICategories.GAME,
+                BotCommand.ICategories.CHAT
+        },
+        aliases = {
+                "g"
+        }
+)
 public final class ChatCommandGuess extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final GameService gameService  = ServiceManager.provideUnchecked(GameService.class);
-
-    @Override
-    protected String @Nullable [] getAliases() {
-        return new String[] {
-                "g"
-        };
-    }
-
-    @Override
-    protected String @NotNull [] getCategories() {
-        return new String[] {
-                ICategories.GAME,
-                ICategories.CHAT
-        };
-    }
-
-    @Override
-    protected @NotNull String getName() {
-        return "guess";
-    }
-
-    @Override
-    protected @NotNull String getHelp() {
-        return "A command for guessing something.\nUsed with games like hangman";
-    }
 
     @Override
     protected void execute(@NotNull CommandParameter param) {

@@ -75,11 +75,13 @@ public final class VoiceCommandPlay extends BotCommand {
         playerManager.loadItem(String.join(" ", param.args), new FunctionalResultHandler(
                 track -> {
                     scheduler.get().queue(track);
-                    utilsChat.sendInfo(channel, String.format("Queued \"%s\" by \"%s\"", track.getInfo().title, track.getInfo().author), message -> cb.run());
+                    utilsChat.sendInfo(channel, String.format("Queued \"%s\" by \"%s\"", track.getInfo().title, track.getInfo().author));
+                    cb.run();
                 },
                 audioPlaylist -> {
                     scheduler.get().queue(audioPlaylist.getTracks().toArray(new AudioTrack[0]));
-                    utilsChat.sendInfo(channel, String.format("Queued playlist \"%s\"", audioPlaylist.getName()), message -> cb.run());
+                    utilsChat.sendInfo(channel, String.format("Queued playlist \"%s\"", audioPlaylist.getName()));
+                    cb.run();
                 },
                 () -> utilsChat.sendInfo(channel, "**Nothing to hear here**"),
                 e -> utilsChat.sendInfo(channel, e.getMessage())

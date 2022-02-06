@@ -61,7 +61,13 @@ public final class ChatCommandQRCode extends BotCommand {
             return;
         }
 
-        Consumer<?> cb = t -> temp.delete();
-        utilsChat.send((Consumer<? super Message>) cb, (Consumer<? super Throwable>) cb, param.message.getChannel(), temp);
+        try {
+            utilsChat.send(param.message.getChannel(), temp);
+        }
+        catch (Throwable ignored) {
+        }
+        finally {
+            temp.delete();
+        }
     }
 }

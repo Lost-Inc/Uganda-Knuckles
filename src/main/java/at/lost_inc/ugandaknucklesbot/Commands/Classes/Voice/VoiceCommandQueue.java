@@ -54,8 +54,10 @@ public final class VoiceCommandQueue extends BotCommand {
 
         builder.setDescription(stringBuilder.append("```"));
 
-        utilsChat.send(param.message.getChannel(), builder.build(), null,
-                e -> utilsChat.sendInfo(param.message.getChannel(), "Sorry, your queue is to big for Discord!")
-        );
+        try {
+            utilsChat.send(param.message.getChannel(), builder.build());
+        } catch (Throwable e) {
+            utilsChat.sendInfo(param.message.getChannel(), "Sorry, your queue is to big for Discord!");
+        }
     }
 }

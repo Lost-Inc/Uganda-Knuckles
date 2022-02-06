@@ -10,61 +10,56 @@ import java.awt.*;
 import java.io.File;
 import java.util.function.Consumer;
 
-// Class containing utility methods
+/**
+ * Contains utility methods for interacting through text
+ */
 public class UtilsChat {
 
-    // Sends a string, embed or file into a channel
-    public final void send(@NotNull MessageChannel channel, CharSequence message) {
-        send(channel, message, null);
+    /**
+     * Sends a string into a text channel
+     * @param channel {@link MessageChannel} to send message into
+     * @param message {@link CharSequence} to send
+     * @return The newly created {@link Message}
+     * @throws RuntimeException if any error occurs
+     */
+    public final @NotNull Message send(@NotNull MessageChannel channel, CharSequence message) throws RuntimeException {
+        return channel.sendMessage(message).complete();
     }
 
-    public final void send(@NotNull MessageChannel channel, CharSequence message, @Nullable Consumer<? super Message> onSuccess) {
-        send(channel, message, onSuccess, null);
+    /**
+     * Sends an embed into a text channel
+     * @param channel {@link MessageChannel} to send embed into
+     * @param embed {@link MessageEmbed} to send
+     * @return The newly created {@link Message}
+     * @throws RuntimeException if any error occurs
+     */
+    public final @NotNull Message send(@NotNull MessageChannel channel, MessageEmbed embed) throws RuntimeException {
+        return channel.sendMessage(embed).complete();
     }
 
-    public final void send(@NotNull MessageChannel channel, CharSequence message, @Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure) {
-        channel.sendMessage(message).queue(onSuccess, onFailure);
+    /**
+     * Sends a file with optional attachment options into a text channel
+     * @param channel {@link MessageChannel} to send file into
+     * @param file {@link File} to send
+     * @param options {@link AttachmentOption}s, can be omitted, if not used
+     * @return The newly created {@link Message}
+     * @throws RuntimeException if any error occurs
+     */
+    public final @NotNull Message send(@NotNull MessageChannel channel, File file, @Nullable AttachmentOption... options) throws RuntimeException {
+        return channel.sendFile(file, options).complete();
     }
 
-
-    public final void send(@NotNull MessageChannel channel, MessageEmbed embed) {
-        send(channel, embed, null);
-    }
-
-    public final void send(@NotNull MessageChannel channel, MessageEmbed embed, @Nullable Consumer<? super Message> onSuccess) {
-        send(channel, embed, onSuccess, null);
-    }
-
-    public final void send(@NotNull MessageChannel channel, MessageEmbed embed, @Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure) {
-        channel.sendMessage(embed).queue(onSuccess, onFailure);
-    }
-
-
-    public final void send(@NotNull MessageChannel channel, File file, @Nullable AttachmentOption... options) {
-        send(null, channel, file, options);
-    }
-
-    public final void send(@Nullable Consumer<? super Message> onSuccess, @NotNull MessageChannel channel, File file, @Nullable AttachmentOption... options) {
-        send(onSuccess, null, channel, file, options);
-    }
-
-    public final void send(@Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure, @NotNull MessageChannel channel, File file, @Nullable AttachmentOption... options) {
-        channel.sendFile(file, options).queue(onSuccess, onFailure);
-    }
-
-    // Method for sending fancy replies
-    public final void sendInfo(@NotNull MessageChannel channel, CharSequence message) {
-        sendInfo(channel, message, null);
-    }
-
-    public final void sendInfo(@NotNull MessageChannel channel, CharSequence message, @Nullable Consumer<? super Message> onSuccess) {
-        sendInfo(channel, message, onSuccess, null);
-    }
-
-    public final void sendInfo(@NotNull MessageChannel channel, CharSequence message, @Nullable Consumer<? super Message> onSuccess, @Nullable Consumer<? super Throwable> onFailure) {
+    /**
+     * Sends a fancy reply embed into a text channel
+     * @param channel {@link MessageChannel} to send embed into
+     * @param message {@link CharSequence} to embed
+     * @return The newly created {@link Message}
+     * @throws RuntimeException if any error occurs
+     */
+    public final @NotNull Message sendInfo(@NotNull MessageChannel channel, CharSequence message) throws RuntimeException {
         EmbedBuilder builder = getDefaultEmbed();
         builder.setDescription(message);
-        send(channel, builder.build(), onSuccess, onFailure);
+        return send(channel, builder.build());
     }
 
     // Returns an embed with default properties already set

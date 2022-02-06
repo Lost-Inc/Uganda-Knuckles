@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Provides methods for hashing strings
  */
-public class Hash {
+public final class Hash {
     private Hash() {
     }
 

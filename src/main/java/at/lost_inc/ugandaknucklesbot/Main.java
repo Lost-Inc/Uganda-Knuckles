@@ -126,6 +126,8 @@ public final class Main {
                 new ChatCommandGuess(),
                 new ChatCommandPoll(),
                 new ChatCommandInsult(),
+                new ChatCommandCoinflip(),
+                new ChatCommandHash(),
                 // Voice commands
                 new VoiceCommandPlay(),
                 new VoiceCommandPause(),

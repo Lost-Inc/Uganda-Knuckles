@@ -28,6 +28,8 @@ import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.event.Level;
+import org.slf4j.impl.SimpleLoggerConfiguration;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
@@ -54,7 +56,7 @@ public final class Main {
         ServiceManager.setProvider(AudioPlayerService.class, new SimpleAudioPlayerService());
         ServiceManager.setProvider(GameService.class, new SimpleGameService());
         ServiceManager.setProvider(EventBusService.class, new SimpleEventBusService());
-        logger.trace("Injected standard services");
+        logger.debug("Injected standard services");
     }
 
     private Main() throws LoginException { // Token retrieved from Environment
@@ -64,7 +66,7 @@ public final class Main {
                 .setChunkingFilter(ChunkingFilter.ALL)
                 .setMemberCachePolicy(MemberCachePolicy.ALL)
                 .build();
-        logger.trace("Built JDA");
+        logger.debug("Built JDA");
         this.handler = CommandHandler.get();
     }
 
@@ -72,7 +74,7 @@ public final class Main {
         Main main = null;
         try {
             main = new Main();
-            logger.trace("Constructed Main class");
+            logger.debug("Constructed Main class");
         } catch (LoginException e) {
             logger.error("Couldn't log in!", e);
             System.exit(3);
@@ -84,14 +86,14 @@ public final class Main {
                 new SlashCommandEventListener(),
                 new GuildVoiceListener()
                 );
-        logger.trace("Added event listeners");
+        logger.debug("Added event listeners");
 
         // Set presence
         main.jda.getPresence().setPresence(OnlineStatus.ONLINE, Activity.listening("@" + main.jda.getSelfUser().getName()), false);
-        logger.trace("Set presence");
+        logger.debug("Set presence");
 
         // Register your Commands here
-        logger.trace("Registering static commands...");
+        logger.debug("Registering static commands...");
         main.handler.register(
                 // Chat commands
                 new ChatCommandInator(),
@@ -123,6 +125,7 @@ public final class Main {
                 new ChatCommandHangman(),
                 new ChatCommandGuess(),
                 new ChatCommandPoll(),
+                new ChatCommandInsult(),
                 // Voice commands
                 new VoiceCommandPlay(),
                 new VoiceCommandPause(),
@@ -135,7 +138,7 @@ public final class Main {
                 new VoiceCommandLoop(),
                 new VoiceCommandLeave()
         );
-        logger.trace("Registering dynamic commands...");
+        logger.debug("Registering dynamic commands...");
 
         final File basePath = new File(System.getProperty("user.dir") + File.separator + "plugins");
         if(!basePath.exists())
@@ -144,6 +147,6 @@ public final class Main {
                 // Dynamically loaded commands
                 new PluginLoader(basePath.toPath()).getCommands()
         );
-        logger.trace("Registration complete");
+        logger.debug("Registration complete");
     }
 }

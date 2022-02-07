@@ -120,7 +120,7 @@ public final class CommandHandler {
                     for (Cmd command : commands)
                         builder.addField(
                                 command.props.name(),
-                                command.props.help() + (command.props.aliases() != null ? "\n\n*Aliases:* " + String.join(",", command.props.aliases()) : ""),
+                                command.props.help() + (command.props.aliases().length != 0 ? "\n\n*Aliases:* " + String.join(",", command.props.aliases()) : ""),
                                 false
                         );
                 } else {
@@ -130,7 +130,7 @@ public final class CommandHandler {
                         for (Cmd command : categories.get(key))
                             builder.addField(
                                     command.props.name(),
-                                    command.props.help() + (command.props.aliases() != null ? "\n\n*Aliases:* " + String.join(",", command.props.aliases()) : ""),
+                                    command.props.help() + (command.props.aliases().length != 0 ? "\n\n*Aliases:* " + String.join(",", command.props.aliases()) : ""),
                                     false
                             );
                     } else {
@@ -139,7 +139,7 @@ public final class CommandHandler {
                             builder.setTitle("Help for \"" + command.props.name() + "\" command");
                             builder.addField(
                                     command.props.name(),
-                                    command.props.help() + (command.props.aliases() != null ? "\n\n*Aliases:* " + String.join(",", command.props.aliases()) : ""),
+                                    command.props.help() + (command.props.aliases().length != 0 ? "\n\n*Aliases:* " + String.join(",", command.props.aliases()) : ""),
                                     false
                             );
                         } else // command does not exist
@@ -180,7 +180,7 @@ public final class CommandHandler {
                 .filter(
                         c -> c.props.name()
                                 .equalsIgnoreCase(command) || (
-                                c.props.aliases() != null && Arrays.stream(c.props.aliases()).anyMatch(a -> a.equalsIgnoreCase(command))
+                                c.props.aliases().length != 0 && Arrays.stream(c.props.aliases()).anyMatch(a -> a.equalsIgnoreCase(command))
                         )
                 )
                 .findFirst()

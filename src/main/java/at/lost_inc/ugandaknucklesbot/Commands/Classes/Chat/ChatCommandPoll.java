@@ -38,7 +38,6 @@ public final class ChatCommandPoll extends BotCommand {
                 "U+0039 U+FE0F U+20E3",
                 "U+0030 U+FE0F U+20E3"
         };
-
         final String[] emojis = {
                 ":one:",
                 ":two:",
@@ -65,9 +64,8 @@ public final class ChatCommandPoll extends BotCommand {
         }
         if(x.get() > 10) {
             x.set(10);
-            utilsChat.sendInfo(param.message.getChannel(), "Sorry, but you can only make up to ten ");
+            utilsChat.sendInfo(param.message.getChannel(), "Sorry, but you can only make up to ten options!");
         }
-        //param.args[0] = "";
         EmbedBuilder pollembed = new EmbedBuilder()
                 .setTitle("Poll");
 
@@ -82,5 +80,6 @@ public final class ChatCommandPoll extends BotCommand {
         for(int i = 0; i < x.get(); i++)
             msg.addReaction(reactions[i]).queue();
 
+        param.message.delete().queue();
     }
 }

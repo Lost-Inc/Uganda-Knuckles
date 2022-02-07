@@ -21,7 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
         }
 )
 
-public class ChatCommandPoll extends BotCommand {
+public final class ChatCommandPoll extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override

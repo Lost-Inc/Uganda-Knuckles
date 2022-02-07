@@ -1,8 +1,8 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
+import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.google.zxing.BarcodeFormat;
@@ -10,16 +10,13 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import net.dv8tion.jda.api.entities.Message;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
-import java.util.function.Consumer;
 
 
 @Command(
@@ -35,7 +32,7 @@ public final class ChatCommandQRCode extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
-    protected void execute(@NotNull CommandParameter param) {
+    public void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(), "Please mate, tell me __what__ to encode!\n\nLosin' my hope....");
             return;

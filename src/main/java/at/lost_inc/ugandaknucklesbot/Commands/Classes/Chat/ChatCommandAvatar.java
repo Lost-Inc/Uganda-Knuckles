@@ -1,15 +1,14 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
+import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 
 @Command(
@@ -26,7 +25,7 @@ public final class ChatCommandAvatar extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override
-    protected void execute(@NotNull CommandParameter param) {
+    public void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0 || !utilsChat.isMention(param.args[0])) {
             utilsChat.sendInfo(param.message.getChannel(), "**How am I supposed to know the dude, if you don't even mention him?**");
             return;

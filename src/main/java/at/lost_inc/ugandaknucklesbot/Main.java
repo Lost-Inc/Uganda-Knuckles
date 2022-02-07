@@ -11,8 +11,11 @@ import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerManagerService;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.Event.EventBusService;
+import at.lost_inc.ugandaknucklesbot.Service.Event.SimpleEventBusService;
 import at.lost_inc.ugandaknucklesbot.Service.Games.GameService;
+import at.lost_inc.ugandaknucklesbot.Service.Games.SimpleGameService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Plugins.*;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
 import com.google.gson.Gson;
@@ -27,6 +30,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
@@ -47,8 +52,8 @@ public final class Main {
 
         ServiceManager.setProvider(AudioPlayerManagerService.class, new SimpleAudioPlayerManagerService());
         ServiceManager.setProvider(AudioPlayerService.class, new SimpleAudioPlayerService());
-        ServiceManager.setProvider(GameService.class, GameService.getDefaultImplementation());
-        ServiceManager.setProvider(EventBusService.class, EventBusService.getDefaultImplementation());
+        ServiceManager.setProvider(GameService.class, new SimpleGameService());
+        ServiceManager.setProvider(EventBusService.class, new SimpleEventBusService());
         logger.trace("Injected standard services");
     }
 
@@ -63,7 +68,7 @@ public final class Main {
         this.handler = CommandHandler.get();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Main main = null;
         try {
             main = new Main();
@@ -86,7 +91,7 @@ public final class Main {
         logger.trace("Set presence");
 
         // Register your Commands here
-        logger.trace("Registering commands...");
+        logger.trace("Registering static commands...");
         main.handler.register(
                 // Chat commands
                 new ChatCommandInator(),
@@ -128,6 +133,15 @@ public final class Main {
                 new VoiceCommandStop(),
                 new VoiceCommandLoop(),
                 new VoiceCommandLeave()
+        );
+        logger.trace("Registering dynamic commands...");
+
+        final File basePath = new File(System.getProperty("user.dir") + File.separator + "plugins");
+        if(!basePath.exists())
+            basePath.mkdirs();
+        main.handler.register(
+                // Dynamically loaded commands
+                new PluginLoader(basePath.toPath()).getCommands()
         );
         logger.trace("Registration complete");
     }

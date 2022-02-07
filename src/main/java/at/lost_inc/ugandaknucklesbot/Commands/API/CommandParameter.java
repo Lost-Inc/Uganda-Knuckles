@@ -1,4 +1,4 @@
-package at.lost_inc.ugandaknucklesbot.Commands.Core;
+package at.lost_inc.ugandaknucklesbot.Commands.API;
 
 import net.dv8tion.jda.api.entities.Message;
 

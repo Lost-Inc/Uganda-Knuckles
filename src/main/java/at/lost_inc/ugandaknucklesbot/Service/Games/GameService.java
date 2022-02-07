@@ -8,39 +8,6 @@ import java.lang.reflect.TypeVariable;
 import java.util.*;
 
 public interface GameService {
-    @Contract(value = " -> new", pure = true)
-    static @NotNull GameService getDefaultImplementation() {
-        return new GameService() {
-            private final HashMap<String, Game<?, ?>> games = new HashMap<>();
-
-            @Override
-            public void register(@NotNull Game<?, ?> game) {
-                games.put(game.getId(), game);
-            }
-
-            @Override
-            public @NotNull <I, O> Optional<Game<I, O>> getByName(@NotNull String name, @NotNull Class<I> inClass, @NotNull Class<O> outClass) throws ClassCastException {
-                return Optional.ofNullable(
-                        (Game<I, O>) games.values().stream()
-                                .filter(game -> game.getName().equals(name))
-                                .findFirst().orElse(null)
-                );
-            }
-
-            @Override
-            public @NotNull <I, O> Optional<Game<I, O>> getById(@NotNull String id, @NotNull Class<I> inClass, @NotNull Class<O> outClass) throws ClassCastException {
-                if(!games.containsKey(id))
-                    return Optional.empty();
-                return Optional.ofNullable((Game<I, O>) games.get(id));
-            }
-
-            @Override
-            public boolean removeById(@NotNull String id) {
-                return games.remove(id, games.get(id));
-            }
-        };
-    }
-
     /**
      * Registers a game
      * @param game Instance to register

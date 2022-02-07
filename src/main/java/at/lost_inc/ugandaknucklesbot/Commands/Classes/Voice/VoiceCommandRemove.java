@@ -1,14 +1,13 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.BotCommand;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Command;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
+import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -36,7 +35,7 @@ public final class VoiceCommandRemove extends BotCommand {
      * @see CommandParameter
      */
     @Override
-    protected void execute(@NotNull CommandParameter param) {
+    public void execute(@NotNull CommandParameter param) {
         if(param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(),
                     "Please tell me the index of the track to remove!\n" +

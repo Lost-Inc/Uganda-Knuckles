@@ -1,4 +1,4 @@
-package at.lost_inc.ugandaknucklesbot.Commands.Core;
+package at.lost_inc.ugandaknucklesbot.Commands.API;
 
 import java.lang.annotation.*;
 

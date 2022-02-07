@@ -1,7 +1,6 @@
-package at.lost_inc.ugandaknucklesbot.Commands.Core;
+package at.lost_inc.ugandaknucklesbot.Commands.API;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * abstract class which gets inherited
@@ -17,7 +16,7 @@ public abstract class BotCommand {
      * @author sudo200
      * @see CommandParameter
      */
-    protected abstract void execute(@NotNull CommandParameter param);
+    public abstract void execute(@NotNull CommandParameter param);
 
     /**
      * Interface containing categories for bot commands

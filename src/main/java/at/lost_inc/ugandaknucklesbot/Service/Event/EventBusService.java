@@ -7,37 +7,6 @@ import java.util.*;
 import java.util.function.Consumer;
 
 public interface EventBusService {
-    @Contract(value = " -> new", pure = true)
-    static @NotNull EventBusService getDefaultImplementation() {
-        return new EventBusService() {
-            private final Map<Integer, EventEmitter<?>> events = new HashMap<>();
-
-            @Override
-            public <T> void register(@NotNull Class<T> clazz, @NotNull EventEmitter<T> eventEmitter) throws AlreadySetException {
-                if(events.containsKey(clazz.hashCode()))
-                    throw new AlreadySetException("EventEmitter for " + clazz + " already exists!");
-
-
-                events.put(clazz.hashCode(), eventEmitter);
-            }
-
-            @Override
-            public @NotNull <T> Optional<EventEmitter<T>> remove(@NotNull Class<T> clazz) {
-                return Optional.ofNullable((EventEmitter<T>) events.remove(clazz.hashCode()));
-            }
-
-            @Override
-            public <T> @NotNull Optional<EventEmitter<T>> provide(@NotNull Class<T> clazz) {
-                return Optional.ofNullable((EventEmitter<T>) events.get(clazz.hashCode()));
-            }
-
-            @Override
-            public <T> @NotNull EventEmitter<T> provideUnchecked(@NotNull Class<T> clazz) throws NoSuchElementException {
-                return provide(clazz).get();
-            }
-        };
-    }
-
     /**
      * Registers a new event emitter
      * @param clazz

@@ -1,19 +1,18 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Core;
 
+import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
+import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.annotation.AnnotationFormatError;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Class containing the logic making the bot tick
@@ -165,7 +164,7 @@ public final class CommandHandler {
             return;
 
         Thread thread = new Thread(threadGroup, () -> {// Async thread
-            // Execute the command; exceptions are thrown in seperate thread, so they won't crash the bot (pls still catch 'em yourself)
+            // Execute the command; exceptions are thrown in separate thread, so they won't crash the bot (pls still catch 'em yourself)
             cmd.cmd.execute(param);
         }, "CommandThread-" + cmd.props.name() + '-' + cmd.cmd.hashCode());
         /* Thread priority is set lower than usual,

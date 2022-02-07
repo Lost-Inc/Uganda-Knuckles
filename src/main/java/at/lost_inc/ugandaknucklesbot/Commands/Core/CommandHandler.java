@@ -57,7 +57,7 @@ public final class CommandHandler {
         if(!command.getClass().isAnnotationPresent(Command.class)) {
             logger.warn(String.format(
                     "Command annotation was not found in %s! Command will be discarded!",
-                    this.getClass().toString())
+                    command.getClass())
                     );
             return false;
         }

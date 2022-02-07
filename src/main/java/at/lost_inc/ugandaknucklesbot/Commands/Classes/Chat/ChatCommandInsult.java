@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
                 BotCommand.ICategories.CHAT
         }
 )
-public class ChatCommandInsult extends BotCommand {
+public final class ChatCommandInsult extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final Gson gson = ServiceManager.provideUnchecked(Gson.class);
 

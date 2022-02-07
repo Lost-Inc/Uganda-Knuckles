@@ -24,7 +24,7 @@ import java.util.function.Function;
                 BotCommand.ICategories.CHAT
         }
 )
-public class ChatCommandHash extends BotCommand {
+public final class ChatCommandHash extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
 
     @Override

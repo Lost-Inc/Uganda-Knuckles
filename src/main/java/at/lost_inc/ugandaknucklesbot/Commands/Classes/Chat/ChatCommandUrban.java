@@ -1,17 +1,21 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.UrbanDictionaryAPIResponse;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.UrbanDictionaryAPIResponse;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
-import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.Gson;
 import net.dv8tion.jda.api.EmbedBuilder;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Type;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 
 @Command(
@@ -36,10 +40,15 @@ public final class ChatCommandUrban extends BotCommand {
             return;
         }
 
-        EmbedBuilder builder = utilsChat.getDefaultEmbed();
-        String response = HttpRequest.get("https://api.urbandictionary.com/v0/define", true, "term", String.join(" ", param.args)).body();
+        final OkHttpClient client = param.message.getJDA().getHttpClient();
+        final EmbedBuilder builder = utilsChat.getDefaultEmbed();
+        final Request req = new Request.Builder()
+                .url("https://api.urbandictionary.com/v0/define?term=" + encode(String.join(" ", param.args)))
+                .build();
+
         try {
-            UrbanDictionaryAPIResponse urbanDictionaryAPIResponse = gson.fromJson(response, (Type) UrbanDictionaryAPIResponse.class);
+            final Response res = client.newCall(req).execute();
+            final UrbanDictionaryAPIResponse urbanDictionaryAPIResponse = gson.fromJson(res.body().charStream(), UrbanDictionaryAPIResponse.class);
 
             if (urbanDictionaryAPIResponse.list.length != 0) {
                 UrbanDictionaryAPIResponse.DefinitionObject definition = urbanDictionaryAPIResponse.list[0];
@@ -64,5 +73,13 @@ public final class ChatCommandUrban extends BotCommand {
         }
 
 
+    }
+
+    private static @NotNull String encode(@NotNull String param) {
+        try {
+            return URLEncoder.encode(param, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

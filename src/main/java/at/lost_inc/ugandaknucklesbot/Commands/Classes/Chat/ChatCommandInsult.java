@@ -6,10 +6,14 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.EvilInsultAPIResponse;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
-import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.Gson;
 import net.dv8tion.jda.api.EmbedBuilder;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 
 @Command(
         name = "insult",
@@ -26,15 +30,19 @@ public final class ChatCommandInsult extends BotCommand {
 
     @Override
     public void execute(@NotNull CommandParameter param) {
-        EmbedBuilder builder = utilsChat.getDefaultEmbed();
-        String response = HttpRequest.get("https://evilinsult.com/generate_insult.php?lang=en&type=json").body();
+        final EmbedBuilder builder = utilsChat.getDefaultEmbed();
+        final OkHttpClient client = param.message.getJDA().getHttpClient();
+        final Request req = new Request.Builder()
+                .url("https://evilinsult.com/generate_insult.php?lang=en&type=json").build();
         try {
-            EvilInsultAPIResponse evilInsultAPIResponse = gson.fromJson(response, EvilInsultAPIResponse.class);
+            final Response res = client.newCall(req).execute();
+
+            final EvilInsultAPIResponse evilInsultAPIResponse = gson.fromJson(res.body().charStream(), EvilInsultAPIResponse.class);
             builder.setAuthor(evilInsultAPIResponse.createdby);
             builder.setDescription(evilInsultAPIResponse.insult);
 
             utilsChat.send(param.message.getChannel(), builder.build());
-        } catch (Exception e) {
+        } catch (IOException e) {
             utilsChat.sendInfo(
                     param.message.getChannel(),
                     "**Error** could not load insult\n\nF\\*\\*\\* you!"

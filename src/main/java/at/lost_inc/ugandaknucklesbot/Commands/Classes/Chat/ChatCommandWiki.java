@@ -1,19 +1,21 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.WikipediaSummaryRestAPI;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.WikipediaSummaryRestAPI;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
-import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.Gson;
 import net.dv8tion.jda.api.EmbedBuilder;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 
 @Command(
@@ -39,14 +41,17 @@ public final class ChatCommandWiki extends BotCommand {
         }
 
         try {
-            EmbedBuilder builder = utilsChat.getDefaultEmbed();
-            HttpRequest request = HttpRequest.get("https://en.wikipedia.org/api/rest_v1/page/summary/" + URLEncoder.encode(String.join(" ", param.args), "ISO-8859-1"));
-            request.header("Api-User-Agent", "gratzerfabian92@gmail.com");
-            String jsonString = request.body();
+            final OkHttpClient client = param.message.getJDA().getHttpClient();
+            final EmbedBuilder builder = utilsChat.getDefaultEmbed();
+            final Request req = new Request.Builder()
+                    .url("https://en.wikipedia.org/api/rest_v1/page/summary/" + URLEncoder.encode(String.join(" ", param.args), StandardCharsets.UTF_8.toString()))
+                    .header("Api-User-Agent", "gratzerfabian92@gmail.com")
+                    .build();
+            Response res = client.newCall(req).execute();
 
-            switch (request.code()) {
+            switch (res.code()) {
                 case 200:// Page exists
-                    WikipediaSummaryRestAPI response = gson.fromJson(jsonString, (Type) WikipediaSummaryRestAPI.class);
+                    WikipediaSummaryRestAPI response = gson.fromJson(res.body().charStream(), WikipediaSummaryRestAPI.class);
                     if (!response.type.equalsIgnoreCase("standard")) {
                         utilsChat.sendInfo(
                                 param.message.getChannel(),
@@ -82,7 +87,11 @@ public final class ChatCommandWiki extends BotCommand {
                     );
                     break;
             }
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
+            utilsChat.sendInfo(
+                    param.message.getChannel(),
+                    "**Oh no!**\n\nSomething went severely wrong!"
+            );
             e.printStackTrace();
         }
     }

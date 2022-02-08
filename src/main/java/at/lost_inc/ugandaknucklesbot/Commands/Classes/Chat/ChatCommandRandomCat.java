@@ -1,17 +1,17 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomCatAPIResponse;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomCatAPIResponse;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
-import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.Gson;
 import net.dv8tion.jda.api.EmbedBuilder;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Type;
 
 
 @Command(
@@ -31,11 +31,15 @@ public final class ChatCommandRandomCat extends BotCommand {
 
     @Override
     public void execute(@NotNull CommandParameter param) {
+        final EmbedBuilder builder = utilsChat.getDefaultEmbed();
+        final OkHttpClient client = param.message.getJDA().getHttpClient();
+        final Request req = new Request.Builder()
+                .url("https://aws.random.cat/meow")
+                .build();
 
-        EmbedBuilder builder = utilsChat.getDefaultEmbed();
-        String response = HttpRequest.get("https://aws.random.cat/meow").body();
         try {
-            RandomCatAPIResponse randomCatAPIResponse = gson.fromJson(response, (Type) RandomCatAPIResponse.class);
+            final Response res = client.newCall(req).execute();
+            final RandomCatAPIResponse randomCatAPIResponse = gson.fromJson(res.body().charStream(), RandomCatAPIResponse.class);
             builder.setImage(randomCatAPIResponse.file);
             utilsChat.send(param.message.getChannel(), builder.build());
         } catch (Exception e) {

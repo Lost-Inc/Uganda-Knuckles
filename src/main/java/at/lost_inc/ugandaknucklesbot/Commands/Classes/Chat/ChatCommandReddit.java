@@ -1,15 +1,19 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.reddit.Subreddit;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.reddit.Subreddit;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
-import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.Gson;
 import net.dv8tion.jda.api.EmbedBuilder;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
+
+import java.io.IOException;
 
 
 @Command(
@@ -24,13 +28,6 @@ public final class ChatCommandReddit extends BotCommand {
     private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
     private final Gson gson = ServiceManager.provideUnchecked(Gson.class);
 
-    /**
-     * Method, which contains the logic for this command
-     *
-     * @param param Object containing the command args and the message object
-     * @author sudo200
-     * @see CommandParameter
-     */
     @Override
     public void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0) {// If the user didn't specify a subreddit
@@ -41,14 +38,28 @@ public final class ChatCommandReddit extends BotCommand {
         if (!param.args[0].startsWith("r/"))
             param.args[0] = "r/" + param.args[0];
 
+        final OkHttpClient client = param.message.getJDA().getHttpClient();
         final EmbedBuilder builder = utilsChat.getDefaultEmbed();
-        final String jsonString = HttpRequest.get("https://www.reddit.com/" + String.join(" ", param.args) + ".json")
-                .userAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.3538.77 Safari/537.36").body();
+        final Request req = new Request.Builder()
+                .url("https://www.reddit.com/" + String.join(" ", param.args) + ".json")
+                .addHeader("UserAgent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.3538.77 Safari/537.36")
+                .build();
 
-        Subreddit.PostData postData;
+        Response res;
+        try {
+            res = client.newCall(req).execute();
+        } catch (IOException e) {
+            utilsChat.sendInfo(
+                    param.message.getChannel(),
+                    "Couldn't get info, maybe they don't like us?"
+            );
+            return;
+        }
+
+        Subreddit.PostData postData = null;
 
         try {
-            postData = gson.fromJson(jsonString, Subreddit.class).data.children[0].data;
+            postData = gson.fromJson(res.body().charStream(), Subreddit.class).data.children[0].data;
         } catch (RuntimeException e) {
             utilsChat.sendInfo(param.message.getChannel(), "It seem, as if there is no subreddit called \"" + String.join(" ", param.args) + "\"");
             return;

@@ -19,7 +19,7 @@ import java.util.zip.ZipEntry;
 
 public final class PluginLoader {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private final List<BotCommand> commandClasses = new ArrayList<>();
+    private final List<Class<BotCommand>> commandClasses = new ArrayList<>();
 
     public PluginLoader(@NotNull Path pluginDir) throws IOException {
         final File dir = pluginDir.toFile();
@@ -53,15 +53,13 @@ public final class PluginLoader {
                     if(!clazz.isAnnotationPresent(Command.class))
                         continue;
 
-                    commandClasses.add((BotCommand) clazz.newInstance());
+                    commandClasses.add((Class<BotCommand>) clazz);
                 } catch (ClassNotFoundException ignored) {
-                } catch (InstantiationException | IllegalAccessException e) {
-                    logger.warn(String.format("Error while loading %s:", entryName), e);
                 }
             }
     }
 
-    public BotCommand @NotNull [] getCommands() {
-        return commandClasses.toArray(new BotCommand[0]);
+    public @NotNull List<Class<BotCommand>> getCommands() {
+        return new ArrayList<>(commandClasses);
     }
 }

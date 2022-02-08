@@ -2,7 +2,6 @@ package at.lost_inc.ugandaknucklesbot;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.*;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.*;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Plugins.PluginLoader;
 import at.lost_inc.ugandaknucklesbot.Startup.BootCamp;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -13,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.security.auth.login.LoginException;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -41,59 +39,51 @@ public final class Main {
             System.exit(3);
         }
 
-        BootCamp.registerCommands(
+        BootCamp.registerStaticCommands(
                 // Chat commands
-                new ChatCommandInator(),
-                new ChatCommandLenny(),
-                new ChatCommandAvatar(),
-                new ChatCommandResolve(),
-                new ChatCommandUrban(),
-                new ChatCommandRandomCat(),
-                new ChatCommandPoop(),
-                new ChatCommandDice(),
-                new ChatCommandRandomDog(),
-                new ChatCommandFood(),
-                new ChatCommandQRCode(),
-                new ChatCommandPing(),
-                new ChatCommandLeet(),
-                new ChatCommandOwO(),
-                new ChatCommandMCSkin(),
-                new ChatCommandUselessWeb(),
-                new ChatCommandWiki(),
-                new ChatCommandClear(),
-                new ChatCommandKick(),
-                new ChatCommandBan(),
-                new ChatCommandVersion(),
-                new ChatCommandRemind(),
-                new ChatCommandReddit(),
-                new ChatCommand8Ball(),
-                new ChatCommandServerStats(),
-                new ChatCommandKill(),
-                new ChatCommandHangman(),
-                new ChatCommandGuess(),
-                new ChatCommandPoll(),
-                new ChatCommandInsult(),
-                new ChatCommandCoinflip(),
-                new ChatCommandHash(),
+                ChatCommandInator.class,
+                ChatCommandLenny.class,
+                ChatCommandAvatar.class,
+                ChatCommandResolve.class,
+                ChatCommandUrban.class,
+                ChatCommandRandomCat.class,
+                ChatCommandPoop.class,
+                ChatCommandDice.class,
+                ChatCommandRandomDog.class,
+                ChatCommandFood.class,
+                ChatCommandQRCode.class,
+                ChatCommandPing.class,
+                ChatCommandLeet.class,
+                ChatCommandOwO.class,
+                ChatCommandMCSkin.class,
+                ChatCommandUselessWeb.class,
+                ChatCommandWiki.class,
+                ChatCommandClear.class,
+                ChatCommandKick.class,
+                ChatCommandBan.class,
+                ChatCommandVersion.class,
+                ChatCommandRemind.class,
+                ChatCommandReddit.class,
+                ChatCommand8Ball.class,
+                ChatCommandServerStats.class,
+                ChatCommandKill.class,
+                ChatCommandHangman.class,
+                ChatCommandGuess.class,
+                ChatCommandPoll.class,
+                ChatCommandInsult.class,
+                ChatCommandCoinflip.class,
+                ChatCommandHash.class,
                 // Voice commands
-                new VoiceCommandPlay(),
-                new VoiceCommandPause(),
-                new VoiceCommandQueue(),
-                new VoiceCommandResume(),
-                new VoiceCommandRemove(),
-                new VoiceCommandSkip(),
-                new VoiceCommandSync(),
-                new VoiceCommandStop(),
-                new VoiceCommandLoop(),
-                new VoiceCommandLeave()
-        );
-
-        final File basePath = new File(System.getProperty("user.dir") + File.separator + "plugins");
-        if(!basePath.exists())
-            basePath.mkdirs();
-        BootCamp.registerCommands(
-                // Dynamically loaded commands
-                new PluginLoader(basePath.toPath()).getCommands()
+                VoiceCommandPlay.class,
+                VoiceCommandPause.class,
+                VoiceCommandQueue.class,
+                VoiceCommandResume.class,
+                VoiceCommandRemove.class,
+                VoiceCommandSkip.class,
+                VoiceCommandSync.class,
+                VoiceCommandStop.class,
+                VoiceCommandLoop.class,
+                VoiceCommandLeave.class
         );
 
         BootCamp.initialize(main.jda);

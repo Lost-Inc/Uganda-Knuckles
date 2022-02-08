@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Startup;
 
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandHandler;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Plugins.PluginLoader;
 import at.lost_inc.ugandaknucklesbot.Listeners.GuildVoiceListener;
 import at.lost_inc.ugandaknucklesbot.Listeners.MessageReceiveListener;
 import at.lost_inc.ugandaknucklesbot.Listeners.SlashCommandEventListener;
@@ -24,6 +25,8 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,16 +35,16 @@ import java.util.Random;
 public final class BootCamp {
     private static Phases phase = Phases.CONSTRUCTION;
     private static CommandHandler handler = CommandHandler.get();
-    private static List<BotCommand> commands = new ArrayList<>();
+    private static List<Class<? extends BotCommand>> commandClasses = new ArrayList<>();
     private static final Logger logger = LoggerFactory.getLogger(BootCamp.class);
 
     private BootCamp() {
     }
 
-    public static boolean registerCommands(BotCommand @NotNull ... cmds) {
+    public static boolean registerStaticCommands(Class<? extends BotCommand> @NotNull ... cmds) {
         if(!phase.equals(Phases.CONSTRUCTION))
             throw new IllegalStateException("Registration of commands is only possible during the \"construction\" phase!");
-        return commands.addAll(Arrays.asList(cmds));
+        return commandClasses.addAll(Arrays.asList(cmds));
     }
 
     public static Phases getPhase() {
@@ -49,6 +52,23 @@ public final class BootCamp {
     }
 
     public static void initialize(@NotNull JDA jda) {
+        logger.info("Loading dynamic commands...");
+        final File basePath = new File(System.getProperty("user.dir") + File.separator + "plugins");
+        if(!basePath.exists())
+            basePath.mkdirs();
+        try {
+            commandClasses.addAll(new PluginLoader(basePath.toPath()).getCommands());
+        } catch (IOException e) {
+            logger.warn("Couldn't load dynamic commands, plugins won't work!");
+        }
+        logger.info("Constructing commands...");
+        final List<BotCommand> commands = new ArrayList<>();
+        for(Class<? extends BotCommand> commandClass : commandClasses)
+            try {
+                commands.add(commandClass.newInstance());
+            } catch (InstantiationException | IllegalAccessException e) {
+                logger.warn(String.format("Exception while constructing class %s:", commandClass.getName()), e);
+            }
         logger.info("Construction complete");
         phase = Phases.INITIALIZATION;
         logger.info("Initializing services...");

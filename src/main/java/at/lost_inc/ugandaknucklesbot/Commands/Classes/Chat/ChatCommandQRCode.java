@@ -28,8 +28,14 @@ import java.util.Random;
         }
 )
 public final class ChatCommandQRCode extends BotCommand {
-    private final Random random = ServiceManager.provideUnchecked(Random.class);
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private Random random;
+    private UtilsChat utilsChat;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        random = ServiceManager.provideUnchecked(Random.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

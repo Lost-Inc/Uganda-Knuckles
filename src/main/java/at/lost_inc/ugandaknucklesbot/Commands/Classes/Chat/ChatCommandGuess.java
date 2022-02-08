@@ -25,8 +25,14 @@ import java.util.Optional;
         }
 )
 public final class ChatCommandGuess extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final GameService gameService  = ServiceManager.provideUnchecked(GameService.class);
+    private UtilsChat utilsChat;
+    private GameService gameService;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        gameService = ServiceManager.provideUnchecked(GameService.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

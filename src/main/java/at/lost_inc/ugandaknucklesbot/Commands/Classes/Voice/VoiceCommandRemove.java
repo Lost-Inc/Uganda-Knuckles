@@ -1,9 +1,9 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -24,8 +24,14 @@ import java.util.Objects;
         }
 )
 public final class VoiceCommandRemove extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
+    private UtilsChat utilsChat;
+    private AudioPlayerService playerService;
+
+    @Override
+    public void onPostInitialization() {
+        playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    }
 
     /**
      * Method, which contains the logic for this command

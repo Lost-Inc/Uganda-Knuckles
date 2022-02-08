@@ -23,8 +23,15 @@ import java.util.Random;
         }
 )
 public final class ChatCommandKill extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final Random rand = ServiceManager.provideUnchecked(Random.class);
+    private UtilsChat utilsChat;
+    private Random rand;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        rand = ServiceManager.provideUnchecked(Random.class);
+    }
+
     private final String[] sentences = new String[] {
             "%s died by getting killed, cringe!",
             "%s was to christian",

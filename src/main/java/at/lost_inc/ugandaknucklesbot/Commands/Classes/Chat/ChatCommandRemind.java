@@ -27,7 +27,12 @@ import java.util.Timer;
         }
 )
 public final class ChatCommandRemind extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private UtilsChat utilsChat;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

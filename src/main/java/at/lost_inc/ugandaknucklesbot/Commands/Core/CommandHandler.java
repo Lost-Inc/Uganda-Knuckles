@@ -41,7 +41,7 @@ public final class CommandHandler {
 
     private final Collection<Cmd> commands = new ArrayList<>();
     private final Map<String, Collection<Cmd>> categories = new HashMap<>();
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private final UtilsChat utilsChat = new UtilsChat();
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private CommandHandler() {

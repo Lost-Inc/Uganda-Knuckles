@@ -27,8 +27,14 @@ import java.util.Random;
         }
 )
 public final class ChatCommandMCSkin extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final Random random = ServiceManager.provideUnchecked(Random.class);
+    private UtilsChat utilsChat;
+    private Random random;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        random = ServiceManager.provideUnchecked(Random.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

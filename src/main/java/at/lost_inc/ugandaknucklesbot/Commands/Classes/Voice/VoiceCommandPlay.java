@@ -1,9 +1,9 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerManagerService;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
@@ -37,10 +37,18 @@ import java.util.concurrent.atomic.AtomicReference;
         }
 )
 public final class VoiceCommandPlay extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final UtilsVoice utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
-    private final AudioPlayerManager playerManager = ServiceManager.provideUnchecked(AudioPlayerManagerService.class).get();
-    private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
+    private UtilsChat utilsChat;
+    private UtilsVoice utilsVoice;
+    private AudioPlayerManager playerManager;
+    private AudioPlayerService playerService;
+
+    @Override
+    public void onPostInitialization() {
+        playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
+        playerManager = ServiceManager.provideUnchecked(AudioPlayerManagerService.class).get();
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

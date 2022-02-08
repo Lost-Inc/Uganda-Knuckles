@@ -18,8 +18,15 @@ import java.util.Random;
         }
 )
 public final class ChatCommand8Ball extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final Random rand = ServiceManager.provideUnchecked(Random.class);
+    private UtilsChat utilsChat;
+    private Random rand;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        rand = ServiceManager.provideUnchecked(Random.class);
+    }
+
     private static final String[] answers = new String[] {
             "Why not??",
             "Dude, hell no!",

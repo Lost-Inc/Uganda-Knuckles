@@ -25,7 +25,12 @@ import java.util.function.Function;
         }
 )
 public final class ChatCommandHash extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private UtilsChat utilsChat;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

@@ -25,7 +25,12 @@ import org.jetbrains.annotations.NotNull;
         }
 )
 public final class VoiceCommandLeave extends BotCommand {
-    private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
+    private AudioPlayerService playerService;
+
+    @Override
+    public void onPostInitialization() {
+        playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

@@ -1,11 +1,9 @@
 package at.lost_inc.ugandaknucklesbot.Service.Games;
 
 
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.TypeVariable;
-import java.util.*;
+import java.util.Optional;
 
 public interface GameService {
     /**

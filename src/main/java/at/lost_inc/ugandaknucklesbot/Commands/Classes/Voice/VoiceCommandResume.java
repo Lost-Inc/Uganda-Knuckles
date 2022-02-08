@@ -24,8 +24,14 @@ import java.util.concurrent.atomic.AtomicReference;
         }
 )
 public final class VoiceCommandResume extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
+    private UtilsChat utilsChat;
+    private AudioPlayerService playerService;
+
+    @Override
+    public void onPostInitialization() {
+        playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

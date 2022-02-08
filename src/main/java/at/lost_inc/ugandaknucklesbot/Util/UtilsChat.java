@@ -8,7 +8,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.io.File;
-import java.util.function.Consumer;
 
 /**
  * Contains utility methods for interacting through text

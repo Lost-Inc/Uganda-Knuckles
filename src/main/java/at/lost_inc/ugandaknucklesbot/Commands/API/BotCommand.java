@@ -10,6 +10,24 @@ import org.jetbrains.annotations.NotNull;
  */
 public abstract class BotCommand {
     /**
+     * Called, when bot is in INITIALIZATION phase.
+     * <br>
+     * You should register services here.
+     */
+    public void onInitialization() {
+    }
+
+    /**
+     * Called, when bot is in POST_INITIALIZATION phase.
+     * <br>
+     * You should get services your command needs here.
+     * <br>
+     * After this phase, your command should be fully operational.
+     */
+    public void onPostInitialization() {
+    }
+
+    /**
      * Method, which contains the logic for this command
      *
      * @param param Object containing the command args and the message object

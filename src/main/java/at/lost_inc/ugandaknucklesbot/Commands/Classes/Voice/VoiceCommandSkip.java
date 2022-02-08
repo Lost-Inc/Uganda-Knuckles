@@ -21,8 +21,12 @@ import org.jetbrains.annotations.NotNull;
         }
 )
 public final class VoiceCommandSkip extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
+    private AudioPlayerService playerService;
+
+    @Override
+    public void onPostInitialization() {
+        playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

@@ -21,8 +21,14 @@ import java.util.Random;
         }
 )
 public final class ChatCommandCoinflip extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final Random rand = ServiceManager.provideUnchecked(Random.class);
+    private UtilsChat utilsChat;
+    private Random rand;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        rand = ServiceManager.provideUnchecked(Random.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

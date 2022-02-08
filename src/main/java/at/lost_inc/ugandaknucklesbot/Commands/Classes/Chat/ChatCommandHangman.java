@@ -28,9 +28,16 @@ import java.util.Random;
         }
 )
 public final class ChatCommandHangman extends BotCommand {
-    private final Random rand = ServiceManager.provideUnchecked(Random.class);
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final GameService gameService = ServiceManager.provideUnchecked(GameService.class);
+    private Random rand;
+    private UtilsChat utilsChat;
+    private GameService gameService;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        rand = ServiceManager.provideUnchecked(Random.class);
+        gameService = ServiceManager.provideUnchecked(GameService.class);
+    }
 
     private static final String[] guessWords = new String[] {
             "abruptly",

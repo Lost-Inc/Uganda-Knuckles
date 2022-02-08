@@ -26,8 +26,14 @@ import org.jetbrains.annotations.NotNull;
         }
 )
 public final class ChatCommandRandomDog extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final Gson gson = ServiceManager.provideUnchecked(Gson.class);
+    private UtilsChat utilsChat;
+    private Gson gson;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        gson = ServiceManager.provideUnchecked(Gson.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

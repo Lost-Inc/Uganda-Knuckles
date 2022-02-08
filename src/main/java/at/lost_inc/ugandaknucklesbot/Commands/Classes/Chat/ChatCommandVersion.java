@@ -31,7 +31,13 @@ public final class ChatCommandVersion extends BotCommand {
             ChatCommandVersion.class.getPackage().getImplementationVersion() == null ?
                     "Development Version" :
                     "v" + ChatCommandVersion.class.getPackage().getImplementationVersion();
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+
+    private UtilsChat utilsChat;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

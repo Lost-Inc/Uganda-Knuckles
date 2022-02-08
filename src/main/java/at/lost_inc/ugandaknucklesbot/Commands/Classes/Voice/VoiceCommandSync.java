@@ -1,9 +1,10 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler.VoiceAudioEchoHandler;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler.VoiceAudioEchoHandler;
+import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.Hash;
 import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
@@ -34,9 +35,17 @@ import java.util.Timer;
 public final class VoiceCommandSync extends BotCommand {
     private static final HashMap<String, Guild> guilds = new HashMap<>();
     private static final HashMap<Guild, VoiceChannel> vcs = new HashMap<>();
-    private final Random random = ServiceManager.provideUnchecked(Random.class);
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final UtilsVoice utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
+
+    private Random random;
+    private UtilsChat utilsChat;
+    private UtilsVoice utilsVoice;
+
+    @Override
+    public void onPostInitialization() {
+        random = ServiceManager.provideUnchecked(Random.class);
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

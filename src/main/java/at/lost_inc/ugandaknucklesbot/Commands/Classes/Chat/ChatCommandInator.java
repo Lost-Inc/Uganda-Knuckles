@@ -21,7 +21,12 @@ import org.jetbrains.annotations.NotNull;
         }
 )
 public final class ChatCommandInator extends BotCommand {
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    private UtilsChat utilsChat;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

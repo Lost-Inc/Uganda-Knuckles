@@ -81,8 +81,14 @@ public final class ChatCommandDice extends BotCommand {
                     "    99\n" +
                     " 9999"
     };
-    private final UtilsChat utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-    private final Random random = ServiceManager.provideUnchecked(Random.class);
+    private UtilsChat utilsChat;
+    private Random random;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        random = ServiceManager.provideUnchecked(Random.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

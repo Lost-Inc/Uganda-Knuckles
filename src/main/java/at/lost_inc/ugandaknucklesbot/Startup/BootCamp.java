@@ -34,13 +34,14 @@ import java.util.Random;
 
 public final class BootCamp {
     private static Phases phase = Phases.CONSTRUCTION;
-    private static CommandHandler handler = CommandHandler.get();
-    private static List<Class<? extends BotCommand>> commandClasses = new ArrayList<>();
+    private static final CommandHandler handler = CommandHandler.get();
+    private static final List<Class<? extends BotCommand>> commandClasses = new ArrayList<>();
     private static final Logger logger = LoggerFactory.getLogger(BootCamp.class);
 
     private BootCamp() {
     }
 
+    @SafeVarargs
     public static boolean registerStaticCommands(Class<? extends BotCommand> @NotNull ... cmds) {
         if(!phase.equals(Phases.CONSTRUCTION))
             throw new IllegalStateException("Registration of commands is only possible during the \"construction\" phase!");
@@ -114,7 +115,14 @@ public final class BootCamp {
         logger.info("Registering commands...");
         handler.register(commands.toArray(new BotCommand[0]));
         logger.info("Registration complete!");
+        logger.info("Waiting for JDA to finish its start-up...");
+        try {
+            jda.awaitReady();
+        } catch (InterruptedException e) {
+            logger.error("Interupted while waiting, cannot proceed!");
+            throw new RuntimeException(e);
+        }
         phase = Phases.RUNNING;
-        logger.info("Bot running!");
+        logger.info("Done! Bot running!");
     }
 }

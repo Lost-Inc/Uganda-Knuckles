@@ -17,75 +17,71 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public final class Main {
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
-    private final Collection<GatewayIntent> gatewayIntents = new ArrayList<>();
-    private final JDA jda;
-
-    private Main() throws LoginException { // Token retrieved from Environment
-        this.gatewayIntents.add(GatewayIntent.GUILD_MEMBERS);
-        this.jda = JDABuilder.createDefault(System.getenv("DISCORDBOTTOKEN"))
-                .enableIntents(this.gatewayIntents)
-                .setChunkingFilter(ChunkingFilter.ALL)
-                .setMemberCachePolicy(MemberCachePolicy.ALL)
-                .build();
+    private Main() {
     }
 
     public static void main(String[] args) throws IOException {
-        Main main = null;
+        final Logger logger = LoggerFactory.getLogger(Main.class);
+        final Collection<GatewayIntent> gatewayIntents = new ArrayList<>();
+        gatewayIntents.add(GatewayIntent.GUILD_MEMBERS);
         try {
-            main = new Main();
+            final JDA jda = JDABuilder.createDefault(System.getenv("DISCORDBOTTOKEN"))
+                    .enableIntents(gatewayIntents)
+                    .setChunkingFilter(ChunkingFilter.ALL)
+                    .setMemberCachePolicy(MemberCachePolicy.ALL)
+                    .build();
+
+            BootCamp.registerStaticCommands(
+                    // Chat commands
+                    ChatCommandInator.class,
+                    ChatCommandLenny.class,
+                    ChatCommandAvatar.class,
+                    ChatCommandResolve.class,
+                    ChatCommandUrban.class,
+                    ChatCommandRandomCat.class,
+                    ChatCommandPoop.class,
+                    ChatCommandDice.class,
+                    ChatCommandRandomDog.class,
+                    ChatCommandFood.class,
+                    ChatCommandQRCode.class,
+                    ChatCommandPing.class,
+                    ChatCommandLeet.class,
+                    ChatCommandOwO.class,
+                    ChatCommandMCSkin.class,
+                    ChatCommandUselessWeb.class,
+                    ChatCommandWiki.class,
+                    ChatCommandClear.class,
+                    ChatCommandKick.class,
+                    ChatCommandBan.class,
+                    ChatCommandVersion.class,
+                    ChatCommandRemind.class,
+                    ChatCommandReddit.class,
+                    ChatCommand8Ball.class,
+                    ChatCommandServerStats.class,
+                    ChatCommandKill.class,
+                    ChatCommandHangman.class,
+                    ChatCommandGuess.class,
+                    ChatCommandPoll.class,
+                    ChatCommandInsult.class,
+                    ChatCommandCoinflip.class,
+                    ChatCommandHash.class,
+                    // Voice commands
+                    VoiceCommandPlay.class,
+                    VoiceCommandPause.class,
+                    VoiceCommandQueue.class,
+                    VoiceCommandResume.class,
+                    VoiceCommandRemove.class,
+                    VoiceCommandSkip.class,
+                    VoiceCommandSync.class,
+                    VoiceCommandStop.class,
+                    VoiceCommandLoop.class,
+                    VoiceCommandLeave.class
+            );
+
+            BootCamp.initialize(jda);
         } catch (LoginException e) {
             logger.error("Couldn't log in!", e);
             System.exit(3);
         }
-
-        BootCamp.registerStaticCommands(
-                // Chat commands
-                ChatCommandInator.class,
-                ChatCommandLenny.class,
-                ChatCommandAvatar.class,
-                ChatCommandResolve.class,
-                ChatCommandUrban.class,
-                ChatCommandRandomCat.class,
-                ChatCommandPoop.class,
-                ChatCommandDice.class,
-                ChatCommandRandomDog.class,
-                ChatCommandFood.class,
-                ChatCommandQRCode.class,
-                ChatCommandPing.class,
-                ChatCommandLeet.class,
-                ChatCommandOwO.class,
-                ChatCommandMCSkin.class,
-                ChatCommandUselessWeb.class,
-                ChatCommandWiki.class,
-                ChatCommandClear.class,
-                ChatCommandKick.class,
-                ChatCommandBan.class,
-                ChatCommandVersion.class,
-                ChatCommandRemind.class,
-                ChatCommandReddit.class,
-                ChatCommand8Ball.class,
-                ChatCommandServerStats.class,
-                ChatCommandKill.class,
-                ChatCommandHangman.class,
-                ChatCommandGuess.class,
-                ChatCommandPoll.class,
-                ChatCommandInsult.class,
-                ChatCommandCoinflip.class,
-                ChatCommandHash.class,
-                // Voice commands
-                VoiceCommandPlay.class,
-                VoiceCommandPause.class,
-                VoiceCommandQueue.class,
-                VoiceCommandResume.class,
-                VoiceCommandRemove.class,
-                VoiceCommandSkip.class,
-                VoiceCommandSync.class,
-                VoiceCommandStop.class,
-                VoiceCommandLoop.class,
-                VoiceCommandLeave.class
-        );
-
-        BootCamp.initialize(main.jda);
     }
 }

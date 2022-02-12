@@ -61,6 +61,9 @@ public final class BootCamp {
             commandClasses.addAll(new PluginLoader(basePath.toPath()).getCommands());
         } catch (IOException e) {
             logger.warn("Couldn't load dynamic commands, plugins won't work!");
+        } catch (IllegalStateException e) {
+            logger.warn("PluginLoader didn't have a dir, aborting!");
+            System.exit(3);
         }
         logger.info("Constructing commands...");
         final List<BotCommand> commands = new ArrayList<>();

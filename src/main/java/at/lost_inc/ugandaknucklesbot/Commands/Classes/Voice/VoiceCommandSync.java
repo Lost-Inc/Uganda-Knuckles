@@ -21,6 +21,9 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 
+/* TODO
+ * Add possibility to sync more than two guilds
+ */
 
 @Command(
         name = "sync",

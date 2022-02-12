@@ -11,41 +11,33 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-
 @Command(
-        name = "remove",
-        help = "Removes track at specified position",
+        name = "jump",
+        help = "Jumps to track at specified position",
         categories = {
-                BotCommand.ICategories.VOICE,
-                BotCommand.ICategories.UTIL
+                BotCommand.ICategories.UTIL,
+                BotCommand.ICategories.VOICE
         },
         aliases = {
-                "r"
+                "j"
         }
 )
-public final class VoiceCommandRemove extends BotCommand {
+public final class VoiceCommandJump extends BotCommand {
     private UtilsChat utilsChat;
     private AudioPlayerService playerService;
 
     @Override
     public void onPostInitialization() {
-        playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
         utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
     }
 
-    /**
-     * Method, which contains the logic for this command
-     *
-     * @param param Object containing the command args and the message object
-     * @author sudo200
-     * @see CommandParameter
-     */
     @Override
     public void execute(@NotNull CommandParameter param) {
         if(param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(),
-                    "Please tell me the index of the track to remove!\n" +
-                    "You can get it using `@" +
+                    "Please tell me the index of the track to jump to!\n" +
+                            "You can get it using `@" +
                             Objects.requireNonNull(param.message.getGuild().getMemberById(param.message.getJDA().getSelfUser().getId())).getEffectiveName()
                             + " q`");
             return;
@@ -53,9 +45,9 @@ public final class VoiceCommandRemove extends BotCommand {
 
         final TrackScheduler scheduler = playerService.getScheduler(param.message.getGuild()).get();
         try {
-            scheduler.remove(Integer.parseUnsignedInt(String.join(" ", param.args)) - 1);
-        }
-        catch (NumberFormatException e) {
+            scheduler.setTrackNum(Integer.parseInt(String.join(" ", param.args)) - 1);
+            scheduler.start();
+        } catch (NumberFormatException e) {
             utilsChat.sendInfo(param.message.getChannel(), "**Whatever that is, it's not a number**");
         }
     }

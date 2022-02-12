@@ -75,7 +75,8 @@ public final class Main {
                     VoiceCommandSync.class,
                     VoiceCommandStop.class,
                     VoiceCommandLoop.class,
-                    VoiceCommandLeave.class
+                    VoiceCommandLeave.class,
+                    VoiceCommandJump.class
             );
 
             BootCamp.initialize(jda);

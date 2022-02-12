@@ -72,7 +72,7 @@ public final class BootCamp {
             }
         logger.info("Construction complete");
         phase = Phases.INITIALIZATION;
-        logger.info("Initializing services...");
+        logger.info("Initializing core services...");
         ServiceManager.setProvider(Random.class, new Random());
         ServiceManager.setProvider(UtilsChat.class, new UtilsChat());
         ServiceManager.setProvider(UtilsVoice.class, new UtilsVoice());

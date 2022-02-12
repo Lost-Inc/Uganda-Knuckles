@@ -40,6 +40,12 @@ public final class TrackScheduler extends AudioEventAdapter {
         return queue.trackNum;
     }
 
+    public void setTrackNum(int i) {
+        if(i >= queue.audioTracks.size())
+            throw new ArrayIndexOutOfBoundsException("index bigger than list size!");
+        queue.trackNum = i;
+    }
+
     public AudioTrack remove(int i) {
         return queue.audioTracks.remove(i);
     }

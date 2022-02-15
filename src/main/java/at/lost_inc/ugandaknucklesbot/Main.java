@@ -18,7 +18,7 @@ import java.util.Collection;
 
 /*  TODO
     * Add possibility for commands to add event listeners
-    *
+    * Add per-user and per-guild cooldown for commands
  */
 
 public final class Main {

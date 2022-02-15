@@ -16,6 +16,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+/*  TODO
+    * Add possibility for commands to add event listeners
+    *
+ */
+
 public final class Main {
     private Main() {
     }

@@ -16,9 +16,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/*  TODO
-    * Add possibility for commands to add event listeners
-    *
+/**  <h1>TODO:</h1>
+    <ul>
+        <li>Add possibility for commands to add event listeners</li>
+        <li>Add per-user and per-guild cooldown for commands</li>
+        <li>Add splitting of queue, if length exceeds {@link net.dv8tion.jda.api.entities.MessageEmbed#TEXT_MAX_LENGTH}</li>
+    </ul>
  */
 
 public final class Main {

@@ -11,7 +11,9 @@ import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerManagerService;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.Event.EventBusService;
+import at.lost_inc.ugandaknucklesbot.Service.Event.EventListenerService;
 import at.lost_inc.ugandaknucklesbot.Service.Event.SimpleEventBusService;
+import at.lost_inc.ugandaknucklesbot.Service.Event.SimpleEventListenerService;
 import at.lost_inc.ugandaknucklesbot.Service.Games.GameService;
 import at.lost_inc.ugandaknucklesbot.Service.Games.SimpleGameService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
@@ -27,10 +29,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public final class BootCamp {
     private static Phases phase = Phases.CONSTRUCTION;
@@ -81,6 +80,8 @@ public final class BootCamp {
         ServiceManager.setProvider(UtilsVoice.class, new UtilsVoice());
         ServiceManager.setProvider(Gson.class, new Gson());
 
+        ServiceManager.setProvider(EventListenerService.class, new SimpleEventListenerService());
+
         ServiceManager.setProvider(AudioPlayerManagerService.class, new SimpleAudioPlayerManagerService());
         ServiceManager.setProvider(AudioPlayerService.class, new SimpleAudioPlayerService());
         ServiceManager.setProvider(GameService.class, new SimpleGameService());
@@ -115,6 +116,9 @@ public final class BootCamp {
                 new SlashCommandEventListener(),
                 new GuildVoiceListener()
         );
+        jda.addEventListener(
+                (Object[]) ServiceManager.provideUnchecked(EventListenerService.class).get()
+        );
         logger.info("Registering commands...");
         handler.register(commands.toArray(new BotCommand[0]));
         logger.info("Registration complete!");
@@ -122,8 +126,8 @@ public final class BootCamp {
         try {
             jda.awaitReady();
         } catch (InterruptedException e) {
-            logger.error("Interupted while waiting, cannot proceed!");
-            throw new RuntimeException(e);
+            logger.error("Interrupted while waiting, cannot proceed!");
+            System.exit(3);
         }
         phase = Phases.RUNNING;
         logger.info("Done! Bot running!");

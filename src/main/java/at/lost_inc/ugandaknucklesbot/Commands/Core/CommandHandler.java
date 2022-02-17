@@ -4,6 +4,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
@@ -41,6 +42,8 @@ public final class CommandHandler {
 
     private final Collection<Cmd> commands = new ArrayList<>();
     private final Map<String, Collection<Cmd>> categories = new HashMap<>();
+    private final Set<Long> userCooldown = new HashSet<>();
+    private final Set<Long> guildCooldown = new HashSet<>();
     private final UtilsChat utilsChat = new UtilsChat();
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -106,6 +109,38 @@ public final class CommandHandler {
         )
         ) return;
         if (args.length == 1) return;
+
+        if(userCooldown.contains(event.getAuthor().getIdLong())) {
+            utilsChat.send(event.getChannel(), event.getAuthor().getAsMention());
+            utilsChat.sendInfo(
+                    event.getChannel(),
+                    "Woah! You exceeded the per-user cooldown!\n\nPlease take a chill pill!"
+                    );
+            return;
+        }
+
+        if(guildCooldown.contains(event.getGuild().getIdLong())) {
+            utilsChat.send(event.getChannel(), "<#" + event.getChannel().getId() + '>');
+            utilsChat.sendInfo(
+                    event.getChannel(),
+                    "Y'all together exceeded the guild rate limit!\n\nPlease calm down!"
+                    );
+            return;
+        }
+
+        userCooldown.add(event.getAuthor().getIdLong());
+        guildCooldown.add(event.getGuild().getIdLong());
+
+        new Timer(true).schedule(new TimerTaskRunnable(
+                        () -> userCooldown.remove(event.getAuthor().getIdLong())
+                ),
+                500
+        );
+        new Timer(true).schedule(new TimerTaskRunnable(
+                () -> guildCooldown.remove(event.getGuild().getIdLong())
+                ),
+                100
+                );
 
         if (args[1].equalsIgnoreCase("help")) {// help command
             Thread helpThread = new Thread(threadGroup, () -> {

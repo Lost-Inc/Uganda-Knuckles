@@ -1,5 +1,6 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Core.Audio;
 
+import at.lost_inc.ugandaknucklesbot.Util.Author;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
+@Author("sudo200")
 public final class TrackScheduler extends AudioEventAdapter {
     private final AudioPlayer player;
     private final PlayQueue queue = new PlayQueue(new ArrayList<>(), 0);

@@ -1,5 +1,6 @@
 package at.lost_inc.ugandaknucklesbot.Service.Event;
 
+import at.lost_inc.ugandaknucklesbot.Util.Author;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
+@Author("sudo200")
 public final class SimpleEventBusService implements EventBusService {
     private final Map<Integer, EventBusService.EventEmitter<?>> events = new HashMap<>();
 

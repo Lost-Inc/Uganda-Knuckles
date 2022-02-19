@@ -5,6 +5,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.Games.GameService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -14,7 +15,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 
-
+@Author("sudo200")
 @Command(
         name = "hangman",
         help = "Play a game of hangman with your friends (who needs paper?)\n" +

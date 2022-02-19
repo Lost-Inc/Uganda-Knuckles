@@ -5,6 +5,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.RandomFoodAPIResponse;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.google.gson.Gson;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -13,7 +14,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 
-
+@Author("sudo200")
 @Command(
         name = "food",
         help = "Serves random pictures of various foods\n" +

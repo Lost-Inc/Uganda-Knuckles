@@ -1,5 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Commands.API;
 
+import at.lost_inc.ugandaknucklesbot.Util.Author;
+
 import java.lang.annotation.*;
 
 /**
@@ -7,6 +9,7 @@ import java.lang.annotation.*;
  * <br>
  * <b>Every command class must be annotated with this!</b>
  */
+@Author("sudo200")
 @Documented
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)

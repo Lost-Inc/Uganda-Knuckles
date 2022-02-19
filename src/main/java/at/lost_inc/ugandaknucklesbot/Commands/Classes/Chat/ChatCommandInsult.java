@@ -5,6 +5,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.EvilInsultAPIResponse;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.google.gson.Gson;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -15,6 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+@Author("sudo200")
 @Command(
         name = "insult",
         help = "Insults the channel with a random, but evil insult\n" +

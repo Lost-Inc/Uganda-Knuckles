@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler;
 
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerManagerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Util.Author;
 import com.sedmelluq.discord.lavaplayer.format.AudioDataFormat;
 import com.sedmelluq.discord.lavaplayer.format.StandardAudioDataFormats;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
@@ -12,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.nio.ByteBuffer;
 
+@Author("sudo200")
 public final class VoiceAudioSendHandler implements AudioSendHandler {
     private final AudioDataFormat format = ServiceManager.provideUnchecked(AudioPlayerManagerService.class).get().getConfiguration().getOutputFormat();
     private final AudioPlayer player;

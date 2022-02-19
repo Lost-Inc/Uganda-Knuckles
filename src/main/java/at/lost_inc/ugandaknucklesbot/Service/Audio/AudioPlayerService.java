@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Service.Audio;
 
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
+import at.lost_inc.ugandaknucklesbot.Util.Author;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import net.dv8tion.jda.api.audio.AudioSendHandler;
 import net.dv8tion.jda.api.entities.Guild;
@@ -9,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
+@Author("sudo200")
 public interface AudioPlayerService {
     /**
      * Gets the {@link AudioPlayer} for the specific {@link Guild};

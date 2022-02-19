@@ -17,6 +17,7 @@ import at.lost_inc.ugandaknucklesbot.Service.Event.SimpleEventListenerService;
 import at.lost_inc.ugandaknucklesbot.Service.Games.GameService;
 import at.lost_inc.ugandaknucklesbot.Service.Games.SimpleGameService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
 import com.google.gson.Gson;
@@ -31,6 +32,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
+@Author("sudo200")
 public final class BootCamp {
     private static Phases phase = Phases.CONSTRUCTION;
     private static final CommandHandler handler = CommandHandler.get();

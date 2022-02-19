@@ -6,10 +6,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler.VoiceAudioEchoHandler;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
-import at.lost_inc.ugandaknucklesbot.Util.Hash;
-import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
-import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
-import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
+import at.lost_inc.ugandaknucklesbot.Util.*;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.GuildVoiceState;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -24,7 +21,7 @@ import java.util.Timer;
 /* TODO
  * Add possibility to sync more than two guilds
  */
-
+@Author("sudo200")
 @Command(
         name = "sync",
         help = "Syncs two voicechannels on two different servers.\n\n**Why? Because we can!**",

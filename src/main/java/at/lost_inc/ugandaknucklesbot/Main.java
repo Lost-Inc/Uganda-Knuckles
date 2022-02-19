@@ -3,6 +3,7 @@ package at.lost_inc.ugandaknucklesbot;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.*;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.*;
 import at.lost_inc.ugandaknucklesbot.Startup.BootCamp;
+import at.lost_inc.ugandaknucklesbot.Util.Author;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -16,12 +17,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/**  <h1>TODO:</h1>
-    <ul>
-        <li>Add splitting of queue, if length exceeds {@link net.dv8tion.jda.api.entities.MessageEmbed#TEXT_MAX_LENGTH}</li>
-    </ul>
- */
-
+@Author("sudo200")
 public final class Main {
     private Main() {
     }

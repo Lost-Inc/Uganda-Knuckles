@@ -8,6 +8,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Provides methods for hashing strings
  */
+@Author("sudo200")
 public final class Hash {
     private Hash() {
     }

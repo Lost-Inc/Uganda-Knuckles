@@ -1,5 +1,8 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.reddit;
 
+import at.lost_inc.ugandaknucklesbot.Util.Author;
+
+@Author("sudo200")
 public class Subreddit {
     public String kind;
     public SubredditData data;

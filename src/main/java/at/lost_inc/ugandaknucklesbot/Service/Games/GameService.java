@@ -1,10 +1,12 @@
 package at.lost_inc.ugandaknucklesbot.Service.Games;
 
 
+import at.lost_inc.ugandaknucklesbot.Util.Author;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Optional;
 
+@Author("sudo200")
 public interface GameService {
     /**
      * Registers a game

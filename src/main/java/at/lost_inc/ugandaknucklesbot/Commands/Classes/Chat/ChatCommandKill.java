@@ -4,6 +4,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -13,7 +14,7 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 import java.util.Random;
 
-
+@Author("sudo200")
 @Command(
         name = "kill",
         help = "Kills a person (why is the FBI here?!?)",

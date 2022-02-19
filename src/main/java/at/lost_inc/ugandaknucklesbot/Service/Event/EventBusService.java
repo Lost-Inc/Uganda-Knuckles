@@ -11,6 +11,7 @@ import java.util.function.Consumer;
 public interface EventBusService {
     /**
      * Registers a new event emitter
+     *
      * @param clazz
      * @param eventEmitter
      * @throws AlreadySetException
@@ -28,12 +29,12 @@ public interface EventBusService {
         private final Map<String, List<Consumer<T>>> events = new HashMap<>();
 
         public void emit(@NotNull String name, T type) {
-            for(Consumer<T> element : listeners(name))
+            for (Consumer<T> element : listeners(name))
                 element.accept(type);
         }
 
         public void on(@NotNull String name, @NotNull Consumer<T> function) {
-            if(!events.containsKey(name)) {
+            if (!events.containsKey(name)) {
                 final List<Consumer<T>> list = new ArrayList<>();
                 list.add(function);
                 events.put(name, list);
@@ -66,8 +67,16 @@ public interface EventBusService {
     }
 
     class AlreadySetException extends RuntimeException {
-        public AlreadySetException(String name) { super(name); }
-        public AlreadySetException(Throwable throwable) { super(throwable); }
-        public AlreadySetException(String name, Throwable throwable) { super(name, throwable); }
+        public AlreadySetException(String name) {
+            super(name);
+        }
+
+        public AlreadySetException(Throwable throwable) {
+            super(throwable);
+        }
+
+        public AlreadySetException(String name, Throwable throwable) {
+            super(name, throwable);
+        }
     }
 }

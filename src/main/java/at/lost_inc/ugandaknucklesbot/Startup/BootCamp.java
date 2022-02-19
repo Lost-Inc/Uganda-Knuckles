@@ -30,21 +30,24 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 @Author("sudo200")
 public final class BootCamp {
-    private static Phases phase = Phases.CONSTRUCTION;
     private static final CommandHandler handler = CommandHandler.get();
     private static final List<Class<? extends BotCommand>> commandClasses = new ArrayList<>();
     private static final Logger logger = LoggerFactory.getLogger(BootCamp.class);
+    private static Phases phase = Phases.CONSTRUCTION;
 
     private BootCamp() {
     }
 
     @SafeVarargs
     public static boolean registerStaticCommands(Class<? extends BotCommand> @NotNull ... cmds) {
-        if(!phase.equals(Phases.CONSTRUCTION))
+        if (!phase.equals(Phases.CONSTRUCTION))
             throw new IllegalStateException("Registration of commands is only possible during the \"construction\" phase!");
         return commandClasses.addAll(Arrays.asList(cmds));
     }
@@ -56,7 +59,7 @@ public final class BootCamp {
     public static void initialize(@NotNull JDA jda) {
         logger.info("Loading dynamic commands...");
         final File basePath = new File(System.getProperty("user.dir") + File.separator + "plugins");
-        if(!basePath.exists())
+        if (!basePath.exists())
             basePath.mkdirs();
         try {
             commandClasses.addAll(new PluginLoader(basePath.toPath()).getCommands());
@@ -68,7 +71,7 @@ public final class BootCamp {
         }
         logger.info("Constructing commands...");
         final List<BotCommand> commands = new ArrayList<>();
-        for(Class<? extends BotCommand> commandClass : commandClasses)
+        for (Class<? extends BotCommand> commandClass : commandClasses)
             try {
                 commands.add(commandClass.newInstance());
             } catch (InstantiationException | IllegalAccessException e) {
@@ -90,7 +93,7 @@ public final class BootCamp {
         ServiceManager.setProvider(EventBusService.class, new SimpleEventBusService());
 
         logger.info("Initializing commands...");
-        for(BotCommand cmd : commands) {
+        for (BotCommand cmd : commands) {
             try {
                 cmd.onInitialization();
             } catch (Exception e) {
@@ -103,7 +106,7 @@ public final class BootCamp {
         jda.getPresence().setPresence(OnlineStatus.ONLINE, Activity.listening("@" + jda.getSelfUser().getName()), false);
 
         logger.info("Post-Initializing commands...");
-        for(BotCommand cmd : commands) {
+        for (BotCommand cmd : commands) {
             try {
                 cmd.onPostInitialization();
             } catch (Exception e) {

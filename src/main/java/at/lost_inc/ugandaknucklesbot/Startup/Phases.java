@@ -8,5 +8,5 @@ public enum Phases {
     INITIALIZATION,
     POST_INITIALIZATION,
     REGISTRATION,
-    RUNNING;
+    RUNNING
 }

@@ -76,17 +76,17 @@ public final class ChatCommandServerStats extends BotCommand {
 
     private @NotNull Optional<Message> getLastMessage(@NotNull List<GuildChannel> channels, long markerMsg) {
         Message newestMsg = null;
-        for(GuildChannel channel : channels) {
-            if(!ChannelType.TEXT.equals(channel.getType()))
+        for (GuildChannel channel : channels) {
+            if (!ChannelType.TEXT.equals(channel.getType()))
                 continue;
 
             final TextChannel textChannel = channel.getGuild().getTextChannelById(channel.getIdLong());
-            if(textChannel == null)
+            if (textChannel == null)
                 continue;
             final List<Message> msgs = textChannel.getHistoryBefore(markerMsg, 1).complete().getRetrievedHistory();
-            if(msgs.size() == 0)
+            if (msgs.size() == 0)
                 continue;
-            if(newestMsg == null || msgs.get(0).getTimeCreated().isAfter(newestMsg.getTimeCreated()))
+            if (newestMsg == null || msgs.get(0).getTimeCreated().isAfter(newestMsg.getTimeCreated()))
                 newestMsg = msgs.get(0);
         }
 

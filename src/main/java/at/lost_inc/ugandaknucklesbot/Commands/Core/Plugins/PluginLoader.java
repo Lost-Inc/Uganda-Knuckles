@@ -26,33 +26,33 @@ public final class PluginLoader {
     public PluginLoader(@NotNull Path pluginDir) throws IOException {
         final File dir = pluginDir.toFile();
 
-        if(!dir.isDirectory())
+        if (!dir.isDirectory())
             throw new IllegalStateException("pluginDir should lead to a directory!");
 
         final File[] files = dir.listFiles((file, name) -> name.endsWith(".jar"));
-        if(files == null)
+        if (files == null)
             return;
 
         final List<Enumeration<? extends ZipEntry>> jarFileEntries = new ArrayList<>();
         final List<URL> jarFileUrls = new ArrayList<>();
-        for(File file : files) {
+        for (File file : files) {
             jarFileEntries.add(new JarFile(file).entries());
             jarFileUrls.add(file.toURI().toURL());
         }
 
         final ClassLoader classLoader = new URLClassLoader(jarFileUrls.toArray(new URL[0]));
-        for(Enumeration<? extends ZipEntry> entries : jarFileEntries)
+        for (Enumeration<? extends ZipEntry> entries : jarFileEntries)
             while (entries.hasMoreElements()) {
                 final ZipEntry entry = entries.nextElement();
-                if(!entry.getName().endsWith(".class"))
+                if (!entry.getName().endsWith(".class"))
                     continue;
 
                 final String entryName = entry.getName().substring(0, entry.getName().length() - 6).replaceAll("/", ".");
                 try {
                     Class<?> clazz = classLoader.loadClass(entryName);
-                    if(!BotCommand.class.equals(clazz.getSuperclass()))
+                    if (!BotCommand.class.equals(clazz.getSuperclass()))
                         continue;
-                    if(!clazz.isAnnotationPresent(Command.class))
+                    if (!clazz.isAnnotationPresent(Command.class))
                         continue;
 
                     commandClasses.add((Class<BotCommand>) clazz);

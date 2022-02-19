@@ -6,7 +6,6 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.Author;
-import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import org.jetbrains.annotations.NotNull;
 
@@ -36,7 +35,7 @@ public final class VoiceCommandPause extends BotCommand {
     public void execute(@NotNull CommandParameter param) {
         final AtomicReference<AudioPlayer> player = playerService.getPlayer(param.message.getGuild());
 
-        if(!player.get().isPaused())
+        if (!player.get().isPaused())
             player.get().setPaused(true);
     }
 }

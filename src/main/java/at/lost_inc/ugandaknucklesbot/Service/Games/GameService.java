@@ -10,14 +10,16 @@ import java.util.Optional;
 public interface GameService {
     /**
      * Registers a game
+     *
      * @param game Instance to register
      */
     void register(@NotNull Game<?, ?> game);
 
     /**
      * Get a game by its name
-     * @param name the game name
-     * @param inClass class of the input object
+     *
+     * @param name     the game name
+     * @param inClass  class of the input object
      * @param outClass class of the output object
      * @return If game with name exists -> {@link Game} wrapped in an {@link Optional}; else {@link Optional#empty()}
      * @throws ClassCastException if game with name exists, but input- and output object do not match with the game
@@ -26,8 +28,9 @@ public interface GameService {
 
     /**
      * Get a game by its id
-     * @param id the id of the game
-     * @param inClass class of the input object
+     *
+     * @param id       the id of the game
+     * @param inClass  class of the input object
      * @param outClass class of the output object
      * @return If game with name exists -> {@link Game} wrapped in an {@link Optional}; else {@link Optional#empty()}
      * @throws ClassCastException if game with name exists, but input- and output object do not match with the game
@@ -37,6 +40,7 @@ public interface GameService {
 
     /**
      * Removes a game by its id
+     *
      * @param id the game's id
      * @return {@link Boolean#TRUE} if removed
      */
@@ -44,12 +48,14 @@ public interface GameService {
 
     /**
      * Interface describing a game
-     * @param <Input> Data type of data from players to the game
+     *
+     * @param <Input>  Data type of data from players to the game
      * @param <Output> Data type of data from the game to the players
      */
     interface Game<Input, Output> {
         /**
          * Should just return the game's name
+         *
          * @return name of game
          */
         @NotNull String getName();
@@ -57,12 +63,14 @@ public interface GameService {
 
         /**
          * Returns the game's id
+         *
          * @return id
          */
         @NotNull String getId();
 
         /**
          * Called to check, if the player made a correct guess
+         *
          * @param input the data to check
          * @return {@link GameState#OKAY} if correct; {@link GameState#WRONG} if incorrect; {@link GameState#GAME_OVER} if game over; {@link GameState#WIN} if player won the game
          */
@@ -70,13 +78,14 @@ public interface GameService {
 
         /**
          * Called after {@link Game#check(Object)} to give feedback to the player
+         *
          * @return {@link Output} wrapped in an {@link Optional}, or {@link Optional#empty()} if there is no message
          */
         @NotNull Optional<Output> getMsg();
 
         /**
-         *  An enum containing the constants describing the different states
-         *  a game can be in
+         * An enum containing the constants describing the different states
+         * a game can be in
          */
         enum GameState {
             OKAY,

@@ -9,8 +9,6 @@ import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import de.bill.owo.OwOfy;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Random;
-
 @Author("sudo200")
 @Command(
         name = "owo",

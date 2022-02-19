@@ -12,7 +12,8 @@ import java.util.Objects;
 public class UtilsVoice {
     /**
      * Gets voicestate of user from guild
-     * @param user user to get voice state from
+     *
+     * @param user  user to get voice state from
      * @param guild guild to get voice state from
      * @return user voice state
      */

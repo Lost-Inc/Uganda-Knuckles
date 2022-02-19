@@ -31,6 +31,7 @@ public @interface Command {
 
     /**
      * Can be omitted, if no aliases are desired.
+     *
      * @return An array of aliases for the command;
      */
     String[] aliases() default {};

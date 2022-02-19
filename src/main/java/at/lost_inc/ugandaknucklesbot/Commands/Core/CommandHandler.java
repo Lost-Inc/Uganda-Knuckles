@@ -3,7 +3,6 @@ package at.lost_inc.ugandaknucklesbot.Commands.Core;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
-import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -29,25 +28,13 @@ public final class CommandHandler {
         instance = new CommandHandler();
     }
 
-    private static class Cmd {
-        public final BotCommand cmd;
-        public final Command props;
-
-        public Cmd(@NotNull BotCommand cmd, @NotNull Command props) {
-            this.cmd = cmd;
-            this.props = props;
-        }
-    }
-
     private final ThreadGroup threadGroup = new ThreadGroup("bot commands");
-
     private final Collection<Cmd> commands = new ArrayList<>();
     private final Map<String, Collection<Cmd>> categories = new HashMap<>();
     private final Set<Long> userCooldown = new HashSet<>();
     private final Set<Long> guildCooldown = new HashSet<>();
     private final UtilsChat utilsChat = new UtilsChat();
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private CommandHandler() {
     }
 
@@ -55,13 +42,12 @@ public final class CommandHandler {
         return instance;
     }
 
-
     private boolean register(@NotNull BotCommand command) {
-        if(!command.getClass().isAnnotationPresent(Command.class)) {
+        if (!command.getClass().isAnnotationPresent(Command.class)) {
             logger.warn(String.format(
                     "Command annotation was not found in %s! Command will be discarded!",
                     command.getClass())
-                    );
+            );
             return false;
         }
         final Cmd cmd = new Cmd(
@@ -86,7 +72,7 @@ public final class CommandHandler {
         for (BotCommand command : commands)
             if (!register(command))
                 okay = false;
-            System.gc();
+        System.gc();
         return okay;
     }
 
@@ -111,21 +97,21 @@ public final class CommandHandler {
         ) return;
         if (args.length == 1) return;
 
-        if(userCooldown.contains(event.getAuthor().getIdLong())) {
+        if (userCooldown.contains(event.getAuthor().getIdLong())) {
             utilsChat.send(event.getChannel(), event.getAuthor().getAsMention());
             utilsChat.sendInfo(
                     event.getChannel(),
                     "Woah! You exceeded the per-user cooldown!\n\nPlease take a chill pill!"
-                    );
+            );
             return;
         }
 
-        if(guildCooldown.contains(event.getGuild().getIdLong())) {
+        if (guildCooldown.contains(event.getGuild().getIdLong())) {
             utilsChat.send(event.getChannel(), "<#" + event.getChannel().getId() + '>');
             utilsChat.sendInfo(
                     event.getChannel(),
                     "Y'all together exceeded the guild rate limit!\n\nPlease calm down!"
-                    );
+            );
             return;
         }
 
@@ -138,10 +124,10 @@ public final class CommandHandler {
                 500
         );
         new Timer(true).schedule(new TimerTaskRunnable(
-                () -> guildCooldown.remove(event.getGuild().getIdLong())
+                        () -> guildCooldown.remove(event.getGuild().getIdLong())
                 ),
                 100
-                );
+        );
 
         if (args[1].equalsIgnoreCase("help")) {// help command
             Thread helpThread = new Thread(threadGroup, () -> {
@@ -221,5 +207,15 @@ public final class CommandHandler {
                 )
                 .findFirst()
                 .orElse(null);
+    }
+
+    private static class Cmd {
+        public final BotCommand cmd;
+        public final Command props;
+
+        public Cmd(@NotNull BotCommand cmd, @NotNull Command props) {
+            this.cmd = cmd;
+            this.props = props;
+        }
     }
 }

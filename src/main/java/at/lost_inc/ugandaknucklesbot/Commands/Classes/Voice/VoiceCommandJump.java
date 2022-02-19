@@ -36,7 +36,7 @@ public final class VoiceCommandJump extends BotCommand {
 
     @Override
     public void execute(@NotNull CommandParameter param) {
-        if(param.args.length == 0) {
+        if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(),
                     "Please tell me the index of the track to jump to!\n" +
                             "You can get it using `@" +

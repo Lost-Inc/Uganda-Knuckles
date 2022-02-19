@@ -24,7 +24,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 )
 
 public final class ChatCommandPoll extends BotCommand {
-    private  UtilsChat utilsChat;
+    private UtilsChat utilsChat;
 
     @Override
     public void onPostInitialization() {
@@ -65,26 +65,26 @@ public final class ChatCommandPoll extends BotCommand {
 
         final AtomicInteger x = new AtomicInteger();
         int y = 1;
-        for(int i=0; i < param.args.length; i++){
-            if(param.args[i].contains("~"))
+        for (int i = 0; i < param.args.length; i++) {
+            if (param.args[i].contains("~"))
                 x.set(++y);
         }
-        if(x.get() > 10) {
+        if (x.get() > 10) {
             x.set(10);
             utilsChat.sendInfo(param.message.getChannel(), "Sorry, but you can only make up to ten options!");
         }
         EmbedBuilder pollembed = new EmbedBuilder()
                 .setTitle("Poll");
 
-        for(int i=0; i<x.get(); i++){
-            if(i == 0)
+        for (int i = 0; i < x.get(); i++) {
+            if (i == 0)
                 pollembed.appendDescription(emojis[i] + " " + String.join(" ", param.args).split("~")[i] + "\n");
             else
                 pollembed.appendDescription(emojis[i] + String.join(" ", param.args).split("~")[i] + "\n");
         }
 
         final Message msg = utilsChat.send(param.message.getChannel(), pollembed.build());
-        for(int i = 0; i < x.get(); i++)
+        for (int i = 0; i < x.get(); i++)
             msg.addReaction(reactions[i]).queue();
 
         param.message.delete().queue();

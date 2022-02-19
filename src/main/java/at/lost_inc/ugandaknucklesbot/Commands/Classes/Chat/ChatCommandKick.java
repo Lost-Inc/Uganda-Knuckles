@@ -38,7 +38,7 @@ public final class ChatCommandKick extends BotCommand {
             return;
         }
 
-        if (!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getAuthor())).hasPermission(Permission.KICK_MEMBERS)  && !param.message.getAuthor().getId().equals("624243342896660513")) {
+        if (!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getAuthor())).hasPermission(Permission.KICK_MEMBERS) && !param.message.getAuthor().getId().equals("624243342896660513")) {
             utilsChat.sendInfo(param.message.getChannel(), "**You are not pog enough to use this!**");
             return;
         }

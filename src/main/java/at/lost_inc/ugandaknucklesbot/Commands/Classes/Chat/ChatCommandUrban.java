@@ -34,6 +34,14 @@ public final class ChatCommandUrban extends BotCommand {
     private UtilsChat utilsChat;
     private Gson gson;
 
+    private static @NotNull String encode(@NotNull String param) {
+        try {
+            return URLEncoder.encode(param, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void onPostInitialization() {
         utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
@@ -80,13 +88,5 @@ public final class ChatCommandUrban extends BotCommand {
         }
 
 
-    }
-
-    private static @NotNull String encode(@NotNull String param) {
-        try {
-            return URLEncoder.encode(param, StandardCharsets.UTF_8.toString());
-        } catch (UnsupportedEncodingException e) {
-            throw new RuntimeException(e);
-        }
     }
 }

@@ -30,7 +30,7 @@ public final class SimpleAudioPlayerService implements AudioPlayerService {
      */
     @Override
     public @NotNull AtomicReference<AudioPlayer> getPlayer(@NotNull Guild guild) {
-        if(map.containsKey(guild))
+        if (map.containsKey(guild))
             return map.get(guild).getKey();
         final Map.@NotNull Entry<AtomicReference<AudioPlayer>, Map.Entry<AtomicReference<TrackScheduler>, AtomicReference<AudioSendHandler>>> newEntry = buildEntry();
         map.put(guild, newEntry);
@@ -46,7 +46,7 @@ public final class SimpleAudioPlayerService implements AudioPlayerService {
      */
     @Override
     public @NotNull AtomicReference<TrackScheduler> getScheduler(@NotNull Guild guild) {
-        if(map.containsKey(guild))
+        if (map.containsKey(guild))
             return map.get(guild).getValue().getKey();
         final Map.@NotNull Entry<AtomicReference<AudioPlayer>, Map.Entry<AtomicReference<TrackScheduler>, AtomicReference<AudioSendHandler>>> newEntry = buildEntry();
         map.put(guild, newEntry);
@@ -55,7 +55,7 @@ public final class SimpleAudioPlayerService implements AudioPlayerService {
 
     @Override
     public @NotNull Optional<AtomicReference<AudioSendHandler>> getAudioHandler(@NotNull Guild guild) {
-        if(!map.containsKey(guild))
+        if (!map.containsKey(guild))
             return Optional.empty();
         return Optional.of(map.get(guild).getValue().getValue());
     }
@@ -71,7 +71,7 @@ public final class SimpleAudioPlayerService implements AudioPlayerService {
     public boolean destroy(@NotNull Guild guild) {
         final boolean removed = map.containsKey(guild);
         final Map.Entry<AtomicReference<AudioPlayer>, Map.Entry<AtomicReference<TrackScheduler>, AtomicReference<AudioSendHandler>>> oldEntry = map.remove(guild);
-        if(removed) {
+        if (removed) {
             oldEntry.getKey().get().destroy();
             oldEntry.getValue().getKey().get().destroy();
             guild.getAudioManager().setSendingHandler(null);

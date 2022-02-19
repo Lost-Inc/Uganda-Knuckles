@@ -17,6 +17,7 @@ public class UtilsChat {
 
     /**
      * Sends a string into a text channel
+     *
      * @param channel {@link MessageChannel} to send message into
      * @param message {@link CharSequence} to send
      * @return The newly created {@link Message}
@@ -28,8 +29,9 @@ public class UtilsChat {
 
     /**
      * Sends an embed into a text channel
+     *
      * @param channel {@link MessageChannel} to send embed into
-     * @param embed {@link MessageEmbed} to send
+     * @param embed   {@link MessageEmbed} to send
      * @return The newly created {@link Message}
      * @throws RuntimeException if any error occurs
      */
@@ -39,8 +41,9 @@ public class UtilsChat {
 
     /**
      * Sends a file with optional attachment options into a text channel
+     *
      * @param channel {@link MessageChannel} to send file into
-     * @param file {@link File} to send
+     * @param file    {@link File} to send
      * @param options {@link AttachmentOption}s, can be omitted, if not used
      * @return The newly created {@link Message}
      * @throws RuntimeException if any error occurs
@@ -51,6 +54,7 @@ public class UtilsChat {
 
     /**
      * Sends a fancy reply embed into a text channel
+     *
      * @param channel {@link MessageChannel} to send embed into
      * @param message {@link CharSequence} to embed
      * @return The newly created {@link Message}

@@ -43,10 +43,10 @@ public final class VoiceCommandRemove extends BotCommand {
      */
     @Override
     public void execute(@NotNull CommandParameter param) {
-        if(param.args.length == 0) {
+        if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(),
                     "Please tell me the index of the track to remove!\n" +
-                    "You can get it using `@" +
+                            "You can get it using `@" +
                             Objects.requireNonNull(param.message.getGuild().getMemberById(param.message.getJDA().getSelfUser().getId())).getEffectiveName()
                             + " q`");
             return;
@@ -55,8 +55,7 @@ public final class VoiceCommandRemove extends BotCommand {
         final TrackScheduler scheduler = playerService.getScheduler(param.message.getGuild()).get();
         try {
             scheduler.remove(Integer.parseUnsignedInt(String.join(" ", param.args)) - 1);
-        }
-        catch (NumberFormatException e) {
+        } catch (NumberFormatException e) {
             utilsChat.sendInfo(param.message.getChannel(), "**Whatever that is, it's not a number**");
         }
     }

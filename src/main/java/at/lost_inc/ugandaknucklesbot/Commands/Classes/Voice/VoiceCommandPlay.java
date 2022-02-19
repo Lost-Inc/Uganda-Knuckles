@@ -53,7 +53,7 @@ public final class VoiceCommandPlay extends BotCommand {
 
     @Override
     public void execute(@NotNull CommandParameter param) {
-        if(param.args.length == 0) {
+        if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(), "Give me a link to what you want to be played...");
             return;
         }
@@ -62,7 +62,7 @@ public final class VoiceCommandPlay extends BotCommand {
         final AudioManager audioManager = guild.getAudioManager();
         final MessageChannel channel = param.message.getChannel();
         final GuildVoiceState voiceState = utilsVoice.getVoiceState(param.message.getAuthor(), guild);
-        if(!voiceState.inVoiceChannel()) {
+        if (!voiceState.inVoiceChannel()) {
             utilsChat.sendInfo(channel, "Please join a voice channel first!");
             return;
         }
@@ -71,12 +71,12 @@ public final class VoiceCommandPlay extends BotCommand {
         final AtomicReference<AudioSendHandler> sendHandler = playerService.getAudioHandler(guild).get();
 
         final Runnable cb = () -> {
-            if(audioManager.getConnectedChannel() == null)
+            if (audioManager.getConnectedChannel() == null)
                 audioManager.openAudioConnection(voiceState.getChannel());
-            if(audioManager.getSendingHandler() == null)
+            if (audioManager.getSendingHandler() == null)
                 audioManager.setSendingHandler(sendHandler.get());
 
-            if(player.get().getPlayingTrack() == null)
+            if (player.get().getPlayingTrack() == null)
                 scheduler.get().start();
         };
 

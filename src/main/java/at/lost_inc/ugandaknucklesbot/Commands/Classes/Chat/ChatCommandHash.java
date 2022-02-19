@@ -37,16 +37,16 @@ public final class ChatCommandHash extends BotCommand {
     @Override
     public void execute(@NotNull CommandParameter param) {
         final MessageChannel channel = param.message.getChannel();
-        if(param.args.length == 0) {
+        if (param.args.length == 0) {
             utilsChat.sendInfo(
                     channel,
                     "You wanna hash to void?\n" +
-                    "Sure, if you tell me which algorithm to use..."
+                            "Sure, if you tell me which algorithm to use..."
             );
             return;
         }
 
-        if(param.args.length == 1 && (
+        if (param.args.length == 1 && (
                 param.args[0].equalsIgnoreCase("MD5") ||
                         param.args[0].equalsIgnoreCase("SHA-1") ||
                         param.args[0].equalsIgnoreCase("SHA-256")
@@ -59,7 +59,7 @@ public final class ChatCommandHash extends BotCommand {
             return;
         }
 
-        if(param.args.length == 1 && !(
+        if (param.args.length == 1 && !(
                 param.args[0].equalsIgnoreCase("MD5") ||
                         param.args[0].equalsIgnoreCase("SHA-1") ||
                         param.args[0].equalsIgnoreCase("SHA-256")

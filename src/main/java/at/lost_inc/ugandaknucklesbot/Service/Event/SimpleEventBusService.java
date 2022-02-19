@@ -14,7 +14,7 @@ public final class SimpleEventBusService implements EventBusService {
 
     @Override
     public <T> void register(@NotNull Class<T> clazz, @NotNull EventBusService.EventEmitter<T> eventEmitter) throws EventBusService.AlreadySetException {
-        if(events.containsKey(clazz.hashCode()))
+        if (events.containsKey(clazz.hashCode()))
             throw new EventBusService.AlreadySetException("EventEmitter for " + clazz + " already exists!");
 
 

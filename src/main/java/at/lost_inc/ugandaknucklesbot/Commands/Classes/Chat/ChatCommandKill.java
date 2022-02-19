@@ -24,16 +24,7 @@ import java.util.Random;
         }
 )
 public final class ChatCommandKill extends BotCommand {
-    private UtilsChat utilsChat;
-    private Random rand;
-
-    @Override
-    public void onPostInitialization() {
-        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        rand = ServiceManager.provideUnchecked(Random.class);
-    }
-
-    private final String[] sentences = new String[] {
+    private final String[] sentences = new String[]{
             "%s died by getting killed, cringe!",
             "%s was to christian",
             "%s expired, because they were an anti-vaxxer",
@@ -67,12 +58,20 @@ public final class ChatCommandKill extends BotCommand {
             "%s hated on someone's taste",
             "%s hated minorities and was canceled on Twitter",
     };
+    private UtilsChat utilsChat;
+    private Random rand;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        rand = ServiceManager.provideUnchecked(Random.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {
         final MessageChannel channel = param.message.getChannel();
 
-        if(param.args.length == 0 || !utilsChat.isMention(param.args[0])) {
+        if (param.args.length == 0 || !utilsChat.isMention(param.args[0])) {
             utilsChat.sendInfo(channel, String.format(
                     sentences[rand.nextInt(sentences.length)],
                     Objects.requireNonNull(param.message.getMember()).getEffectiveName()
@@ -81,7 +80,7 @@ public final class ChatCommandKill extends BotCommand {
         }
         final Member member = utilsChat.getMemberByMention(param.args[0], param.message.getGuild());
 
-        if(member == null) {
+        if (member == null) {
             utilsChat.sendInfo(channel, "This user does not exist, like your dad!");
             return;
         }

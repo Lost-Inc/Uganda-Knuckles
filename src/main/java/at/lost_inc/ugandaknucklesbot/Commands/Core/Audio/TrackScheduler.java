@@ -23,17 +23,17 @@ public final class TrackScheduler extends AudioEventAdapter {
         this.player = player;
     }
 
-    public void queue(AudioTrack @NotNull ...tracks) {
+    public void queue(AudioTrack @NotNull ... tracks) {
         queue.audioTracks.addAll(Arrays.asList(tracks));
     }
 
     public void start() {
-        if(looping && queue.trackNum + 1 > queue.audioTracks.size())
+        if (looping && queue.trackNum + 1 > queue.audioTracks.size())
             queue.trackNum = 0;
 
         final AudioTrack track = queue.poll();
 
-        if(track != null)
+        if (track != null)
             player.playTrack(track.makeClone());
     }
 
@@ -42,7 +42,7 @@ public final class TrackScheduler extends AudioEventAdapter {
     }
 
     public void setTrackNum(int i) {
-        if(i >= queue.audioTracks.size())
+        if (i >= queue.audioTracks.size())
             throw new ArrayIndexOutOfBoundsException("index bigger than list size!");
         queue.trackNum = i;
     }
@@ -73,7 +73,7 @@ public final class TrackScheduler extends AudioEventAdapter {
 
     @Override
     public void onTrackEnd(AudioPlayer player, AudioTrack track, @NotNull AudioTrackEndReason endReason) {
-        if(endReason.mayStartNext)
+        if (endReason.mayStartNext)
             start();
     }
 
@@ -107,7 +107,7 @@ public final class TrackScheduler extends AudioEventAdapter {
 
         public @Nullable AudioTrack poll() {
             final AudioTrack track = peek();
-            if(track == null)
+            if (track == null)
                 return null;
             trackNum++;
             return track;

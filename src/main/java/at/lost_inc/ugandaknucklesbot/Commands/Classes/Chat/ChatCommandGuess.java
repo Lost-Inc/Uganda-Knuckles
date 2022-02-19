@@ -39,24 +39,24 @@ public final class ChatCommandGuess extends BotCommand {
     public void execute(@NotNull CommandParameter param) {
         final Guild guild = param.message.getGuild();
         final MessageChannel channel = param.message.getChannel();
-        final String gameId = channel.getId()+'+'+guild.getId();
+        final String gameId = channel.getId() + '+' + guild.getId();
 
         final Optional<GameService.Game<Character, String>> optionalGame = gameService
                 .getById(gameId, Character.class, String.class);
 
-        if(!optionalGame.isPresent()) {
+        if (!optionalGame.isPresent()) {
             utilsChat.sendInfo(channel, "There is no game running in this channel, yet");
             return;
         }
 
         switch (optionalGame.get().getName()) {
             case "hangman": {
-                if(param.args.length == 0) {
+                if (param.args.length == 0) {
                     utilsChat.sendInfo(channel, "You forgot your guess!");
                     return;
                 }
 
-                if(param.args[0].length() != 1) {
+                if (param.args[0].length() != 1) {
                     utilsChat.sendInfo(channel, "Your guess should only contain a single character!");
                     return;
                 }
@@ -100,7 +100,7 @@ public final class ChatCommandGuess extends BotCommand {
                     break;
                 }
 
-                if(state.isOver())
+                if (state.isOver())
                     gameService.removeById(gameId);
             }
             return;

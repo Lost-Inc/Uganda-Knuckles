@@ -20,16 +20,7 @@ import java.util.Random;
         }
 )
 public final class ChatCommand8Ball extends BotCommand {
-    private UtilsChat utilsChat;
-    private Random rand;
-
-    @Override
-    public void onPostInitialization() {
-        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        rand = ServiceManager.provideUnchecked(Random.class);
-    }
-
-    private static final String[] answers = new String[] {
+    private static final String[] answers = new String[]{
             "Why not??",
             "Dude, hell no!",
             "Sorry, the 8ball is currently not in reach!\n" +
@@ -64,21 +55,29 @@ public final class ChatCommand8Ball extends BotCommand {
             "No front, but, yes",
             "No front, but, no",
     };
+    private UtilsChat utilsChat;
+    private Random rand;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        rand = ServiceManager.provideUnchecked(Random.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {
-        if(param.args.length == 0) {
+        if (param.args.length == 0) {
             utilsChat.sendInfo(param.message.getChannel(), "**Whats up? Wanna ask somethin'?**");
             return;
         }
 
         String q = String.join(" ", param.args);
-        if(q.length() > 255) {
+        if (q.length() > 255) {
             utilsChat.sendInfo(param.message.getChannel(), "Sry, the 8ball has no interest in questions longer than 255 characters!");
             return;
         }
 
-        if(!q.endsWith("?"))
+        if (!q.endsWith("?"))
             q += '?';
 
         utilsChat.send(
@@ -87,6 +86,6 @@ public final class ChatCommand8Ball extends BotCommand {
                         .setTitle(q)
                         .setDescription(answers[rand.nextInt(answers.length)])
                         .build()
-                );
+        );
     }
 }

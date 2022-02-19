@@ -23,15 +23,6 @@ import java.util.Random;
         }
 )
 public final class ChatCommandUselessWeb extends BotCommand {
-    private UtilsChat utilsChat;
-    private Random random;
-
-    @Override
-    public void onPostInitialization() {
-        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        random = ServiceManager.provideUnchecked(Random.class);
-    }
-
     private final String[] urls = {
             "https://longdogechallenge.com/",
             "http://heeeeeeeey.com/",
@@ -115,6 +106,14 @@ public final class ChatCommandUselessWeb extends BotCommand {
             "http://papertoilet.com/",
             "https://loopedforinfinity.com/",
     };
+    private UtilsChat utilsChat;
+    private Random random;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        random = ServiceManager.provideUnchecked(Random.class);
+    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

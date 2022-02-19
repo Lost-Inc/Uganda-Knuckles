@@ -30,7 +30,7 @@ public final class GuildVoiceListener extends ListenerAdapter {
 
     @Override
     public void onGuildVoiceMove(@NotNull GuildVoiceMoveEvent event) {
-        if(event.getNewValue().getMembers().size() < event.getOldValue().getMembers().size()) // Someone left
+        if (event.getNewValue().getMembers().size() < event.getOldValue().getMembers().size()) // Someone left
             onLeave(event);
         else
             onJoin(event);
@@ -43,7 +43,7 @@ public final class GuildVoiceListener extends ListenerAdapter {
 
     private void onLeave(@NotNull GenericGuildVoiceUpdateEvent event) {
         final List<Member> members = Objects.requireNonNull(event.getChannelLeft()).getMembers();
-        if(!(members.size() == 1 && members.contains(event.getGuild().getMemberById(event.getJDA().getSelfUser().getId()))))
+        if (!(members.size() == 1 && members.contains(event.getGuild().getMemberById(event.getJDA().getSelfUser().getId()))))
             return;
 
         final Timer timer = new Timer(true);
@@ -58,7 +58,7 @@ public final class GuildVoiceListener extends ListenerAdapter {
 
     private void onJoin(@NotNull GenericGuildVoiceUpdateEvent event) {
         final List<Member> members = Objects.requireNonNull(event.getChannelJoined()).getMembers();
-        if(members.size() > 1 && timers.containsKey(event.getGuild()))
+        if (members.size() > 1 && timers.containsKey(event.getGuild()))
             timers.remove(event.getGuild()).cancel();
     }
 }

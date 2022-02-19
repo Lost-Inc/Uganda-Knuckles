@@ -18,6 +18,7 @@ public final class Hash {
      * <br><br>
      * <b>WARNING: md5 is mathematically insecure, and because of that,
      * it should only be used for for example generating codes from random numbers!</b>
+     *
      * @param md5 {@link String} to generate hash from
      * @return md5 hash
      */
@@ -27,6 +28,7 @@ public final class Hash {
 
     /**
      * Generates the sha1 hash from the given string.
+     *
      * @param sha1 {@link String} to generate hash from
      * @return sha1 hash
      */
@@ -36,6 +38,7 @@ public final class Hash {
 
     /**
      * Generates the sha256 hash from the given string
+     *
      * @param sha256 {@link String} to generate hash from
      * @return sha256 hash
      */

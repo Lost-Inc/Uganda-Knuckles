@@ -29,18 +29,7 @@ import java.util.Random;
         }
 )
 public final class ChatCommandHangman extends BotCommand {
-    private Random rand;
-    private UtilsChat utilsChat;
-    private GameService gameService;
-
-    @Override
-    public void onPostInitialization() {
-        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        rand = ServiceManager.provideUnchecked(Random.class);
-        gameService = ServiceManager.provideUnchecked(GameService.class);
-    }
-
-    private static final String[] guessWords = new String[] {
+    private static final String[] guessWords = new String[]{
             "abruptly",
             "absurd",
             "abyss",
@@ -279,19 +268,30 @@ public final class ChatCommandHangman extends BotCommand {
             guessWords[i] = guessWords[i].toUpperCase();
     }
 
+    private Random rand;
+    private UtilsChat utilsChat;
+    private GameService gameService;
+
+    @Override
+    public void onPostInitialization() {
+        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        rand = ServiceManager.provideUnchecked(Random.class);
+        gameService = ServiceManager.provideUnchecked(GameService.class);
+    }
+
     @Override
     public void execute(@NotNull CommandParameter param) {
         final Guild guild = param.message.getGuild();
         final MessageChannel channel = param.message.getChannel();
 
-        if(param.args.length == 0) {
-            if(gameService.getById(channel.getId()+'+'+guild.getId(), Character.class, String.class).isPresent()) {
+        if (param.args.length == 0) {
+            if (gameService.getById(channel.getId() + '+' + guild.getId(), Character.class, String.class).isPresent()) {
                 utilsChat.sendInfo(channel, "A hangman game is already running in this channel!");
                 return;
             }
 
             gameService.register(new GameService.Game<Character, String>() {
-                private final String id = channel.getId()+'+'+guild.getId();
+                private final String id = channel.getId() + '+' + guild.getId();
                 private final String orgWord = guessWords[rand.nextInt(guessWords.length)];
                 private String word = orgWord;
                 private String showedWord = word.replaceAll("\\S", "?");
@@ -311,10 +311,10 @@ public final class ChatCommandHangman extends BotCommand {
 
                 @Override
                 public @NotNull GameState check(@NotNull Character character) {
-                    if(!word.contains(character.toString())) {
+                    if (!word.contains(character.toString())) {
                         lives--;
-                        if(lives <= 0) {
-                            msg = "The word was `"+ orgWord +"`!";
+                        if (lives <= 0) {
+                            msg = "The word was `" + orgWord + "`!";
                             return GameState.GAME_OVER;
                         }
                         msg = '`' + showedWord + '`' +
@@ -329,7 +329,7 @@ public final class ChatCommandHangman extends BotCommand {
                     }
                     while (word.contains(character.toString()));
 
-                    if(word.matches("^\u001B+$")) {
+                    if (word.matches("^\u001B+$")) {
                         msg = '`' + showedWord + '`' +
                                 "\nYou had " + lives + " left!";
                         return GameState.WIN;
@@ -350,10 +350,10 @@ public final class ChatCommandHangman extends BotCommand {
                     " g`!"
             );
         } else {
-            if(!gameService.getById(channel.getId()+'+'+guild.getId(), Character.class, String.class).isPresent())
+            if (!gameService.getById(channel.getId() + '+' + guild.getId(), Character.class, String.class).isPresent())
                 return;
 
-            if(gameService.removeById(channel.getId()+'+'+guild.getId()))
+            if (gameService.removeById(channel.getId() + '+' + guild.getId()))
                 utilsChat.sendInfo(channel, "Hangman game endet!");
         }
     }

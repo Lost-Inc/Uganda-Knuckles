@@ -26,7 +26,7 @@ public final class SimpleGameService implements GameService {
 
     @Override
     public @NotNull <I, O> Optional<GameService.Game<I, O>> getById(@NotNull String id, @NotNull Class<I> inClass, @NotNull Class<O> outClass) throws ClassCastException {
-        if(!games.containsKey(id))
+        if (!games.containsKey(id))
             return Optional.empty();
         return Optional.ofNullable((GameService.Game<I, O>) games.get(id));
     }

@@ -42,7 +42,7 @@ public final class ChatCommandVersion extends BotCommand {
 
     @Override
     public void execute(@NotNull CommandParameter param) {
-        final Message msg =  utilsChat.sendInfo(param.message.getChannel(), "Getting info...");
+        final Message msg = utilsChat.sendInfo(param.message.getChannel(), "Getting info...");
         final ApplicationInfo info = msg.getJDA().retrieveApplicationInfo().complete();
 
         final EmbedBuilder builder = utilsChat.getDefaultEmbed();

@@ -6,7 +6,6 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.Author;
-import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
 
 @Author("sudo200")

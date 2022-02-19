@@ -15,6 +15,7 @@ public interface AudioPlayerService {
     /**
      * Gets the {@link AudioPlayer} for the specific {@link Guild};
      * if there isn't one, it creates one
+     *
      * @param guild the Guild
      * @return {@link AudioPlayer}
      */
@@ -23,6 +24,7 @@ public interface AudioPlayerService {
     /**
      * Gets the {@link TrackScheduler} for the specific {@link Guild};
      * if there isn't one, it creates one
+     *
      * @param guild the Guild
      * @return {@link TrackScheduler}
      */
@@ -31,6 +33,7 @@ public interface AudioPlayerService {
     /**
      * Gets the {@link AudioSendHandler} for the specific {@link Guild};
      * if there isn't one, it returns an empty {@link Optional}
+     *
      * @param guild the Guild
      * @return {@link AudioSendHandler}
      */
@@ -39,6 +42,7 @@ public interface AudioPlayerService {
     /**
      * Destroys the {@link AudioPlayer}, {@link TrackScheduler} and {@link AudioSendHandler} for the
      * specific {@link Guild}
+     *
      * @param guild the Guild
      * @return {@link Boolean#TRUE} if destroyed
      */

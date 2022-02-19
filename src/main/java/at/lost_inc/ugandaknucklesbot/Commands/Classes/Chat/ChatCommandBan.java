@@ -38,7 +38,7 @@ public final class ChatCommandBan extends BotCommand {
             return;
         }
 
-        if (!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getAuthor())).hasPermission(Permission.BAN_MEMBERS) ) {
+        if (!Objects.requireNonNull(param.message.getGuild().getMember(param.message.getAuthor())).hasPermission(Permission.BAN_MEMBERS)) {
             utilsChat.sendInfo(param.message.getChannel(), "**You are not pog enough to use this!**");
             return;
         }

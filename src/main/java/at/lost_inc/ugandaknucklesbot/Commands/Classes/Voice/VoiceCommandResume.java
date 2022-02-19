@@ -38,7 +38,7 @@ public final class VoiceCommandResume extends BotCommand {
     public void execute(@NotNull CommandParameter param) {
         final AtomicReference<AudioPlayer> player = playerService.getPlayer(param.message.getGuild());
 
-        if(player.get().isPaused())
+        if (player.get().isPaused())
             player.get().setPaused(false);
     }
 }

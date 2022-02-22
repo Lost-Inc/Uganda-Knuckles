@@ -8,7 +8,10 @@ import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
 
+import java.math.BigInteger;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Function;
 
 @Author({"sudo200", "Lauze1"})
 @Command(
@@ -83,41 +86,40 @@ public final class ChatCommandDice extends BotCommand {
                     " 9999"
     };
     private UtilsChat utilsChat;
-    private Random random;
+    private Function<Long, Long> random;
 
     @Override
     public void onPostInitialization() {
         utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        random = ServiceManager.provideUnchecked(Random.class);
+        random = ThreadLocalRandom.current()::nextLong;
     }
 
     @Override
     public void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0) {
-            utilsChat.sendInfo(param.message.getChannel(), "```c\n" + numbers[random.nextInt(6) + 1] + "\n```"); //Integer.toString( random.nextInt(5+1))
+            utilsChat.sendInfo(param.message.getChannel(), "```c\n" + numbers[(int) (random.apply(6L) + 1)] + "\n```"); //Integer.toString( random.nextInt(5+1))
             return;
         }
 
         final String countStr = param.args[0];
-        int dice = Integer.parseInt(countStr);
+        long dice = Long.parseUnsignedLong(countStr);
 
         try {
             if (countStr.toLowerCase().startsWith("0x"))
-                dice = Integer.parseInt(countStr.substring(2), 16);
+                dice = Long.parseUnsignedLong(countStr.substring(2), 16);
             else if (countStr.toLowerCase().startsWith("0o"))
-                dice = Integer.parseInt(countStr.substring(2), 8);
+                dice = Long.parseUnsignedLong(countStr.substring(2), 8);
             else if (countStr.toLowerCase().startsWith("0b"))
-                dice = Integer.parseInt(countStr.substring(2), 2);
+                dice = Long.parseUnsignedLong(countStr.substring(2), 2);
         } catch (NumberFormatException e) {
             utilsChat.sendInfo(param.message.getChannel(), "**\"" + countStr + "\" is not a valid number!**\n\nas far as I know :confused:");
             return;
         }
 
         try {
-            //int dice = Integer.parseInt(param.args[0]);
-            int randomnumber = random.nextInt(dice);
+            long randomnumber = random.apply(dice);
             StringBuilder asciinumber = new StringBuilder("```c\n");
-            for (char c : Integer.toString(randomnumber).toCharArray()) {
+            for (char c : Long.toString(randomnumber).toCharArray()) {
                 asciinumber.append(numbers[Integer.parseInt(String.valueOf(c))]);
                 asciinumber.append("\n\n");
             }

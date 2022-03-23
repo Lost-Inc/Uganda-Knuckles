@@ -9,6 +9,8 @@ import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
 import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
@@ -16,6 +18,7 @@ import net.dv8tion.jda.api.events.message.react.MessageReactionRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -97,18 +100,24 @@ public final class ChatCommandPoll extends BotCommand {
 
         param.message.delete().complete();
 
-
     }
 
     private static class ReactionListener extends ListenerAdapter {
         @Override
         public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent event) {
-
+            Message retrmsg = event.retrieveMessage().complete();
+            if (event.getReactionEmote().getEmoji().equals("📌")) {
+                if(!retrmsg.isPinned())
+                    retrmsg.pin().complete();
+                else
+                    retrmsg.unpin().complete();
+                event.getReaction().removeReaction(event.getUser()).complete();
+            }
         }
 
         @Override
         public void onGuildMessageReactionRemove(@NotNull GuildMessageReactionRemoveEvent event) {
 
+            }
         }
     }
-}

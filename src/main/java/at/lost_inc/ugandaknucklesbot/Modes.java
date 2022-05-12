@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public enum Modes {
     DEBUG(1 << 0),
-    DEBUG_DB(1 << 1),
+    DEBUG_DB(1 << 0),
     PRODUCTION(1 << 2);
 
     /**

@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Author("sudo200")
-public class SimpleEventListenerService implements EventListenerService {
+public final class SimpleEventListenerService implements EventListenerService {
     private final List<EventListener> listeners = new ArrayList<>();
 
     @Override

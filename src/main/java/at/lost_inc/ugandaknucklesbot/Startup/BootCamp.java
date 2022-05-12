@@ -6,6 +6,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.Core.Plugins.PluginLoader;
 import at.lost_inc.ugandaknucklesbot.Listeners.GuildVoiceListener;
 import at.lost_inc.ugandaknucklesbot.Listeners.MessageReceiveListener;
 import at.lost_inc.ugandaknucklesbot.Listeners.SlashCommandEventListener;
+import at.lost_inc.ugandaknucklesbot.Modes;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerManagerService;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.SimpleAudioPlayerManagerService;
@@ -56,7 +57,7 @@ public final class BootCamp {
         return phase;
     }
 
-    public static void initialize(@NotNull JDA jda) {
+    public static void initialize(@NotNull JDA jda, @NotNull Modes mode) {
         logger.info("Loading dynamic commands...");
         final File basePath = new File(System.getProperty("user.dir") + File.separator + "plugins");
         if (!basePath.exists())

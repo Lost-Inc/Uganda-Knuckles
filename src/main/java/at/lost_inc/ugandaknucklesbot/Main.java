@@ -4,6 +4,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.*;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.*;
 import at.lost_inc.ugandaknucklesbot.Startup.BootCamp;
 import at.lost_inc.ugandaknucklesbot.Util.Author;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.requests.GatewayIntent;
@@ -16,9 +17,12 @@ import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Optional;
 
 @Author("sudo200")
 public final class Main {
+    private static final Modes mode = Modes.getFromString(System.getProperty("at.lost_inc.ugandaknucklesbot.mode"));
+
     private Main() {
     }
 
@@ -26,6 +30,7 @@ public final class Main {
         final Logger logger = LoggerFactory.getLogger(Main.class);
         final Collection<GatewayIntent> gatewayIntents = new ArrayList<>();
         gatewayIntents.add(GatewayIntent.GUILD_MEMBERS);
+
         try {
             final JDA jda = JDABuilder.createDefault(System.getenv("DISCORDBOTTOKEN"))
                     .enableIntents(gatewayIntents)
@@ -81,7 +86,7 @@ public final class Main {
                     VoiceCommandJump.class
             );
 
-            BootCamp.initialize(jda);
+            BootCamp.initialize(jda, mode);
         } catch (LoginException e) {
             logger.error("Couldn't log in!", e);
             System.exit(3);

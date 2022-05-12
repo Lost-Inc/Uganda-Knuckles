@@ -21,8 +21,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Author("sudo200")
-public final class SlashCommandMessageAdapter implements Message {
-    private final SlashCommandEvent event;
+public class SlashCommandMessageAdapter implements Message {
+    protected final SlashCommandEvent event;
 
     public SlashCommandMessageAdapter(SlashCommandEvent event) {
         this.event = event;

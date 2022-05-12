@@ -4,16 +4,20 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Util.Author;
+import at.lost_inc.ugandaknucklesbot.Util.SlashCommandMessageAdapter;
 import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.interactions.InteractionHook;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Class containing the logic making the bot tick
@@ -76,8 +80,23 @@ public final class CommandHandler {
         return okay;
     }
 
+    public void handle(@NotNull SlashCommandEvent event) {
+        handle(new SlashCommandMessageAdapter(event) {
+            @Override
+            public @NotNull String getContentRaw() {
+                if(!event.isAcknowledged()) {
+                    final InteractionHook action = event.reply(EmbedBuilder.ZERO_WIDTH_SPACE).complete();
+                    action.deleteOriginal().queueAfter(100, TimeUnit.MILLISECONDS);
+                }
+                return getJDA().getSelfUser().getAsMention() + " " + super.getContentRaw();
+            }
+        });
+    }
+
     // method called by MessageReceiveListener
     public void handle(@NotNull Message event) {
+        logger.trace("Message from guild {}: \"{}\"", event.getGuild().getId(), event.getContentRaw().trim());
+
         // Object, that gets passed to the command classes
         CommandParameter param = new CommandParameter();
         String[] args = event

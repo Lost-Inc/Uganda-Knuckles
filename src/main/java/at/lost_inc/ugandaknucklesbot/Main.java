@@ -4,29 +4,37 @@ import at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat.*;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice.*;
 import at.lost_inc.ugandaknucklesbot.Startup.BootCamp;
 import at.lost_inc.ugandaknucklesbot.Util.Author;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.impl.SimpleLogger;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 
 @Author("sudo200")
 public final class Main {
-    private static final Modes mode = Modes.getFromString(System.getProperty("at.lost_inc.ugandaknucklesbot.mode"));
+    private static final Modes mode = Modes.getFromString(System.clearProperty("at.lost_inc.ugandaknucklesbot.mode"));
 
     private Main() {
     }
 
     public static void main(String[] args) throws IOException {
+        System.setProperty("at.lost_inc.ugandaknucklesbot.mode", mode.toString());
+
+        if(mode.equals(Modes.DEBUG) || mode.equals(Modes.DEBUG_DB))
+            System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "debug");
+
+        if(mode.equals(Modes.TRACE))
+            System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "trace");
+
         final Logger logger = LoggerFactory.getLogger(Main.class);
         final Collection<GatewayIntent> gatewayIntents = new ArrayList<>();
         gatewayIntents.add(GatewayIntent.GUILD_MEMBERS);
@@ -87,6 +95,20 @@ public final class Main {
             );
 
             BootCamp.initialize(jda, mode);
+
+            // BEGIN TEMP
+            /*
+                This code registers a /-cmd for our testing guild, and removes it,
+                when shutting down.
+             */
+            final Guild guild = jda.getGuildById(705433083729412128L);
+            final long cmdId = guild.upsertCommand("help", "Show help")
+                    .complete().getIdLong();
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                guild.deleteCommandById(cmdId).complete();
+            }));
+            // END TEMP
+
         } catch (LoginException e) {
             logger.error("Couldn't log in!", e);
             System.exit(3);

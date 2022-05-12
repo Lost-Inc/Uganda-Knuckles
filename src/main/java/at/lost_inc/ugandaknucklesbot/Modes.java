@@ -7,6 +7,7 @@ import java.util.Locale;
 import java.util.Objects;
 
 public enum Modes {
+    TRACE(1 << 0),
     DEBUG(1 << 0),
     DEBUG_DB(1 << 0),
     PRODUCTION(1 << 2);

@@ -157,9 +157,6 @@ public final class BootCamp {
         if(mode.getStability() < Modes.PRODUCTION.getStability()) {// Test mode
             final Guild guild = jda.getGuildById(705433083729412128L);// Our test guild
             guild.updateCommands().addCommands(cmds).complete();
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                guild.updateCommands().complete();
-            }));
         } else { // Production mode
             jda.updateCommands().addCommands(cmds).complete();
         }

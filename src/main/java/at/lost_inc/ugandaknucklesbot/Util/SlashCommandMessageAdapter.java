@@ -138,7 +138,7 @@ public class SlashCommandMessageAdapter implements Message {
     public String getContentRaw() {
         return String.join(
                 " ",
-                event.getName(),
+                event.getCommandPath().replaceAll("/", " "),
                 event.getOptions().stream()
                         .map(OptionMapping::getAsString)
                         .collect(Collectors.joining(" "))

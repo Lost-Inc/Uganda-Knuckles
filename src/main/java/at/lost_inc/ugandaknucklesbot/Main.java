@@ -6,7 +6,6 @@ import at.lost_inc.ugandaknucklesbot.Startup.BootCamp;
 import at.lost_inc.ugandaknucklesbot.Util.Author;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import net.dv8tion.jda.api.utils.ChunkingFilter;
 import net.dv8tion.jda.api.utils.MemberCachePolicy;
@@ -95,20 +94,6 @@ public final class Main {
             );
 
             BootCamp.initialize(jda, mode);
-
-            // BEGIN TEMP
-            /*
-                This code registers a /-cmd for our testing guild, and removes it,
-                when shutting down.
-             */
-            final Guild guild = jda.getGuildById(705433083729412128L);
-            final long cmdId = guild.upsertCommand("help", "Show help")
-                    .complete().getIdLong();
-            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-                guild.deleteCommandById(cmdId).complete();
-            }));
-            // END TEMP
-
         } catch (LoginException e) {
             logger.error("Couldn't log in!", e);
             System.exit(3);

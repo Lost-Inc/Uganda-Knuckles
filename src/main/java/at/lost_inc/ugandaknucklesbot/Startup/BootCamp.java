@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Startup;
 
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
+import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandHandler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Plugins.PluginLoader;
 import at.lost_inc.ugandaknucklesbot.Listeners.GuildVoiceListener;
@@ -25,6 +26,10 @@ import com.google.gson.Gson;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.entities.Guild;
+import net.dv8tion.jda.api.interactions.commands.OptionType;
+import net.dv8tion.jda.api.interactions.commands.build.CommandData;
+import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -125,9 +130,6 @@ public final class BootCamp {
         jda.addEventListener(
                 (Object[]) ServiceManager.provideUnchecked(EventListenerService.class).get()
         );
-        logger.info("Registering commands...");
-        handler.register(commands.toArray(new BotCommand[0]));
-        logger.info("Registration complete!");
         logger.info("Waiting for JDA to finish its start-up...");
         try {
             jda.awaitReady();
@@ -135,6 +137,34 @@ public final class BootCamp {
             logger.error("Interrupted while waiting, cannot proceed!");
             System.exit(3);
         }
+        logger.info("Registering commands...");
+        handler.register(commands.toArray(new BotCommand[0]));
+
+        final List<CommandData> cmds = new ArrayList<>();
+        for (final BotCommand cmd : commands) {
+            final Command props = cmd.getClass().getAnnotation(Command.class);
+            cmds.add(
+                    new CommandData(
+                            props.name(), props.help().substring(0, Math.min(props.help().length(), 97)) + "...")
+                            .addOptions(new OptionData(
+                                    OptionType.STRING,
+                                    "args",
+                                    "Arguments for the command"
+                            ))
+            );
+        }
+
+        if(mode.getStability() < Modes.PRODUCTION.getStability()) {// Test mode
+            final Guild guild = jda.getGuildById(705433083729412128L);// Our test guild
+            guild.updateCommands().addCommands(cmds).complete();
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                guild.updateCommands().complete();
+            }));
+        } else { // Production mode
+            jda.updateCommands().addCommands(cmds).complete();
+        }
+
+        logger.info("Registration complete!");
         phase = Phases.RUNNING;
         logger.info("Done! Bot running!");
     }

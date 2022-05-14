@@ -10,7 +10,7 @@ public enum Modes {
     TRACE(1 << 0),
     DEBUG(1 << 0),
     DEBUG_DB(1 << 0),
-    PRODUCTION(1 << 2);
+    PRODUCTION(1 << 4);
 
     /**
      * Returns the corresponding constant named after the given string.

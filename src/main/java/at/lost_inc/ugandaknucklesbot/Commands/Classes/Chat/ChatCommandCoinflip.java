@@ -37,6 +37,11 @@ public final class ChatCommandCoinflip extends BotCommand {
         final EmbedBuilder builder = utilsChat.getDefaultEmbed();
 
         builder.setTitle(heads ? "Heads" : "Tails");
+        builder.setImage(
+                heads ?
+                        "https://cdn.discordapp.com/attachments/975045626549108786/975051628715601990/Coin_heads.png":
+                        "https://cdn.discordapp.com/attachments/975045626549108786/975051628954652732/Coin_tails.png"
+        );
 
         utilsChat.send(param.message.getChannel(), builder.build());
     }

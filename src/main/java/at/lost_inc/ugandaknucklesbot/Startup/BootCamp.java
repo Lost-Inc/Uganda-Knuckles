@@ -81,7 +81,7 @@ public final class BootCamp {
             try {
                 commands.add(commandClass.newInstance());
             } catch (InstantiationException | IllegalAccessException e) {
-                logger.warn(String.format("Exception while constructing class %s:", commandClass.getName()), e);
+                logger.warn("Exception while constructing class {}: {}", commandClass.getName(), e.getLocalizedMessage());
             }
         logger.info("Construction complete");
         phase = Phases.INITIALIZATION;

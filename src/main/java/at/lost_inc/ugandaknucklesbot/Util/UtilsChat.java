@@ -1,6 +1,7 @@
 package at.lost_inc.ugandaknucklesbot.Util;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.utils.AttachmentOption;
 import org.jetbrains.annotations.NotNull;
@@ -14,6 +15,11 @@ import java.io.File;
  */
 @Author("sudo200")
 public class UtilsChat {
+    private final JDA jda;
+
+    public UtilsChat(@NotNull JDA jda) {
+        this.jda = jda;
+    }
 
     /**
      * Sends a string into a text channel
@@ -81,5 +87,9 @@ public class UtilsChat {
     // returns true, if string is a valid user mention
     public final boolean isMention(@NotNull String q) {
         return q.matches("^<@!?[0-9]{18}>$");
+    }
+
+    public final boolean isSelf(User user) {
+        return user != null && jda.getSelfUser().getIdLong() == user.getIdLong();
     }
 }

@@ -28,10 +28,10 @@ public final class Main {
     public static void main(String[] args) throws IOException {
         System.setProperty("at.lost_inc.ugandaknucklesbot.mode", mode.toString());
 
-        if(mode.equals(Modes.DEBUG) || mode.equals(Modes.DEBUG_DB))
+        if (mode.equals(Modes.DEBUG) || mode.equals(Modes.DEBUG_DB))
             System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "debug");
 
-        if(mode.equals(Modes.TRACE))
+        if (mode.equals(Modes.TRACE))
             System.setProperty(SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "trace");
 
         final Logger logger = LoggerFactory.getLogger(Main.class);

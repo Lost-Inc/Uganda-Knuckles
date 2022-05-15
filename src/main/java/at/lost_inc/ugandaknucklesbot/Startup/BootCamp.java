@@ -87,7 +87,7 @@ public final class BootCamp {
         phase = Phases.INITIALIZATION;
         logger.info("Initializing core services...");
         ServiceManager.setProvider(Random.class, new Random());
-        ServiceManager.setProvider(UtilsChat.class, new UtilsChat());
+        ServiceManager.setProvider(UtilsChat.class, new UtilsChat(jda));
         ServiceManager.setProvider(UtilsVoice.class, new UtilsVoice());
         ServiceManager.setProvider(Gson.class, new Gson());
 
@@ -140,7 +140,14 @@ public final class BootCamp {
         logger.info("Registering commands...");
         handler.register(commands.toArray(new BotCommand[0]));
 
-        final List<CommandData> cmds = new ArrayList<>();
+        final List<CommandData> cmds = new ArrayList<>(Arrays.asList(
+                new CommandData("help", "Show help")
+                        .addOptions(new OptionData(
+                                OptionType.STRING,
+                                "args",
+                                "Arguments for the command"
+                        ))
+        ));
         for (final BotCommand cmd : commands) {
             final Command props = cmd.getClass().getAnnotation(Command.class);
             cmds.add(
@@ -154,7 +161,7 @@ public final class BootCamp {
             );
         }
 
-        if(mode.getStability() < Modes.PRODUCTION.getStability()) {// Test mode
+        if (mode.getStability() < Modes.PRODUCTION.getStability()) {// Test mode
             final Guild guild = jda.getGuildById(705433083729412128L);// Our test guild
             guild.updateCommands().addCommands(cmds).complete();
         } else { // Production mode

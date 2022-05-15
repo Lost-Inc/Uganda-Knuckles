@@ -9,18 +9,16 @@ import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
-import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.MessageReaction;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionAddEvent;
-import net.dv8tion.jda.api.events.message.guild.react.GuildMessageReactionRemoveEvent;
-import net.dv8tion.jda.api.events.message.react.MessageReactionAddEvent;
-import net.dv8tion.jda.api.events.message.react.MessageReactionRemoveEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Author("sudo200")
 @Command(
@@ -34,12 +32,13 @@ import java.util.concurrent.atomic.AtomicInteger;
 )
 
 public final class ChatCommandPoll extends BotCommand {
+    private final AtomicReference<Set<Long>> msgIds = new AtomicReference<>(new HashSet<>());
     private UtilsChat utilsChat;
 
     @Override
     public void onPostInitialization() {
         utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        ServiceManager.provideUnchecked(EventListenerService.class).registerListener(new ReactionListener());
+        ServiceManager.provideUnchecked(EventListenerService.class).registerListener(new ReactionListener(msgIds, utilsChat));
     }
 
     @Override
@@ -95,29 +94,35 @@ public final class ChatCommandPoll extends BotCommand {
         }
 
         final Message msg = utilsChat.send(param.message.getChannel(), pollembed.build());
+        msgIds.get().add(msg.getIdLong());
+
         for (int i = 0; i < x.get(); i++)
             msg.addReaction(reactions[i]).complete();
-
-        param.message.delete().complete();
-
     }
 
     private static class ReactionListener extends ListenerAdapter {
+        final AtomicReference<Set<Long>> msgIds;
+        final UtilsChat utilsChat;
+
+        public ReactionListener(@NotNull AtomicReference<Set<Long>> msgIds, @NotNull UtilsChat utilsChat) {
+            this.msgIds = msgIds;
+            this.utilsChat = utilsChat;
+        }
+
         @Override
         public void onGuildMessageReactionAdd(@NotNull GuildMessageReactionAddEvent event) {
-            Message retrmsg = event.retrieveMessage().complete();
-            if (event.getReactionEmote().getEmoji().equals("📌")) {
-                if(!retrmsg.isPinned())
-                    retrmsg.pin().complete();
-                else
-                    retrmsg.unpin().complete();
-                event.getReaction().removeReaction(event.getUser()).complete();
-            }
-        }
+            final Message msg = event.retrieveMessage().complete();
+            final User eventUser = event.getUser();
+            if (!msgIds.get().contains(msg.getIdLong()) || utilsChat.isSelf(eventUser))
+                return;
+            int counter = 0;
 
-        @Override
-        public void onGuildMessageReactionRemove(@NotNull GuildMessageReactionRemoveEvent event) {
-
-            }
+            for (final MessageReaction reaction : msg.getReactions())
+                for (User user : reaction.retrieveUsers().complete())
+                    if (user.getIdLong() == eventUser.getIdLong() && counter++ >= 1) {
+                        reaction.removeReaction(eventUser).queue();
+                        return;
+                    }
         }
     }
+}

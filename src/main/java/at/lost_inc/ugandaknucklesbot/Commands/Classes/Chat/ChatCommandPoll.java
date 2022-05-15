@@ -6,6 +6,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.Event.EventListenerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.Author;
+import at.lost_inc.ugandaknucklesbot.Util.MessageReactions;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
@@ -39,6 +40,7 @@ public final class ChatCommandPoll extends BotCommand {
     public void onPostInitialization() {
         utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
         ServiceManager.provideUnchecked(EventListenerService.class).registerListener(new ReactionListener(msgIds, utilsChat));
+        ServiceManager.provideUnchecked(EventListenerService.class).registerListener(new MessageReactions());
     }
 
     @Override

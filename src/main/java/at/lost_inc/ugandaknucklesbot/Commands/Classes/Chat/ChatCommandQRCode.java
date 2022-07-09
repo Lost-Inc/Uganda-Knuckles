@@ -20,7 +20,7 @@ import java.util.Random;
 
 @Command(
         name = "qr",
-        help = "Generates a QR code with your string inside it!\n\nWhy? Because links are boring!",
+        help = "Generates a QR code with your string inside it!",
         categories = {
                 BotCommand.ICategories.IMAGE,
                 BotCommand.ICategories.CHAT, BotCommand.ICategories.UTIL, BotCommand.ICategories.FUN
@@ -39,7 +39,7 @@ public final class ChatCommandQRCode extends BotCommand {
     @Override
     public void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0) {
-            utilsChat.sendInfo(param.message.getChannel(), "Please mate, tell me __what__ to encode!\n\nLosin' my hope....");
+            utilsChat.sendInfo(param.message.getChannel(), "Please append some text for me to encode...");
             return;
         }
 
@@ -49,7 +49,7 @@ public final class ChatCommandQRCode extends BotCommand {
         try {
             matrix = writer.encode(String.join(" ", param.args), BarcodeFormat.QR_CODE, 512, 512);
         } catch (WriterException e) {
-            utilsChat.sendInfo(param.message.getChannel(), "Oof!\n\nThe QR code factory blew up!");
+            utilsChat.sendInfo(param.message.getChannel(), "The QR code factory blew up!");
             return;
         }
         BufferedImage image = MatrixToImageWriter.toBufferedImage(matrix);
@@ -59,7 +59,7 @@ public final class ChatCommandQRCode extends BotCommand {
             temp = File.createTempFile(Integer.toString(random.nextInt(899) + 100), ".png");
             ImageIO.write(image, "png", temp);
         } catch (IOException e) {
-            utilsChat.sendInfo(param.message.getChannel(), "Oof!\n\nCould not package your QR code into a file!");
+            utilsChat.sendInfo(param.message.getChannel(), "Could not package your QR code into a file!");
             return;
         }
 

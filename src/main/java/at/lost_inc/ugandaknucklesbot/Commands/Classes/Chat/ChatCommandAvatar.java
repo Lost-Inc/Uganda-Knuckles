@@ -31,13 +31,13 @@ public final class ChatCommandAvatar extends BotCommand {
     @Override
     public void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0 || !utilsChat.isMention(param.args[0])) {
-            utilsChat.sendInfo(param.message.getChannel(), "**How am I supposed to know the dude, if you don't even mention him?**");
+            utilsChat.sendInfo(param.message.getChannel(), "**Mention the one, who's avatar shall be retrieved**");
             return;
         }
 
         Member member = utilsChat.getMemberByMention(param.args[0], param.message.getGuild());
         if (member == null) {
-            utilsChat.sendInfo(param.message.getChannel(), "**Could not getPlayer User for some reason**\nTry to make him send a message or join a voice channel");
+            utilsChat.sendInfo(param.message.getChannel(), "**Could not get User for some reason**\nTry make him send a message or join a voice channel");
             return;
         }
 
@@ -46,7 +46,7 @@ public final class ChatCommandAvatar extends BotCommand {
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
 
         if (url == null)
-            builder.setDescription("**That guy seems to not have a profile picture!**");
+            builder.setDescription("**This user seems to not have a profile picture!**");
         else
             builder.setImage(url);
 

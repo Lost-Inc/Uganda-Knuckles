@@ -5,6 +5,8 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
@@ -70,8 +72,11 @@ public final class ChatCommand8Ball extends BotCommand {
         }
 
         String q = String.join(" ", param.args);
-        if (q.length() > 255) {
-            utilsChat.sendInfo(param.message.getChannel(), "Sry, the 8ball has no interest in questions longer than 255 characters!");
+        if (q.length() > MessageEmbed.TITLE_MAX_LENGTH) {
+            utilsChat.sendInfo(
+                    param.message.getChannel(),
+                    String.format("Sry, the 8ball has no interest in questions longer than %d characters!", MessageEmbed.TITLE_MAX_LENGTH - 1)
+            );
             return;
         }
 

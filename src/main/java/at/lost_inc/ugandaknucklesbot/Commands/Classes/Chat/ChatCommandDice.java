@@ -93,20 +93,14 @@ public final class ChatCommandDice extends BotCommand {
     @Override
     public void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0) {
-            utilsChat.sendInfo(param.message.getChannel(), "```c\n" + numbers[(int) (random.apply(6L) + 1)] + "\n```"); //Integer.toString( random.nextInt(5+1))
+            utilsChat.sendInfo(param.message.getChannel(), "```c\n" + numbers[(int) (random.apply(6L) + 1)] + "\n```");
             return;
         }
 
-        final String countStr = param.args[0];
-        long dice = Long.parseUnsignedLong(countStr);
-
+        final String countStr = param.args[0].toLowerCase().trim();
+        long dice;
         try {
-            if (countStr.toLowerCase().startsWith("0x"))
-                dice = Long.parseUnsignedLong(countStr.substring(2), 16);
-            else if (countStr.toLowerCase().startsWith("0o"))
-                dice = Long.parseUnsignedLong(countStr.substring(2), 8);
-            else if (countStr.toLowerCase().startsWith("0b"))
-                dice = Long.parseUnsignedLong(countStr.substring(2), 2);
+            dice = Long.parseUnsignedLong(countStr);
         } catch (NumberFormatException e) {
             utilsChat.sendInfo(param.message.getChannel(), "**\"" + countStr + "\" is not a valid number!**\n\nas far as I know :confused:");
             return;
@@ -125,7 +119,7 @@ public final class ChatCommandDice extends BotCommand {
         } catch (NumberFormatException e) {
             utilsChat.sendInfo(param.message.getChannel(), param.args[0] + " is not a number!");
         } catch (IllegalArgumentException e) {
-            utilsChat.sendInfo(param.message.getChannel(), "Number has to be positive!\n\nLike your attitude");
+            utilsChat.sendInfo(param.message.getChannel(), "The number has to be positive!\n\nLike your attitude");
         }
 
 

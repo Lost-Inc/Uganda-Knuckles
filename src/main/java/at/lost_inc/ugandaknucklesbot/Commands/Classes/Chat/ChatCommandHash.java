@@ -38,7 +38,7 @@ public final class ChatCommandHash extends BotCommand {
         if (param.args.length == 0) {
             utilsChat.sendInfo(
                     channel,
-                    "You wanna hash to void?\n" +
+                    "You wanna hash the void?\n" +
                             "Sure, if you tell me which algorithm to use..."
             );
             return;
@@ -51,7 +51,7 @@ public final class ChatCommandHash extends BotCommand {
         )) {
             utilsChat.sendInfo(
                     channel,
-                    "You really thought, i would hash to void?\n" +
+                    "You really thought, i would hash the void?\n" +
                             "Naaa!"
             );
             return;

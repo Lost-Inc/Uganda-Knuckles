@@ -11,7 +11,7 @@ import org.jetbrains.annotations.NotNull;
 @Command(
         name = "inator",
         help = "Converts every word into a doofensmirtz quote\n" +
-                "*We are not responable for quotes, which aren't grammatically correct* :upside_down:",
+                "*Behold, the doofensmirtzquoteinator!* :upside_down:",
         categories = {
                 // Main category
                 BotCommand.ICategories.FUN,

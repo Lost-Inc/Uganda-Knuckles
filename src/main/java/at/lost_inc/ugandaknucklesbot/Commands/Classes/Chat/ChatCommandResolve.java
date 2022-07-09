@@ -12,7 +12,7 @@ import java.net.UnknownHostException;
 
 @Command(
         name = "resolve",
-        help = "Performs a dns lookup on the given hostname\n\nYes, I know, its very specific!",
+        help = "Performs a dns lookup on the given hostname.\n\nIf you have no idea what I'm talking about, this command is not for you...",
         categories = {
                 // Main category
                 BotCommand.ICategories.SEARCH,

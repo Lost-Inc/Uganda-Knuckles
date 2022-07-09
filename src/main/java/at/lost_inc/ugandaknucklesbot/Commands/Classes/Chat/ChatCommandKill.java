@@ -24,7 +24,7 @@ import java.util.Random;
 public final class ChatCommandKill extends BotCommand {
     private final String[] sentences = new String[]{
             "%s died by getting killed, cringe!",
-            "%s was to christian",
+            "%s was to religious",
             "%s expired, because they were an anti-vaxxer",
             "%s was accused of anti-soviet behavior, and sentenced by the court to be shot",
             "%s was a WW1-Soldier in Verdun",

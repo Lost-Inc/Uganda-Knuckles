@@ -50,7 +50,7 @@ public final class ChatCommandRandomDog extends BotCommand {
         } catch (Exception e) {
             utilsChat.sendInfo(
                     param.message.getChannel(),
-                    "**Something went severely wrong**\nBlame your neighbor's cat!\n\n" + e
+                    "**Failed to get hot dogs**"
             );
         }
     }

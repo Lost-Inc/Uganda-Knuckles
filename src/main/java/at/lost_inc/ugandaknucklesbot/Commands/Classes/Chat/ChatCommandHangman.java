@@ -27,7 +27,7 @@ import java.util.Random;
         }
 )
 public final class ChatCommandHangman extends BotCommand {
-    private static final String[] guessWords = new String[]{
+    private static final String[] guessWords = new String[] {
             "abruptly",
             "absurd",
             "abyss",

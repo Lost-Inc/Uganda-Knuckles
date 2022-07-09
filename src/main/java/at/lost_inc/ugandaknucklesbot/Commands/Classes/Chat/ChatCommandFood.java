@@ -50,7 +50,7 @@ public final class ChatCommandFood extends BotCommand {
         } catch (Exception e) {
             utilsChat.sendInfo(
                     param.message.getChannel(),
-                    "**Something went severely wrong**\nBlame your cook!\nIf you have one\n\n" + e
+                    "**Failed to retrieve food!**"
             );
         }
     }

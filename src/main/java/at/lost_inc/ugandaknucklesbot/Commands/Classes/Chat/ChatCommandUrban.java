@@ -49,7 +49,7 @@ public final class ChatCommandUrban extends BotCommand {
     @Override
     public void execute(@NotNull CommandParameter param) {
         if (param.args.length == 0) {
-            utilsChat.sendInfo(param.message.getChannel(), "Mate, please, what do you want me to search?");
+            utilsChat.sendInfo(param.message.getChannel(), "What should I search?");
             return;
         }
 
@@ -81,7 +81,7 @@ public final class ChatCommandUrban extends BotCommand {
         } catch (Exception e) {
             utilsChat.sendInfo(
                     param.message.getChannel(),
-                    "**Something went severely wrong**\nBlame your neighbor!\n\n" + e
+                    "**Something went severely wrong**\n||Like my life...||"
             );
         }
 

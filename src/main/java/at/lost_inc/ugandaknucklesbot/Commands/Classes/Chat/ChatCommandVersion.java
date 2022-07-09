@@ -16,7 +16,7 @@ import java.util.Objects;
 
 @Command(
         name = "version",
-        help = "Prints out info about the bot, and credits it's devs",
+        help = "Prints out info about me, and credits my devs",
         categories = {
                 BotCommand.ICategories.MISC,
                 BotCommand.ICategories.CHAT

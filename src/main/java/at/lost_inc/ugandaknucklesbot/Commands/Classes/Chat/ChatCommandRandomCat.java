@@ -50,7 +50,7 @@ public final class ChatCommandRandomCat extends BotCommand {
         } catch (Exception e) {
             utilsChat.sendInfo(
                     param.message.getChannel(),
-                    "**Something went severely wrong**\nBlame your neighbor!\n\n" + e
+                    "**Failed to get pussies**"
             );
         }
 

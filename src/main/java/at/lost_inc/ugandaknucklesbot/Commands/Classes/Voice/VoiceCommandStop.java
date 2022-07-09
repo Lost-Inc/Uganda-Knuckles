@@ -5,10 +5,8 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import org.jetbrains.annotations.NotNull;
 
-@Author("sudo200")
 @Command(
         name = "stop",
         help = "Stops playing audio (if playing that is) __and deletes queue__",

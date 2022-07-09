@@ -1,6 +1,5 @@
 package at.lost_inc.ugandaknucklesbot.Service;
 
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -19,7 +18,6 @@ import java.util.Optional;
  * have an interface with method definitions, and a class
  * with its default implementation.
  */
-@Author("sudo200")
 public final class ServiceManager {
     /**
      * Stores service instances by their class.

@@ -3,7 +3,6 @@ package at.lost_inc.ugandaknucklesbot.Service.Audio;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler.VoiceAudioSendHandler;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import net.dv8tion.jda.api.audio.AudioSendHandler;
@@ -16,7 +15,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 
-@Author("sudo200")
 public final class SimpleAudioPlayerService implements AudioPlayerService {
     private final AudioPlayerManager playerManager = ServiceManager.provideUnchecked(AudioPlayerManagerService.class).get();
     private final Map<Guild, Map.Entry<AtomicReference<AudioPlayer>, Map.Entry<AtomicReference<TrackScheduler>, AtomicReference<AudioSendHandler>>>> map = new HashMap<>();

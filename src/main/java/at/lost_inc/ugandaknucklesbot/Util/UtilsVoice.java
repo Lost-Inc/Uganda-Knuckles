@@ -8,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-@Author("sudo200")
 public class UtilsVoice {
     /**
      * Gets voicestate of user from guild

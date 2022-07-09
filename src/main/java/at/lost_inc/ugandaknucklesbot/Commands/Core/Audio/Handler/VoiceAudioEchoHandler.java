@@ -1,6 +1,5 @@
 package at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler;
 
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import net.dv8tion.jda.api.audio.AudioReceiveHandler;
 import net.dv8tion.jda.api.audio.AudioSendHandler;
 import net.dv8tion.jda.api.audio.CombinedAudio;
@@ -15,7 +14,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  *
  * @author sudo200
  */
-@Author("sudo200")
 public final class VoiceAudioEchoHandler implements AudioSendHandler, AudioReceiveHandler {
     private final Queue<byte[]> queue = new ConcurrentLinkedQueue<>();
 

@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
  *
  * @author sudo200
  */
-@Author("sudo200")
 public final class Leetify {
     private static final Hashtable<Character, Character> LeetTable = new Hashtable<>();
 

@@ -4,14 +4,12 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Function;
 
-@Author({"sudo200", "Lauze1"})
 @Command(
         name = "dice",
         help = "magic dice",

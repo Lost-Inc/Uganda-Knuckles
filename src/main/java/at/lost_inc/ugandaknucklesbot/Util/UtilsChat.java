@@ -13,7 +13,6 @@ import java.io.File;
 /**
  * Contains utility methods for interacting through text
  */
-@Author("sudo200")
 public class UtilsChat {
     private final JDA jda;
 

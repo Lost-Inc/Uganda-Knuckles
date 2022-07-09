@@ -5,7 +5,6 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.Event.EventListenerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.MessageReactions;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -21,7 +20,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
-@Author("sudo200")
 @Command(
         name = "poll",
         help = "Makes a poll\n\n" +

@@ -4,7 +4,6 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
@@ -19,7 +18,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
-@Author("sudo200")
 @Command(
         name = "qr",
         help = "Generates a QR code with your string inside it!\n\nWhy? Because links are boring!",

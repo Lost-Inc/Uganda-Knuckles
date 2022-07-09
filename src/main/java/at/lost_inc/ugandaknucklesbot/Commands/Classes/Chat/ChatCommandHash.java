@@ -5,7 +5,6 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.Hash;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -13,7 +12,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 
-@Author("sudo200")
 @Command(
         name = "hash",
         help = "Creates a hash from a string using the given algorithm,\n" +

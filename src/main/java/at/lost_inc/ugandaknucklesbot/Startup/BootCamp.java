@@ -19,7 +19,6 @@ import at.lost_inc.ugandaknucklesbot.Service.Event.SimpleEventListenerService;
 import at.lost_inc.ugandaknucklesbot.Service.Games.GameService;
 import at.lost_inc.ugandaknucklesbot.Service.Games.SimpleGameService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
 import com.google.gson.Gson;
@@ -41,7 +40,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-@Author("sudo200")
 public final class BootCamp {
     private static final CommandHandler handler = CommandHandler.get();
     private static final List<Class<? extends BotCommand>> commandClasses = new ArrayList<>();

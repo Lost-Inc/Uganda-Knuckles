@@ -2,7 +2,6 @@ package at.lost_inc.ugandaknucklesbot.Listeners;
 
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
@@ -18,7 +17,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Timer;
 
-@Author("sudo200")
 public final class GuildVoiceListener extends ListenerAdapter {
     private final AudioPlayerService playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
     private final HashMap<Guild, Timer> timers = new HashMap<>();

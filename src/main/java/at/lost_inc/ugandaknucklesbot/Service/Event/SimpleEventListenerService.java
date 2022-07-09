@@ -1,6 +1,5 @@
 package at.lost_inc.ugandaknucklesbot.Service.Event;
 
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import net.dv8tion.jda.api.hooks.EventListener;
 import org.jetbrains.annotations.NotNull;
 
@@ -8,7 +7,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Author("sudo200")
 public final class SimpleEventListenerService implements EventListenerService {
     private final List<EventListener> listeners = new ArrayList<>();
 

@@ -1,6 +1,5 @@
 package at.lost_inc.ugandaknucklesbot.Commands.API;
 
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -9,7 +8,6 @@ import org.jetbrains.annotations.NotNull;
  *
  * @author sudo200
  */
-@Author("sudo200")
 public abstract class BotCommand {
     /**
      * Called, when bot is in INITIALIZATION phase.

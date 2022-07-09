@@ -2,7 +2,6 @@ package at.lost_inc.ugandaknucklesbot.Commands.Core.Plugins;
 
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,6 @@ import java.util.List;
 import java.util.jar.JarFile;
 import java.util.zip.ZipEntry;
 
-@Author("sudo200")
 public final class PluginLoader {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final List<Class<BotCommand>> commandClasses = new ArrayList<>();

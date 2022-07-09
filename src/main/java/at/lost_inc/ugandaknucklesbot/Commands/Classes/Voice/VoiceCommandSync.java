@@ -20,7 +20,6 @@ import java.util.Timer;
 /* TODO
  * Add possibility to sync more than two guilds
  */
-@Author("sudo200")
 @Command(
         name = "sync",
         help = "Syncs two voicechannels on two different servers.\n\n**Why? Because we can!**",

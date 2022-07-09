@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@Author("sudo200")
 public class SlashCommandMessageAdapter implements Message {
     protected final SlashCommandEvent event;
 

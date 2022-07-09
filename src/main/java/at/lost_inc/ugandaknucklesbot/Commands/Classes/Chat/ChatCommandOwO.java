@@ -4,12 +4,10 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import de.bill.owo.OwOfy;
 import org.jetbrains.annotations.NotNull;
 
-@Author("sudo200")
 @Command(
         name = "owo",
         help = "Converts text into OwO!",

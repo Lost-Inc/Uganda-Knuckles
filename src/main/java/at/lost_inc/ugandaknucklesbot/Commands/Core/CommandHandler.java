@@ -4,7 +4,6 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import at.lost_inc.ugandaknucklesbot.Util.SlashCommandMessageAdapter;
 import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -25,7 +24,6 @@ import java.util.concurrent.TimeUnit;
  *
  * @author sudo200
  */
-@Author("sudo200")
 public final class CommandHandler {
     private static final CommandHandler instance;
 

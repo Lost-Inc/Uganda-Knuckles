@@ -1,13 +1,11 @@
 package at.lost_inc.ugandaknucklesbot.Service.Event;
 
-import at.lost_inc.ugandaknucklesbot.Util.Author;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.function.Consumer;
 
-@Author("sudo200")
 public interface EventBusService {
     /**
      * Registers a new event emitter

@@ -80,6 +80,12 @@ public final class CommandHandler {
     }
 
     public void handle(@NotNull SlashCommandEvent event) {
+        ServiceManager.provideUnchecked(UtilsChat.class).sendInfo(event.getChannel(),
+                    ":warning: **WARNING!** :warning:\n" +
+                            "Slashcommands are WIP!\n" +
+                            "If you find any issues, please report them [here](https://github.com/Lost-Inc/Uganda-Knuckles/issues)"
+                );
+
         handle(new SlashCommandMessageAdapter(event) {
             @Override
             public @NotNull String getContentRaw() {

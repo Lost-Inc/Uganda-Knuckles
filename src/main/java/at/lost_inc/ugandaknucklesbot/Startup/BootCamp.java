@@ -21,6 +21,7 @@ import at.lost_inc.ugandaknucklesbot.Service.Games.SimpleGameService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
+import at.lost_inc.ugandaknucklesbot.Util.YoutubeSearcher;
 import com.google.gson.Gson;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.OnlineStatus;
@@ -35,6 +36,8 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -77,8 +80,9 @@ public final class BootCamp {
         final List<BotCommand> commands = new ArrayList<>();
         for (Class<? extends BotCommand> commandClass : commandClasses)
             try {
-                commands.add(commandClass.newInstance());
-            } catch (InstantiationException | IllegalAccessException e) {
+                commands.add(commandClass.getConstructor().newInstance());
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException |
+                     InvocationTargetException e) {
                 logger.warn("Exception while constructing class {}: {}", commandClass.getName(), e.getLocalizedMessage());
             }
         logger.info("Construction complete");
@@ -88,6 +92,13 @@ public final class BootCamp {
         ServiceManager.setProvider(UtilsChat.class, new UtilsChat(jda));
         ServiceManager.setProvider(UtilsVoice.class, new UtilsVoice());
         ServiceManager.setProvider(Gson.class, new Gson());
+        try {
+            ServiceManager.setProvider(YoutubeSearcher.class, new YoutubeSearcher(
+                    jda.getHttpClient(),
+                    ServiceManager.provideUnchecked(Gson.class)
+            ));
+        } catch (MalformedURLException ignored) {
+        }
 
         ServiceManager.setProvider(EventListenerService.class, new SimpleEventListenerService());
 

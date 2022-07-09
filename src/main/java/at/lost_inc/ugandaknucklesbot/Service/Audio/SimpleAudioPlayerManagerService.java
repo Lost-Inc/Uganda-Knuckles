@@ -1,5 +1,6 @@
 package at.lost_inc.ugandaknucklesbot.Service.Audio;
 
+import com.github.topislavalinkplugins.topissourcemanagers.applemusic.AppleMusicSourceManager;
 import com.sedmelluq.discord.lavaplayer.format.StandardAudioDataFormats;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
@@ -11,6 +12,9 @@ public final class SimpleAudioPlayerManagerService implements AudioPlayerManager
 
     static {
         AudioSourceManagers.registerRemoteSources(manager);
+
+        manager.registerSourceManager(new AppleMusicSourceManager(null, "at", manager));
+
         manager.enableGcMonitoring();
         manager.getConfiguration().setOutputFormat(StandardAudioDataFormats.DISCORD_OPUS);
     }

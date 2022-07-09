@@ -14,7 +14,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
-import java.util.Objects;
 
 /**
  * Searches for YouTube videos using an instance of <a href="https://github.com/iv-org/invidious">Invidious</a>.
@@ -75,16 +74,16 @@ public class YoutubeSearcher {
         final Request req = new Request.Builder()
                 .url(
                         instance.getProtocol()
-                        + ':'
-                        + ((s = instance.getAuthority()) != null && !s.isEmpty()
-                        ? "//" + s : "") + testpoint
+                                + ':'
+                                + ((s = instance.getAuthority()) != null && !s.isEmpty()
+                                ? "//" + s : "") + testpoint
                 ).build();
 
         try (final Response res = httpClient.newCall(req).execute()) {
             final ResponseBody body = res.body();
-            if(body != null) body.close();
+            if (body != null) body.close();
 
-            if(!res.isSuccessful())
+            if (!res.isSuccessful())
                 throw new MalformedURLException();
         } catch (IOException e) {
             throw new MalformedURLException(e.getMessage());

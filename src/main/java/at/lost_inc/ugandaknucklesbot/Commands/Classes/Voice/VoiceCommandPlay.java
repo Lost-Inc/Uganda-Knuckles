@@ -9,9 +9,12 @@ import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
+import at.lost_inc.ugandaknucklesbot.Util.YoutubeSearcher;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.FunctionalResultHandler;
+import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
+import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
 import net.dv8tion.jda.api.audio.AudioSendHandler;
 import net.dv8tion.jda.api.entities.Guild;
@@ -21,6 +24,7 @@ import net.dv8tion.jda.api.managers.AudioManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 
 @Command(
         name = "play",
@@ -40,6 +44,7 @@ public final class VoiceCommandPlay extends BotCommand {
     private UtilsVoice utilsVoice;
     private AudioPlayerManager playerManager;
     private AudioPlayerService playerService;
+    private YoutubeSearcher searcher;
 
     @Override
     public void onPostInitialization() {
@@ -47,6 +52,7 @@ public final class VoiceCommandPlay extends BotCommand {
         playerManager = ServiceManager.provideUnchecked(AudioPlayerManagerService.class).get();
         utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
         utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
+        searcher = ServiceManager.provideUnchecked(YoutubeSearcher.class);
     }
 
     @Override
@@ -68,6 +74,8 @@ public final class VoiceCommandPlay extends BotCommand {
         final AtomicReference<AudioPlayer> player = playerService.getPlayer(guild);
         final AtomicReference<AudioSendHandler> sendHandler = playerService.getAudioHandler(guild).get();
 
+        String itemString = String.join(" ", param.args);
+
         final Runnable cb = () -> {
             if (audioManager.getConnectedChannel() == null)
                 audioManager.openAudioConnection(voiceState.getChannel());
@@ -77,20 +85,37 @@ public final class VoiceCommandPlay extends BotCommand {
             if (player.get().getPlayingTrack() == null)
                 scheduler.get().start();
         };
+        final Consumer<AudioTrack> trackConsumer = track -> {
+            scheduler.get().queue(track);
+            utilsChat.sendInfo(channel, String.format("Queued \"%s\" by \"%s\"", track.getInfo().title, track.getInfo().author));
+            cb.run();
+        };
+        final Consumer<AudioPlaylist> playlistConsumer = audioPlaylist -> {
+            scheduler.get().queue(audioPlaylist.getTracks().toArray(new AudioTrack[0]));
+            utilsChat.sendInfo(channel, String.format("Queued playlist \"%s\"", audioPlaylist.getName()));
+            cb.run();
+        };
+        final Consumer<FriendlyException> exceptionConsumer = e -> utilsChat.sendInfo(channel, e.getMessage());
+        final Runnable emptyHandler = () -> {
+            String[] IDs = searcher.search(itemString);
+            if(IDs.length == 0) {
+                utilsChat.sendInfo(channel, "**Nothing to hear here**");
+                return;
+            }
+            playerManager.loadItem(IDs[0], new FunctionalResultHandler(
+                    trackConsumer,
+                    playlistConsumer,
+                    () -> {},
+                    exceptionConsumer
+            ));
+        };
 
-        playerManager.loadItem(String.join(" ", param.args), new FunctionalResultHandler(
-                track -> {
-                    scheduler.get().queue(track);
-                    utilsChat.sendInfo(channel, String.format("Queued \"%s\" by \"%s\"", track.getInfo().title, track.getInfo().author));
-                    cb.run();
-                },
-                audioPlaylist -> {
-                    scheduler.get().queue(audioPlaylist.getTracks().toArray(new AudioTrack[0]));
-                    utilsChat.sendInfo(channel, String.format("Queued playlist \"%s\"", audioPlaylist.getName()));
-                    cb.run();
-                },
-                () -> utilsChat.sendInfo(channel, "**Nothing to hear here**"),
-                e -> utilsChat.sendInfo(channel, e.getMessage())
+
+        playerManager.loadItem(itemString, new FunctionalResultHandler(
+                trackConsumer,
+                playlistConsumer,
+                emptyHandler,
+                exceptionConsumer
         ));
     }
 }

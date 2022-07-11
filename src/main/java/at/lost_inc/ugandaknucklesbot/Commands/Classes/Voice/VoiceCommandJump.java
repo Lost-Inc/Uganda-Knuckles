@@ -45,7 +45,7 @@ public final class VoiceCommandJump extends BotCommand {
 
         final TrackScheduler scheduler = playerService.getScheduler(param.message.getGuild()).get();
         try {
-            scheduler.setTrackNum(Integer.parseInt(String.join(" ", param.args)) - 1);
+            scheduler.setTrackNum(Integer.parseUnsignedInt(String.join(" ", param.args)) - 1);
             scheduler.start();
         } catch (NumberFormatException e) {
             utilsChat.sendInfo(param.message.getChannel(), "**Whatever that is, it's not a number**");

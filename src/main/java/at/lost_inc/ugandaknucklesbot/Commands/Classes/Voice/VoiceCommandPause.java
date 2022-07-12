@@ -3,6 +3,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.API.Inject;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer;
@@ -22,12 +23,8 @@ import java.util.concurrent.atomic.AtomicReference;
         }
 )
 public final class VoiceCommandPause extends BotCommand {
+    @Inject
     private AudioPlayerService playerService;
-
-    @Override
-    public void onPostInitialization() {
-        playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
-    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

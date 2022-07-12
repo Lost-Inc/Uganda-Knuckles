@@ -3,6 +3,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.API.Inject;
 import at.lost_inc.ugandaknucklesbot.Commands.Classes.JSONTypeClasses.UrbanDictionaryAPIResponse;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -29,7 +30,9 @@ import java.nio.charset.StandardCharsets;
         }
 )
 public final class ChatCommandUrban extends BotCommand {
+    @Inject
     private UtilsChat utilsChat;
+    @Inject
     private Gson gson;
 
     private static @NotNull String encode(@NotNull String param) {
@@ -38,12 +41,6 @@ public final class ChatCommandUrban extends BotCommand {
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    @Override
-    public void onPostInitialization() {
-        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        gson = ServiceManager.provideUnchecked(Gson.class);
     }
 
     @Override

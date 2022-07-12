@@ -3,6 +3,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.API.Inject;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.entities.Message;
@@ -55,13 +56,16 @@ public final class ChatCommand8Ball extends BotCommand {
             "No front, but, yes",
             "No front, but, no",
     };
+
+    @Inject
     private UtilsChat utilsChat;
+    @Inject
     private Random rand;
 
     @Override
     public void onPostInitialization() {
-        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        rand = ServiceManager.provideUnchecked(Random.class);
+        //utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
+        //rand = ServiceManager.provideUnchecked(Random.class);
     }
 
     @Override

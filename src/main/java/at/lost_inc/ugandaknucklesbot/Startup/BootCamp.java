@@ -3,7 +3,6 @@ package at.lost_inc.ugandaknucklesbot.Startup;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandHandler;
-import at.lost_inc.ugandaknucklesbot.Commands.Core.Plugins.PluginLoader;
 import at.lost_inc.ugandaknucklesbot.Listeners.GuildVoiceListener;
 import at.lost_inc.ugandaknucklesbot.Listeners.MessageReceiveListener;
 import at.lost_inc.ugandaknucklesbot.Listeners.SlashCommandEventListener;
@@ -64,18 +63,6 @@ public final class BootCamp {
     }
 
     public static void initialize(@NotNull JDA jda, @NotNull Modes mode) {
-        logger.info("Loading dynamic commands...");
-        final File basePath = new File(System.getProperty("user.dir") + File.separator + "plugins");
-        if (!basePath.exists())
-            basePath.mkdirs();
-        try {
-            commandClasses.addAll(new PluginLoader(basePath.toPath()).getCommands());
-        } catch (IOException e) {
-            logger.warn("Couldn't load dynamic commands, plugins won't work!");
-        } catch (IllegalStateException e) {
-            logger.warn("PluginLoader didn't have a dir, aborting!");
-            System.exit(3);
-        }
         logger.info("Constructing commands...");
         final List<BotCommand> commands = new ArrayList<>();
         for (Class<? extends BotCommand> commandClass : commandClasses)

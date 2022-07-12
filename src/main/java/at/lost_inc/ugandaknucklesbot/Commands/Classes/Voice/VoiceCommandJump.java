@@ -3,9 +3,9 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
-import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import org.jetbrains.annotations.NotNull;
 
@@ -23,14 +23,10 @@ import java.util.Objects;
         }
 )
 public final class VoiceCommandJump extends BotCommand {
+    @Inject
     private UtilsChat utilsChat;
+    @Inject
     private AudioPlayerService playerService;
-
-    @Override
-    public void onPostInitialization() {
-        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
-    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

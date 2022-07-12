@@ -3,6 +3,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -23,7 +24,9 @@ import java.util.concurrent.atomic.AtomicReference;
         }
 )
 public final class VoiceCommandResume extends BotCommand {
+    @Inject
     private UtilsChat utilsChat;
+    @Inject
     private AudioPlayerService playerService;
 
     @Override

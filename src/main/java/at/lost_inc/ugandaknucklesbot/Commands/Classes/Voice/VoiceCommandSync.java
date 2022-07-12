@@ -3,8 +3,8 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.Handler.VoiceAudioEchoHandler;
-import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.Hash;
 import at.lost_inc.ugandaknucklesbot.Util.TimerTaskRunnable;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
@@ -37,16 +37,12 @@ public final class VoiceCommandSync extends BotCommand {
     private static final HashMap<String, Guild> guilds = new HashMap<>();
     private static final HashMap<Guild, VoiceChannel> vcs = new HashMap<>();
 
+    @Inject
     private Random random;
+    @Inject
     private UtilsChat utilsChat;
+    @Inject
     private UtilsVoice utilsVoice;
-
-    @Override
-    public void onPostInitialization() {
-        random = ServiceManager.provideUnchecked(Random.class);
-        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
-    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

@@ -2,6 +2,7 @@ package at.lost_inc.ugandaknucklesbot.Startup;
 
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
+import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandHandler;
 import at.lost_inc.ugandaknucklesbot.Listeners.GuildVoiceListener;
 import at.lost_inc.ugandaknucklesbot.Listeners.MessageReceiveListener;
@@ -33,14 +34,11 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InaccessibleObjectException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public final class BootCamp {
     private static final CommandHandler handler = CommandHandler.get();
@@ -95,6 +93,22 @@ public final class BootCamp {
         ServiceManager.setProvider(EventBusService.class, new SimpleEventBusService());
 
         logger.info("Initializing commands...");
+        // Dependency injection
+        for (final BotCommand command : commands)
+            for(final Field field : command.getClass().getDeclaredFields()) {
+                if(!field.isAnnotationPresent(Inject.class))
+                    continue;
+
+                try {
+                    field.setAccessible(true);
+                    final Optional<?> opt = ServiceManager.provide(field.getType());
+                    if(opt.isPresent())
+                        field.set(command, opt.get());
+                } catch (InaccessibleObjectException | SecurityException | IllegalAccessException e) {
+                    logger.warn("Couldn't inject dependency into \"{}\" in class \"{}\"!", field.getName(), command.getClass().getName());
+                }
+            }
+
         for (BotCommand cmd : commands) {
             try {
                 cmd.onInitialization();

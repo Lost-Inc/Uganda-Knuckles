@@ -3,7 +3,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
-import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -104,14 +104,12 @@ public final class ChatCommandUselessWeb extends BotCommand {
             "http://papertoilet.com/",
             "https://loopedforinfinity.com/",
     };
+
+    @Inject
     private UtilsChat utilsChat;
+    @Inject
     private Random random;
 
-    @Override
-    public void onPostInitialization() {
-        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        random = ServiceManager.provideUnchecked(Random.class);
-    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

@@ -3,10 +3,9 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
+import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
-import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerManagerService;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
-import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
 import at.lost_inc.ugandaknucklesbot.Util.YoutubeSearcher;
@@ -40,20 +39,16 @@ import java.util.function.Consumer;
         }
 )
 public final class VoiceCommandPlay extends BotCommand {
+    @Inject
     private UtilsChat utilsChat;
+    @Inject
     private UtilsVoice utilsVoice;
+    @Inject
     private AudioPlayerManager playerManager;
+    @Inject
     private AudioPlayerService playerService;
+    @Inject
     private YoutubeSearcher searcher;
-
-    @Override
-    public void onPostInitialization() {
-        playerService = ServiceManager.provideUnchecked(AudioPlayerService.class);
-        playerManager = ServiceManager.provideUnchecked(AudioPlayerManagerService.class).get();
-        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        utilsVoice = ServiceManager.provideUnchecked(UtilsVoice.class);
-        searcher = ServiceManager.provideUnchecked(YoutubeSearcher.class);
-    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

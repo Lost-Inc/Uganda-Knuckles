@@ -3,7 +3,7 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Chat;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
-import at.lost_inc.ugandaknucklesbot.Service.ServiceManager;
+import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageChannel;
@@ -56,14 +56,12 @@ public final class ChatCommandKill extends BotCommand {
             "%s hated on someone's taste",
             "%s hated minorities and was canceled on Twitter",
     };
+
+    @Inject
     private UtilsChat utilsChat;
+    @Inject
     private Random rand;
 
-    @Override
-    public void onPostInitialization() {
-        utilsChat = ServiceManager.provideUnchecked(UtilsChat.class);
-        rand = ServiceManager.provideUnchecked(Random.class);
-    }
 
     @Override
     public void execute(@NotNull CommandParameter param) {

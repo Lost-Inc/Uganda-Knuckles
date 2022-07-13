@@ -30,6 +30,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-api:1.7.36'
     implementation 'org.slf4j:slf4j-simple:1.7.36'
     implementation 'com.github.Topis-Lavalink-Plugins:Topis-Source-Managers:2.0.6'
+    implementation 'org.mongodb:mongodb-driver-sync:4.6.1'
 }
 
 jar {

@@ -17,10 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-/*
- * TODO: Add calc command (calculator); idea by Lauze1
- */
-
 public final class Main {
     private static final Modes mode = Modes.getFromString(System.clearProperty("at.lost_inc.ugandaknucklesbot.mode"));
 

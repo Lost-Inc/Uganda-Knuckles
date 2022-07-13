@@ -25,9 +25,6 @@
 ***
 ## Planned features
 * [ ] General improvements
-
-### Long term ideas
-* [ ] Add a plugin system
 ***
 ## Contributing
 Contributions, no matter how small or big, are always welcome; be worry however,\

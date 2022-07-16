@@ -4,6 +4,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.UUID;
 
 /**
  * Provides methods for hashing strings
@@ -45,7 +46,7 @@ public final class Hash {
         return getHash(sha256, "SHA-256");
     }
 
-    protected static @NotNull String getHash(@NotNull String str, @NotNull String algorithm) {
+    private static @NotNull String getHash(@NotNull String str, @NotNull String algorithm) {
         try {
             MessageDigest md = MessageDigest.getInstance(algorithm);
             byte[] array = md.digest(str.getBytes());

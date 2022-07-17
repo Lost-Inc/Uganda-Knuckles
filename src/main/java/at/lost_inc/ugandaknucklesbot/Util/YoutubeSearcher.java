@@ -69,7 +69,6 @@ public class YoutubeSearcher {
     }
 
     public YoutubeSearcher(@NotNull OkHttpClient httpClient, @NotNull Gson gson, @NotNull URL instance) throws MalformedURLException {
-        instance.toExternalForm();
         String s;
         final Request req = new Request.Builder()
                 .url(

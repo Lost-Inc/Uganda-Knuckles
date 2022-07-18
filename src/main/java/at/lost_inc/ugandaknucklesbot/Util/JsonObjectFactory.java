@@ -26,19 +26,19 @@ public final class JsonObjectFactory {
     public static @NotNull JsonObject fromObject(@NotNull Object obj) {
         final JsonObject jsonObject = new JsonObject();
 
-        for(final Field field : obj.getClass().getDeclaredFields())
+        for (final Field field : obj.getClass().getDeclaredFields())
             try {
                 field.setAccessible(true);
                 final Object fieldVal = field.get(obj);
-                if(fieldVal instanceof Number)
+                if (fieldVal instanceof Number)
                     jsonObject.addProperty(field.getName(), (Number) fieldVal);
-                else if(fieldVal instanceof String)
+                else if (fieldVal instanceof String)
                     jsonObject.addProperty(field.getName(), (String) fieldVal);
-                else if(fieldVal instanceof Character)
+                else if (fieldVal instanceof Character)
                     jsonObject.addProperty(field.getName(), (Character) fieldVal);
-                else if(fieldVal instanceof Boolean)
+                else if (fieldVal instanceof Boolean)
                     jsonObject.addProperty(field.getName(), (Boolean) fieldVal);
-                else if(fieldVal == null)
+                else if (fieldVal == null)
                     jsonObject.add(field.getName(), null);
             } catch (Exception e) {
                 logger.error("Error while building JsonObject!", e);

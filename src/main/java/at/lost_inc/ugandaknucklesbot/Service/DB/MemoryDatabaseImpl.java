@@ -1,7 +1,5 @@
 package at.lost_inc.ugandaknucklesbot.Service.DB;
 
-import at.lost_inc.ugandaknucklesbot.Util.JsonObjectFactory;
-import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.jetbrains.annotations.NotNull;
@@ -14,7 +12,7 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
 
     @Override
     public @NotNull DataStore getDataStore(String name) {
-        if(stores.containsKey(name))
+        if (stores.containsKey(name))
             return stores.get(name);
 
         final DataStore store = new MemoryDataStore();
@@ -31,18 +29,18 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
         private final Set<JsonObject> objects = Collections.synchronizedSet(new LinkedHashSet<>());
 
         private static boolean lazilyCompareObjects(@NotNull JsonObject object, @NotNull JsonObject compare) {
-            for(final Map.Entry<String, JsonElement> entry : compare.entrySet()) {
+            for (final Map.Entry<String, JsonElement> entry : compare.entrySet()) {
                 if (!object.has(entry.getKey())) // Check if object got keys from comparison
                     return false;
 
                 final JsonElement objectElement = object.get(entry.getKey());
                 final JsonElement compareElement = entry.getValue();
 
-                if(objectElement == compareElement)
+                if (objectElement == compareElement)
                     continue;
-                if(objectElement == null || compareElement == null)
+                if (objectElement == null || compareElement == null)
                     return false;
-                if(!compareElement.equals(objectElement))
+                if (!compareElement.equals(objectElement))
                     return false;
             }
             return true;
@@ -57,8 +55,8 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
         public @NotNull List<JsonObject> find(@NotNull JsonObject query) {
             final Set<String> keys = query.keySet();
             final List<JsonObject> results = new LinkedList<>();
-            for(final JsonObject object : objects)
-                if(lazilyCompareObjects(object, query))
+            for (final JsonObject object : objects)
+                if (lazilyCompareObjects(object, query))
                     results.add(object);
             return results;
         }
@@ -70,13 +68,13 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
 
         @Override
         public Optional<JsonObject> updateFirst(@NotNull JsonObject query, @NotNull JsonObject object) {
-            for(final JsonObject object1 : objects)
-                if(lazilyCompareObjects(object1, query)) {
+            for (final JsonObject object1 : objects)
+                if (lazilyCompareObjects(object1, query)) {
                     final JsonObject copyObject1 = object1.deepCopy();
-                    for(final Map.Entry<String, JsonElement> entry : object.entrySet()) {
-                        if(object1.has(entry.getKey()))
+                    for (final Map.Entry<String, JsonElement> entry : object.entrySet()) {
+                        if (object1.has(entry.getKey()))
                             object1.remove(entry.getKey());
-                        if(!entry.getValue().isJsonNull())
+                        if (!entry.getValue().isJsonNull())
                             object1.add(entry.getKey(), entry.getValue());
                     }
                     return Optional.of(copyObject1);
@@ -90,12 +88,12 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
             final List<JsonObject> results = new LinkedList<>();
 
             for (final JsonObject object1 : objects)
-                if(lazilyCompareObjects(object1, query)) {
+                if (lazilyCompareObjects(object1, query)) {
                     results.add(object1.deepCopy());
-                    for(final Map.Entry<String, JsonElement> entry : object.entrySet()) {
-                        if(object1.has(entry.getKey()))
+                    for (final Map.Entry<String, JsonElement> entry : object.entrySet()) {
+                        if (object1.has(entry.getKey()))
                             object1.remove(entry.getKey());
-                        if(!entry.getValue().isJsonNull())
+                        if (!entry.getValue().isJsonNull())
                             object1.add(entry.getKey(), entry.getValue());
                     }
                 }
@@ -105,8 +103,8 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
 
         @Override
         public Optional<JsonObject> deleteFirst(@NotNull JsonObject query) {
-            for(final JsonObject object : objects)
-                if(lazilyCompareObjects(object, query)) {
+            for (final JsonObject object : objects)
+                if (lazilyCompareObjects(object, query)) {
                     objects.remove(object);
                     return Optional.of(object);
                 }
@@ -120,7 +118,7 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
 
             objects.removeIf(object -> {
                 final boolean rm = lazilyCompareObjects(object, query);
-                if(rm) results.add(object);
+                if (rm) results.add(object);
                 return rm;
             });
 

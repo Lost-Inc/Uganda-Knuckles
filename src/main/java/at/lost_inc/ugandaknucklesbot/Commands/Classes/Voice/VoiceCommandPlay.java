@@ -3,8 +3,8 @@ package at.lost_inc.ugandaknucklesbot.Commands.Classes.Voice;
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
-import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
+import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
@@ -93,14 +93,15 @@ public final class VoiceCommandPlay extends BotCommand {
         final Consumer<FriendlyException> exceptionConsumer = e -> utilsChat.sendInfo(channel, e.getMessage());
         final Runnable emptyHandler = () -> {
             String[] IDs = searcher.search(itemString);
-            if(IDs.length == 0) {
+            if (IDs.length == 0) {
                 utilsChat.sendInfo(channel, "**Nothing to hear here**");
                 return;
             }
             playerManager.loadItem(IDs[0], new FunctionalResultHandler(
                     trackConsumer,
                     playlistConsumer,
-                    () -> {},
+                    () -> {
+                    },
                     exceptionConsumer
             ));
         };

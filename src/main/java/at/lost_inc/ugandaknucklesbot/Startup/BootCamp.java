@@ -2,8 +2,8 @@ package at.lost_inc.ugandaknucklesbot.Startup;
 
 import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
-import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.CommandHandler;
+import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
 import at.lost_inc.ugandaknucklesbot.Listeners.GuildVoiceListener;
 import at.lost_inc.ugandaknucklesbot.Listeners.MessageReceiveListener;
 import at.lost_inc.ugandaknucklesbot.Listeners.SlashCommandEventListener;
@@ -95,14 +95,14 @@ public final class BootCamp {
         logger.info("Initializing commands...");
         // Dependency injection
         for (final BotCommand command : commands)
-            for(final Field field : command.getClass().getDeclaredFields()) {
-                if(!field.isAnnotationPresent(Inject.class))
+            for (final Field field : command.getClass().getDeclaredFields()) {
+                if (!field.isAnnotationPresent(Inject.class))
                     continue;
 
                 try {
                     field.setAccessible(true);
                     final Optional<?> opt = ServiceManager.provide(field.getType());
-                    if(opt.isPresent())
+                    if (opt.isPresent())
                         field.set(command, opt.get());
                 } catch (InaccessibleObjectException | SecurityException | IllegalAccessException e) {
                     logger.warn("Couldn't inject dependency into \"{}\" in class \"{}\"!", field.getName(), command.getClass().getName());

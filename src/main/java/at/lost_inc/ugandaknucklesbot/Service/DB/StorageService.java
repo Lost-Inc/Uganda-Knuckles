@@ -11,6 +11,7 @@ public interface StorageService {
     /**
      * Get the {@link DataStore} with the given name.
      * Implicitly creates it, if non-existent.
+     *
      * @param name Name of the {@link DataStore}.
      * @return The {@link DataStore}.
      */
@@ -18,6 +19,7 @@ public interface StorageService {
 
     /**
      * Get the names of all the {@link DataStore}s.
+     *
      * @return Array of names.
      */
     @NotNull String[] getDataStores();
@@ -25,7 +27,7 @@ public interface StorageService {
     /**
      * A container for data.
      * Data can be inserted, updated, deleted and searched.
-     *
+     * <p>
      * Additionally, you can get the Object behind the DataStore directly (not recommended, implementation defined).
      */
     abstract class DataStore {
@@ -33,11 +35,17 @@ public interface StorageService {
         }
 
         public abstract void insert(JsonObject @NotNull ... object);
+
         public abstract @NotNull List<JsonObject> find(@NotNull JsonObject query);
+
         public abstract @NotNull List<JsonObject> find();
+
         public abstract Optional<JsonObject> updateFirst(@NotNull JsonObject query, @NotNull JsonObject object);
+
         public abstract List<JsonObject> updateAll(@NotNull JsonObject query, @NotNull JsonObject object);
+
         public abstract Optional<JsonObject> deleteFirst(@NotNull JsonObject query);
+
         public abstract List<JsonObject> deleteAll(@NotNull JsonObject query);
 
         public abstract Object getNativeStructure();

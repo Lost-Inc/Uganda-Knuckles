@@ -12,39 +12,6 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MemoryDatabaseImpl extends AbstractDatabaseService {
     private final Map<String, DataStore> stores = new ConcurrentHashMap<>();
 
-    public static void main(String[] args) {
-        final DataStore dataStore = new MemoryDataStore();
-        dataStore.insert(
-                JsonObjectFactory.fromObject(new Object() {
-                    String foo = "bar";
-                    long age = 69;
-                }),
-                JsonObjectFactory.fromObject(new Object() {
-                    String foo = "bar";
-                    long iq = -1;
-                }),
-                JsonObjectFactory.fromObject(new Object() {
-                    String foo = "boom";
-                    long age = 420;
-                })
-        );
-
-        dataStore.updateAll(
-                JsonObjectFactory.fromObject(new Object() {
-                    String foo = "bar";
-                }),
-                JsonObjectFactory.fromObject(new Object() {
-                    String foo = null;
-                })
-        );
-
-        final List<JsonObject> results = dataStore.find();
-        final Gson gson = new Gson();
-
-        for(final JsonObject result : results)
-            System.out.println(gson.toJson(result));
-    }
-
     @Override
     public @NotNull DataStore getDataStore(String name) {
         if(stores.containsKey(name))

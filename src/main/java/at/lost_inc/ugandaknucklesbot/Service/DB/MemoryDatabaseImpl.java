@@ -29,6 +29,15 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
                 })
         );
 
+        dataStore.updateAll(
+                JsonObjectFactory.fromObject(new Object() {
+                    String foo = "bar";
+                }),
+                JsonObjectFactory.fromObject(new Object() {
+                    String foo = null;
+                })
+        );
+
         final List<JsonObject> results = dataStore.find();
         final Gson gson = new Gson();
 
@@ -100,7 +109,8 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
                     for(final Map.Entry<String, JsonElement> entry : object.entrySet()) {
                         if(object1.has(entry.getKey()))
                             object1.remove(entry.getKey());
-                        object1.add(entry.getKey(), entry.getValue());
+                        if(!entry.getValue().isJsonNull())
+                            object1.add(entry.getKey(), entry.getValue());
                     }
                     return Optional.of(copyObject1);
                 }
@@ -118,7 +128,8 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
                     for(final Map.Entry<String, JsonElement> entry : object.entrySet()) {
                         if(object1.has(entry.getKey()))
                             object1.remove(entry.getKey());
-                        object1.add(entry.getKey(), entry.getValue());
+                        if(!entry.getValue().isJsonNull())
+                            object1.add(entry.getKey(), entry.getValue());
                     }
                 }
 

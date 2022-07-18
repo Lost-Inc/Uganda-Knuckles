@@ -38,6 +38,8 @@ public final class JsonObjectFactory {
                     jsonObject.addProperty(field.getName(), (Character) fieldVal);
                 else if(fieldVal instanceof Boolean)
                     jsonObject.addProperty(field.getName(), (Boolean) fieldVal);
+                else if(fieldVal == null)
+                    jsonObject.add(field.getName(), null);
             } catch (Exception e) {
                 logger.error("Error while building JsonObject!", e);
             }

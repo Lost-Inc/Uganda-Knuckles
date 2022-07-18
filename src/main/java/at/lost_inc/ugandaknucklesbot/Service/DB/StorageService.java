@@ -34,6 +34,7 @@ public interface StorageService {
 
         public abstract void insert(JsonObject @NotNull ... object);
         public abstract @NotNull List<JsonObject> find(@NotNull JsonObject query);
+        public abstract @NotNull List<JsonObject> find();
         public abstract Optional<JsonObject> updateFirst(@NotNull JsonObject query, @NotNull JsonObject object);
         public abstract List<JsonObject> updateAll(@NotNull JsonObject query, @NotNull JsonObject object);
         public abstract Optional<JsonObject> deleteFirst(@NotNull JsonObject query);

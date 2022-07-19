@@ -1,11 +1,14 @@
 package at.lost_inc.ugandaknucklesbot.Util;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -13,7 +16,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Searches for YouTube videos using an instance of <a href="https://github.com/iv-org/invidious">Invidious</a>.
@@ -21,76 +25,59 @@ import java.util.Arrays;
  * @author sudo200
  */
 public class YoutubeSearcher {
+    private static final String instancepoint = "https://api.invidious.io/instances.json";
     private static final String testpoint = "/api/v1/stats";
-    private static final String searchpoint = "/api/v1/search?fields=videoId&q=";
+    private static final String searchpoint = "/api/v1/search";
 
-    private static final URL defaultInstance;
 
-    static {
-        URL temp;
-        try {
-            temp = new URL("https://invidious.flokinet.to/");
-        } catch (MalformedURLException e) {
-            temp = null; // If this happens, please fix it, this should always work without an exception...
-        }
-        defaultInstance = temp;
-    }
-
-    private final URL invidious;
+    private URL invidious;
     private final OkHttpClient client;
     private final Gson gson;
+    private final Random random;
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public YoutubeSearcher() throws MalformedURLException {
-        this(defaultInstance);
-    }
-
-    public YoutubeSearcher(@NotNull URL instance) throws MalformedURLException {
-        this(new OkHttpClient(), instance);
-    }
-
-    public YoutubeSearcher(@NotNull OkHttpClient httpClient) throws MalformedURLException {
-        this(httpClient, defaultInstance);
-    }
-
-    public YoutubeSearcher(@NotNull OkHttpClient client, @NotNull URL instance) throws MalformedURLException {
-        this(client, new Gson(), instance);
-    }
-
-    public YoutubeSearcher(@NotNull Gson gson) throws MalformedURLException {
-        this(gson, defaultInstance);
-    }
-
-    public YoutubeSearcher(@NotNull OkHttpClient httpClient, @NotNull Gson gson) throws MalformedURLException {
-        this(httpClient, gson, defaultInstance);
-    }
-
-    public YoutubeSearcher(@NotNull Gson gson, @NotNull URL instance) throws MalformedURLException {
-        this(new OkHttpClient(), gson, instance);
-    }
-
-    public YoutubeSearcher(@NotNull OkHttpClient httpClient, @NotNull Gson gson, @NotNull URL instance) throws MalformedURLException {
-        String s;
-        final Request req = new Request.Builder()
-                .url(
-                        instance.getProtocol()
-                                + ':'
-                                + ((s = instance.getAuthority()) != null && !s.isEmpty()
-                                ? "//" + s : "") + testpoint
-                ).build();
-
-        try (final Response res = httpClient.newCall(req).execute()) {
-            final ResponseBody body = res.body();
-            if (body != null) body.close();
-
-            if (!res.isSuccessful())
-                throw new MalformedURLException();
-        } catch (IOException e) {
-            throw new MalformedURLException(e.getMessage());
-        }
-
-        invidious = instance;
+    public YoutubeSearcher(@NotNull OkHttpClient httpClient, @NotNull Gson gson, @NotNull Random random) throws MalformedURLException {
+        this.random = random;
         this.gson = gson;
         client = httpClient;
+        changeInstanceTimer();
+    }
+
+    private void changeInstanceTimer() {
+        changeInstance();
+        new Timer(true).schedule(new TimerTaskRunnable(this::changeInstanceTimer), 5 * 60 * 1000);
+    }
+
+    protected void changeInstance() {
+        final Request req = new Request.Builder()
+                .url(instancepoint).build();
+
+        try (final Response res = client.newCall(req).execute()) {
+
+            final InstanceData[] instances = Arrays.stream(gson.fromJson(res.body().charStream(), JsonArray[].class))
+                    .map(element -> gson.fromJson(element.get(1), InstanceData.class))
+                    .filter(instance -> instance.cors && instance.api)
+                    .toArray(InstanceData[]::new);
+
+            invidious = new URL(
+                    instances[random.nextInt(instances.length)].uri
+            );
+
+            final Request req1 = new Request.Builder()
+                    .url(invidious).build();
+
+            try (final Response res1 = client.newCall(req1).execute()) {
+                final ResponseBody body = res1.body();
+                if (body != null) body.close();
+
+                if (!res1.isSuccessful())
+                    changeInstance();
+            } catch (IOException e) {
+                changeInstance();
+            }
+            logger.debug("New invidious instance: {}", invidious.toString());
+        } catch (IOException ignored) {
+        }
     }
 
     public @NotNull String[] search(String q) {
@@ -100,7 +87,7 @@ public class YoutubeSearcher {
                     .url(invidious.getProtocol()
                             + ':'
                             + ((s = invidious.getAuthority()) != null && !s.isEmpty()
-                            ? "//" + s : "") + searchpoint + URLEncoder.encode(q, StandardCharsets.UTF_8.toString()))
+                            ? "//" + s : "") + searchpoint + "?fields=videoId&q=" + URLEncoder.encode(q, StandardCharsets.UTF_8.toString()))
                     .build();
 
             try (final Response res = client.newCall(req).execute()) {
@@ -113,6 +100,15 @@ public class YoutubeSearcher {
         } catch (UnsupportedEncodingException ignored) {
             return new String[0];
         }
+    }
+
+    private static class InstanceData {
+        private String flag;
+        private String region;
+        private boolean cors;
+        private boolean api;
+        private String type;
+        private String uri;
     }
 
     private static class Video {

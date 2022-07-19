@@ -5,6 +5,7 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Commands.Core.Audio.TrackScheduler;
 import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
+import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerManagerService;
 import at.lost_inc.ugandaknucklesbot.Service.Audio.AudioPlayerService;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsVoice;
@@ -44,7 +45,7 @@ public final class VoiceCommandPlay extends BotCommand {
     @Inject
     private UtilsVoice utilsVoice;
     @Inject
-    private AudioPlayerManager playerManager;
+    private AudioPlayerManagerService playerManagerService;
     @Inject
     private AudioPlayerService playerService;
     @Inject
@@ -56,6 +57,8 @@ public final class VoiceCommandPlay extends BotCommand {
             utilsChat.sendInfo(param.message.getChannel(), "Give me a link to what you want to be played...");
             return;
         }
+
+        final AudioPlayerManager playerManager = playerManagerService.get();
 
         final Guild guild = param.message.getGuild();
         final AudioManager audioManager = guild.getAudioManager();

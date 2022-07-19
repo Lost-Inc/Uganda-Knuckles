@@ -80,7 +80,8 @@ public final class BootCamp {
         try {
             ServiceManager.setProvider(YoutubeSearcher.class, new YoutubeSearcher(
                     jda.getHttpClient(),
-                    ServiceManager.provideUnchecked(Gson.class)
+                    ServiceManager.provideUnchecked(Gson.class),
+                    ServiceManager.provideUnchecked(Random.class)
             ));
         } catch (MalformedURLException ignored) {
         }

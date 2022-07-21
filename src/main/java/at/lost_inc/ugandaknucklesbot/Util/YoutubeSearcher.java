@@ -16,8 +16,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.Timer;
 
 /**
  * Searches for YouTube videos using an instance of <a href="https://github.com/iv-org/invidious">Invidious</a>.
@@ -28,13 +29,11 @@ public class YoutubeSearcher {
     private static final String instancepoint = "https://api.invidious.io/instances.json";
     private static final String testpoint = "/api/v1/stats";
     private static final String searchpoint = "/api/v1/search";
-
-
-    private URL invidious;
     private final OkHttpClient client;
     private final Gson gson;
     private final Random random;
     private final Logger logger = LoggerFactory.getLogger(getClass());
+    private URL invidious;
 
     public YoutubeSearcher(@NotNull OkHttpClient httpClient, @NotNull Gson gson, @NotNull Random random) throws MalformedURLException {
         this.random = random;

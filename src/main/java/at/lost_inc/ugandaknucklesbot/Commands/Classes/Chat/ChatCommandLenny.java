@@ -30,7 +30,7 @@ public final class ChatCommandLenny extends BotCommand {
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
         builder.setTitle("( \u0361° \u035c\u0296 \u0361 °)");
 
-        if (param.args.length == 0 || !utilsChat.isMention(param.args[0]))
+        if (param.args.length == 0 || !utilsChat.isUserMention(param.args[0]))
             utilsChat.send(param.message.getChannel(), builder.build());
         else {
             User user = utilsChat.getMemberByMention(param.args[0], param.message.getGuild()).getUser();

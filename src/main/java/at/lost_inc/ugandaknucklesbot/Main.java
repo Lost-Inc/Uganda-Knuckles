@@ -77,6 +77,9 @@ public final class Main {
                     ChatCommandInsult.class,
                     ChatCommandCoinflip.class,
                     ChatCommandHash.class,
+                    ChatCommandMonospace.class,
+                    ChatCommandBold.class,
+                    ChatCommandItalic.class,
                     // Voice commands
                     VoiceCommandPlay.class,
                     VoiceCommandPause.class,

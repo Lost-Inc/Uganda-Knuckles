@@ -112,7 +112,7 @@ public final class CommandHandler {
 
 
         // If not mentioned, ignore
-        if (!utilsChat.isMention(args[0])) return;
+        if (!utilsChat.isUserMention(args[0])) return;
         if (!utilsChat.getMemberByMention(
                 args[0], event.getGuild()).equals(
                 event.getGuild().getMemberById(

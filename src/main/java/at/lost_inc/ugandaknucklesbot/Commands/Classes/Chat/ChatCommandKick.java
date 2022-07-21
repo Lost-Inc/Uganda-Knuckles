@@ -27,7 +27,7 @@ public final class ChatCommandKick extends BotCommand {
 
     @Override
     public void execute(@NotNull CommandParameter param) {
-        if (param.args.length == 0 || !utilsChat.isMention(param.args[0])) {
+        if (param.args.length == 0 || !utilsChat.isUserMention(param.args[0])) {
             utilsChat.sendInfo(param.message.getChannel(), "You have to say who you want to kick.");
             return;
         }

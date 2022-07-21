@@ -26,7 +26,7 @@ public final class ChatCommandAvatar extends BotCommand {
 
     @Override
     public void execute(@NotNull CommandParameter param) {
-        if (param.args.length == 0 || !utilsChat.isMention(param.args[0])) {
+        if (param.args.length == 0 || !utilsChat.isUserMention(param.args[0])) {
             utilsChat.sendInfo(param.message.getChannel(), "**Mention the one, who's avatar shall be retrieved**");
             return;
         }

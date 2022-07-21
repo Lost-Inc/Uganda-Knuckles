@@ -67,7 +67,7 @@ public final class ChatCommandKill extends BotCommand {
     public void execute(@NotNull CommandParameter param) {
         final MessageChannel channel = param.message.getChannel();
 
-        if (param.args.length == 0 || !utilsChat.isMention(param.args[0])) {
+        if (param.args.length == 0 || !utilsChat.isUserMention(param.args[0])) {
             utilsChat.sendInfo(channel, String.format(
                     sentences[rand.nextInt(sentences.length)],
                     Objects.requireNonNull(param.message.getMember()).getEffectiveName()

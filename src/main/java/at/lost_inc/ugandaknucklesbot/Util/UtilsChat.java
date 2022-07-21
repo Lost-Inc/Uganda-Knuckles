@@ -78,14 +78,35 @@ public class UtilsChat {
 
     // gets a member from a mention
     public final Member getMemberByMention(@NotNull String mention, @NotNull Guild guild) {
+        if (!isUserMention(mention))
+            throw new UnsupportedOperationException("Not a user mention!");
+
         String temp = mention.trim().substring(mention.contains("!") ? 3 : 2);
         String id = temp.substring(0, temp.length() - 1);
         return guild.getMemberById(id);
     }
 
+    public final TextChannel getChannelByMention(@NotNull String mention, @NotNull Guild guild) {
+        if (!isChannelMention(mention))
+            throw new UnsupportedOperationException("Not a channel mention!");
+
+        String temp = mention.trim().substring(mention.contains("!") ? 3 : 2);
+        String id = temp.substring(0, temp.length() - 1);
+        return guild.getTextChannelById(id);
+    }
+
     // returns true, if string is a valid user mention
-    public final boolean isMention(@NotNull String q) {
+    public final boolean isUserMention(@NotNull String q) {
         return q.matches("^<@!?[0-9]{18}>$");
+    }
+
+    // returns true, if string is a valid channel mention
+    public final boolean isChannelMention(@NotNull String q) {
+        return q.matches("^<#!?[0-9]{18}>$");
+    }
+
+    public final boolean sameUser(User user1, User user2) {
+        return user1 == user2 || (user1 != null && user2 != null && user1.getIdLong() == user2.getIdLong());
     }
 
     public final boolean isSelf(User user) {

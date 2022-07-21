@@ -29,7 +29,7 @@ public final class ChatCommandPoop extends BotCommand {
         EmbedBuilder builder = utilsChat.getDefaultEmbed();
         builder.setTitle(":poop:");
 
-        if (param.args.length == 0 || !utilsChat.isMention(param.args[0]))
+        if (param.args.length == 0 || !utilsChat.isUserMention(param.args[0]))
             utilsChat.send(param.message.getChannel(), builder.build());
         else {
             User user = utilsChat.getMemberByMention(param.args[0], param.message.getGuild()).getUser();

@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
         help = "Converts text, nicknames, and even channel names to monospace",
         categories = {BotCommand.ICategories.UTIL, BotCommand.ICategories.CHAT}
 )
-public class ChatCommandMonospace extends BotCommand {
+public final class ChatCommandMonospace extends BotCommand {
     @Inject
     UtilsChat utilsChat;
 

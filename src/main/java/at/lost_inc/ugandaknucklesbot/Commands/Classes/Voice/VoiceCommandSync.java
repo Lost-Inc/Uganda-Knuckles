@@ -17,12 +17,10 @@ import net.dv8tion.jda.api.managers.AudioManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 import java.util.Timer;
 
-/* TODO
- * Add possibility to sync more than two guilds
- */
 @Command(
         name = "sync",
         help = "Syncs two voicechannels on two different servers.\n\n**Why? Because we can!**",
@@ -34,8 +32,8 @@ import java.util.Timer;
         }
 )
 public final class VoiceCommandSync extends BotCommand {
-    private static final HashMap<String, Guild> guilds = new HashMap<>();
-    private static final HashMap<Guild, VoiceChannel> vcs = new HashMap<>();
+    private static final Map<String, Guild> guilds = new HashMap<>();
+    private static final Map<Guild, VoiceChannel> vcs = new HashMap<>();
 
     @Inject
     private Random random;

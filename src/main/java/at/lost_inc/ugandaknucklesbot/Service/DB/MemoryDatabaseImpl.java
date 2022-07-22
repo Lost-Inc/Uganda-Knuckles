@@ -133,11 +133,11 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
         protected static class JsonObjectComparator implements Comparator<JsonObject> {
             @Override
             public int compare(@NotNull JsonObject o1, @NotNull JsonObject o2) {
-                if(o1.equals(o2))
+                if (o1.equals(o2))
                     return 0;
 
                 final Iterator<String> io1 = o1.keySet().iterator(),
-                                        io2 = o2.keySet().iterator();
+                        io2 = o2.keySet().iterator();
                 int accumulator = 0;
 
                 while (io1.hasNext() && io2.hasNext())

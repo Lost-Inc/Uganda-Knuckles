@@ -6,7 +6,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.function.Function;
 
-public class ItalicConverter {
+public final class ItalicConverter {
     private static final Hashtable<Character, String> italicTable = new Hashtable<>();
     private static final Function<CharSequence, String> replacer;
 

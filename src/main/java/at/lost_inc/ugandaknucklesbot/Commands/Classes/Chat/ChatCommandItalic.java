@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
         help = "Converts text, nicknames, and even channel names to italic text",
         categories = {BotCommand.ICategories.UTIL, BotCommand.ICategories.CHAT}
 )
-public class ChatCommandItalic extends BotCommand {
+public final class ChatCommandItalic extends BotCommand {
     @Inject
     UtilsChat utilsChat;
 

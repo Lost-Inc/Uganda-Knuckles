@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
         help = "Converts text, nicknames, and even channel names to bold text",
         categories = {BotCommand.ICategories.UTIL, BotCommand.ICategories.CHAT}
 )
-public class ChatCommandBold extends BotCommand {
+public final class ChatCommandBold extends BotCommand {
     @Inject
     UtilsChat utilsChat;
 

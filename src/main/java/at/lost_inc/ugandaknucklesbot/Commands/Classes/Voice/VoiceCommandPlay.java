@@ -133,7 +133,7 @@ public final class VoiceCommandPlay extends BotCommand {
 
         if (param.args.length != 0)
             play.accept(String.join(" ", param.args), true);
-        for (Message.Attachment attachment : param.message.getAttachments())
+        for (final Message.Attachment attachment : param.message.getAttachments())
             if (attachment.isVideo() || FileExtentions.AUDIO_EXTENTIONS.contains(attachment.getFileExtension()))
                 play.accept(attachment.getProxyUrl(), false);
     }

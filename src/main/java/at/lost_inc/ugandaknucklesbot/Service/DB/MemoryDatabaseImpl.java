@@ -26,7 +26,7 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
     }
 
     private static class MemoryDataStore extends DataStore {
-        private final Set<JsonObject> objects = Collections.synchronizedSet(new LinkedHashSet<>());
+        private final Set<JsonObject> objects = Collections.synchronizedSet(new TreeSet<>(new JsonObjectComparator()));
 
         private static boolean lazilyCompareObjects(@NotNull JsonObject object, @NotNull JsonObject compare) {
             for (final Map.Entry<String, JsonElement> entry : compare.entrySet()) {
@@ -128,6 +128,22 @@ public class MemoryDatabaseImpl extends AbstractDatabaseService {
         @Override
         public Object getNativeStructure() {
             return objects;
+        }
+
+        protected static class JsonObjectComparator implements Comparator<JsonObject> {
+            @Override
+            public int compare(@NotNull JsonObject o1, @NotNull JsonObject o2) {
+                if(o1.equals(o2))
+                    return 0;
+
+                final Iterator<String> io1 = o1.keySet().iterator(),
+                                        io2 = o2.keySet().iterator();
+                int accumulator = 0;
+
+                while (io1.hasNext() && io2.hasNext())
+                    accumulator += io1.next().compareTo(io2.next());
+                return accumulator;
+            }
         }
     }
 }

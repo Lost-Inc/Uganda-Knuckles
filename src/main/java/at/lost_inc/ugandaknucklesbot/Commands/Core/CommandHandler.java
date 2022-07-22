@@ -10,6 +10,7 @@ import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Message;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
+import net.dv8tion.jda.api.exceptions.InsufficientPermissionException;
 import net.dv8tion.jda.api.interactions.InteractionHook;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -153,6 +154,11 @@ public final class CommandHandler {
                 ),
                 100
         );
+
+        try {
+            event.getChannel().sendTyping().complete();
+        } catch (InsufficientPermissionException ignore) {
+        }
 
         if (args[1].equalsIgnoreCase("help")) {// help command
             Thread helpThread = new Thread(threadGroup, () -> {

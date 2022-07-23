@@ -80,6 +80,7 @@ public final class Main {
                     ChatCommandMonospace.class,
                     ChatCommandBold.class,
                     ChatCommandItalic.class,
+                    ChatCommandVaporwave.class,
                     // Voice commands
                     VoiceCommandPlay.class,
                     VoiceCommandPause.class,

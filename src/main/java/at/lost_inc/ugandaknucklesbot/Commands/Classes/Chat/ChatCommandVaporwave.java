@@ -4,8 +4,8 @@ import at.lost_inc.ugandaknucklesbot.Commands.API.BotCommand;
 import at.lost_inc.ugandaknucklesbot.Commands.API.Command;
 import at.lost_inc.ugandaknucklesbot.Commands.API.CommandParameter;
 import at.lost_inc.ugandaknucklesbot.Commands.DI.Inject;
-import at.lost_inc.ugandaknucklesbot.Util.BoldConverter;
 import at.lost_inc.ugandaknucklesbot.Util.UtilsChat;
+import at.lost_inc.ugandaknucklesbot.Util.VaporwaveConverter;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
@@ -14,11 +14,13 @@ import net.dv8tion.jda.api.exceptions.HierarchyException;
 import org.jetbrains.annotations.NotNull;
 
 @Command(
-        name = "bold",
-        help = "Converts text, nicknames, and even channel names to bold text",
-        categories = {BotCommand.ICategories.UTIL, BotCommand.ICategories.CHAT}
+        name = "vaporwave",
+        help = "Converts text, nicknames, and even channel names to ᐯ卂卩ㄖ尺山卂ᐯ乇 text",
+        categories = {
+                BotCommand.ICategories.UTIL, BotCommand.ICategories.CHAT
+        }
 )
-public final class ChatCommandBold extends BotCommand {
+public final class ChatCommandVaporwave extends BotCommand {
     @Inject
     UtilsChat utilsChat;
 
@@ -42,7 +44,7 @@ public final class ChatCommandBold extends BotCommand {
             }
 
             try {
-                member.modifyNickname(BoldConverter.boldify(member.getEffectiveName())).queue();
+                member.modifyNickname(VaporwaveConverter.vaporwaveify(member.getEffectiveName())).queue();
                 return;
             } catch (HierarchyException e) {
                 hierarchyExceptionHandler(param.message.getChannel());
@@ -64,7 +66,7 @@ public final class ChatCommandBold extends BotCommand {
 
             try {
                 param.message.getGuild().getGuildChannelById(channel.getIdLong()).getManager().setName(
-                        BoldConverter.boldify(channel.getName())
+                        VaporwaveConverter.vaporwaveify(channel.getName())
                 ).queue();
                 return;
             } catch (HierarchyException e) {
@@ -73,7 +75,7 @@ public final class ChatCommandBold extends BotCommand {
             }
         }
 
-        utilsChat.sendInfo(param.message.getChannel(), BoldConverter.boldify(String.join(" ", param.args)));
+        utilsChat.sendInfo(param.message.getChannel(), VaporwaveConverter.vaporwaveify(String.join(" ", param.args)));
     }
 
     private void userNotPermitted(@NotNull MessageChannel channel) {

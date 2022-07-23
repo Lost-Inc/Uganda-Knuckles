@@ -31,7 +31,7 @@ public final class ChatCommandMonospace extends BotCommand {
 
         if (utilsChat.isUserMention(param.args[0])) {
             final Member member = utilsChat.getMemberByMention(param.args[0], param.message.getGuild());
-            if (!utilsChat.sameUser(param.message.getAuthor(), member.getUser()) && !member.hasPermission(Permission.NICKNAME_MANAGE)) {
+            if (!utilsChat.sameUser(param.message.getAuthor(), member.getUser()) && !param.message.getMember().hasPermission(Permission.NICKNAME_MANAGE)) {
                 userNotPermitted(param.message.getChannel());
                 return;
             }

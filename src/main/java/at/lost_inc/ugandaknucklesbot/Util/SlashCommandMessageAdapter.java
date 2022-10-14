@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.interaction.SlashCommandEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.components.ActionRow;
+import net.dv8tion.jda.api.interactions.components.ComponentLayout;
 import net.dv8tion.jda.api.requests.RestAction;
 import net.dv8tion.jda.api.requests.restaction.AuditableRestAction;
 import net.dv8tion.jda.api.requests.restaction.MessageAction;
@@ -14,10 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.time.OffsetDateTime;
-import java.util.EnumSet;
-import java.util.Formatter;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class SlashCommandMessageAdapter implements Message {
@@ -25,6 +23,12 @@ public class SlashCommandMessageAdapter implements Message {
 
     public SlashCommandMessageAdapter(SlashCommandEvent event) {
         this.event = event;
+    }
+
+    @Nullable
+    @Override
+    public MessageReference getMessageReference() {
+        return null;
     }
 
     @Nullable
@@ -281,7 +285,13 @@ public class SlashCommandMessageAdapter implements Message {
 
     @NotNull
     @Override
-    public MessageAction editMessage(@NotNull MessageEmbed newContent) {
+    public MessageAction editMessageEmbeds(@NotNull Collection<? extends MessageEmbed> embeds) {
+        throw new UnsupportedOperationException("Message adapted from slash command!");
+    }
+
+    @NotNull
+    @Override
+    public MessageAction editMessageComponents(@NotNull Collection<? extends ComponentLayout> components) {
         throw new UnsupportedOperationException("Message adapted from slash command!");
     }
 
@@ -433,10 +443,26 @@ public class SlashCommandMessageAdapter implements Message {
         throw new UnsupportedOperationException("Message adapted from slash command!");
     }
 
+    @Override
+    public long getFlagsRaw() {
+        return 0;
+    }
+
+    @Override
+    public boolean isEphemeral() {
+        return false;
+    }
+
     @NotNull
     @Override
     public MessageType getType() {
         throw new UnsupportedOperationException("Message adapted from slash command!");
+    }
+
+    @Nullable
+    @Override
+    public Interaction getInteraction() {
+        return null;
     }
 
     @Override

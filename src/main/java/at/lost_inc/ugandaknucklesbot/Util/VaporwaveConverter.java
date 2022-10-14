@@ -8,11 +8,7 @@ import java.util.Hashtable;
 import java.util.function.Function;
 
 public final class VaporwaveConverter {
-    private VaporwaveConverter() {
-    }
-
     private static final Hashtable<Character, String> vaporwaveTable = new Hashtable<>();
-
     private static final Function<CharSequence, String> replacer;
 
     static {
@@ -44,6 +40,9 @@ public final class VaporwaveConverter {
         vaporwaveTable.put('z', "乙");
 
         replacer = CharacterReplaceFactory.getReplacer(vaporwaveTable);
+    }
+
+    private VaporwaveConverter() {
     }
 
     @Contract(" -> new")

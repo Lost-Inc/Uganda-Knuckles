@@ -1,6 +1,6 @@
 package at.lost_inc.ugandaknucklesbot.Service.Audio;
 
-import com.github.topislavalinkplugins.topissourcemanagers.applemusic.AppleMusicSourceManager;
+import com.github.topisenpai.lavasrc.applemusic.AppleMusicSourceManager;
 import com.sedmelluq.discord.lavaplayer.format.StandardAudioDataFormats;
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;

@@ -30,6 +30,4 @@
 Contributions, no matter how small or big, are always welcome; be worry however,\
 that it can take some time for us to review them.
 
-Fell free to fork and modify it to your own personal standards,\
-however, do not release your modified version to the public,\
-without letting us review it or even asking us for permission.
+Feel free to fork and modify it to your own personal standards

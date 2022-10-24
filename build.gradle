@@ -29,7 +29,7 @@ dependencies {
     implementation 'com.google.zxing:javase:3.5.0'
     implementation 'org.slf4j:slf4j-api:2.0.3'
     implementation 'org.slf4j:slf4j-simple:2.0.3'
-    implementation 'com.github.Topis-Lavalink-Plugins:Topis-Source-Managers:3.0.6'
+    implementation 'com.github.Topis-Lavalink-Plugins:Topis-Source-Managers:3.0.7'
     implementation 'org.mongodb:mongodb-driver-sync:4.7.2'
 }
 

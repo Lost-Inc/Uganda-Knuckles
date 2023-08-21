@@ -23,7 +23,7 @@ repositories {
 
 dependencies {
     implementation "net.dv8tion:JDA:4.4.1_353"
-    implementation "com.github.walkyst:lavaplayer-fork:1.4.2"
+    implementation "com.github.walkyst:lavaplayer-fork:1.4.3"
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.google.zxing:core:3.5.1'
     implementation 'com.google.zxing:javase:3.5.1'
